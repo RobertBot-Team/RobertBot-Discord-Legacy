@@ -1,17 +1,22 @@
 class Arma{
-    constructor(nombre,categoria,danio,usos){
+    constructor(nombre,categoria,danio,usos,genero,plural){
         this.nombre = nombre;
         this.categoria = categoria;
         this.danio = danio;
         this.usos = usos;
+        this.genero = genero;
+        this.plural = plural;
     }
 }
+    // las categorias lo dejamos pa despues
+const pistola = new Arma("pistola","pistola",190,3,"f","");
+const granada = new Arma("granada","",480,1,"f","");
+const guitarra = new Arma("guitarra","",100,1,"f","");
+const alfiler = new Arma("alfiler","",10,1,"m","");
+const martilloThor = new Arma("martillo de Thor","",500,2,"m","");
+const bomba = new Arma("bomba","",250,1,"f","");
 
-const pistola = new Arma("pistola","pistola",190,3);
-const granada = new Arma("granada","",480,1);
-const guitarra = new Arma("guitarra","",50,2);
-
-var armas = [pistola,granada,guitarra];
+var armas = [pistola,granada,guitarra,alfiler,martilloThor,bomba];
 
 
 class Jugador{
@@ -49,6 +54,8 @@ const lynn = new Jugador("lynn",1074);
 const robert = new Jugador("robert",15644);
 const k = new Jugador("k",561);
 const yugito = new Jugador("yugito",54356);
+const draco = new Jugador("draco",5486);
+const chun = new Jugador("chun",1010);
 
 
 let generarArma = ()=>{
@@ -110,7 +117,7 @@ let encontrarGanador = (jugadores)=>{
 }
 
 let recibirJugadores = ()=>{
-    let jugadores = [lynn, yugito, robert, k];
+    let jugadores = [lynn, yugito, robert, k, draco, chun];
     return jugadores;
 }
 
@@ -201,12 +208,13 @@ let formarEquipo = (jugadores)=> {
 
 }
 
-let eventoAleatorio1 = (jugador)=>{
+let eventoAleatorio1 = (jugador, players)=>{
     let resultado;
     console.log(" Sucedió un evento aleatorio");
     do{
         var rand = parseInt(Math.random()*eventosAleatorios1.length);  
-        resultado = eventosAleatorios1[rand](jugador);
+        console.log(`%c ${rand}`,"color:yellow");
+        resultado = eventosAleatorios1[rand](jugador, players);
     }
     while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 
@@ -262,7 +270,7 @@ let ataqueGenericoSinArma = (jugador, victima)=>{
 let rondaLoot = (jugador)=>{
         let probabilidad = Math.random();
         if(probabilidad < 0.2){
-            eventoAleatorio1(jugador);
+            eventoAleatorio1(jugador, players);
         }else{
             let arma = generarArma();
             jugador.setArma(arma);
@@ -306,7 +314,7 @@ let rondaAtaque = (jugador,jugadores)=>{
 let cantidadConVida = 0;
 
 //se unen los jugadores
-players = recibirJugadores();
+var players = recibirJugadores();
 
 cantidadConVida = calcularVivos(players);
 
@@ -326,8 +334,7 @@ for(let i=0;i<cantidadConVida;i++){
 
 cantidadConVida = calcularVivos(players);
 
-//while(cantidadConVida > 1 ){
-let temporal = 0;
+
 while(cantidadConVida > 1 ){
     shuffleJugadores(players);      //por cada ronda, reordeno la lista para que ataquen en orden random
     for(let j=0;j<players.length;j++){
@@ -344,7 +351,6 @@ while(cantidadConVida > 1 ){
                 rondaAtaque(jugador,copia);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random
             }
         }
-    temporal++;    
     }
     cantidadConVida = calcularVivos(players);
 }
