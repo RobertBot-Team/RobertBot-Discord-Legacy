@@ -60,31 +60,38 @@ eventosAleatorios1[8] = function1=(jugador, players)=>{
 }
 
 
-/*eventosAleatorios1[9] = function1=(jugador, players)=>{
+eventosAleatorios1[9] = function1=(jugador, players)=>{
+    let copiaJugadores = copiarJugadores(players);
     console.log(`%c AAAA A A A A A`,"color:yellow");
     let comprador;
+    let jugadorACambiar;
     let limit=0;
+    let id;
     if(jugador.arma == null){return null};
 
     do{
-       comprador = buscarJugador(jugador, players);
+       comprador = buscarJugador(jugador, copiaJugadores);
        limit++;
-       if(limit<=8){return null;}
+       if(limit>=8){return null;}
     } 
-    while (comprador.arma != null);
+    while (comprador.arma != null); //no es la forma ideal de buscar un jugador sin arma, pero bueno
 
-    console.log(` ${jugador.getNombre()} necesitaba dinero para gachas así que vendió su ${jugador.getArma()["nombre"]} a ${comprador.getNombre()}`);
-    comprador.arma = jugador.getArma();
+    id = comprador.getID();
+    jugadorACambiar = buscarPorID(id);
+
+    console.log(` ${jugador.getNombre()} necesitaba dinero para gachas así que vendió su ${jugador.getArma()["nombre"]} a ${jugadorACambiar.getNombre()}`);
+    jugadorACambiar.arma = jugador.getArma();
     jugador.arma = null;
     return 1;
 
-}*/
-    //este evento tiene problemas xq reordena la lista
-    //haria falta una funcion que busque un jugador por ID
-    //entonces este evento recibe la lista original de jugadores
-    //hace una copia, reordena la copia y busca una victima en la copia
-    //compara el id buscando ese id en la lista original
+}
+
+    //este evento recibe el array original de jugadores
+    //hace una copia, reordena la copia y busca una "victima"/"comprador" en la copia
+    //compara el id, buscando ese id en la lista original
     //y hace los cambios en la lista original sin reordenarla
+
+    //dejo este comentario porque hay que hacer lo mismo en varios eventos
 
 
 

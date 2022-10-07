@@ -48,6 +48,10 @@ class Jugador{
     getHP(){
         return this.hp;
     }
+
+    getID(){
+        return this.id;
+    }
 }
 
 const lynn = new Jugador("lynn",1074);
@@ -93,6 +97,18 @@ const shuffleJugadores = (jugadores)=>{         //algoritmo de Fisher-Yates para
          jugadores[j] = temp;
         }
 
+}
+
+let buscarPorID = (id)=>{
+    let jugador;
+    for(let i=0;i<players.length;i++){
+        jugador = players[i];
+        if(jugador.getID() == id){
+            return jugador;
+        }
+    }
+    console.log("no lo encontre");
+    return null;
 }
 
 let buscarJugador = (jugador,jugadores)=>{    //el jugador del parametro es el q ataca, y esta funcion retorna otro jugador vivo 
@@ -214,7 +230,7 @@ let eventoAleatorio1 = (jugador, players)=>{
     do{
         var rand = parseInt(Math.random()*eventosAleatorios1.length);  
         console.log(`%c ${rand}`,"color:yellow");
-        resultado = eventosAleatorios1[rand](jugador, players);
+        resultado = eventosAleatorios1[rand](jugador, players); //le paso el array original
     }
     while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 
