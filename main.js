@@ -149,6 +149,31 @@ let haySuficientes = (jugadores)=> {
      return cont;
 }
 
+let chequearSonMismoEquipo = ()=> {
+    var ganadores = [];
+    let jugador;
+    let team;
+    let count = 0;
+    for(let i=0; i<players.length; i++){
+        jugador = players[i];
+        if(jugador.alive){
+
+            if(count>=1 && jugador.team == team){
+                count++;
+                ganadores.push(jugador);
+            }
+
+            if(count == 0){
+                count++;
+                team = jugador.team;
+                ganadores.push(jugador);
+            }
+
+        }
+     }  
+     return ganadores;
+}
+
 let formarEquipo = (jugadores)=> {
     let jugador;
     let jugadorA;   //auxiliar
@@ -275,7 +300,7 @@ let ataqueGenericoConArma = (jugador, victima)=>{
 
 let ataqueGenericoSinArma = (jugador, victima)=>{
     console.log(` ${jugador.getNombre()} atacó sin arma a ${victima.getNombre()}`);
-    victima.hp -= 25;
+    victima.setHP(Math.max(0, victima.getHP() - 25)); 
 
     console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
     if(victima.getHP()<=0){victima.alive=false};
@@ -350,8 +375,9 @@ for(let i=0;i<cantidadConVida;i++){
 
 cantidadConVida = calcularVivos(players);
 
-
+let nroRonda = 1;
 while(cantidadConVida > 1 ){
+    console.log(`%cRonda ${nroRonda}.`,"color:#808080");
     shuffleJugadores(players);      //por cada ronda, reordeno la lista para que ataquen en orden random
     for(let j=0;j<players.length;j++){
         let jugador = players[j];
@@ -368,10 +394,30 @@ while(cantidadConVida > 1 ){
             }
         }
     }
+    nroRonda++;
     cantidadConVida = calcularVivos(players);
+
+    if(cantidadConVida == 3){   //si quedan 3 jugadores y son del mismo team, termina el juego
+        let check = chequearSonMismoEquipo();
+        if(check.length == 3){
+            console.log(`%c Los ganadores son ${check[0].getNombre()}, ${check[1].getNombre()} y ${check[2].getNombre()}`,"color:green; font-weight:bold");
+            break;
+        }
+
+    }    
+
+    if(cantidadConVida == 2){   //si quedan 2 jugadores y son del mismo team, termina el juego
+        let check = chequearSonMismoEquipo();
+        if(check.length == 2){
+            console.log(`%c Los ganadores son ${check[0].getNombre()} y ${check[1].getNombre()}`,"color:green; font-weight:bold");
+            break;
+        }
+
+    }    
 }
 
+if(cantidadConVida==1){
 let ganador = encontrarGanador(players);
 console.log(`%c El ganador es ${ganador.getNombre()}`,"color:green; font-weight:bold");
-
+}
 //mostrarResultados();
