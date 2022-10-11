@@ -253,6 +253,17 @@ let formarEquipo = (jugadores)=> {
 
 }
 
+
+let mostrarResultados = () =>{
+    let jugador;
+    console.log(`%c--------------------`,"color:#808080");
+    for(let i=0; i<players.length; i++){
+        let jugador = players[i];
+        //faltaria ordenar la lista por kills en orden descendente
+        console.log(`%c${jugador.getNombre()} -  Kills: ${jugador.getKills()}`,"color:#808080");
+    }
+}
+
 let eventoAleatorio1 = (jugador, players)=>{
     let resultado;
     console.log(" Sucedió un evento aleatorio");
@@ -442,4 +453,5 @@ if(cantidadConVida==1){
 let ganador = encontrarGanador(players);
 console.log(`%c El ganador es ${ganador.getNombre()}`,"color:green; font-weight:bold");
 }
-//mostrarResultados();
+
+mostrarResultados();
