@@ -27,6 +27,7 @@ class Jugador{
         this.id = id;
         this.hp = 1000;
         this.team = null;
+        this.kills = 0;
 	}
 
     setArma(arma){
@@ -51,6 +52,10 @@ class Jugador{
 
     getID(){
         return this.id;
+    }
+
+    getKills(){
+        return this.kills;
     }
 }
 
@@ -280,7 +285,11 @@ let ataqueEspecificoxCategoria = (jugador, victima)=>{
     } //si su arma se queda sin usos, la pierde
 
     console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
-    if(victima.getHP()<=0){victima.alive=false};
+    if(victima.getHP()<=0){
+        victima.alive=false;
+        jugador.kills++;
+        console.log(`%cKills de ${jugador.getNombre()}: ${jugador.getKills()}.`,"color:#808080");
+    }
 };
 
 let ataqueGenericoConArma = (jugador, victima)=>{
@@ -294,7 +303,11 @@ let ataqueGenericoConArma = (jugador, victima)=>{
     } //si su arma se queda sin usos, la pierde
 
     console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
-    if(victima.getHP()<=0){victima.alive=false};
+    if(victima.getHP()<=0){
+        victima.alive=false;
+        jugador.kills++;
+        console.log(`%cKills de ${jugador.getNombre()}: ${jugador.getKills()}.`,"color:#808080");
+    }
 };
 
 let ataqueGenericoSinArma = (jugador, victima)=>{
@@ -302,7 +315,11 @@ let ataqueGenericoSinArma = (jugador, victima)=>{
     victima.setHP(Math.max(0, victima.getHP() - 25)); 
 
     console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
-    if(victima.getHP()<=0){victima.alive=false};
+    if(victima.getHP()<=0){
+        victima.alive=false;
+        jugador.kills++;
+        console.log(`%cKills de ${jugador.getNombre()}: ${jugador.getKills()}.`,"color:#808080");
+    }
 };
 
 
@@ -381,7 +398,7 @@ while(cantidadConVida > 1 ){
     console.log(`%cRonda ${nroRonda}.`,"color:#808080");
     shuffleJugadores(players);      //por cada ronda, reordeno la lista para que ataquen en orden random
     for(let j=0;j<players.length;j++){
-        
+
         cantidadConVida = calcularVivos(players);
 
         if(cantidadConVida == 3){   //si quedan 3 jugadores y son del mismo team, termina el juego
@@ -417,6 +434,7 @@ while(cantidadConVida > 1 ){
         }
     }
     nroRonda++;
+    cantidadConVida = calcularVivos(players);
     console.log(`%cQuedan ${cantidadConVida} jugadores con vida.`,"color:#808080");
 }
 
