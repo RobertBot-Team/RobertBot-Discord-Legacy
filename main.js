@@ -279,8 +279,16 @@ let lootEspecificoxCategoria = (jugador, arma)=>{
     console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
 };
 let lootGenerico = (jugador, arma)=>{
-    console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
+    //console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
+    let resultado;
+    do{
+        var rand = parseInt(Math.random()*eventosLootGenerico.length);  
+        console.log(`%c ${rand}`,"color:yellow");
+        resultado = eventosLootGenerico[rand](jugador, players, arma); //le paso el array original
+    }
+    while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 };
+
 let eventoAleatorio2 = ()=>{
     console.log(" Sucedió un evento aleatorio");
 }
