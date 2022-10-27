@@ -1,5 +1,5 @@
 /*------------ eventos aleatorios 1 ------------*/
-let maxHP = 1000;
+
 var eventosAleatorios1 = [];
 
 eventosAleatorios1[0] = function1=(jugador, players)=>{

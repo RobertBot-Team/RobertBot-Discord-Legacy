@@ -1,3 +1,5 @@
+let maxHP = 1000;
+
 class Arma{
     constructor(nombre,categoria,danio,usos,genero,plural){
         this.nombre = nombre;
@@ -108,7 +110,7 @@ let buscarPorID = (id)=>{
     for(let i=0;i<players.length;i++){
         jugador = players[i];
         if(jugador.getID() == id){
-            return jugador;
+            return players[i];
         }
     }
     console.log("no lo encontre");
@@ -122,6 +124,18 @@ let buscarJugador = (jugador,jugadores)=>{    //el jugador del parametro es el q
         victima = jugadores[i];
         if(victima.alive && victima.id != jugador.id){
             return victima;
+        }
+    }
+return null;
+}
+
+let buscarJugadorConArma = (jugador,jugadores)=>{    //esta funcion retorna otro jugador vivo que tenga arma 
+    shuffleJugadores(jugadores);
+    let victima;
+    for(let i=0;i<jugadores.length;i++){
+        victima = jugadores[i];
+        if(victima.alive && victima.id != jugador.id && victima.arma){
+            return victima.getID();
         }
     }
 return null;
@@ -298,7 +312,7 @@ let ataqueEspecificoxCategoria = (jugador, victima)=>{
     victima.setHP(Math.max(0,victima.getHP() - jugador.getArma()["danio"])); //le quita de vida el danio base de su arma. si queda en negativo pone 0
 
     jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
-    if(jugador.getArma()["usos"] == 0){
+    if(jugador.getArma()["usos"] <= 0){
         console.log(`La ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se quedó sin usos`);
         jugador.setArma(null);
     } //si su arma se queda sin usos, la pierde
@@ -316,7 +330,7 @@ let ataqueGenericoConArma = (jugador, victima)=>{
     victima.setHP(Math.max(0,victima.getHP() - jugador.getArma()["danio"])); //le quita de vida el danio base de su arma. si queda en negativo pone 0
     
     jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
-    if(jugador.getArma()["usos"] == 0){
+    if(jugador.getArma()["usos"] <= 0){
         console.log(`La ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se quedó sin usos`);
         jugador.setArma(null);
     } //si su arma se queda sin usos, la pierde
@@ -349,7 +363,7 @@ let rondaLoot = (jugador)=>{
             eventoAleatorio1(jugador, players);
         }else{
             let arma = generarArma();
-            jugador.setArma(arma);
+            jugador.setArma(arma);  //ya le pongo el arma aca
             if(arma.categoria){
                 lootEspecificoxCategoria(jugador, arma);
             }else{
@@ -412,6 +426,7 @@ cantidadConVida = calcularVivos(players);
 console.log(`%cQuedan ${cantidadConVida} jugadores con vida.`,"color:#808080");
 
 let nroRonda = 1;
+let danioSuma = 50;
 whileGrande:
 while(cantidadConVida > 1 ){
     console.log(`%cRonda ${nroRonda}.`,"color:#808080");
@@ -455,6 +470,19 @@ while(cantidadConVida > 1 ){
     nroRonda++;
     cantidadConVida = calcularVivos(players);
     console.log(`%cQuedan ${cantidadConVida} jugadores con vida.`,"color:#808080");
+
+
+    if(nroRonda>=4){
+        for(let contador = 0;contador<players.length;contador++){
+            let playerRonda = players[contador];
+            if(playerRonda.getArma()){
+                console.log(`danio antes ${playerRonda.getArma()["danio"]}`);
+                playerRonda.getArma().danio += danioSuma;
+                console.log(`danio despues ${playerRonda.getArma()["danio"]}`);
+            }
+        }
+        danioSuma+=25;
+    }
 }
 
 if(cantidadConVida==1){
