@@ -71,7 +71,10 @@ const chun = new Jugador("chun",1010);
 
 let generarArma = ()=>{
     var rand = parseInt(Math.random()*armas.length);
-    return armas[rand];
+    console.log(`%c${JSON.stringify(armas[rand])}`,"color:orange");
+
+    //return armas[rand];
+    return JSON.parse(JSON.stringify(armas[rand]));
 }
 
 let calcularVivos = (jugadores)=>{
