@@ -36,6 +36,10 @@ class Jugador{
 		this.arma= arma;
 	}
 
+    setTeam(numero){
+		this.team=numero;
+	}
+
     setHP(hp){
         this.hp=hp;
     }
@@ -59,6 +63,10 @@ class Jugador{
     getKills(){
         return this.kills;
     }
+
+    getTeam(){
+        return this.team;
+    }
 }
 
 const lynn = new Jugador("lynn",1074);
@@ -68,13 +76,75 @@ const yugito = new Jugador("yugito",54356);
 const draco = new Jugador("draco",5486);
 const chun = new Jugador("chun",1010);
 
+class Team{
+	constructor(id){
+        this.id = id;
+        this.player1 = null;
+        this.player2 = null;
+        this.player3 = null;
+	}
+
+    set setPlayer1(player){
+		this.player1= player;
+	}
+
+    set setPlayer2(player){
+		this.player2= player;
+	}
+
+    set setPlayer3(player){
+		this.player3= player;
+	}
+
+    getID(){
+        return this.id;
+    }
+
+    getPlayer1(){
+        return this.player1;
+    }
+
+    getPlayer2(){
+        return this.player2;
+    }
+
+    getPlayer3(){
+        return this.player3;
+    }
+}
+
+var teams = [];
+
+imprimirTeams = ()=>{
+    for(let countTeams = 0; countTeams < teams.length; countTeams++){
+        console.log(`%cTEAM ${teams[countTeams].getID()}`,"color:orange");
+        if(teams[countTeams].getPlayer1() != null){
+            console.log(`%c${teams[countTeams].getPlayer1().getNombre()} - HP: ${teams[countTeams].getPlayer1().getHP()}`,"color:orange");
+        }        
+        if(teams[countTeams].getPlayer2() != null){
+            console.log(`%c${teams[countTeams].getPlayer2().getNombre()} - HP: ${teams[countTeams].getPlayer2().getHP()}`,"color:orange");
+        }    
+        if(teams[countTeams].getPlayer3() != null){
+            console.log(`%c${teams[countTeams].getPlayer3().getNombre()} - HP: ${teams[countTeams].getPlayer3().getHP()}`,"color:orange");
+        }    
+        console.log(``);
+    }
+}
+
 
 let generarArma = ()=>{
     var rand = parseInt(Math.random()*armas.length);
-    console.log(`%c${JSON.stringify(armas[rand])}`,"color:orange");
+    //console.log(`%c${JSON.stringify(armas[rand])}`,"color:orange");
 
     //return armas[rand];
     return JSON.parse(JSON.stringify(armas[rand]));
+}
+
+
+let danioExtra = (min,max)=>{
+    let danio = Math.floor(Math.random() * (max - min + 1) + min)
+    console.log(`%c${danio} de danio extra`,"color:#808080");
+    return danio;
 }
 
 let calcularVivos = (jugadores)=>{
@@ -213,9 +283,20 @@ let formarEquipo = (jugadores)=> {
                     jugador.team = idEquipo;
                     jugadorA = jugadores[i+1];
                     jugadorA.team = idEquipo;
+
+                     var thisTeam = new Team(idEquipo);  
+                     thisTeam.setPlayer1 = jugador;
+                     thisTeam.setPlayer2 = jugadorA;
+                     teams.push(thisTeam);
+
                     idEquipo++;
                 }else{
                     jugador.team = idEquipo;
+
+                    var thisTeam = new Team(idEquipo);  
+                    thisTeam.setPlayer1 = jugador;
+                    teams.push(thisTeam);
+
                     idEquipo++;
                 }
                 
@@ -228,14 +309,31 @@ let formarEquipo = (jugadores)=> {
                     jugadorA.team = idEquipo;
                     jugadorB = jugadores[i+2];
                     jugadorB.team = idEquipo;
+
+                    var thisTeam = new Team(idEquipo);  
+                    thisTeam.setPlayer1 = jugador;
+                    thisTeam.setPlayer2 = jugadorA;
+                    thisTeam.setPlayer3 = jugadorB;
+                    teams.push(thisTeam);
+
                     idEquipo++;    
                 }else{
                     jugador.team = idEquipo;
+
+                    var thisTeam = new Team(idEquipo);  
+                    thisTeam.setPlayer1 = jugador;
+                    teams.push(thisTeam);
+
                     idEquipo++;    
                 }
             }else{
                 //team de 1 - 30% prob
                 jugador.team = idEquipo;
+
+                var thisTeam = new Team(idEquipo);  
+                thisTeam.setPlayer1 = jugador;
+                teams.push(thisTeam);
+
                 idEquipo++; 
             }
         }
@@ -312,7 +410,8 @@ let eventoAleatorio2 = ()=>{
 
 let ataqueEspecificoxCategoria = (jugador, victima)=>{
     console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
-    victima.setHP(Math.max(0,victima.getHP() - jugador.getArma()["danio"])); //le quita de vida el danio base de su arma. si queda en negativo pone 0
+    let danio = jugador.getArma()["danio"] + danioExtra(1,500);
+    victima.setHP(Math.max(0,victima.getHP() - danio)); //le quita de vida el danio base de su arma. si queda en negativo pone 0
 
     jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
     if(jugador.getArma()["usos"] <= 0){
@@ -330,7 +429,8 @@ let ataqueEspecificoxCategoria = (jugador, victima)=>{
 
 let ataqueGenericoConArma = (jugador, victima)=>{
     console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
-    victima.setHP(Math.max(0,victima.getHP() - jugador.getArma()["danio"])); //le quita de vida el danio base de su arma. si queda en negativo pone 0
+    let danio = jugador.getArma()["danio"] + danioExtra(1,500);
+    victima.setHP(Math.max(0,victima.getHP() - danio)); //le quita de vida el danio base de su arma. si queda en negativo pone 0
     
     jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
     if(jugador.getArma()["usos"] <= 0){
@@ -348,7 +448,8 @@ let ataqueGenericoConArma = (jugador, victima)=>{
 
 let ataqueGenericoSinArma = (jugador, victima)=>{
     console.log(` ${jugador.getNombre()} atacó sin arma a ${victima.getNombre()}`);
-    victima.setHP(Math.max(0, victima.getHP() - 25)); 
+    let danio = danioExtra(30,90);
+    victima.setHP(Math.max(0,victima.getHP() - danio)); 
 
     console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
     if(victima.getHP()<=0){
@@ -417,6 +518,7 @@ cantidadConVida = calcularVivos(players);
 let copia1 = copiarJugadores(players)
     formarEquipo(copia1);
 
+      console.log(`%c${JSON.stringify(teams)}`,"color:orange");
 
 //primera ronda de loot
 for(let i=0;i<cantidadConVida;i++){
@@ -455,12 +557,13 @@ while(cantidadConVida > 1 ){
             }
     
         }    
-
+        let probabilidadExtra = 0;
         let jugador = players[j];
         if(jugador.alive){
             console.log(`%cTurno de ${jugador.getNombre()}`,"color:green; font-weight:bold");
+            if(jugador.getArma() == null){probabilidadExtra = 0.50;} //si el jugador no tiene arma, tiene 50% mas de chances de lootear que de atacar
             let probabilidad = Math.random();
-            if(probabilidad < 0.25){
+            if(probabilidad < (0.25 + probabilidadExtra)){
                 console.log(`%c Loot`,"color:#6068da");
                 rondaLoot(jugador);
             }else{
@@ -474,6 +577,7 @@ while(cantidadConVida > 1 ){
     cantidadConVida = calcularVivos(players);
     console.log(`%cQuedan ${cantidadConVida} jugadores con vida.`,"color:#808080");
 
+    imprimirTeams();
 
     if(nroRonda>=4){
         for(let contador = 0;contador<players.length;contador++){

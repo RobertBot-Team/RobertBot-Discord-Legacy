@@ -83,9 +83,7 @@ eventosAleatorios1[9] = function1=(jugador, players)=>{
     jugadorACambiar.arma = jugador.getArma();
     jugador.arma = null;
     return 1;
-
 }
-
     //este evento recibe el array original de jugadores
     //hace una copia, reordena la copia y busca una "victima"/"comprador" en la copia
     //compara el id, buscando ese id en la lista original
@@ -102,3 +100,97 @@ eventosAleatorios1[9] = function1=(jugador, players)=>{
 // entonces si recibe null, genera otro evento distinto
 // si se cumple, retorna 1
 /*----------------------------------------------*/
+
+eventosAleatorios1[10] = function1=(jugador, players)=>{
+    console.log(`%c this is evento 100000000000000`,"color:purple");
+    console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
+    let nroTeam = jugador.getTeam();
+    let team = teams[nroTeam-1];
+    let cantEnTeam = 1;
+    let newTeamId = teams.length + 1;
+
+    //console.log(`%c${JSON.stringify(team)}`,"color:purple");
+
+    let player1 = buscarPorID(team.getPlayer1().getID());
+    let player2 = null;
+    let player3 = null;
+    var newTeam = null;
+
+    if(team.getPlayer2()==null){return null;}
+    if(team.getPlayer2()!=null){
+        cantEnTeam = 2;
+        player2 = buscarPorID(team.getPlayer2().getID());
+    }
+    if(team.getPlayer3()!=null){
+        cantEnTeam = 3;
+        player3 = buscarPorID(team.getPlayer3().getID());
+    }
+
+    let r = Math.random();
+
+    if(cantEnTeam == 2){
+
+        if(r < 0.5){
+            console.log(`${player1.getNombre()} no se aguanta más a ${player2.getNombre()} y decide irse del equipo por su cuenta.`);
+            
+            team.setPlayer1 = team.getPlayer2();
+            team.player2 = null;
+
+            player1.setTeam(newTeamId);
+            newTeam = new Team(newTeamId);  
+            newTeam.setPlayer1 = player1;
+            teams.push(newTeam);
+
+        } else {
+            console.log(`${player2.getNombre()} no se aguanta más a ${player1.getNombre()} y decide irse del equipo por su cuenta.`); 
+            
+            team.player2 = null;
+            
+            player2.setTeam(newTeamId);
+            newTeam = new Team(newTeamId);  
+            newTeam.setPlayer1 = player2;
+            teams.push(newTeam);
+        }
+    }
+
+    if(cantEnTeam == 3){
+
+        if(r < 0.3){
+            console.log(`${player1.getNombre()} no se aguanta más a ${player2.getNombre()} y decide irse del equipo por su cuenta.`);
+           
+            team.setPlayer1 =team.getPlayer2();
+            team.setPlayer2 = team.getPlayer3();
+            team.player3 = null;
+
+            player1.setTeam(newTeamId);
+            newTeam = new Team(newTeamId);  
+            newTeam.setPlayer1 = player1;
+            teams.push(newTeam);
+
+        } else if(r < 0.6){
+            console.log(`${player2.getNombre()} no se aguanta más a ${player3.getNombre()} y decide irse del equipo por su cuenta.`);
+
+            team.setPlayer2 = team.getPlayer3();
+            team.player3 = null;
+            
+            player2.setTeam(newTeamId);
+            newTeam = new Team(newTeamId);  
+            newTeam.setPlayer1 = player2;
+            teams.push(newTeam);
+
+        } else {
+            console.log(`${player3.getNombre()} no se aguanta más a ${player1.getNombre()} y decide irse del equipo por su cuenta.`);
+
+            team.player3 = null;
+            
+            player3.setTeam(newTeamId);
+            var newTeam = new Team(newTeamId);  
+            newTeam.setPlayer1 = player3;
+            teams.push(newTeam);
+        }
+
+    }
+
+    imprimirTeams();
+    return 1;
+}
