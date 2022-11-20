@@ -6,7 +6,7 @@ class Arma{
         this.categoria = categoria;
         this.danio = danio;
         this.usos = usos;
-        this.genero = genero;
+        this.pronombre = genero;
         this.plural = plural;
     }
 }
@@ -24,7 +24,7 @@ var armas = [pistola,granada,guitarra,alfiler,martilloThor,bomba];
 class Jugador{
 	constructor(nombre,id){
 		this.nombre = nombre;
-		this.alive = true;
+		this.alive = 1;
         this.arma = null;
         this.id = id;
         this.hp = 1000;
@@ -111,6 +111,33 @@ class Team{
     getPlayer3(){
         return this.player3;
     }
+
+    estaVivo1(){
+        return (this.player1.alive == 1);
+    }
+
+    estaVivo2(){
+        return (this.player2.alive == 1);
+    }
+
+    estaVivo3(){
+        return (this.player3.alive == 1);
+    }
+
+    nombresVivos(){
+        let nombres = [];
+        if(this.getPlayer1()!=null && this.estaVivo1()){
+            nombres.push(this.getPlayer1().getNombre());
+        }    
+        if(this.getPlayer2()!=null && this.estaVivo2()){
+            nombres.push(this.getPlayer2().getNombre());
+        }    
+        if(this.getPlayer3()!=null && this.estaVivo3()){
+            nombres.push(this.getPlayer3().getNombre());
+        }    
+        return nombres;
+    }
+
 }
 
 var teams = [];
@@ -152,7 +179,7 @@ let calcularVivos = (jugadores)=>{
     let player;
     for(let m=0; m<jugadores.length; m++){
         player = jugadores[m];
-        if(player.alive){
+        if(player.alive == 1){
             cantConVida++;
         }
     }
@@ -190,12 +217,16 @@ let buscarPorID = (id)=>{
     return null;
 }
 
+let esDelMismoTeam = (jugadora,jugadorb)=>{
+    return (jugadora.team == jugadorb.team);
+}
+
 let buscarJugador = (jugador,jugadores)=>{    //el jugador del parametro es el q ataca, y esta funcion retorna otro jugador vivo 
     shuffleJugadores(jugadores);
     let victima;
     for(let i=0;i<jugadores.length;i++){
         victima = jugadores[i];
-        if(victima.alive && victima.id != jugador.id){
+        if((victima.alive==1) && victima.id != jugador.id){
             return victima;
         }
     }
@@ -207,7 +238,7 @@ let buscarJugadorConArma = (jugador,jugadores)=>{    //esta funcion retorna otro
     let victima;
     for(let i=0;i<jugadores.length;i++){
         victima = jugadores[i];
-        if(victima.alive && victima.id != jugador.id && victima.arma){
+        if((victima.alive==1) && victima.id != jugador.id && victima.arma){
             return victima.getID();
         }
     }
@@ -218,7 +249,7 @@ let encontrarGanador = (jugadores)=>{
     let ganador;
     for (let i = 0; i < jugadores.length; i++) {
         ganador = jugadores[i];
-        if(ganador.alive){return ganador};
+        if(ganador.alive == 1){return ganador};
     }
     return null;
 }
@@ -247,7 +278,7 @@ let chequearSonMismoEquipo = ()=> {
     let count = 0;
     for(let i=0; i<players.length; i++){
         jugador = players[i];
-        if(jugador.alive){
+        if(jugador.alive == 1){
 
             if(count>=1 && jugador.team == team){
                 count++;
@@ -421,7 +452,7 @@ let ataqueEspecificoxCategoria = (jugador, victima)=>{
 
     console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
     if(victima.getHP()<=0){
-        victima.alive=false;
+        victima.alive=0;
         jugador.kills++;
         console.log(`%cKills de ${jugador.getNombre()}: ${jugador.getKills()}.`,"color:#808080");
     }
@@ -440,7 +471,7 @@ let ataqueGenericoConArma = (jugador, victima)=>{
 
     console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
     if(victima.getHP()<=0){
-        victima.alive=false;
+        victima.alive=0;
         jugador.kills++;
         console.log(`%cKills de ${jugador.getNombre()}: ${jugador.getKills()}.`,"color:#808080");
     }
@@ -453,7 +484,7 @@ let ataqueGenericoSinArma = (jugador, victima)=>{
 
     console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
     if(victima.getHP()<=0){
-        victima.alive=false;
+        victima.alive=0;
         jugador.kills++;
         console.log(`%cKills de ${jugador.getNombre()}: ${jugador.getKills()}.`,"color:#808080");
     }
@@ -478,7 +509,7 @@ let rondaLoot = (jugador)=>{
 
 // ronda de ataque
 let rondaAtaque = (jugador,jugadores)=>{
-        if(jugador.alive){
+        if(jugador.alive == 1){
             if(cantidadConVida >= 2){
              let probabilidad = Math.random();
              if(probabilidad < 0.05){
@@ -559,7 +590,7 @@ while(cantidadConVida > 1 ){
         }    
         let probabilidadExtra = 0;
         let jugador = players[j];
-        if(jugador.alive){
+        if(jugador.alive == 1){
             console.log(`%cTurno de ${jugador.getNombre()}`,"color:green; font-weight:bold");
             if(jugador.getArma() == null){probabilidadExtra = 0.50;} //si el jugador no tiene arma, tiene 50% mas de chances de lootear que de atacar
             let probabilidad = Math.random();

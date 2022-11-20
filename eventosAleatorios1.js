@@ -91,16 +91,6 @@ eventosAleatorios1[9] = function1=(jugador, players)=>{
 
     //dejo este comentario porque hay que hacer lo mismo en varios eventos
 
-
-
-// si algun evento necesita una condicion extra, por ejemplo tener 3 jugadores
-// con vida para imprimir sus nombres, el propio evento chequea la condicion.
-// si no se cumple, devuelve null
-// del otro lado, cuando llamamos a esta funcion para elegir un evento, hacemos un do while(not null)
-// entonces si recibe null, genera otro evento distinto
-// si se cumple, retorna 1
-/*----------------------------------------------*/
-
 eventosAleatorios1[10] = function1=(jugador, players)=>{
     console.log(`%c this is evento 100000000000000`,"color:purple");
     console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
@@ -129,7 +119,7 @@ eventosAleatorios1[10] = function1=(jugador, players)=>{
     let r = Math.random();
 
     if(cantEnTeam == 2){
-
+        if(!(team.estaVivo1() && team.estaVivo2())){ return null;}    //si alguno de los 2 está muerto, no se hace este evento
         if(r < 0.5){
             console.log(`${player1.getNombre()} no se aguanta más a ${player2.getNombre()} y decide irse del equipo por su cuenta.`);
             
@@ -156,6 +146,7 @@ eventosAleatorios1[10] = function1=(jugador, players)=>{
     if(cantEnTeam == 3){
 
         if(r < 0.3){
+            if(!(team.estaVivo1() && team.estaVivo2())){ return null;}
             console.log(`${player1.getNombre()} no se aguanta más a ${player2.getNombre()} y decide irse del equipo por su cuenta.`);
            
             team.setPlayer1 =team.getPlayer2();
@@ -168,6 +159,7 @@ eventosAleatorios1[10] = function1=(jugador, players)=>{
             teams.push(newTeam);
 
         } else if(r < 0.6){
+            if(!(team.estaVivo2() && team.estaVivo3())){ return null;}
             console.log(`${player2.getNombre()} no se aguanta más a ${player3.getNombre()} y decide irse del equipo por su cuenta.`);
 
             team.setPlayer2 = team.getPlayer3();
@@ -179,6 +171,7 @@ eventosAleatorios1[10] = function1=(jugador, players)=>{
             teams.push(newTeam);
 
         } else {
+            if(!(team.estaVivo3() && team.estaVivo1())){ return null;}
             console.log(`${player3.getNombre()} no se aguanta más a ${player1.getNombre()} y decide irse del equipo por su cuenta.`);
 
             team.player3 = null;
@@ -194,3 +187,45 @@ eventosAleatorios1[10] = function1=(jugador, players)=>{
     imprimirTeams();
     return 1;
 }
+
+eventosAleatorios1[11] = function1=(jugador, players)=>{
+    let team = teams[jugador.getTeam() - 1]
+    let vivos = team.nombresVivos();
+    if(team.getPlayer2()!=null && team.getPlayer3()!= null) //team de 3
+    {
+        if(vivos.length == 3){
+            console.log(`${vivos[0]}, ${vivos[1]} y ${vivos[2]} hacen un concurso de talentos. Las habilidades de canto de ${jugador.getNombre()} sorprendieron a todos.`);
+            return 1;
+        }
+        if(vivos.length == 2){
+            console.log(`${vivos[0]} y ${vivos[1]} hacen un concurso de talentos. Las habilidades de canto de ${jugador.getNombre()} sorprendieron a todos.`);
+            return 1;
+        }
+        if(vivos.length <=1){return null;}
+    }
+    if(team.getPlayer2()!=null && team.getPlayer3()== null) //team de 2
+    {
+        if(vivos.length == 2){
+            console.log(`${vivos[0]} y ${vivos[1]} hacen un concurso de talentos. Las habilidades de canto de ${jugador.getNombre()} sorprendieron a todos.`);
+            return 1;
+        }
+        if(vivos.length <=1){return null;}
+    }
+    if(team.getPlayer2()==null && team.getPlayer3()== null) //team de 1
+    {
+        return null;
+    }
+
+}
+
+
+
+
+
+// si algun evento necesita una condicion extra, por ejemplo tener 3 jugadores
+// con vida para imprimir sus nombres, el propio evento chequea la condicion.
+// si no se cumple, devuelve null
+// del otro lado, cuando llamamos a esta funcion para elegir un evento, hacemos un do while(not null)
+// entonces si recibe null, genera otro evento distinto
+// si se cumple, retorna 1
+/*----------------------------------------------*/
