@@ -142,6 +142,22 @@ class Team{
 
 var teams = [];
 
+
+buscarTeamDe2 = ()=>{   //retorna null si no hay teams de 2 miembros
+    let team;
+    let idTeam;
+    for(let i=0; i < teams.length; i++){
+        team = teams[i];
+        idTeam = team.getID();
+        if(team.nombresVivos().length == 2){
+            console.log(`buscarTeamDe2 devuelve ${idTeam}`);
+            return idTeam;
+        }
+    }
+    console.log(`buscarTeamDe2 no encontro team de 2`);
+    return null;
+}
+
 imprimirTeams = ()=>{
     for(let countTeams = 0; countTeams < teams.length; countTeams++){
         console.log(`%cTEAM ${teams[countTeams].getID()}`,"color:orange");
@@ -549,7 +565,8 @@ cantidadConVida = calcularVivos(players);
 let copia1 = copiarJugadores(players)
     formarEquipo(copia1);
 
-      console.log(`%c${JSON.stringify(teams)}`,"color:orange");
+    //console.log(`%c${JSON.stringify(teams)}`,"color:orange");
+    imprimirTeams();
 
 //primera ronda de loot
 for(let i=0;i<cantidadConVida;i++){
