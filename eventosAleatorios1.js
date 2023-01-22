@@ -1,8 +1,10 @@
 /*------------ eventos aleatorios 1 ------------*/
+import { buscarTeamDe2, copiarJugadores, buscarPorID, imprimirTeams, buscarJugador } from "./utils.js";
+import {Team} from "./clases.js";
 
 var eventosAleatorios1 = [];
 
-eventosAleatorios1[0] = function1=(jugador, players)=>{
+eventosAleatorios1[0] = (jugador, players, maxHP, teams)=>{
     if(jugador.hp == maxHP){return null};
 
     console.log(` HP antes: ${jugador.getHP()}`);
@@ -12,7 +14,7 @@ eventosAleatorios1[0] = function1=(jugador, players)=>{
     return 1;
 }
 
-eventosAleatorios1[1] = function1=(jugador, players)=>{
+eventosAleatorios1[1] = (jugador, players, maxHP, teams)=>{
     if(jugador.hp == maxHP){return null};
 
     console.log(` HP antes: ${jugador.getHP()}`);
@@ -22,37 +24,37 @@ eventosAleatorios1[1] = function1=(jugador, players)=>{
     return 1;
 }
 
-eventosAleatorios1[2] = function1=(jugador, players)=>{
+eventosAleatorios1[2] = (jugador, players, maxHP, teams)=>{
     console.log(` ${jugador.getNombre()} va tan sobrado que ni busca armas.`);
     return 1;
 }
 
-eventosAleatorios1[3] = function1=(jugador, players)=>{
+eventosAleatorios1[3] = (jugador, players, maxHP, teams)=>{
     console.log(` ${jugador.getNombre()} toma una mochila y se va corriendo mientras rie maniáticamente. Lástima que está vacía. Al menos se ve feliz.`);
     return 1;
 }
 
-eventosAleatorios1[4] = function1=(jugador, players)=>{
+eventosAleatorios1[4] = (jugador, players, maxHP, teams)=>{
     console.log(` ${jugador.getNombre()} se sienta a pescar.`);
     return 1;
 }
 
-eventosAleatorios1[5] = function1=(jugador, players)=>{
+eventosAleatorios1[5] = (jugador, players, maxHP, teams)=>{
     console.log(` ${jugador.getNombre()} se acuesta a dormir todo el día.`);
     return 1;
 }
 
-eventosAleatorios1[6] = function1=(jugador, players)=>{
+eventosAleatorios1[6] = (jugador, players, maxHP, teams)=>{
     console.log(` ${jugador.getNombre()} no sabe cómo se juega esto`);
     return 1;
 }
 
-eventosAleatorios1[7] = function1=(jugador, players)=>{
+eventosAleatorios1[7] = (jugador, players, maxHP, teams)=>{
     console.log(` ${jugador.getNombre()} pregunta "¿Ya me morí?"`);
     return 1;
 }
 
-eventosAleatorios1[8] = function1=(jugador, players)=>{
+eventosAleatorios1[8] = (jugador, players, maxHP, teams)=>{
     if(jugador.arma == null){return null};
     console.log(` ${jugador.getNombre()} necesitaba dinero para gachas así que vendió su ${jugador.getArma()["nombre"]}`);
     jugador.arma = null;
@@ -60,7 +62,7 @@ eventosAleatorios1[8] = function1=(jugador, players)=>{
 }
 
 
-eventosAleatorios1[9] = function1=(jugador, players)=>{
+eventosAleatorios1[9] = (jugador, players, maxHP, teams)=>{
     let copiaJugadores = copiarJugadores(players);
     console.log(`%c AAAA A A A A A`,"color:yellow");
     let comprador;
@@ -77,7 +79,7 @@ eventosAleatorios1[9] = function1=(jugador, players)=>{
     while (comprador.arma != null); //no es la forma ideal de buscar un jugador sin arma, pero bueno
 
     id = comprador.getID();
-    jugadorACambiar = buscarPorID(id);
+    jugadorACambiar = buscarPorID(id, players);
 
     console.log(` ${jugador.getNombre()} necesitaba dinero para gachas así que vendió su ${jugador.getArma()["nombre"]} a ${jugadorACambiar.getNombre()}`);
     jugadorACambiar.arma = jugador.getArma();
@@ -91,7 +93,7 @@ eventosAleatorios1[9] = function1=(jugador, players)=>{
 
     //dejo este comentario porque hay que hacer lo mismo en varios eventos
 
-eventosAleatorios1[10] = function1=(jugador, players)=>{
+eventosAleatorios1[10] = (jugador, players, maxHP, teams)=>{
     console.log(`%c this is evento 100000000000000`,"color:purple");
     console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
     let nroTeam = jugador.getTeam();
@@ -101,7 +103,7 @@ eventosAleatorios1[10] = function1=(jugador, players)=>{
 
     //console.log(`%c${JSON.stringify(team)}`,"color:purple");
 
-    let player1 = buscarPorID(team.getPlayer1().getID());
+    let player1 = buscarPorID(team.getPlayer1().getID(), players);
     let player2 = null;
     let player3 = null;
     var newTeam = null;
@@ -109,11 +111,11 @@ eventosAleatorios1[10] = function1=(jugador, players)=>{
     if(team.getPlayer2()==null){return null;}
     if(team.getPlayer2()!=null){
         cantEnTeam = 2;
-        player2 = buscarPorID(team.getPlayer2().getID());
+        player2 = buscarPorID(team.getPlayer2().getID(), players);
     }
     if(team.getPlayer3()!=null){
         cantEnTeam = 3;
-        player3 = buscarPorID(team.getPlayer3().getID());
+        player3 = buscarPorID(team.getPlayer3().getID(), players);
     }
 
     let r = Math.random();
@@ -184,11 +186,11 @@ eventosAleatorios1[10] = function1=(jugador, players)=>{
 
     }
 
-    imprimirTeams();
+    imprimirTeams(players);
     return 1;
 }
 
-eventosAleatorios1[11] = function1=(jugador, players)=>{
+eventosAleatorios1[11] = (jugador, players, maxHP, teams)=>{
     let team = teams[jugador.getTeam() - 1]
     let vivos = team.nombresVivos();
     if(team.getPlayer2()!=null && team.getPlayer3()!= null) //team de 3
@@ -218,7 +220,7 @@ eventosAleatorios1[11] = function1=(jugador, players)=>{
 
 }
 
-eventosAleatorios1[12] = function1=(jugador, players)=>{
+eventosAleatorios1[12] = (jugador, players, maxHP, teams)=>{
     console.log(`%c this is evento 122222222222222222`,"color:purple");
     let team = teams[jugador.getTeam() - 1]
     let vivos = team.nombresVivos();
@@ -283,7 +285,7 @@ eventosAleatorios1[12] = function1=(jugador, players)=>{
     //este evento solo puede ocuurrir si son 3 miembros en el team
 }
 
-eventosAleatorios1[13] = function1=(jugador, players)=>{
+eventosAleatorios1[13] = (jugador, players, maxHP, teams)=>{
     let team = teams[jugador.getTeam() - 1]
     let vivos = team.nombresVivos();
     if(team.getPlayer2()!=null && team.getPlayer3()!= null) //team de 3
@@ -322,7 +324,7 @@ eventosAleatorios1[13] = function1=(jugador, players)=>{
 
 }
 
-eventosAleatorios1[14] = function1=(jugador, players)=>{
+eventosAleatorios1[14] = (jugador, players, maxHP, teams)=>{
     let idTeamDe2;
     let team;
     let teamActual;
@@ -355,3 +357,5 @@ eventosAleatorios1[14] = function1=(jugador, players)=>{
 // entonces si recibe null, genera otro evento distinto
 // si se cumple, retorna 1
 /*----------------------------------------------*/
+
+export {eventosAleatorios1};

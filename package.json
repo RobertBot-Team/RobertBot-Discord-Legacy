@@ -1,0 +1,29 @@
+{
+  "name": "robertbot",
+  "version": "1.0.2",
+  "description": "Bot",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArielPiwko/RobertBot-Discord.git"
+  },
+  "keywords": [
+    "Bot",
+    "Discord",
+    "HG",
+    "Hunger-Games",
+    "Robert",
+    "JS",
+    "Javascript"
+  ],
+  "author": "Lynn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArielPiwko/RobertBot-Discord/issues"
+  },
+  "type": "module",
+  "homepage": "https://github.com/ArielPiwko/RobertBot-Discord#readme"
+}
