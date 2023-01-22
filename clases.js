@@ -24,8 +24,8 @@ class Jugador{
 		this.arma= arma;
 	}
 
-    setTeam(numero){
-		this.team=numero;
+    setTeam(team){
+		this.team=team;
 	}
 
     setHP(hp){
@@ -76,6 +76,10 @@ class Team{
     set setPlayer3(player){
 		this.player3= player;
 	}
+
+    set setID(id){
+        this.id = id;
+    }
 
     getID(){
         return this.id;

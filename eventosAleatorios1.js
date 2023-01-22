@@ -1,5 +1,5 @@
 /*------------ eventos aleatorios 1 ------------*/
-import { buscarTeamDe2, copiarJugadores, buscarPorID, imprimirTeams, buscarJugador } from "./utils.js";
+import { buscarTeamDe2, copiarJugadores, buscarPorID, imprimirTeams, buscarJugador, eliminarTeam } from "./utils.js";
 import {Team} from "./clases.js";
 
 var eventosAleatorios1 = [];
@@ -95,9 +95,8 @@ eventosAleatorios1[9] = (jugador, players, maxHP, teams)=>{
 
 eventosAleatorios1[10] = (jugador, players, maxHP, teams)=>{
     console.log(`%c this is evento 100000000000000`,"color:purple");
-    console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
-    let nroTeam = jugador.getTeam();
-    let team = teams[nroTeam-1];
+    //console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
+    let team = jugador.getTeam();
     let cantEnTeam = 1;
     let newTeamId = teams.length + 1;
 
@@ -128,20 +127,22 @@ eventosAleatorios1[10] = (jugador, players, maxHP, teams)=>{
             team.setPlayer1 = team.getPlayer2();
             team.player2 = null;
 
-            player1.setTeam(newTeamId);
             newTeam = new Team(newTeamId);  
             newTeam.setPlayer1 = player1;
             teams.push(newTeam);
+
+            player1.setTeam(newTeam);
 
         } else {
             console.log(`${player2.getNombre()} no se aguanta más a ${player1.getNombre()} y decide irse del equipo por su cuenta.`); 
             
             team.player2 = null;
             
-            player2.setTeam(newTeamId);
             newTeam = new Team(newTeamId);  
             newTeam.setPlayer1 = player2;
             teams.push(newTeam);
+
+            player2.setTeam(newTeam);
         }
     }
 
@@ -155,10 +156,11 @@ eventosAleatorios1[10] = (jugador, players, maxHP, teams)=>{
             team.setPlayer2 = team.getPlayer3();
             team.player3 = null;
 
-            player1.setTeam(newTeamId);
             newTeam = new Team(newTeamId);  
             newTeam.setPlayer1 = player1;
             teams.push(newTeam);
+
+            player1.setTeam(newTeam);
 
         } else if(r < 0.6){
             if(!(team.estaVivo2() && team.estaVivo3())){ return null;}
@@ -167,10 +169,11 @@ eventosAleatorios1[10] = (jugador, players, maxHP, teams)=>{
             team.setPlayer2 = team.getPlayer3();
             team.player3 = null;
             
-            player2.setTeam(newTeamId);
             newTeam = new Team(newTeamId);  
             newTeam.setPlayer1 = player2;
             teams.push(newTeam);
+
+            player2.setTeam(newTeam);
 
         } else {
             if(!(team.estaVivo3() && team.estaVivo1())){ return null;}
@@ -178,20 +181,22 @@ eventosAleatorios1[10] = (jugador, players, maxHP, teams)=>{
 
             team.player3 = null;
             
-            player3.setTeam(newTeamId);
             var newTeam = new Team(newTeamId);  
             newTeam.setPlayer1 = player3;
             teams.push(newTeam);
+
+            player3.setTeam(newTeam);
         }
 
     }
 
-    imprimirTeams(players);
+    imprimirTeams();
     return 1;
 }
 
 eventosAleatorios1[11] = (jugador, players, maxHP, teams)=>{
-    let team = teams[jugador.getTeam() - 1]
+    //console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
+    let team = jugador.getTeam();
     let vivos = team.nombresVivos();
     if(team.getPlayer2()!=null && team.getPlayer3()!= null) //team de 3
     {
@@ -221,8 +226,9 @@ eventosAleatorios1[11] = (jugador, players, maxHP, teams)=>{
 }
 
 eventosAleatorios1[12] = (jugador, players, maxHP, teams)=>{
+    //console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
     console.log(`%c this is evento 122222222222222222`,"color:purple");
-    let team = teams[jugador.getTeam() - 1]
+    let team = jugador.getTeam();
     let vivos = team.nombresVivos();
     let newTeamId = teams.length + 1;
     var newTeam = null;
@@ -239,28 +245,31 @@ eventosAleatorios1[12] = (jugador, players, maxHP, teams)=>{
                 team.setPlayer2 = team.getPlayer3();
                 team.player3 = null;
     
-                jugador.setTeam(newTeamId);
                 newTeam = new Team(newTeamId);  
                 newTeam.setPlayer1 = jugador;
                 teams.push(newTeam);
+
+                jugador.setTeam(newTeam);
             }
             else if(jugador.getID() == id2){
                 team.setPlayer2 = team.getPlayer3();
                 team.player3 = null;
                 
-                jugador.setTeam(newTeamId);
                 newTeam = new Team(newTeamId);  
                 newTeam.setPlayer1 = jugador;
                 teams.push(newTeam);
+
+                jugador.setTeam(newTeam);
             }
             else if(jugador.getID() == id3){
                 
                 team.player3 = null;
                 
-                jugador.setTeam(newTeamId);
                 var newTeam = new Team(newTeamId);  
                 newTeam.setPlayer1 = jugador;
                 teams.push(newTeam);
+
+                jugador.setTeam(newTeam);
             }
             else{
                 console.log("ERROR ERROR ERROR");
@@ -286,7 +295,8 @@ eventosAleatorios1[12] = (jugador, players, maxHP, teams)=>{
 }
 
 eventosAleatorios1[13] = (jugador, players, maxHP, teams)=>{
-    let team = teams[jugador.getTeam() - 1]
+    //console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
+    let team = jugador.getTeam();
     let vivos = team.nombresVivos();
     if(team.getPlayer2()!=null && team.getPlayer3()!= null) //team de 3
     {
@@ -328,11 +338,11 @@ eventosAleatorios1[14] = (jugador, players, maxHP, teams)=>{
     let idTeamDe2;
     let team;
     let teamActual;
-    console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
-    console.log(`%c${JSON.stringify(jugador.getTeam())}`,"color:purple");
+    //console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
+    //console.log(`%c${JSON.stringify(jugador.getTeam())}`,"color:purple");
     console.log(`%caaaaaaaaaaaaaaaaaaaaaaaaaa`,"color:purple");
     teamActual = jugador.getTeam();
-    if((teams[teamActual-1].getPlayer2()) != null){return null;}
+    if((teamActual.getPlayer2()) != null){return null;}
     idTeamDe2 = buscarTeamDe2();
     if(idTeamDe2==null){return null;}
     team = teams[idTeamDe2 - 1];
@@ -340,14 +350,11 @@ eventosAleatorios1[14] = (jugador, players, maxHP, teams)=>{
     console.log(`${jugador.getNombre()} encuentra a ${team.getPlayer1().getNombre()} y ${team.getPlayer2().getNombre()} y les suplica hacer equipo. 
     ${team.getPlayer1().getNombre()} y ${team.getPlayer2().getNombre()} aceptan y permiten que ${jugador.getNombre()} se una.`);
 
-    jugador.setTeam(idTeamDe2);
+    eliminarTeam(teamActual.getID());
+
+    jugador.setTeam(team);
     team.setPlayer3 = jugador;
     return 1;
-    //problema: el team de 1 jugador sigue existiendo en la variable teams
-    // esto no afecta la jugabilidad xq no se hace una copia del jugador
-    //pero si habria que eliminar ese team para poder imprimir bien los teams cada ronda
-    // ademas hay que modificar el id de los teams siguientes xq siempre asumo que el team
-    // de un jugador es la posicion en el array, +1
 }
 
 // si algun evento necesita una condicion extra, por ejemplo tener 3 jugadores

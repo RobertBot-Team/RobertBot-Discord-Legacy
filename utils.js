@@ -111,7 +111,7 @@ let buscarPorID = (id, players)=>{
 }
 
 let esDelMismoTeam = (jugadora,jugadorb)=>{
-    return (jugadora.team == jugadorb.team);
+    return (jugadora.team.getID() == jugadorb.team.getID());
 }
 
 let buscarJugador = (jugador,jugadores)=>{    //el jugador del parametro es el q ataca, y esta funcion retorna otro jugador vivo 
@@ -173,14 +173,14 @@ let chequearSonMismoEquipo = (players)=> {
         jugador = players[i];
         if(jugador.alive == 1){
 
-            if(count>=1 && jugador.team == team){
+            if(count>=1 && jugador.team.getID() == team){
                 count++;
                 ganadores.push(jugador);
             }
 
             if(count == 0){
                 count++;
-                team = jugador.team;
+                team = jugador.team.getID();
                 ganadores.push(jugador);
             }
 
@@ -204,22 +204,25 @@ let formarEquipo = (jugadores)=> {
                 //team de 2 - 50% prob
                 let valid = haySuficientes(jugadores)
                 if(valid >= 2){  //forma team de 2 si hay 2 libres
-                    jugador.team = idEquipo;
-                    jugadorA = jugadores[i+1];
-                    jugadorA.team = idEquipo;
 
-                     var thisTeam = new Team(idEquipo);  
+                    jugadorA = jugadores[i+1];
+
+                     var thisTeam = new Team(idEquipo);
                      thisTeam.setPlayer1 = jugador;
                      thisTeam.setPlayer2 = jugadorA;
                      teams.push(thisTeam);
 
+                     jugador.setTeam(thisTeam);
+                     jugadorA.setTeam(thisTeam);
+
                     idEquipo++;
-                }else{
-                    jugador.team = idEquipo;
+                }else{  //team de 1
 
                     var thisTeam = new Team(idEquipo);  
                     thisTeam.setPlayer1 = jugador;
                     teams.push(thisTeam);
+
+                    jugador.setTeam(thisTeam);
 
                     idEquipo++;
                 }
@@ -228,11 +231,9 @@ let formarEquipo = (jugadores)=> {
                 //team de 3 - 20% prob
                 let valid = haySuficientes(jugadores)
                 if(valid >= 3){  //forma team de 3 si hay 3 libres
-                    jugador.team = idEquipo;
+
                     jugadorA = jugadores[i+1];
-                    jugadorA.team = idEquipo;
                     jugadorB = jugadores[i+2];
-                    jugadorB.team = idEquipo;
 
                     var thisTeam = new Team(idEquipo);  
                     thisTeam.setPlayer1 = jugador;
@@ -240,23 +241,29 @@ let formarEquipo = (jugadores)=> {
                     thisTeam.setPlayer3 = jugadorB;
                     teams.push(thisTeam);
 
+                    jugador.setTeam(thisTeam);
+                    jugadorA.setTeam(thisTeam);
+                    jugadorB.setTeam(thisTeam);
+
                     idEquipo++;    
-                }else{
-                    jugador.team = idEquipo;
+                }else{  //team de 1
 
                     var thisTeam = new Team(idEquipo);  
                     thisTeam.setPlayer1 = jugador;
                     teams.push(thisTeam);
 
+                    jugador.setTeam(thisTeam);
+
                     idEquipo++;    
                 }
             }else{
                 //team de 1 - 30% prob
-                jugador.team = idEquipo;
 
                 var thisTeam = new Team(idEquipo);  
                 thisTeam.setPlayer1 = jugador;
                 teams.push(thisTeam);
+
+                jugador.setTeam(thisTeam);
 
                 idEquipo++; 
             }
@@ -268,7 +275,7 @@ let formarEquipo = (jugadores)=> {
         console.log(`%c EQUIPO ${n} `,"border-radius:8px; border:2px solid white;");
         for(let k=0; k<jugadores.length; k++){
             let jugador = jugadores[k];
-            if(jugador.team == n){
+            if(jugador.team.getID() == n){
                 console.log(`• ${jugador.getNombre()}`);
             }
         }
@@ -280,7 +287,7 @@ let formarEquipo = (jugadores)=> {
         arrayConTodo.push(`EQUIPO ${n}`);
         for(let k=0; k<jugadores.length; k++){
             let jugador = jugadores[k];
-            if(jugador.team == n){
+            if(jugador.team.getID() == n){
                 arrayConTodo.push(` ${jugador.getNombre()}`);
             }
         }
@@ -429,6 +436,22 @@ let rondaAtaque = (jugador,jugadores, cantidadConVida)=>{
     }
 }
 
+let arreglarIDs= ()=>{
+    let team;
+    for(let i=0;i<teams.length;i++){
+        team = teams[i];
+        team.setID = i+1;
+    }
+}
+
+let eliminarTeam = (teamID)=>{
+    let index;
+    console.log(`eliminando el team ${teamID}`);
+    index = teamID-1;
+    teams.splice(index,1);
+    arreglarIDs();
+}
+
 export {
     ataqueEspecificoxCategoria,
     ataqueGenericoConArma,
@@ -455,5 +478,6 @@ export {
     rondaLoot,
     shuffleJugadores,
     imprimirTeams,
-    buscarTeamDe2
+    buscarTeamDe2,
+    eliminarTeam
 }
