@@ -17,7 +17,7 @@ const yugito = new Jugador("yugito",54356);
 const draco = new Jugador("draco",5486);
 const chun = new Jugador("chun",1010);
 
-let maxHP = 1000;
+var maxHP = 1000;
 var teams = [];
 
 let buscarTeamDe2 = ()=>{   //retorna null si no hay teams de 2 miembros
@@ -322,6 +322,7 @@ let eventoAleatorio1 = (jugador, players)=>{
 
 };
 let lootEspecificoxCategoria = (jugador, arma)=>{
+    jugador.setArma(arma);
     console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
 };
 
@@ -331,7 +332,7 @@ let lootGenerico = (jugador, arma, players)=>{
     do{
         var rand = parseInt(Math.random()*eventosLootGenerico.length);  
         console.log(`%c ${rand}`,"color:yellow");
-        resultado = eventosLootGenerico[rand](jugador, players, arma); //le paso el array original
+        resultado = eventosLootGenerico[rand](jugador, players, arma, maxHP); //le paso el array original
     }
     while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 };
