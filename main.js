@@ -83,7 +83,7 @@ while(cantidadConVida > 1 ){
         let jugador = players[j];
         if(jugador.alive == 1){
             console.log("\x1b[32m%s\x1b[0m",`Turno de ${jugador.getNombre()}`);
-            if(jugador.getArma() == null){probabilidadExtra = 0.50;} //si el jugador no tiene arma, tiene 50% mas de chances de lootear que de atacar
+            if(jugador.getArma() == null){probabilidadExtra = 0.55;} //si el jugador no tiene arma, tiene 55% mas de chances de lootear que de atacar
             let probabilidad = Math.random();
             if(probabilidad < (0.25 + probabilidadExtra)){
                 console.log("\x1b[34m%s\x1b[0m",`> Loot`);
@@ -93,6 +93,7 @@ while(cantidadConVida > 1 ){
                 let copia = copiarJugadores(players);
                 rondaAtaque(jugador,copia, cantidadConVida);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random
             }
+            probabilidadExtra = 0;
         }
     }
     nroRonda++;

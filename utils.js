@@ -1,6 +1,8 @@
 import {Arma, Team, Jugador} from "./clases.js";
 import { eventosAleatorios1 } from "./eventosAleatorios1.js";
 import { eventosLootGenerico } from "./lootGenerico.js";
+import { ataquesGenericosSinArma } from "./ataqueGenericoSinArma.js"
+
 const pistola = new Arma("pistola","pistola",190,3,"f","");
 const granada = new Arma("granada","",480,1,"f","");
 const guitarra = new Arma("guitarra","",100,1,"f","");
@@ -39,13 +41,26 @@ let imprimirTeams = (teams1 = teams)=>{
     for(let countTeams = 0; countTeams < teams1.length; countTeams++){
         console.log("\x1b[36m%s\x1b[0m",`TEAM ${teams1[countTeams].getID()}`);
         if(teams1[countTeams].getPlayer1() != null){
+            if(teams1[countTeams].getPlayer1().getHP()==0){
+            console.log("\x1b[31m%s\x1b[0m",`${teams1[countTeams].getPlayer1().getNombre()} - HP: ${teams1[countTeams].getPlayer1().getHP()}`);
+            }else{
             console.log("\x1b[36m%s\x1b[0m",`${teams1[countTeams].getPlayer1().getNombre()} - HP: ${teams1[countTeams].getPlayer1().getHP()}`);
+            }
         }        
         if(teams1[countTeams].getPlayer2() != null){
+            if(teams1[countTeams].getPlayer2().getHP()==0){
+            console.log("\x1b[31m%s\x1b[0m",`${teams1[countTeams].getPlayer2().getNombre()} - HP: ${teams1[countTeams].getPlayer2().getHP()}`);
+            }else{
             console.log("\x1b[36m%s\x1b[0m",`${teams1[countTeams].getPlayer2().getNombre()} - HP: ${teams1[countTeams].getPlayer2().getHP()}`);
+            }
         }    
         if(teams1[countTeams].getPlayer3() != null){
-            console.log("\x1b[36m%s\x1b[0m",`${teams1[countTeams].getPlayer3().getNombre()} - HP: ${teams1[countTeams].getPlayer3().getHP()}`);
+            if(teams1[countTeams].getPlayer3().getHP()==0){
+            console.log("\x1b[31m%s\x1b[0m",`${teams1[countTeams].getPlayer3().getNombre()} - HP: ${teams1[countTeams].getPlayer3().getHP()}`);
+            }
+            else{
+            console.log("\x1b[36m%s\x1b[0m",`${teams1[countTeams].getPlayer3().getNombre()} - HP: ${teams1[countTeams].getPlayer3().getHP()}`);                
+            }
         }    
         console.log(``);
     }
@@ -115,11 +130,23 @@ let esDelMismoTeam = (jugadora,jugadorb)=>{
 }
 
 let buscarJugador = (jugador,jugadores)=>{    //el jugador del parametro es el q ataca, y esta funcion retorna otro jugador vivo 
-    shuffleJugadores(jugadores);
+    shuffleJugadores(jugadores);                //falta verificar que sea de otro equipo
     let victima;
     for(let i=0;i<jugadores.length;i++){
         victima = jugadores[i];
         if((victima.alive==1) && victima.id != jugador.id){
+            return victima;
+        }
+    }
+return null;
+}
+
+let buscarJugadorDistintoA2 = (jugador1,jugador2,jugadores)=>{    //esta funcion retorna un jugador vivo distinto a los 2 recibidos
+    shuffleJugadores(jugadores);                
+    let victima;
+    for(let i=0;i<jugadores.length;i++){
+        victima = jugadores[i];
+        if((victima.alive==1) && victima.id != jugador1.id && victima.id != jugador2.id){
             return victima;
         }
     }
@@ -379,7 +406,8 @@ let ataqueGenericoConArma = (jugador, victima)=>{
     }
 };
 
-let ataqueGenericoSinArma = (jugador, victima)=>{
+let ataqueGenericoSinArma1 = (jugador, victima)=>{
+
     console.log(` ${jugador.getNombre()} atacó sin arma a ${victima.getNombre()}`);
     let danio = danioExtra(30,90);
     victima.setHP(Math.max(0,victima.getHP() - danio)); 
@@ -392,6 +420,16 @@ let ataqueGenericoSinArma = (jugador, victima)=>{
     }
 };
 
+let ataqueGenericoSinArma = (jugador, players, victima)=>{
+    let resultado;
+    console.log(`Ataque generico sin arma`);
+do{
+    var rand = parseInt(Math.random()*ataquesGenericosSinArma.length);  
+    console.log("\x1b[33m%s\x1b[0m",` ${rand}`);
+    resultado = ataquesGenericosSinArma[rand](jugador, players, victima); //le paso una copia
+}
+while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
+};
 
 // ronda de loot
 let rondaLoot = (jugador, players)=>{
@@ -419,7 +457,7 @@ let rondaAtaque = (jugador,jugadores, cantidadConVida)=>{
              }else{
             let victima = buscarJugador(jugador,jugadores);
               if(!jugador.arma){
-                    ataqueGenericoSinArma(jugador,victima);
+                    ataqueGenericoSinArma(jugador,jugadores,victima);
                 }else{
                     if(jugador.arma.categoria){
                         let probabilidadEspecial = Math.random();
@@ -480,5 +518,6 @@ export {
     shuffleJugadores,
     imprimirTeams,
     buscarTeamDe2,
-    eliminarTeam
+    eliminarTeam,
+    buscarJugadorDistintoA2
 }

@@ -62,7 +62,7 @@ eventosLootGenerico[3] = (jugador, players, arma)=>{
 eventosLootGenerico[4] = (jugador, players, arma)=>{
     jugador.setArma(arma);
     let hp;
-    console.log(` ${jugador.getNombre()} come bayas silvestres para recuperar vida. El problema es que eran tóxicas.`);
+    console.log(` ${jugador.getNombre()} come algunas bayas silvestres. El problema es que eran tóxicas.`);
     hp = jugador.getHP();
     console.log(` HP antes: ${hp}`);
     hp -= 0.18*hp;
