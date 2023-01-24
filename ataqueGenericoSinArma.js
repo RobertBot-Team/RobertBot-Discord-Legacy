@@ -137,7 +137,7 @@ ataquesGenericosSinArma[8] = (jugador, players, victima)=>{
     if(jugador.getHP()<=0){
         jugador.alive=0;
         victima.kills++;
-        console.log("\x1b[90m%s\x1b[0m",`Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
+        console.log("\x1b[90m%s\x1b[0m",`Kills de ${victima.getNombre()}: ${victima.getKills()}.`);
     }
     return 1;
 }
