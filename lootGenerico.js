@@ -194,7 +194,7 @@ eventosLootGenerico[18] = (jugador, players, arma)=>{
         variable = "vacio";
     }
     
-    console.log(`%c ${jugadorOriginal.getNombre()} - ${variable} // ${jugador.getNombre()} - ${jugador.getArma()["nombre"]}`,"color:yellow");
+    console.log("\x1b[33m%s\x1b[0m",` ${jugadorOriginal.getNombre()} - ${variable} // ${jugador.getNombre()} - ${jugador.getArma()["nombre"]}`);
     return 1;
 }
 
@@ -221,7 +221,7 @@ eventosLootGenerico[19] = (jugador, players, arma)=>{
         variable = "vacio";
     }
     
-    console.log(`%c ${jugadorOriginal.getNombre()} - ${variable} // ${jugador.getNombre()} - ${jugador.getArma()["nombre"]}`,"color:yellow");
+    console.log("\x1b[33m%s\x1b[0m",` ${jugadorOriginal.getNombre()} - ${variable} // ${jugador.getNombre()} - ${jugador.getArma()["nombre"]}`);
     return 1;
 }
 

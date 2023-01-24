@@ -64,7 +64,7 @@ eventosAleatorios1[8] = (jugador, players, maxHP, teams)=>{
 
 eventosAleatorios1[9] = (jugador, players, maxHP, teams)=>{
     let copiaJugadores = copiarJugadores(players);
-    console.log(`%c AAAA A A A A A`,"color:yellow");
+    //console.log("\x1b[33m%s\x1b[0m",` AAAA A A A A A`);
     let comprador;
     let jugadorACambiar;
     let limit=0;
@@ -94,7 +94,7 @@ eventosAleatorios1[9] = (jugador, players, maxHP, teams)=>{
     //dejo este comentario porque hay que hacer lo mismo en varios eventos
 
 eventosAleatorios1[10] = (jugador, players, maxHP, teams)=>{
-    console.log(`%c this is evento 100000000000000`,"color:purple");
+    //console.log("\x1b[35m%s\x1b[0m",` this is evento 100000000000000`);
     //console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
     let team = jugador.getTeam();
     let cantEnTeam = 1;
@@ -227,7 +227,7 @@ eventosAleatorios1[11] = (jugador, players, maxHP, teams)=>{
 
 eventosAleatorios1[12] = (jugador, players, maxHP, teams)=>{
     //console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
-    console.log(`%c this is evento 122222222222222222`,"color:purple");
+    //console.log("\x1b[35m%s\x1b[0m",` this is evento 122222222222222222`);
     let team = jugador.getTeam();
     let vivos = team.nombresVivos();
     let newTeamId = teams.length + 1;
@@ -340,7 +340,7 @@ eventosAleatorios1[14] = (jugador, players, maxHP, teams)=>{
     let teamActual;
     //console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
     //console.log(`%c${JSON.stringify(jugador.getTeam())}`,"color:purple");
-    console.log(`%caaaaaaaaaaaaaaaaaaaaaaaaaa`,"color:purple");
+    //console.log("\x1b[35m%s\x1b[0m",`aaaaaaaaaaaaaaaaaaaaaaaaaa`);
     teamActual = jugador.getTeam();
     if((teamActual.getPlayer2()) != null){return null;}
     idTeamDe2 = buscarTeamDe2();

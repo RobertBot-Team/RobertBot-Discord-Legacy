@@ -45,18 +45,18 @@ let copia1 = copiarJugadores(players)
 //primera ronda de loot
 for(let i=0;i<cantidadConVida;i++){
     let jugador = players[i];
-    console.log(`%cRonda inicial de Loot - ${jugador.getNombre()}`,"color:#6068da; font-weight:bold");
+    console.log("\x1b[34m%s\x1b[0m",`Ronda inicial de Loot - ${jugador.getNombre()}`);
     rondaLoot(jugador, players);
 }
 
 cantidadConVida = calcularVivos(players);
-console.log(`%cQuedan ${cantidadConVida} jugadores con vida.`,"color:#808080");
+console.log("\x1b[90m%s\x1b[0m",`Quedan ${cantidadConVida} jugadores con vida.`);
 
 let nroRonda = 1;
 let danioSuma = 50;
 whileGrande:
 while(cantidadConVida > 1 ){
-    console.log(`%cRonda ${nroRonda}.`,"color:#808080");
+    console.log("\x1b[90m%s\x1b[0m",`Ronda ${nroRonda}.`);
     shuffleJugadores(players);      //por cada ronda, reordeno la lista para que ataquen en orden random
     for(let j=0;j<players.length;j++){
 
@@ -65,7 +65,7 @@ while(cantidadConVida > 1 ){
         if(cantidadConVida == 3){   //si quedan 3 jugadores y son del mismo team, termina el juego
             let check = chequearSonMismoEquipo(players);
             if(check.length == 3){
-                console.log(`%c Los ganadores son ${check[0].getNombre()}, ${check[1].getNombre()} y ${check[2].getNombre()}`,"color:green; font-weight:bold");
+                console.log("\x1b[32m%s\x1b[0m",` Los ganadores son ${check[0].getNombre()}, ${check[1].getNombre()} y ${check[2].getNombre()}`);
                 break whileGrande;
             }
     
@@ -74,7 +74,7 @@ while(cantidadConVida > 1 ){
         if(cantidadConVida == 2){   //si quedan 2 jugadores y son del mismo team, termina el juego
             let check = chequearSonMismoEquipo(players);
             if(check.length == 2){
-                console.log(`%c Los ganadores son ${check[0].getNombre()} y ${check[1].getNombre()}`,"color:green; font-weight:bold");
+                console.log("\x1b[32m%s\x1b[0m",` Los ganadores son ${check[0].getNombre()} y ${check[1].getNombre()}`);
                 break whileGrande;
             }
     
@@ -82,14 +82,14 @@ while(cantidadConVida > 1 ){
         let probabilidadExtra = 0;
         let jugador = players[j];
         if(jugador.alive == 1){
-            console.log(`%cTurno de ${jugador.getNombre()}`,"color:green; font-weight:bold");
+            console.log("\x1b[32m%s\x1b[0m",`Turno de ${jugador.getNombre()}`);
             if(jugador.getArma() == null){probabilidadExtra = 0.50;} //si el jugador no tiene arma, tiene 50% mas de chances de lootear que de atacar
             let probabilidad = Math.random();
             if(probabilidad < (0.25 + probabilidadExtra)){
-                console.log(`%c Loot`,"color:#6068da");
+                console.log("\x1b[34m%s\x1b[0m",`> Loot`);
                 rondaLoot(jugador, players);
             }else{
-                console.log(`%c Ataque`,"color:red");
+                console.log("\x1b[31m%s\x1b[0m",`> Ataque`);
                 let copia = copiarJugadores(players);
                 rondaAtaque(jugador,copia, cantidadConVida);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random
             }
@@ -97,7 +97,7 @@ while(cantidadConVida > 1 ){
     }
     nroRonda++;
     cantidadConVida = calcularVivos(players);
-    console.log(`%cQuedan ${cantidadConVida} jugadores con vida.`,"color:#808080");
+    console.log("\x1b[90m%s\x1b[0m",`Quedan ${cantidadConVida} jugadores con vida.`);
 
     imprimirTeams();
 
@@ -116,7 +116,7 @@ while(cantidadConVida > 1 ){
 
 if(cantidadConVida==1){
 let ganador = encontrarGanador(players);
-console.log(`%c El ganador es ${ganador.getNombre()}`,"color:green; font-weight:bold");
+console.log("\x1b[32m%s\x1b[0m",` El ganador es ${ganador.getNombre()}`);
 }
 
 mostrarResultados(players);
