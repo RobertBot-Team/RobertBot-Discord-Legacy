@@ -2,6 +2,7 @@ import {Arma, Team, Jugador} from "./clases.js";
 import { eventosAleatorios1 } from "./eventosAleatorios1.js";
 import { eventosLootGenerico } from "./lootGenerico.js";
 import { ataquesGenericosSinArma } from "./ataqueGenericoSinArma.js"
+import { ataquesGenericosConArma } from "./ataqueGenericoConArma.js"
 
 const pistola = new Arma("pistola","pistola",190,3,"f","");
 const granada = new Arma("granada","",480,1,"f","");
@@ -387,7 +388,7 @@ let ataqueEspecificoxCategoria = (jugador, victima)=>{
     }
 };
 
-let ataqueGenericoConArma = (jugador, victima)=>{
+let ataqueGenericoConArma1 = (jugador, victima)=>{
     console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
     let danio = jugador.getArma()["danio"] + danioExtra(1,500);
     victima.setHP(Math.max(0,victima.getHP() - danio)); //le quita de vida el danio base de su arma. si queda en negativo pone 0
@@ -404,6 +405,17 @@ let ataqueGenericoConArma = (jugador, victima)=>{
         jugador.kills++;
         console.log("\x1b[90m%s\x1b[0m",`Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
     }
+};
+
+let ataqueGenericoConArma = (jugador, players, victima)=>{
+    let resultado;
+    console.log(`Ataque generico con arma`);
+do{
+    var rand = parseInt(Math.random()*ataquesGenericosConArma.length);  
+    console.log("\x1b[33m%s\x1b[0m",` ${rand}`);
+    resultado = ataquesGenericosConArma[rand](jugador, players, victima); //le paso una copia
+}
+while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 };
 
 let ataqueGenericoSinArma1 = (jugador, victima)=>{
@@ -464,10 +476,10 @@ let rondaAtaque = (jugador,jugadores, cantidadConVida)=>{
                         if(probabilidadEspecial < 0.2){
                             ataqueEspecificoxCategoria(jugador,victima);
                         }else{
-                            ataqueGenericoConArma(jugador,victima);
+                            ataqueGenericoConArma(jugador,jugadores,victima);
                         }
                     }else{
-                            ataqueGenericoConArma(jugador,victima); 
+                            ataqueGenericoConArma(jugador,jugadores,victima); 
                     }
                 }
              }

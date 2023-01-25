@@ -1,4 +1,4 @@
-/*------------ loot generico de armas ------------*/
+/*------------ ataque generico sin arma ------------*/
 //let maxHP = 1000;
 import {
     buscarJugadorConArma,

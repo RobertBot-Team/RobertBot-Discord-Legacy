@@ -55,7 +55,7 @@ eventosLootGenerico[2] = (jugador, players, arma)=>{
 
 eventosLootGenerico[3] = (jugador, players, arma)=>{
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} iba caminando cuando pisó un/a ${arma["nombre"]}. Agradecido con Dios lo/a levanta y se lo/a guarda.`);
+    console.log(` ${jugador.getNombre()} iba caminando cuando pisó un/a ${arma["nombre"]}. Agradecido con Dios por su suetrte, lo/a levanta y se lo/a guarda.`);
     return 1;
 }
 
@@ -222,6 +222,12 @@ eventosLootGenerico[19] = (jugador, players, arma)=>{
     }
     
     console.log("\x1b[33m%s\x1b[0m",` ${jugadorOriginal.getNombre()} - ${variable} // ${jugador.getNombre()} - ${jugador.getArma()["nombre"]}`);
+    return 1;
+}
+
+eventosLootGenerico[20] = (jugador, players, arma)=>{
+    jugador.setArma(arma);
+    console.log(` ${jugador.getNombre()} encontró un/a ${arma["nombre"]}. Waos`);
     return 1;
 }
 
