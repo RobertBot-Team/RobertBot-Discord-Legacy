@@ -74,7 +74,7 @@ eventosAleatorios1[9] = (jugador, players, maxHP, teams)=>{
     do{
        comprador = buscarJugador(jugador, copiaJugadores);
        limit++;
-       if(limit>=8){return null;}
+       if(limit>=copiaJugadores.length){return null;}
     } 
     while (comprador.arma != null); //no es la forma ideal de buscar un jugador sin arma, pero bueno
 
@@ -342,7 +342,7 @@ eventosAleatorios1[14] = (jugador, players, maxHP, teams)=>{
     //console.log(`%c${JSON.stringify(jugador.getTeam())}`,"color:purple");
     //console.log("\x1b[35m%s\x1b[0m",`aaaaaaaaaaaaaaaaaaaaaaaaaa`);
     teamActual = jugador.getTeam();
-    if((teamActual.getPlayer2()) != null){return null;}
+    if((teamActual.getPlayer2()) != null){return null;} //que sea un team de 1 solo miembro
     idTeamDe2 = buscarTeamDe2();
     if(idTeamDe2==null){return null;}
     team = teams[idTeamDe2 - 1];
@@ -354,6 +354,61 @@ eventosAleatorios1[14] = (jugador, players, maxHP, teams)=>{
 
     jugador.setTeam(team);
     team.setPlayer3 = jugador;
+    return 1;
+}
+
+eventosAleatorios1[15] = (jugador, players, maxHP, teams)=>{
+    let idTeamDe2;
+    let team;
+    let teamActual;
+
+    teamActual = jugador.getTeam();
+    if((teamActual.getPlayer2()) != null){return null;} //que sea un team de 1 solo miembro
+    idTeamDe2 = buscarTeamDe2();
+    if(idTeamDe2==null){return null;}
+    team = teams[idTeamDe2 - 1];
+
+    console.log(`${jugador.getNombre()} encuentra a ${team.getPlayer1().getNombre()} y ${team.getPlayer2().getNombre()} y les pregunta: "¿hacen alianzas?". 
+    ${team.getPlayer1().getNombre()} y ${team.getPlayer2().getNombre()} aceptan y forman equipo`);
+
+    eliminarTeam(teamActual.getID());
+
+    jugador.setTeam(team);
+    team.setPlayer3 = jugador;
+    return 1;
+}
+
+eventosAleatorios1[16] = (jugador, players, maxHP, teams)=>{
+    let otroJugador;
+    let copiaJugadores = copiarJugadores(players);
+        otroJugador = buscarJugador(jugador, copiaJugadores);
+ 
+    console.log(` ${jugador.getNombre()} y ${otroJugador.getNombre()} ven el fin acercandose y deciden casarse 🎊`);
+    return 1;
+}
+
+eventosAleatorios1[17] = (jugador, players, maxHP, teams)=>{
+    console.log(` ${jugador.getNombre()} decide emborracharse.`);
+    return 1;
+}
+
+eventosAleatorios1[18] = (jugador, players, maxHP, teams)=>{
+    console.log(` ${jugador.getNombre()} se queda dormido viendo zzzznother.`);
+    return 1;
+}
+
+eventosAleatorios1[19] = (jugador, players, maxHP, teams)=>{
+    console.log(` ${jugador.getNombre()} se queda dormido jugando Dark Souls.`);
+    return 1;
+}
+
+eventosAleatorios1[20] = (jugador, players, maxHP, teams)=>{
+    console.log(` ${jugador.getNombre()} come hongos alucinógenos`);
+    return 1;
+}
+
+eventosAleatorios1[21] = (jugador, players, maxHP, teams)=>{
+    console.log(` ${jugador.getNombre()} grita "VIVA ESPAÑA"`);
     return 1;
 }
 

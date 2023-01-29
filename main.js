@@ -120,4 +120,8 @@ let ganador = encontrarGanador(players);
 console.log("\x1b[32m%s\x1b[0m",` El ganador es ${ganador.getNombre()}`);
 }
 
+if(cantidadConVida<1){
+console.log("\x1b[32m%s\x1b[0m",` Parece que esta vez no hubo ganadores...`);
+}
+
 mostrarResultados(players);

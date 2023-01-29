@@ -142,5 +142,18 @@ ataquesGenericosSinArma[8] = (jugador, players, victima)=>{
     return 1;
 }
 
+ataquesGenericosSinArma[9] = (jugador, players, victima)=>{
+    console.log(`${victima.getNombre()} se tuerce el tobillo escapando de ${jugador.getNombre()}`);
+    let danio = danioExtra(40,110);
+    victima.setHP(Math.max(0,victima.getHP() - danio)); 
+
+    console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
+    if(victima.getHP()<=0){
+        victima.alive=0;
+        jugador.kills++;
+        console.log("\x1b[90m%s\x1b[0m",`Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
+    }
+    return 1;
+}
 
 export {ataquesGenericosSinArma};
