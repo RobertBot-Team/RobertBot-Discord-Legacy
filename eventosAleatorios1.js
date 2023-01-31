@@ -1,6 +1,6 @@
 /*------------ eventos aleatorios 1 ------------*/
-import { buscarTeamDe2, copiarJugadores, buscarPorID, imprimirTeams, buscarJugador, eliminarTeam } from "./utils.js";
-import {Team} from "./clases.js";
+import { buscarTeamDe2, copiarJugadores, buscarPorID, imprimirTeams, buscarJugador, eliminarTeam, buscarJugadorDistintoA2, buscarUnMuerto, shuffleJugadores, porcentajeDeVidaRandom } from "./utils.js";
+import {Team,Jugador} from "./clases.js";
 
 var eventosAleatorios1 = [];
 
@@ -409,6 +409,68 @@ eventosAleatorios1[20] = (jugador, players, maxHP, teams)=>{
 
 eventosAleatorios1[21] = (jugador, players, maxHP, teams)=>{
     console.log(` ${jugador.getNombre()} grita "VIVA ESPAÑA"`);
+    return 1;
+}
+
+eventosAleatorios1[22] = (jugador, players, maxHP, teams)=>{
+    let jugador2;
+    let jugador3;
+    
+    jugador2 = buscarJugador(jugador,players);
+    if (jugador2==null){return null;}
+
+    jugador3 = buscarJugadorDistintoA2(jugador,jugador2,players);
+    if(jugador3==null){return null;}
+
+    console.log(` ${jugador.getNombre()} encuentra a ${jugador2.getNombre()} y ${jugador3.getNombre()} juntos en el suelo y... decide irse bien lejos por si acaso.`);
+    return 1;
+}
+
+eventosAleatorios1[23] = (jugador, players, maxHP, teams)=>{    //se crea un jugador RobertBot
+    let probabilidad = Math.random();
+    if(probabilidad > 0.3){return null;}                        //menor probabilidad de que ocurra
+
+    const robertBot = new Jugador("RobertBot", 3350);
+    let idEquipo = teams.length + 1;
+    var team = new Team(idEquipo);
+    team.setPlayer1 = robertBot;
+    teams.push(team);
+    robertBot.setTeam(team);
+    players.push(robertBot);
+
+    console.log(` ${robertBot.getNombre()} se une a la batalla. "¿Qué hacen imbeciles? :peek:"`);
+    eventosAleatorios1[23] = function(){return null;};        //se redefine para que solo suceda 1 vez por partida
+    return 1;
+}
+
+eventosAleatorios1[24] = (jugador, players, maxHP, teams)=>{
+    if(jugador.hp == maxHP){return null};
+
+    console.log(` HP antes: ${jugador.getHP()}`);
+    jugador.hp = maxHP;
+    console.log(` ${jugador.getNombre()} activó los hacks y se subió la vida a full.`);
+    console.log(` HP luego: ${jugador.getHP()}`);
+    return 1;
+}
+
+eventosAleatorios1[25] = (jugador, players, maxHP, teams)=>{
+    let idMuerto;
+    let jugadorOriginal;
+    let vidaConQueRevive;
+    let copiaJugadores = copiarJugadores(players);
+    shuffleJugadores(copiaJugadores);
+    let jugadorMuerto = buscarUnMuerto(copiaJugadores);
+
+    if(jugadorMuerto==null){return null;}
+
+    idMuerto = jugadorMuerto.getID();
+    jugadorOriginal = buscarPorID(idMuerto,players);
+
+    vidaConQueRevive = porcentajeDeVidaRandom(1,500);
+    jugadorOriginal.hp = vidaConQueRevive;
+    jugadorOriginal.alive = 1;
+    console.log(` Un ángel baja del cielo y con mucha compasión revive a ${jugadorOriginal.getNombre()}.`);
+    console.log(` HP luego: ${jugadorOriginal.getHP()}`);
     return 1;
 }
 

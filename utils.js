@@ -62,9 +62,9 @@ const mandoPlei = new Arma("mando de plei","",50,1,"m","");
 const libroMatematicas = new Arma("libro de matemáticas",40,1,"m","");
 const manzana = new Arma("manzana","",20,1,"f","");
 const deathNote = new Arma("Death Note","death note",30,6,"f","");
-const botellaDeVodka = new Arma("votella de Vodka","",100,1,"f","");
-const botellaDeFernet = new Arma("votella de Fernet","",100,1,"f","");
-const botellaDeVino = new Arma("votella de vino","",100,1,"f","");
+const botellaDeVodka = new Arma("botella de Vodka","",100,1,"f","");
+const botellaDeFernet = new Arma("botella de Fernet","",100,1,"f","");
+const botellaDeVino = new Arma("botella de vino","",100,1,"f","");
 const fuegosArtificiales = new Arma("fuegos artificiales","explosivos",170,1,"m","p");
 const skate = new Arma("skate","rompibles",120,1,"m","");
 const motosierra = new Arma("motosierra","",250,3,"f","");
@@ -148,6 +148,12 @@ let danioExtra = (min,max)=>{
     let danio = Math.floor(Math.random() * (max - min + 1) + min)
     console.log("\x1b[90m%s\x1b[0m",`${danio} de danio extra`);
     return danio;
+}
+
+let porcentajeDeVidaRandom = (min,max)=>{
+    let vida = Math.floor(Math.random() * (max - min + 1) + min)
+    console.log("\x1b[90m%s\x1b[0m",`${vida} de vida`);
+    return vida;
 }
 
 let calcularVivos = (jugadores)=>{
@@ -570,6 +576,17 @@ let eliminarTeam = (teamID)=>{
     arreglarIDs();
 }
 
+let buscarUnMuerto = (players)=>{
+    let jugador;
+    for(let i=0;i<players.length;i++){
+        jugador = players[i];
+        if(jugador.alive == 0){
+            return jugador;
+        }
+    }
+    return null;
+}
+
 export {
     ataqueEspecificoxCategoria,
     ataqueGenericoConArma,
@@ -598,5 +615,7 @@ export {
     imprimirTeams,
     buscarTeamDe2,
     eliminarTeam,
-    buscarJugadorDistintoA2
+    buscarJugadorDistintoA2,
+    buscarUnMuerto,
+    porcentajeDeVidaRandom
 }

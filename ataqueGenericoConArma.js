@@ -151,8 +151,7 @@ return 1;
 }
 
 ataquesGenericosConArma[9] = (jugador, players, victima)=>{
-    console.log(`${jugador.getNombre()} le pega a ${victima.getNombre()} con la parte de atrás de su ${jugador.getArma()["nombre"]}. 
-    ¿Quién dijo que hay que usar siempre la parte de adelante?`);
+    console.log(`${jugador.getNombre()} le pega a ${victima.getNombre()} con la parte de atrás de su ${jugador.getArma()["nombre"]}. ¿Quién dijo que hay que usar siempre la parte de adelante?`);
     let danio = jugador.getArma()["danio"] + danioExtra(1,100);
     victima.setHP(Math.max(0,victima.getHP() - danio)); //le quita de vida el danio base de su arma. si queda en negativo pone 0
     
@@ -172,7 +171,7 @@ return 1;
 }
 
 ataquesGenericosConArma[10] = (jugador, players, victima)=>{
-    console.log(`${jugador.getNombre()} ataca a ${victima.getNombre()} pero  ${victima.getNombre()} consigue escapar construyendo 36857 paneles de madera por segundo a su alrededor`);
+    console.log(`${jugador.getNombre()} ataca a ${victima.getNombre()} pero ${victima.getNombre()} consigue escapar construyendo 36857 paneles de madera por segundo a su alrededor`);
     
     jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
     if(jugador.getArma()["usos"] <= 0){
@@ -201,8 +200,7 @@ return 1;
 }
 
 ataquesGenericosConArma[12] = (jugador, players, victima)=>{
-    console.log(`${jugador.getNombre()} ataca a ${victima.getNombre()} con su ${jugador.getArma()["nombre"]} y, mientras da un monólogo explicando su ataque,
-    ${victima.getNombre()} se escapa con vida.`);
+    console.log(`${jugador.getNombre()} ataca a ${victima.getNombre()} con su ${jugador.getArma()["nombre"]} y, mientras da un monólogo explicando su ataque, ${victima.getNombre()} se escapa con vida.`);
     let danio = jugador.getArma()["danio"] + danioExtra(1,250);
     victima.setHP(Math.max(1,victima.getHP() - danio)); //le quita de vida el danio base de su arma. siempre queda con vida, al menos con 1
     
@@ -277,6 +275,27 @@ ataquesGenericosConArma[14] = (jugador, players, victima)=>{
 
 return 1;
 }
+
+ataquesGenericosConArma[15] = (jugador, players, victima)=>{
+    console.log(`${jugador.getNombre()} encuentra a ${victima.getNombre()} campeando y le ataca por detrás con su ${jugador.getArma()["nombre"]}.`);
+    let danio = jugador.getArma()["danio"] + danioExtra(1,500);
+    victima.setHP(Math.max(0,victima.getHP() - danio)); //le quita de vida el danio base de su arma. si queda en negativo pone 0
+    
+    jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
+    if(jugador.getArma()["usos"] <= 0){
+        console.log(`El/La ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se quedó sin usos`);
+        jugador.setArma(null);
+    } //si su arma se queda sin usos, la pierde
+
+    console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
+    if(victima.getHP()<=0){
+        victima.alive=0;
+        jugador.kills++;
+        console.log("\x1b[90m%s\x1b[0m",`Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
+    }
+return 1;
+}
+
 
 
 export {ataquesGenericosConArma};
