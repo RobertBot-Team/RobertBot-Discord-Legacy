@@ -1,5 +1,6 @@
 import {Arma, Team, Jugador} from "./clases.js";
 import { eventosAleatorios1 } from "./eventosAleatorios1.js";
+import { eventosAleatorios2 } from "./eventosAleatorios2.js"
 import { eventosLootGenerico } from "./lootGenerico.js";
 import { ataquesGenericosSinArma } from "./ataqueGenericoSinArma.js"
 import { ataquesGenericosConArma } from "./ataqueGenericoConArma.js"
@@ -413,7 +414,7 @@ let mostrarResultados = (players) =>{
 
 let eventoAleatorio1 = (jugador, players)=>{
     let resultado;
-    console.log(" Sucedió un evento aleatorio");
+    console.log(" Sucedió un evento aleatorio 1");
     do{
         var rand = parseInt(Math.random()*eventosAleatorios1.length);  
         console.log("\x1b[33m%s\x1b[0m",` ${rand}`);
@@ -422,6 +423,7 @@ let eventoAleatorio1 = (jugador, players)=>{
     while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 
 };
+
 let lootEspecificoxCategoria = (jugador, arma)=>{
     jugador.setArma(arma);
     console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
@@ -438,9 +440,16 @@ let lootGenerico = (jugador, arma, players)=>{
     while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 };
 
-let eventoAleatorio2 = ()=>{
-    console.log(" Sucedió un evento aleatorio");
-}
+let eventoAleatorio2 = (jugador, players)=>{
+    let resultado;
+    console.log(" Sucedió un evento aleatorio 2");
+    do{
+        var rand = parseInt(Math.random()*eventosAleatorios2.length);  
+        console.log("\x1b[33m%s\x1b[0m",` ${rand}`);
+        resultado = eventosAleatorios2[rand](jugador, players, maxHP, teams); //le paso el array original
+    }
+    while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
+};
 
 let ataqueEspecificoxCategoria = (jugador, victima)=>{
     console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
@@ -533,12 +542,12 @@ let rondaLoot = (jugador, players)=>{
     };
 
 // ronda de ataque
-let rondaAtaque = (jugador,jugadores, cantidadConVida)=>{
+let rondaAtaque = (jugador, jugadores, cantidadConVida)=>{
         if(jugador.alive == 1){
             if(cantidadConVida >= 2){
              let probabilidad = Math.random();
-             if(probabilidad < 0.05){
-                eventoAleatorio2();
+             if(probabilidad < 0.2){
+                eventoAleatorio2(jugador, jugadores);
              }else{
             let victima = buscarJugador(jugador,jugadores);
               if(!jugador.arma){
@@ -546,7 +555,7 @@ let rondaAtaque = (jugador,jugadores, cantidadConVida)=>{
                 }else{
                     if(jugador.arma.categoria){
                         let probabilidadEspecial = Math.random();
-                        if(probabilidadEspecial < 0.2){
+                        if(probabilidadEspecial < 0.4){
                             ataqueEspecificoxCategoria(jugador,victima);
                         }else{
                             ataqueGenericoConArma(jugador,jugadores,victima);

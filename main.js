@@ -91,7 +91,7 @@ while(cantidadConVida > 1 ){
             }else{
                 console.log("\x1b[31m%s\x1b[0m",`> Ataque`);
                 let copia = copiarJugadores(players);
-                rondaAtaque(jugador,copia, cantidadConVida);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random
+                rondaAtaque(jugador, copia, cantidadConVida);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random
             }
             probabilidadExtra = 0;
         }
