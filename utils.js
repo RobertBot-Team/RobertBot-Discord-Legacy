@@ -1,6 +1,7 @@
 import {Arma, Team, Jugador} from "./clases.js";
 import { eventosAleatorios1 } from "./eventosAleatorios1.js";
 import { eventosAleatorios2 } from "./eventosAleatorios2.js"
+import { eventoslootEspecificoxCategoria } from "./lootEspecificoxCategoria.js"
 import { eventosLootGenerico } from "./lootGenerico.js";
 import { ataquesGenericosSinArma } from "./ataqueGenericoSinArma.js"
 import { ataquesGenericosConArma } from "./ataqueGenericoConArma.js"
@@ -48,7 +49,7 @@ const samsungGalaxy = new Arma("Samsung Galaxy Note 7","explosivos",320,1,"m",""
 const encendedor = new Arma("encendedor","encendedor",15,3,"m","");
 const caniche = new Arma("caniche","",80,2,"m","");
 const varitaMagica = new Arma("varita mágica","varita mágica",20,3,"f","");
-const pescado = new Arma("pescado","espada",70,1,"m","");
+const pescado = new Arma("pescado congelado","espada",70,1,"m","");
 const lanzacohetes = new Arma("lanzacohetes","lanzacohetes",150,3,"m","");
 const llaveEspada = new Arma("Llave Espada","espada",190,3,"f","");
 const espadaMaestra = new Arma("Espada Maestra","espada",999,5,"f","");
@@ -60,7 +61,7 @@ const caparazonAzul = new Arma("caparazón azul","",35,1,"m","");
 const ramoDeFlores = new Arma("ramo de flores","",35,2,"m","");
 const arcoYFlechas = new Arma("arco y flechas","arco y flecha",80,7,"m","");
 const mandoPlei = new Arma("mando de plei","",50,1,"m","");
-const libroMatematicas = new Arma("libro de matemáticas",40,1,"m","");
+const libroMatematicas = new Arma("libro de matemáticas","",40,1,"m","");
 const manzana = new Arma("manzana","",20,1,"f","");
 const deathNote = new Arma("Death Note","death note",30,6,"f","");
 const botellaDeVodka = new Arma("botella de Vodka","",100,1,"f","");
@@ -156,6 +157,13 @@ let porcentajeDeVidaRandom = (min,max)=>{
     console.log("\x1b[90m%s\x1b[0m",`${vida} de vida`);
     return vida;
 }
+
+let randomSelector = (min,max)=>{
+    let selected = Math.floor(Math.random() * (max - min + 1) + min)
+    console.log("\x1b[90m%s\x1b[0m",`${selected} selected`);
+    return selected;
+}
+
 
 let calcularVivos = (jugadores)=>{
     let cantConVida = 0;
@@ -424,9 +432,15 @@ let eventoAleatorio1 = (jugador, players)=>{
 
 };
 
-let lootEspecificoxCategoria = (jugador, arma)=>{
+let lootEspecificoxCategoria1 = (jugador, arma)=>{
     jugador.setArma(arma);
     console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
+};
+
+let lootEspecificoxCategoria = (jugador, arma, players)=>{
+    
+    eventoslootEspecificoxCategoria[0](jugador, players, arma); //le paso el array original
+
 };
 
 let lootGenerico = (jugador, arma, players)=>{
@@ -532,7 +546,7 @@ let rondaLoot = (jugador, players)=>{
             eventoAleatorio1(jugador, players);
         }else{
             let arma = generarArma();
-            jugador.setArma(arma);  //ya le pongo el arma aca
+            // jugador.setArma(arma);  //ya le pongo el arma aca
             if(arma.categoria){
                 lootEspecificoxCategoria(jugador, arma);
             }else{
@@ -626,5 +640,6 @@ export {
     eliminarTeam,
     buscarJugadorDistintoA2,
     buscarUnMuerto,
-    porcentajeDeVidaRandom
+    porcentajeDeVidaRandom,
+    randomSelector
 }
