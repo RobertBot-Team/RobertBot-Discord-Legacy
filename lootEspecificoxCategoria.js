@@ -62,6 +62,7 @@ eventoslootEspecificoxCategoria[0] = (jugador, players, arma)=>{
             break;           
 
         default:
+            jugador.setArma(arma);
             console.log(` ${jugador.getNombre()} looteó un/a ${arma["nombre"]}`);
 
     }
