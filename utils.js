@@ -8,26 +8,27 @@ import { ataquesGenericosConArma } from "./ataqueGenericoConArma.js"
 
 //                     (nombre, categoria, daño base, usos, pronombre, pluralidad)
 const pistola = new Arma("pistola","pistola",190,3,"f","");
-const granada = new Arma("granada","",480,1,"f","");
-const guitarra = new Arma("guitarra","",100,1,"f","");
-const alfiler = new Arma("alfiler","",10,1,"m","");
+const granada = new Arma("granada","explosivos",480,1,"f","");
+const guitarra = new Arma("guitarra","rompibles",100,1,"f","");
+const alfiler = new Arma("alfiler","alfiler",10,1,"m","");
 const martilloThor = new Arma("martillo de Thor","",500,2,"m","");
 const bomba = new Arma("bomba","",250,1,"f","");
-const jeringuilla = new Arma("jeringuilla usada","",50,6,"f","");
+const jeringuilla = new Arma("jeringuilla usada","jeringuilla",50,6,"f","");
 const bate = new Arma("bate de beisbol","rompibles",85,6,"m","");
 const jericho = new Arma("Jericho 941-R","pistola",380,4,"f","");
-const estrellasNinja = new Arma("estrellas ninja","",100,3,"f","p");
+const estrellasNinja = new Arma("estrellas ninja","estrellas",100,3,"f","p");
 const espadaCuadruple = new Arma("espada cuádruple","espada",300,2,"f","");
-const grimorio = new Arma("grimorio antiguo","",300,1,"m","");
+const grimorio = new Arma("grimorio antiguo","grimorio",300,1,"m","");
 const daRules = new Arma("da rules","",100,1,"m","");
 const cuchillo = new Arma("cuchillo","arma blanca",50,4,"m","");
 const navaja = new Arma("navaja","arma blanca",66,5,"f","");
+const navajaVictorinox = new Arma("Navaja Suiza Multiusos Victorinox Climber 5000 ++","arma blanca",66,5,"f","");
 const tirachinas = new Arma("tirachinas","",75,15,"f","");
 const molotov = new Arma("molotov","explosivos",275,1,"f","");
-const roca = new Arma("roca","",100,1,"f","");
+const roca = new Arma("roca","roca",100,1,"f","");
 const cuchilloCarnicero = new Arma("cuchillo de carnicero","arma blanca",159,4,"m","");
 const trozoCristal = new Arma("trozo de cristal","arma blanca",70,2,"m","");
-const granadaFruta = new Arma("granada (pero la fruta)","",10,1,"f","");
+const granadaFruta = new Arma("granada (pero la fruta)","granada fruta",10,1,"f","");
 const lanza = new Arma("lanza","",110,2,"f","");
 const punioAmericano = new Arma("puño americano","",100,9,"m","");
 const latigo = new Arma("latigo","",50,6,"m","");
@@ -43,12 +44,12 @@ const tridente = new Arma("tridente demoníaco","",300,3,"m","");
 const lapiz = new Arma("lapiz","arma blanca",10,1,"m","");
 const ballesta = new Arma("ballesta", "arco y flecha",100,4,"f","");
 const dardosVenenosos = new Arma("dardos venenosos","veneno",175,3,"m","p");
-const reglaMetal = new Arma("regla de metal","",130,2,"f","");
+const reglaMetal = new Arma("regla de metal","regla",130,2,"f","");
 const rocaPequenia = new Arma("roca pequeña","",30,1,"f","");
 const samsungGalaxy = new Arma("Samsung Galaxy Note 7","explosivos",320,1,"m","");
 const encendedor = new Arma("encendedor","encendedor",15,3,"m","");
 const caniche = new Arma("caniche","",80,2,"m","");
-const varitaMagica = new Arma("varita mágica","varita mágica",20,3,"f","");
+const varitaMagica = new Arma("varita mágica","varita magica",20,3,"f","");
 const pescado = new Arma("pescado congelado","espada",70,1,"m","");
 const lanzacohetes = new Arma("lanzacohetes","lanzacohetes",150,3,"m","");
 const llaveEspada = new Arma("Llave Espada","espada",190,3,"f","");
@@ -57,29 +58,31 @@ const nokia1100 = new Arma("nokia 1100","nokia",999,1,"m","");
 const espadaIron = new Arma("espada de iron","espada",100,3,"f","");
 const espadaOro = new Arma("espada de oro","espada",80,1,"f","");
 const pikachu = new Arma("pikachu","pikachu",150,3,"m","");
-const caparazonAzul = new Arma("caparazón azul","",35,1,"m","");
+const caparazonAzul = new Arma("caparazón azul","caparazon",35,1,"m","");
 const ramoDeFlores = new Arma("ramo de flores","",35,2,"m","");
 const arcoYFlechas = new Arma("arco y flechas","arco y flecha",80,7,"m","");
-const mandoPlei = new Arma("mando de plei","",50,1,"m","");
-const libroMatematicas = new Arma("libro de matemáticas","",40,1,"m","");
-const manzana = new Arma("manzana","",20,1,"f","");
+const mandoPlei = new Arma("mando de plei","mando",50,1,"m","");
+const mandoXbox = new Arma("mando de xbox","mando",50,1,"m","");
+const libroMatematicas = new Arma("libro de matemáticas","libro de mates",40,1,"m","");
+const manzana = new Arma("manzana","manzana",20,1,"f","");
 const deathNote = new Arma("Death Note","death note",30,6,"f","");
-const botellaDeVodka = new Arma("botella de Vodka","",100,1,"f","");
-const botellaDeFernet = new Arma("botella de Fernet","",100,1,"f","");
-const botellaDeVino = new Arma("botella de vino","",100,1,"f","");
+const botellaDeVodka = new Arma("botella de Vodka","botella",100,1,"f","");
+const botellaDeFernet = new Arma("botella de Fernet","botella",100,1,"f","");
+const botellaDeVino = new Arma("botella de vino","botella",100,1,"f","");
 const fuegosArtificiales = new Arma("fuegos artificiales","explosivos",170,1,"m","p");
 const skate = new Arma("skate","rompibles",120,1,"m","");
-const motosierra = new Arma("motosierra","",250,3,"f","");
-const panDuro = new Arma("pan duro","",105,3,"m","");
-const nunchaku = new Arma("nunchaku","",50,8,"m","");
-const cuboRubik = new Arma("cubo Rubik","",50,5,"m","");
+const motosierra = new Arma("motosierra","motosierra",250,3,"f","");
+const panDuro = new Arma("pan duro","pan duro",105,3,"m","");
+const nunchaku = new Arma("nunchaku","nunchaku",50,8,"m","");
+const cuboRubik = new Arma("cubo Rubik","cubo rubik",50,5,"m","");
+const kunai = new Arma("kunai","arma blanca",99,5,"m","");
 
     
 var armas = [pistola,granada,guitarra,alfiler,martilloThor,bomba,jeringuilla,bate,jericho,estrellasNinja,espadaCuadruple,grimorio,daRules,cuchillo,navaja,
 tirachinas,molotov,roca,cuchilloCarnicero,trozoCristal,granadaFruta,lanza,punioAmericano,latigo,sableDeLuz,revolver,gasPimienta,banana,plantaVenenosa,
 espadaMadera,guadania,hoz,tridente,lapiz,ballesta,dardosVenenosos,reglaMetal,rocaPequenia,samsungGalaxy,encendedor,caniche,varitaMagica,pescado,lanzacohetes,
-llaveEspada,espadaMaestra,nokia1100,espadaIron,espadaOro,pikachu,caparazonAzul,ramoDeFlores,arcoYFlechas,mandoPlei,libroMatematicas,manzana,deathNote,
-botellaDeFernet,botellaDeVino,botellaDeVodka,fuegosArtificiales,skate,motosierra,panDuro,nunchaku,cuboRubik];
+llaveEspada,espadaMaestra,nokia1100,espadaIron,espadaOro,pikachu,caparazonAzul,ramoDeFlores,arcoYFlechas,mandoPlei,mandoXbox,libroMatematicas,manzana,deathNote,
+botellaDeFernet,botellaDeVino,botellaDeVodka,fuegosArtificiales,skate,motosierra,panDuro,nunchaku,cuboRubik,navajaVictorinox,kunai];
 
 //                   (nombre, id) <-- esto se va a tener que recibir de discord
 const lynn = new Jugador("lynn",1074);

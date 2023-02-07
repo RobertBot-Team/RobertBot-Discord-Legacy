@@ -79,7 +79,7 @@ ataquesGenericosSinArma[4] = (jugador, players, victima)=>{
 }
 
 ataquesGenericosSinArma[5] = (jugador, players, victima)=>{
-    console.log(`${jugador.getNombre()} persigue a  ${victima.getNombre()} y consigue atacarlo`);
+    console.log(`${jugador.getNombre()} persigue a ${victima.getNombre()} y consigue atacarlo`);
     let danio = danioExtra(80,150);
     victima.setHP(Math.max(0,victima.getHP() - danio)); 
 
