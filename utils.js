@@ -613,6 +613,79 @@ let buscarUnMuerto = (players)=>{
     return null;
 }
 
+let pronombreElLaLosLas = (arma)=>{
+    let pronombre = "";
+    console.log(`111111111111`);
+    if(arma["plural"] == ""){
+        if(arma["pronombre"] == "m"){
+            pronombre = "El";
+        }
+        else{
+            pronombre = "La";
+        }
+    }else{
+        if(arma["pronombre"] == "m"){
+            pronombre = "Los";
+        }
+        else{
+            pronombre = "Las";
+        }
+    }
+
+    return pronombre;
+}
+
+let pronombreUnUnaUnosUnas = (arma)=>{
+    let pronombre = "";
+    console.log(`111111111111`);
+    if(arma["plural"] == ""){
+        if(arma["pronombre"] == "m"){
+            pronombre = "un";
+        }
+        else{
+            pronombre = "una";
+        }
+    }else{
+        if(arma["pronombre"] == "m"){
+            pronombre = "unos";
+        }
+        else{
+            pronombre = "unas";
+        }
+    }
+
+    return pronombre;
+}
+
+let pronombreOAOsAs = (arma)=>{
+    let pronombre = "";
+    console.log(`111111111111`);
+    if(arma["plural"] == ""){
+        if(arma["pronombre"] == "m"){
+            pronombre = "o";
+        }
+        else{
+            pronombre = "a";
+        }
+    }else{
+        if(arma["pronombre"] == "m"){
+            pronombre = "os";
+        }
+        else{
+            pronombre = "as";
+        }
+    }
+
+    return pronombre;
+}
+
+
+let pluralS = (arma)=>{
+    let plural = "";
+    if(arma["plural"] == "p"){plural = "s"};
+    return plural;
+}
+
 export {
     ataqueEspecificoxCategoria,
     ataqueGenericoConArma,
@@ -644,5 +717,9 @@ export {
     buscarJugadorDistintoA2,
     buscarUnMuerto,
     porcentajeDeVidaRandom,
-    randomSelector
+    randomSelector,
+    pronombreElLaLosLas,
+    pluralS,
+    pronombreUnUnaUnosUnas,
+    pronombreOAOsAs
 }

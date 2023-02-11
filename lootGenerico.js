@@ -25,20 +25,26 @@ import {
     rondaAtaque,
     rondaLoot,
     shuffleJugadores,
-    imprimirTeams
+    imprimirTeams,    
+    pluralS,
+    pronombreUnUnaUnosUnas,
+    pronombreOAOsAs,
+    pronombreElLaLosLas
 } from "./utils.js"
 var eventosLootGenerico = [];
 
 
 eventosLootGenerico[0] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} looteó un/a ${arma["nombre"]}`);
+    console.log(` ${jugador.getNombre()} looteó ${pronombre} ${arma["nombre"]}`);
     return 1;
 }
 
 eventosLootGenerico[1] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} encontró un/a ${arma["nombre"]} en un rincón`);
+    console.log(` ${jugador.getNombre()} encontró ${pronombre} ${arma["nombre"]} en un rincón`);
     return 1;
 }
 
@@ -54,8 +60,11 @@ eventosLootGenerico[2] = (jugador, players, arma)=>{
 }
 
 eventosLootGenerico[3] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+    let oAosas = pronombreOAOsAs(arma);
+
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} iba caminando cuando pisó un/a ${arma["nombre"]}. Agradecido con Dios por su suerte, lo/a levanta y se lo/a guarda.`);
+    console.log(` ${jugador.getNombre()} iba caminando cuando pisó ${pronombre} ${arma["nombre"]}. Agradecido con Dios por su suerte, l${oAosas} levanta y se l${oAosas} guarda.`);
     return 1;
 }
 
@@ -72,66 +81,100 @@ eventosLootGenerico[4] = (jugador, players, arma)=>{
 }
 
 eventosLootGenerico[5] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} consigue un/a ${arma["nombre"]}`);
+    console.log(` ${jugador.getNombre()} consigue ${pronombre} ${arma["nombre"]}`);
     return 1;
 }
 
 eventosLootGenerico[6] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} encuentra un/a ${arma["nombre"]}. Nada mal.`);
+    console.log(` ${jugador.getNombre()} encuentra ${pronombre} ${arma["nombre"]}. Nada mal.`);
     return 1;
 }
 
 eventosLootGenerico[7] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+    let oAosas = pronombreOAOsAs(arma);
+
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} saca de su bolso un/a ${arma["nombre"]}. que tenía guardado/a desde antes de empezar el juego. Ilegalísimo?`);
+    console.log(` ${jugador.getNombre()} saca de su bolso ${pronombre} ${arma["nombre"]}. que tenía guardad${oAosas} desde antes de empezar el juego. Ilegalísimo?`);
     return 1;
 }
 
 eventosLootGenerico[8] = (jugador, players, arma)=>{
+    let pronombre1 = pronombreUnUnaUnosUnas(arma);
+    let elLa1 = pronombreElLaLosLas(arma);
+
     jugador.setArma(arma);
     let arma2 = generarArma();
-    console.log(` A ${jugador.getNombre()} no le alcanzan las manos para elegir entre un/a ${arma["nombre"]} y un/a ${arma2["nombre"]}, así que decide quedarse con el/la ${arma["nombre"]}.`);
+    let pronombre2 = pronombreUnUnaUnosUnas(arma2);
+
+    console.log(` A ${jugador.getNombre()} no le alcanzan las manos para elegir entre ${pronombre1} ${arma["nombre"]} y ${pronombre2} ${arma2["nombre"]}, así que decide quedarse con ${elLa1} ${arma["nombre"]}.`);
     return 1;
 }
 
 eventosLootGenerico[9] = (jugador, players, arma)=>{
+    let pronombre1 = pronombreUnUnaUnosUnas(arma);
+    let elLa1 = pronombreElLaLosLas(arma);
+
     jugador.setArma(arma);
     let arma2 = generarArma();
-    console.log(` A ${jugador.getNombre()} no le alcanzan las manos para elegir entre un/a ${arma2["nombre"]} y un/a ${arma["nombre"]}, así que decide quedarse con el/la ${arma["nombre"]}.`);
+    let pronombre2 = pronombreUnUnaUnosUnas(arma2);
+
+    console.log(` A ${jugador.getNombre()} no le alcanzan las manos para elegir entre ${pronombre1} ${arma2["nombre"]} y ${pronombre2} ${arma["nombre"]}, así que decide quedarse con ${elLa1} ${arma["nombre"]}.`);
     return 1;
 }
 
 eventosLootGenerico[10] = (jugador, players, arma)=>{
+    let pronombre1 = pronombreUnUnaUnosUnas(arma);
+    let elLa1 = pronombreElLaLosLas(arma);
+
     jugador.setArma(arma);
     let arma2 = generarArma();
-    console.log(` ${jugador.getNombre()} ve un/a ${arma2["nombre"]} y un/a ${arma["nombre"]} en el suelo, Obviamente se queda con el/la ${arma["nombre"]}.`);
+    let pronombre2 = pronombreUnUnaUnosUnas(arma2);
+
+    console.log(` ${jugador.getNombre()} ve ${pronombre1} ${arma2["nombre"]} y ${pronombre2} ${arma["nombre"]} en el suelo, Obviamente se queda con ${elLa1} ${arma["nombre"]}.`);
     return 1;
 }
 
 eventosLootGenerico[11] = (jugador, players, arma)=>{
+    let pronombre1 = pronombreUnUnaUnosUnas(arma);
+    let elLa1 = pronombreElLaLosLas(arma);
+
     jugador.setArma(arma);
     let arma2 = generarArma();
-    console.log(` ${jugador.getNombre()} ve un/a ${arma["nombre"]} y un/a ${arma2["nombre"]} en el suelo, Obviamente se queda con el/la ${arma["nombre"]}.`);
+    let pronombre2 = pronombreUnUnaUnosUnas(arma2);
+
+    console.log(` ${jugador.getNombre()} ve ${pronombre1} ${arma["nombre"]} y ${pronombre2} ${arma2["nombre"]} en el suelo, Obviamente se queda con ${elLa1} ${arma["nombre"]}.`);
     return 1;
 }
 
 eventosLootGenerico[12] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} encuentra un/a ${arma["nombre"]}.`);
+    console.log(` ${jugador.getNombre()} encuentra ${pronombre} ${arma["nombre"]}.`);
     return 1;
 }
 
 eventosLootGenerico[13] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+    let oAosas = pronombreOAOsAs(arma);
+
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} encuentra un/a ${arma["nombre"]} semi-enterrado/a y decide llevárselo/a.`);
+    console.log(` ${jugador.getNombre()} encuentra ${pronombre} ${arma["nombre"]} semi-enterrad${oAosas} y decide llevársel${oAosas}.`);
     return 1;
 }
 
 eventosLootGenerico[14] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} se hace con un/a ${arma["nombre"]}.`);
+    console.log(` ${jugador.getNombre()} se hace con ${pronombre} ${arma["nombre"]}.`);
     return 1;
 }
 
@@ -176,15 +219,17 @@ eventosLootGenerico[18] = (jugador, players, arma)=>{
     let copia = copiarJugadores(players);
     let idVictima = buscarJugadorConArma(jugador, copia);
     if(idVictima==null){return null;}
-    
+   
     let jugadorOriginal = buscarPorID(idVictima, players);
     if(jugadorOriginal==null){ 
     return null;
     }
 
+    let agregaS = pluralS(jugadorOriginal.getArma());
+
     //console.log(JSON.stringify(jugadorOriginal));
 
-    console.log(` ${jugador.getNombre()} le dice a ${jugadorOriginal.getNombre()} “Mira, tu waifu!” y cuando se da la vuelta le roba su ${jugadorOriginal.getArma()["nombre"]}.`);
+    console.log(` ${jugador.getNombre()} le dice a ${jugadorOriginal.getNombre()} “Mira, tu waifu!” y cuando se da la vuelta le roba su${agregaS} ${jugadorOriginal.getArma()["nombre"]}.`);
    
     jugador.arma=jugadorOriginal.getArma();
     jugadorOriginal.arma=null;
@@ -209,9 +254,11 @@ eventosLootGenerico[19] = (jugador, players, arma)=>{
     return null;
     }
 
+    let elLa1 = pronombreElLaLosLas(jugadorOriginal.getArma());
+
     //console.log(JSON.stringify(jugadorOriginal));
 
-    console.log(` ${jugador.getNombre()} le quita el/la ${jugadorOriginal.getArma()["nombre"]} a ${jugadorOriginal.getNombre()} mientras está distraido.`);
+    console.log(` ${jugador.getNombre()} le quita ${elLa1} ${jugadorOriginal.getArma()["nombre"]} a ${jugadorOriginal.getNombre()} mientras está distraido.`);
    
     jugador.arma=jugadorOriginal.getArma();
     jugadorOriginal.arma=null;
@@ -226,8 +273,10 @@ eventosLootGenerico[19] = (jugador, players, arma)=>{
 }
 
 eventosLootGenerico[20] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} encontró un/a ${arma["nombre"]}. Waos`);
+    console.log(` ${jugador.getNombre()} encontró ${pronombre} ${arma["nombre"]}. Waos`);
     return 1;
 }
 

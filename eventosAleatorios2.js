@@ -1,5 +1,5 @@
 /*------------ eventos aleatorios 2 ------------*/
-import { buscarTeamDe2, copiarJugadores, buscarPorID, danioExtra, buscarJugador, buscarJugadorDistintoA2, buscarUnMuerto, shuffleJugadores, porcentajeDeVidaRandom } from "./utils.js";
+import { buscarTeamDe2, copiarJugadores, buscarPorID, danioExtra, buscarJugador, buscarJugadorDistintoA2, buscarUnMuerto, shuffleJugadores, porcentajeDeVidaRandom,pluralS } from "./utils.js";
 import {Team,Jugador} from "./clases.js";
 
 var eventosAleatorios2 = [];
@@ -26,12 +26,9 @@ eventosAleatorios2[2] = (jugador, players, maxHP, teams)=>{
     console.log(` ${jugador.getNombre()} es atacado por onis salvajes y logra escapar por los pelos.`);
 
     let danio = danioExtra(50,200);
-    jugador.setHP(Math.max(0,jugador.getHP() - danio)); 
+    jugador.setHP(Math.max(1,jugador.getHP() - danio)); 
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
-    if(jugador.getHP()<=0){
-        jugador.alive=0;
-    }
     return 1;
 }
 
@@ -157,7 +154,7 @@ eventosAleatorios2[12] = (jugador, players, maxHP, teams)=>{
 }
 
 eventosAleatorios2[13] = (jugador, players, maxHP, teams)=>{
-    console.log(` ${jugador.getNombre()} nsó que podía atravesar un lago nadando. Pero no sabía nadar.`);
+    console.log(` ${jugador.getNombre()} pensó que podía atravesar un lago nadando. Pero no sabía nadar.`);
     
     jugador.setHP(0);
     jugador.alive = 0;
@@ -189,7 +186,9 @@ eventosAleatorios2[15] = (jugador, players, maxHP, teams)=>{
 eventosAleatorios2[16] = (jugador, players, maxHP, teams)=>{
     if(jugador.getArma()==null){return null;}
 
-    console.log(` ${jugador.getNombre()} juega con su ${jugador.getArma()["nombre"]} y se corta un dedo.`);
+    let plural = pluralS(jugador.getArma());
+
+    console.log(` ${jugador.getNombre()} juega con su${plural} ${jugador.getArma()["nombre"]} y se corta un dedo.`);
     
     let danio = danioExtra(100,400);
     jugador.setHP(Math.max(0,jugador.getHP() - danio)); 
@@ -296,7 +295,7 @@ eventosAleatorios2[26] = (jugador, players, maxHP, teams)=>{
 }
 
 eventosAleatorios2[27] = (jugador, players, maxHP, teams)=>{
-    console.log(` ${jugador.getNombre()} entró a Wabi Sabi y se murió de asco.`);
+    console.log(` ${jugador.getNombre()} entró a Wabi Sabi y se murió del asco.`);
     
     jugador.setHP(0);
     jugador.alive = 0;
@@ -325,7 +324,7 @@ eventosAleatorios2[29] = (jugador, players, maxHP, teams)=>{
 }
 
 eventosAleatorios2[30] = (jugador, players, maxHP, teams)=>{
-    console.log(` A ${jugador.getNombre()} se le fue el internet y se desconectó del juego. LATAM momento`);
+    console.log(` A ${jugador.getNombre()} se le fue el internet y se desconectó del juego. LATAM moment`);
     jugador.setHP(0);
     jugador.alive = -1;
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);

@@ -1,5 +1,5 @@
 /*------------ eventos aleatorios 1 ------------*/
-import { buscarTeamDe2, copiarJugadores, buscarPorID, imprimirTeams, buscarJugador, eliminarTeam, buscarJugadorDistintoA2, buscarUnMuerto, shuffleJugadores, porcentajeDeVidaRandom } from "./utils.js";
+import { buscarTeamDe2, copiarJugadores, buscarPorID, imprimirTeams, buscarJugador, eliminarTeam, buscarJugadorDistintoA2, buscarUnMuerto, shuffleJugadores, porcentajeDeVidaRandom, pluralS } from "./utils.js";
 import {Team,Jugador} from "./clases.js";
 
 var eventosAleatorios1 = [];
@@ -56,7 +56,9 @@ eventosAleatorios1[7] = (jugador, players, maxHP, teams)=>{
 
 eventosAleatorios1[8] = (jugador, players, maxHP, teams)=>{
     if(jugador.arma == null){return null};
-    console.log(` ${jugador.getNombre()} necesitaba dinero para gachas así que vendió su ${jugador.getArma()["nombre"]}`);
+    let plural = pluralS(jugador.getArma());
+
+    console.log(` ${jugador.getNombre()} necesitaba dinero para gachas así que vendió su${plural} ${jugador.getArma()["nombre"]}`);
     jugador.arma = null;
     return 1;
 }
@@ -71,6 +73,8 @@ eventosAleatorios1[9] = (jugador, players, maxHP, teams)=>{
     let id;
     if(jugador.arma == null){return null};
 
+    let plural = pluralS(jugador.getArma());
+
     do{
        comprador = buscarJugador(jugador, copiaJugadores);
        limit++;
@@ -81,7 +85,7 @@ eventosAleatorios1[9] = (jugador, players, maxHP, teams)=>{
     id = comprador.getID();
     jugadorACambiar = buscarPorID(id, players);
 
-    console.log(` ${jugador.getNombre()} necesitaba dinero para gachas así que vendió su ${jugador.getArma()["nombre"]} a ${jugadorACambiar.getNombre()}`);
+    console.log(` ${jugador.getNombre()} necesitaba dinero para gachas así que vendió su${plural} ${jugador.getArma()["nombre"]} a ${jugadorACambiar.getNombre()}`);
     jugadorACambiar.arma = jugador.getArma();
     jugador.arma = null;
     return 1;
@@ -95,13 +99,9 @@ eventosAleatorios1[9] = (jugador, players, maxHP, teams)=>{
 
 eventosAleatorios1[10] = (jugador, players, maxHP, teams)=>{
     //console.log("\x1b[35m%s\x1b[0m",` this is evento 100000000000000`);
-    //console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
     let team = jugador.getTeam();
     let cantEnTeam = 1;
     let newTeamId = teams.length + 1;
-
-    //console.log(`%c${JSON.stringify(team)}`,"color:purple");
-
     let player1 = buscarPorID(team.getPlayer1().getID(), players);
     let player2 = null;
     let player3 = null;
@@ -195,7 +195,6 @@ eventosAleatorios1[10] = (jugador, players, maxHP, teams)=>{
 }
 
 eventosAleatorios1[11] = (jugador, players, maxHP, teams)=>{
-    //console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
     let team = jugador.getTeam();
     let vivos = team.nombresVivos();
     if(team.getPlayer2()!=null && team.getPlayer3()!= null) //team de 3
@@ -226,7 +225,6 @@ eventosAleatorios1[11] = (jugador, players, maxHP, teams)=>{
 }
 
 eventosAleatorios1[12] = (jugador, players, maxHP, teams)=>{
-    //console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
     //console.log("\x1b[35m%s\x1b[0m",` this is evento 122222222222222222`);
     let team = jugador.getTeam();
     let vivos = team.nombresVivos();
@@ -295,7 +293,6 @@ eventosAleatorios1[12] = (jugador, players, maxHP, teams)=>{
 }
 
 eventosAleatorios1[13] = (jugador, players, maxHP, teams)=>{
-    //console.log(`%c${JSON.stringify(jugador)}`,"color:purple");
     let team = jugador.getTeam();
     let vivos = team.nombresVivos();
     if(team.getPlayer2()!=null && team.getPlayer3()!= null) //team de 3

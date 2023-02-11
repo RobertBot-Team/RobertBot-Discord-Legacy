@@ -12,7 +12,10 @@ import {
     haySuficientes,
     shuffleJugadores,
     imprimirTeams,
-    buscarJugadorDistintoA2
+    buscarJugadorDistintoA2,
+    pronombreOAOsAs,
+    pluralS,
+    pronombreElLaLosLas
 } from "./utils.js"
 import {Arma, Team, Jugador} from "./clases.js";
 
@@ -48,8 +51,11 @@ ataquesGenericosSinArma[1] = (jugador, players, victima)=>{
 
 ataquesGenericosSinArma[2] = (jugador, players, victima)=>{
     if(victima.getArma()==null){return null;}
+    let plural = pluralS(victima.getArma());
+    let pronombre = pronombreElLaLosLas(victima.getArma());
+
     //console.log(JSON.stringify(victima.getArma()));
-    console.log(`${jugador.getNombre()} mata a ${victima.getNombre()} con su propio/a ${victima.getArma()["nombre"]}`);
+    console.log(`${jugador.getNombre()} mata a ${victima.getNombre()} con su${plural} propi${pronombre} ${victima.getArma()["nombre"]}`);
     victima.setHP(0); 
     console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
         victima.alive=0;

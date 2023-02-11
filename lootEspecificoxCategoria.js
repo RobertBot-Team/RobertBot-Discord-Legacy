@@ -12,7 +12,11 @@ import {
     shuffleJugadores,
     imprimirTeams,
     buscarJugadorDistintoA2,
-    randomSelector
+    randomSelector,    
+    pluralS,
+    pronombreUnUnaUnosUnas,
+    pronombreOAOsAs,
+    pronombreElLaLosLas
 } from "./utils.js"
 import {Arma, Team, Jugador} from "./clases.js";
 
@@ -32,6 +36,8 @@ eventoslootEspecificoxCategoria[0] = (jugador, players, arma)=>{
     let categoria = arma["categoria"];
     console.log(`%c${arma["nombre"]} > ${categoria}`,"color:orange");
     let seleccionado;
+
+    let pronombreUno = pronombreUnUnaUnosUnas(arma);
 
     switch(categoria){
 
@@ -282,7 +288,7 @@ eventoslootEspecificoxCategoria[0] = (jugador, players, arma)=>{
 
         default:
             jugador.setArma(arma);
-            console.log(` ${jugador.getNombre()} looteó un/a ${arma["nombre"]}`);
+            console.log(` ${jugador.getNombre()} looteó ${pronombreUno} ${arma["nombre"]}.`);
 
     }
 
@@ -295,14 +301,14 @@ eventoslootEspecificoxCategoria[0] = (jugador, players, arma)=>{
 eventoslootEspecificoxCategoria[1] = (jugador, players, arma)=>{
     console.log(`no way it works`);
     //jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} encontró el Martillo de Thor. Lamentablemente no lo pudo levantar porque no es digno.`);
+    console.log(` ${jugador.getNombre()} encontró el Martillo de Thor 🔨. Lamentablemente no lo pudo levantar porque no es digno.`);
     return 1;
 }
 
 eventoslootEspecificoxCategoria[2] = (jugador, players, arma)=>{
     console.log(`no way it works`);
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} encontró el Martillo de Thor. Como ${jugador.getNombre()} es “alguien digno”, lo puede levantar y se lo lleva.`);
+    console.log(` ${jugador.getNombre()} encontró el Martillo de Thor 🔨. Como ${jugador.getNombre()} es “alguien digno”, lo puede levantar y se lo lleva.`);
     return 1;
 }
 
@@ -436,23 +442,29 @@ eventoslootEspecificoxCategoria[19] = (jugador, players, arma)=>{
 
 // "espada"
 eventoslootEspecificoxCategoria[20] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+
     console.log(`no way it works`);
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} looteó un/a ${arma["nombre"]}.`);   
+    console.log(` ${jugador.getNombre()} looteó ${pronombre} ${arma["nombre"]}.`);   
     return 1;
 }
 
 eventoslootEspecificoxCategoria[21] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+
     console.log(`no way it works`);
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} looteó un/a ${arma["nombre"]}. A ver a quién se lo/a clava.`);   
+    console.log(` ${jugador.getNombre()} looteó ${pronombre} ${arma["nombre"]}. A ver a quién se lo/a clava.`);   
     return 1;
 }
 
 eventoslootEspecificoxCategoria[22] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+    
     console.log(`no way it works`);
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} looteó un/a ${arma["nombre"]} y piensa "ojala hubiera tomado clases de esgrima"`);   
+    console.log(` ${jugador.getNombre()} looteó ${pronombre} ${arma["nombre"]} y piensa "ojala hubiera tomado clases de esgrima"`);   
     return 1;
 }
 
@@ -659,7 +671,7 @@ eventoslootEspecificoxCategoria[48] = (jugador, players, arma)=>{
 eventoslootEspecificoxCategoria[49] = (jugador, players, arma)=>{
     console.log(`no way it works`);
     jugador.setArma(arma);
-    console.log(`La fuerza está con ${jugador.getNombre()} y su nuevo Sable de Luz.`);
+    console.log(`La fuerza está con ${jugador.getNombre()} y su nuevo sable de Luz.`);
     return 1;
 }
 
@@ -682,7 +694,7 @@ eventoslootEspecificoxCategoria[51] = (jugador, players, arma)=>{
 eventoslootEspecificoxCategoria[52] = (jugador, players, arma)=>{
     console.log(`no way it works`);
     jugador.setArma(arma);
-    console.log(`${jugador.getNombre()} encontró una granada!!!! (ah,  pero la fruta)`);
+    console.log(`${jugador.getNombre()} encontró una granada!!!! (ah, pero la fruta)`);
     return 1;
 }
 
@@ -751,16 +763,23 @@ eventoslootEspecificoxCategoria[60] = (jugador, players, arma)=>{
 
 // "arma blanca"
 eventoslootEspecificoxCategoria[61] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+    let oAosas = pronombreOAOsAs(arma);
+    let elLaLosLas = pronombreElLaLosLas(arma);
+
     console.log(`no way it works`);
     jugador.setArma(arma);
-    console.log(`${jugador.getNombre()} encuentra un/a ${arma["nombre"]} y se lo/a guarda para clavárselo/a a alguien. (el/la ${arma["nombre"]}).`);
+    console.log(`${jugador.getNombre()} encuentra ${pronombre} ${arma["nombre"]} y se l${oAosas} guarda para clavársel${oAosas} a alguien. (${elLaLosLas} ${arma["nombre"]}).`);
     return 1;
 }
 
 eventoslootEspecificoxCategoria[62] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+    let oAosas = pronombreOAOsAs(arma);
+
     console.log(`no way it works`);
     jugador.setArma(arma);
-    console.log(`${jugador.getNombre()} encuentra un/a ${arma["nombre"]} y se lo/a guarda, imaginandose ya en su mente atacando a otros con saltos ninja y volteretas innecesarias.`);
+    console.log(`${jugador.getNombre()} encuentra ${pronombre} ${arma["nombre"]} y se l${oAosas} guarda, imaginandose ya en su mente atacando a otros con saltos ninja y volteretas innecesarias.`);
     return 1;
 }
 
@@ -838,9 +857,12 @@ eventoslootEspecificoxCategoria[71] = (jugador, players, arma)=>{
 
 // "rompibles"
 eventoslootEspecificoxCategoria[72] = (jugador, players, arma)=>{
+    let pronombre = pronombreUnUnaUnosUnas(arma);
+    let oAosas = pronombreOAOsAs(arma);
+
     console.log(`no way it works`);
     jugador.setArma(arma);
-    console.log(`${jugador.getNombre()} encuentra un/a ${arma["nombre"]} y planea a quién partirselo/a en la cabeza.`);
+    console.log(`${jugador.getNombre()} encuentra ${pronombre} ${arma["nombre"]} y planea a quién partirsel${oAosas} en la cabeza.`);
     return 1;
 }
 
