@@ -376,14 +376,14 @@ eventoslootEspecificoxCategoria[10] = (jugador, players, arma)=>{
 eventoslootEspecificoxCategoria[11] = (jugador, players, arma)=>{
     console.log(`no way it works`);
     jugador.setArma(arma);
-    console.log(` Mickey le da una Llave Espada a ${jugador.getNombre()}. ¿A quién se la habrá comprado?"`);   
+    console.log(` Mickey le da una Llave Espada a ${jugador.getNombre()}. ¿A quién se la habrá comprado?`);   
     return 1;
 }
 
 eventoslootEspecificoxCategoria[12] = (jugador, players, arma)=>{
     console.log(`no way it works`);
     jugador.setArma(arma);
-    console.log(` Un ratón le da una espada con forma de llave a ${jugador.getNombre()}. ¿De dónde me suena esta escena?"`);   
+    console.log(` Un ratón le da una espada con forma de llave a ${jugador.getNombre()}. ¿De dónde me suena esta escena?`);   
     return 1;
 }
 
@@ -452,10 +452,11 @@ eventoslootEspecificoxCategoria[20] = (jugador, players, arma)=>{
 
 eventoslootEspecificoxCategoria[21] = (jugador, players, arma)=>{
     let pronombre = pronombreUnUnaUnosUnas(arma);
+    let pronombre2 = pronombreElLaLosLas(arma);
 
     console.log(`no way it works`);
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} looteó ${pronombre} ${arma["nombre"]}. A ver a quién se lo/a clava.`);   
+    console.log(` ${jugador.getNombre()} looteó ${pronombre} ${arma["nombre"]}. A ver a quién se ${pronombre2.toLowerCase()} clava.`);   
     return 1;
 }
 
@@ -718,7 +719,7 @@ eventoslootEspecificoxCategoria[54] = (jugador, players, arma)=>{
 eventoslootEspecificoxCategoria[55] = (jugador, players, arma)=>{
     console.log(`no way it works`);
     jugador.setArma(arma);
-    console.log(`${jugador.getNombre()} tiene una Navaja Suiza Multiusos Victorinox Climber ++. Mucha marca, pero realmente hace el mismo daño que una navaja común y corriente.`);
+    console.log(`${jugador.getNombre()} compra una Navaja Suiza Multiusos Victorinox Climber ++. Mucha marca, pero realmente hace el mismo daño que una navaja común y corriente.`);
     return 1;
 }
 

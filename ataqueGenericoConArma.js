@@ -65,7 +65,7 @@ return 1;
 
 ataquesGenericosConArma[1] = (jugador, players, victima)=>{
     let plural = pluralS(jugador.getArma());
-    console.log(`${jugador.getNombre()} la arroja su${plural} ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
+    console.log(`${jugador.getNombre()} le arroja su${plural} ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
     let danio = danioExtra(100,200);
     victima.setHP(Math.max(0,victima.getHP() - danio));
     
@@ -127,8 +127,6 @@ ataquesGenericosConArma[5] = (jugador, players, victima)=>{
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
     if(jugador.getHP()<=0){
         jugador.alive=0;
-        jugador.kills++;
-        console.log("\x1b[90m%s\x1b[0m",`Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
     }
 return 1;
 }

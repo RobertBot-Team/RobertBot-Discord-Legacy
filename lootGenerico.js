@@ -113,7 +113,7 @@ eventosLootGenerico[8] = (jugador, players, arma)=>{
     let arma2 = generarArma();
     let pronombre2 = pronombreUnUnaUnosUnas(arma2);
 
-    console.log(` A ${jugador.getNombre()} no le alcanzan las manos para elegir entre ${pronombre1} ${arma["nombre"]} y ${pronombre2} ${arma2["nombre"]}, así que decide quedarse con ${elLa1} ${arma["nombre"]}.`);
+    console.log(` A ${jugador.getNombre()} no le alcanzan las manos para elegir entre ${pronombre1} ${arma["nombre"]} y ${pronombre2} ${arma2["nombre"]}, así que decide quedarse con ${elLa1.toLowerCase()} ${arma["nombre"]}.`);
     return 1;
 }
 
@@ -125,7 +125,7 @@ eventosLootGenerico[9] = (jugador, players, arma)=>{
     let arma2 = generarArma();
     let pronombre2 = pronombreUnUnaUnosUnas(arma2);
 
-    console.log(` A ${jugador.getNombre()} no le alcanzan las manos para elegir entre ${pronombre1} ${arma2["nombre"]} y ${pronombre2} ${arma["nombre"]}, así que decide quedarse con ${elLa1} ${arma["nombre"]}.`);
+    console.log(` A ${jugador.getNombre()} no le alcanzan las manos para elegir entre ${pronombre2} ${arma2["nombre"]} y ${pronombre1} ${arma["nombre"]}, así que decide quedarse con ${elLa1.toLowerCase()} ${arma["nombre"]}.`);
     return 1;
 }
 
@@ -137,7 +137,7 @@ eventosLootGenerico[10] = (jugador, players, arma)=>{
     let arma2 = generarArma();
     let pronombre2 = pronombreUnUnaUnosUnas(arma2);
 
-    console.log(` ${jugador.getNombre()} ve ${pronombre1} ${arma2["nombre"]} y ${pronombre2} ${arma["nombre"]} en el suelo, Obviamente se queda con ${elLa1} ${arma["nombre"]}.`);
+    console.log(` ${jugador.getNombre()} ve ${pronombre1} ${arma2["nombre"]} y ${pronombre2} ${arma["nombre"]} en el suelo, Obviamente se queda con ${elLa1.toLowerCase()} ${arma["nombre"]}.`);
     return 1;
 }
 
@@ -149,7 +149,7 @@ eventosLootGenerico[11] = (jugador, players, arma)=>{
     let arma2 = generarArma();
     let pronombre2 = pronombreUnUnaUnosUnas(arma2);
 
-    console.log(` ${jugador.getNombre()} ve ${pronombre1} ${arma["nombre"]} y ${pronombre2} ${arma2["nombre"]} en el suelo, Obviamente se queda con ${elLa1} ${arma["nombre"]}.`);
+    console.log(` ${jugador.getNombre()} ve ${pronombre1} ${arma["nombre"]} y ${pronombre2} ${arma2["nombre"]} en el suelo, Obviamente se queda con ${elLa1.toLowerCase()} ${arma["nombre"]}.`);
     return 1;
 }
 
@@ -258,7 +258,7 @@ eventosLootGenerico[19] = (jugador, players, arma)=>{
 
     //console.log(JSON.stringify(jugadorOriginal));
 
-    console.log(` ${jugador.getNombre()} le quita ${elLa1} ${jugadorOriginal.getArma()["nombre"]} a ${jugadorOriginal.getNombre()} mientras está distraido.`);
+    console.log(` ${jugador.getNombre()} le quita ${elLa1.toLowerCase()} ${jugadorOriginal.getArma()["nombre"]} a ${jugadorOriginal.getNombre()} mientras está distraido.`);
    
     jugador.arma=jugadorOriginal.getArma();
     jugadorOriginal.arma=null;

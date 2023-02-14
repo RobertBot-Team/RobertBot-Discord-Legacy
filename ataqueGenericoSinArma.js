@@ -52,7 +52,7 @@ ataquesGenericosSinArma[1] = (jugador, players, victima)=>{
 ataquesGenericosSinArma[2] = (jugador, players, victima)=>{
     if(victima.getArma()==null){return null;}
     let plural = pluralS(victima.getArma());
-    let pronombre = pronombreElLaLosLas(victima.getArma());
+    let pronombre = pronombreOAOsAs(victima.getArma());
 
     //console.log(JSON.stringify(victima.getArma()));
     console.log(`${jugador.getNombre()} mata a ${victima.getNombre()} con su${plural} propi${pronombre} ${victima.getArma()["nombre"]}`);
