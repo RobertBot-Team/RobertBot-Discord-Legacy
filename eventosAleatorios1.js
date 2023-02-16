@@ -412,11 +412,12 @@ eventosAleatorios1[21] = (jugador, players, maxHP, teams)=>{
 eventosAleatorios1[22] = (jugador, players, maxHP, teams)=>{
     let jugador2;
     let jugador3;
+    let copiaJugadores = copiarJugadores(players);
     
-    jugador2 = buscarJugador(jugador,players);
+    jugador2 = buscarJugador(jugador,copiaJugadores);
     if (jugador2==null){return null;}
 
-    jugador3 = buscarJugadorDistintoA2(jugador,jugador2,players);
+    jugador3 = buscarJugadorDistintoA2(jugador,jugador2,copiaJugadores);
     if(jugador3==null){return null;}
 
     console.log(` ${jugador.getNombre()} encuentra a ${jugador2.getNombre()} y ${jugador3.getNombre()} juntos en el suelo y... decide irse bien lejos por si acaso.`);

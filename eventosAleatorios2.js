@@ -111,7 +111,8 @@ eventosAleatorios2[8] = (jugador, players, maxHP, teams)=>{
 }
 
 eventosAleatorios2[9] = (jugador, players, maxHP, teams)=>{
-    let jugadorDos = buscarJugador(jugador,players);
+    let copiaJugadores = copiarJugadores(players);
+    let jugadorDos = buscarJugador(jugador,copiaJugadores);
     if(jugadorDos==null){return null;}
 
     console.log(` ${jugadorDos.getNombre()} le robó una cajita de pollux a ${jugador.getNombre()}. ${jugador.getNombre()} se entristeció y murió de tristeza.`);
@@ -201,7 +202,8 @@ eventosAleatorios2[16] = (jugador, players, maxHP, teams)=>{
 }
 
 eventosAleatorios2[17] = (jugador, players, maxHP, teams)=>{
-    let jugadorDos = buscarJugador(jugador,players);
+    let copiaJugadores = copiarJugadores(players);
+    let jugadorDos = buscarJugador(jugador,copiaJugadores);
     if(jugadorDos==null){return null;}
 
     console.log(` ${jugador.getNombre()} le pide por favor a ${jugadorDos.getNombre()} que lo mate. ${jugadorDos.getNombre()} se rehúsa.`);
@@ -315,7 +317,8 @@ eventosAleatorios2[28] = (jugador, players, maxHP, teams)=>{
 }
 
 eventosAleatorios2[29] = (jugador, players, maxHP, teams)=>{
-    let jugadorDos = buscarJugador(jugador,players);
+    let copiaJugadores = copiarJugadores(players);
+    let jugadorDos = buscarJugador(jugador,copiaJugadores);
     if(jugadorDos==null){return null;}
 
     console.log(` ${jugador.getNombre()} ve a ${jugadorDos.getNombre()}. ${jugador.getNombre()} pero se aleja porque le da miedo.`);
