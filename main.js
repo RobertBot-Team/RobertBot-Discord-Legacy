@@ -53,6 +53,7 @@ cantidadConVida = calcularVivos(players);
 console.log("\x1b[90m%s\x1b[0m",`Quedan ${cantidadConVida} jugadores con vida.`);
 
 let nroRonda = 1;
+let nroEvento = 0;
 let danioSuma = 50;
 whileGrande:
 while(cantidadConVida > 1 ){
@@ -82,6 +83,7 @@ while(cantidadConVida > 1 ){
         let probabilidadExtra = 0;
         let jugador = players[j];
         if(jugador.alive == 1){
+            nroEvento++;
             console.log("\x1b[32m%s\x1b[0m",`Turno de ${jugador.getNombre()}`);
             if(jugador.getArma() == null){probabilidadExtra = 0.55;} //si el jugador no tiene arma, tiene 55% mas de chances de lootear que de atacar
             let probabilidad = Math.random();
@@ -102,7 +104,21 @@ while(cantidadConVida > 1 ){
 
     imprimirTeams();
 
-    if(nroRonda>=4){
+    if(nroRonda>=4){        //mas daño hacen las armas cuantas mas rondas hayan pasado
+        for(let contador = 0;contador<players.length;contador++){
+            let playerRonda = players[contador];
+            if(playerRonda.getArma()){
+                console.log(`danio antes ${playerRonda.getArma()["danio"]}`);
+                playerRonda.getArma().danio += danioSuma + (players.length*10);
+                console.log(`danio despues ${playerRonda.getArma()["danio"]}`);
+            }
+        }
+        danioSuma+=25;
+    }
+
+}
+/*
+    if(players.length>=7){
         for(let contador = 0;contador<players.length;contador++){
             let playerRonda = players[contador];
             if(playerRonda.getArma()){
@@ -112,8 +128,7 @@ while(cantidadConVida > 1 ){
             }
         }
         danioSuma+=25;
-    }
-}
+    }*/
 
 if(cantidadConVida==1){
 let ganador = encontrarGanador(players);
@@ -125,3 +140,4 @@ console.log("\x1b[32m%s\x1b[0m",` Parece que esta vez no hubo ganadores...`);
 }
 
 mostrarResultados(players);
+console.log(`Total de eventos = ${nroEvento}`);

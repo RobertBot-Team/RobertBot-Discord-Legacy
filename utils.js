@@ -2,6 +2,7 @@ import {Arma, Team, Jugador} from "./clases.js";
 import { eventosAleatorios1 } from "./eventosAleatorios1.js";
 import { eventosAleatorios2 } from "./eventosAleatorios2.js"
 import { eventoslootEspecificoxCategoria } from "./lootEspecificoxCategoria.js"
+import { eventosAtaqueEspecificoxCategoria } from "./ataqueEspecificoxCategoria.js"
 import { eventosLootGenerico } from "./lootGenerico.js";
 import { ataquesGenericosSinArma } from "./ataqueGenericoSinArma.js"
 import { ataquesGenericosConArma } from "./ataqueGenericoConArma.js"
@@ -76,13 +77,18 @@ const panDuro = new Arma("pan duro","pan duro",105,3,"m","");
 const nunchaku = new Arma("nunchaku","nunchaku",50,8,"m","");
 const cuboRubik = new Arma("cubo Rubik","cubo rubik",50,5,"m","");
 const kunai = new Arma("kunai","arma blanca",99,5,"m","");
+const estiletes = new Arma("par de estiletes de color dorado","arma blanca",127,5,"m","");
+const espadaEsgrima = new Arma("espada de esgrima","espada",90,2,"f","");
+const escopeta = new Arma("escopeta","pistola",487,2,"f","");
+const agujas = new Arma("agujas","arma blanca",50,10,"f","p");
+
 
     
 var armas = [pistola,granada,guitarra,alfiler,martilloThor,bomba,jeringuilla,bate,jericho,estrellasNinja,espadaCuadruple,grimorio,daRules,cuchillo,navaja,
 tirachinas,molotov,roca,cuchilloCarnicero,trozoCristal,granadaFruta,lanza,punioAmericano,latigo,sableDeLuz,revolver,gasPimienta,banana,plantaVenenosa,
 espadaMadera,guadania,hoz,tridente,lapiz,ballesta,dardosVenenosos,reglaMetal,rocaPequenia,samsungGalaxy,encendedor,caniche,varitaMagica,pescado,lanzacohetes,
 llaveEspada,espadaMaestra,nokia1100,espadaIron,espadaOro,pikachu,caparazonAzul,ramoDeFlores,arcoYFlechas,mandoPlei,mandoXbox,libroMatematicas,manzana,deathNote,
-botellaDeFernet,botellaDeVino,botellaDeVodka,fuegosArtificiales,skate,motosierra,panDuro,nunchaku,cuboRubik,navajaVictorinox,kunai];
+botellaDeFernet,botellaDeVino,botellaDeVodka,fuegosArtificiales,skate,motosierra,panDuro,nunchaku,cuboRubik,navajaVictorinox,kunai,estiletes,espadaEsgrima,escopeta,agujas];
 
 //                   (nombre, id) <-- esto se va a tener que recibir de discord
 const lynn = new Jugador("lynn",1074);
@@ -91,6 +97,20 @@ const k = new Jugador("k",561);
 const yugito = new Jugador("yugito",54356);
 const draco = new Jugador("draco",5486);
 const chun = new Jugador("chun",1010);
+const lynn2 = new Jugador("lynn",10741);
+const robert2 = new Jugador("robert",156144);
+const k2 = new Jugador("k",5611);
+const yugito2 = new Jugador("yugito",543516);
+const draco2 = new Jugador("draco",54861);
+const chun2 = new Jugador("chun",10101);
+const lynn3 = new Jugador("lynn",107411);
+const robert3 = new Jugador("robert",1561344);
+const k3 = new Jugador("k",55611);
+const yugito3 = new Jugador("yugito",5643516);
+const draco3 = new Jugador("draco",548761);
+const chun3 = new Jugador("chun",101801);
+const lynn4 = new Jugador("lynn",1067411);
+const robert4 = new Jugador("robert",15613474);
 
 var maxHP = 1000;
 var teams = [];
@@ -216,11 +236,23 @@ let esDelMismoTeam = (jugadora,jugadorb)=>{
 }
 
 let buscarJugador = (jugador,jugadores)=>{    //el jugador del parametro es el q ataca, y esta funcion retorna otro jugador vivo 
-    shuffleJugadores(jugadores);                //falta verificar que sea de otro equipo
+    shuffleJugadores(jugadores);                
     let victima;
     for(let i=0;i<jugadores.length;i++){
         victima = jugadores[i];
         if((victima.alive==1) && victima.id != jugador.id){
+            return victima;
+        }
+    }
+return null;
+}
+
+let buscarJugadorOtroTeam = (jugador,jugadores)=>{    //el jugador del parametro es el q ataca, y esta funcion retorna otro jugador vivo DE OTRO TEAM
+    shuffleJugadores(jugadores);                
+    let victima;
+    for(let i=0;i<jugadores.length;i++){
+        victima = jugadores[i];
+        if((victima.alive==1) && (victima.id != jugador.id) && (victima.team.id != jugador.team.id)){
             return victima;
         }
     }
@@ -261,6 +293,10 @@ let encontrarGanador = (jugadores)=>{
 }
 
 let recibirJugadores = ()=>{
+    //20
+    //let jugadores = [lynn, yugito, robert, k, draco, chun,lynn2, yugito2, robert2, k2, draco2, chun2,lynn3, yugito3, robert3, k3, draco3, chun3,lynn4,robert4];
+    
+    //6
     let jugadores = [lynn, yugito, robert, k, draco, chun];
     return jugadores;
 }
@@ -468,7 +504,7 @@ let eventoAleatorio2 = (jugador, players)=>{
     while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 };
 
-let ataqueEspecificoxCategoria = (jugador, victima)=>{
+let ataqueEspecificoxCategoria1 = (jugador, victima)=>{
     console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
     let danio = jugador.getArma()["danio"] + danioExtra(1,500);
     victima.setHP(Math.max(0,victima.getHP() - danio)); //le quita de vida el danio base de su arma. si queda en negativo pone 0
@@ -486,6 +522,14 @@ let ataqueEspecificoxCategoria = (jugador, victima)=>{
         console.log("\x1b[90m%s\x1b[0m",`Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
     }
 };
+
+let ataqueEspecificoxCategoria = (jugador, players, victima)=>{
+    
+    eventosAtaqueEspecificoxCategoria[0](jugador, players, victima); //le paso una COPIA, luego buscar la victima original
+
+};
+
+
 
 let ataqueGenericoConArma1 = (jugador, victima)=>{
     console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
@@ -544,19 +588,25 @@ while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna 
 
 // ronda de loot
 let rondaLoot = (jugador, players)=>{
+        //let armaVieja = jugador.getArma();
         let probabilidad = Math.random();
         if(probabilidad < 0.2){
             eventoAleatorio1(jugador, players);
         }else{
             let arma = generarArma();
-            // jugador.setArma(arma);  //ya le pongo el arma aca
+            
             if(arma.categoria){
                 lootEspecificoxCategoria(jugador, arma);
             }else{
                 lootGenerico(jugador, arma, players);
             }
+
+            /*if(armaVieja != null && armaVieja.danio > arma.danio){
+                console.log("\x1b[33m%s\x1b[0m",` Como el arma anterior hacía más daño, ${jugador.getNombre()} decide no cambiarla.`);
+                jugador.setArma(armaVieja);
+            }*/
         }
-    };
+};
 
 // ronda de ataque
 let rondaAtaque = (jugador, jugadores, cantidadConVida)=>{
@@ -566,14 +616,15 @@ let rondaAtaque = (jugador, jugadores, cantidadConVida)=>{
              if(probabilidad < 0.2){
                 eventoAleatorio2(jugador, jugadores);
              }else{
-            let victima = buscarJugador(jugador,jugadores);
+            let victima = buscarJugadorOtroTeam(jugador,jugadores);
+            if(victima == null){console.log("hay problemas");}
               if(!jugador.arma){
                     ataqueGenericoSinArma(jugador,jugadores,victima);
                 }else{
                     if(jugador.arma.categoria){
                         let probabilidadEspecial = Math.random();
                         if(probabilidadEspecial < 0.4){
-                            ataqueEspecificoxCategoria(jugador,victima);
+                            ataqueEspecificoxCategoria(jugador,jugadores,victima);
                         }else{
                             ataqueGenericoConArma(jugador,jugadores,victima);
                         }
@@ -721,5 +772,6 @@ export {
     pronombreElLaLosLas,
     pluralS,
     pronombreUnUnaUnosUnas,
-    pronombreOAOsAs
+    pronombreOAOsAs,
+    buscarJugadorOtroTeam
 }
