@@ -10,31 +10,41 @@ class Arma{
 };
 
 class Jugador{
-	constructor(nombre,id){
+	constructor(nombre,id,foto){
 		this.nombre = nombre;
 		this.alive = 1;
-        this.arma = null;
-        this.id = id;
-        this.hp = 1000;
-        this.team = null;
-        this.kills = 0;
+    this.arma = null;
+    this.id = id;
+    this.hp = 1000;
+    this.team = null;
+    this.kills = 0;
+    this.foto = foto;
+    this.tieneOtraFoto = null;
 	}
 
-    setArma(arma){
+  setArma(arma){
 		this.arma= arma;
 	}
 
-    setTeam(team){
+  setTeam(team){
 		this.team=team;
 	}
 
-    setHP(hp){
-        this.hp=hp;
-    }
+  setHP(hp){
+      this.hp=hp;
+  }
+
+  setFoto(foto){
+    this.foto = foto;
+  }
+  
+  setNombre(nombre){
+      this.nombre = nombre;
+  }
 
     getArma(){
 		return this.arma;
-	}
+	  }
 
     getNombre(){
         return this.nombre;
@@ -42,6 +52,10 @@ class Jugador{
 
     getHP(){
         return this.hp;
+    }
+  
+    getAlive(){
+        return this.alive;
     }
 
     getID(){
@@ -55,6 +69,34 @@ class Jugador{
     getTeam(){
         return this.team;
     }
+  
+    getFoto(){
+      return this.foto;
+    }
+  
+    getTieneOtraFoto(){
+      return this.tieneOtraFoto;
+    }
+}
+
+class JugadorFake{
+  constructor(nombre,foto){
+    this.nombre = nombre;
+    this.foto = foto;
+    this.yaUnido = 0;
+  }
+  
+  getNombre(){
+    return this.nombre;
+  }
+  
+  getFoto(){
+    return this.foto;
+  }
+  
+  getYaUnido(){
+    return this.yaUnido;
+  }
 }
 
 class Team{
@@ -63,6 +105,7 @@ class Team{
         this.player1 = null;
         this.player2 = null;
         this.player3 = null;
+        this.name = null;
 	}
 
     set setPlayer1(player){
@@ -83,6 +126,10 @@ class Team{
 
     getID(){
         return this.id;
+    }
+  
+    getName(){
+        return this.name;
     }
 
     getPlayer1(){
@@ -122,11 +169,51 @@ class Team{
         }    
         return nombres;
     }
+  
+    quienesVivos(){
+      let quienes = "";
+        if(this.getPlayer1()!=null && this.estaVivo1()){
+            quienes = quienes.concat("1");
+        }    
+        if(this.getPlayer2()!=null && this.estaVivo2()){  
+            quienes = quienes.concat("2");
+        }    
+        if(this.getPlayer3()!=null && this.estaVivo3()){
+            quienes = quienes.concat("3");
+        }
+      console.log(quienes);
+      return quienes;
+    }
+  
+    esTeamDe1(){
+        if(this.getPlayer2() == null && this.getPlayer3() == null){
+          return 1;
+        }else{
+          return 0;
+        }
+    }
+  
+    esTeamDe2(){
+      if(this.getPlayer2() != null && this.getPlayer3() == null){
+        return 1;
+      }else{
+        return 0;
+      }
+    }
+  
+    esTeamDe3(){
+      if(this.getPlayer2() != null && this.getPlayer3() != null){
+        return 1;
+      }else{
+        return 0;
+      }
+    }
 
 }
 
 export {
     Arma,
     Jugador,
-    Team
+    Team,
+    JugadorFake
 };

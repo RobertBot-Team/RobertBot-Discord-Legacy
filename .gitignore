@@ -1,0 +1,10 @@
+.cache
+.config
+.data
+node_modules
+.env
+.node-gyp
+.bash_history
+.glitch-assets
+pnpm-debug.log
+shrinkwrap.yaml

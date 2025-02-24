@@ -1,55 +1,90 @@
-import {Arma, Team, Jugador} from "./clases.js";
-import { eventosAleatorios1 } from "./eventosAleatorios1.js";
-import { eventosAleatorios2 } from "./eventosAleatorios2.js"
-import { eventoslootEspecificoxCategoria } from "./lootEspecificoxCategoria.js"
-import { eventosAtaqueEspecificoxCategoria } from "./ataqueEspecificoxCategoria.js"
-import { eventosLootGenerico } from "./lootGenerico.js";
-import { ataquesGenericosSinArma } from "./ataqueGenericoSinArma.js"
-import { ataquesGenericosConArma } from "./ataqueGenericoConArma.js"
+import 'dotenv/config';
+import fetch from 'node-fetch';
+import { verifyKey } from 'discord-interactions';
+import { 
+  Arma,
+  Jugador,
+  Team,
+  JugadorFake
+} from "./hg/clases.js";
+import {
+  createCanvas, 
+  loadImage, 
+  GlobalFonts
+} from "@napi-rs/canvas";
+import { AttachmentBuilder } from "discord.js";
+import { eventosLootGenerico } from "./hg/lootGenerico.js";
+import { eventosAleatorios1 } from "./hg/eventosAleatorios1.js";
+import { eventosAleatorios2 } from "./hg/eventosAleatorios2.js";
+import { eventoslootEspecificoxCategoria } from "./hg/lootEspecificoxCategoria.js"
+import { eventosLootArmaEstetica } from "./hg/lootArmasEsteticas.js"
+import { eventosAtaqueEspecificoxCategoria } from "./hg/ataqueEspecificoxCategoria.js"
+import { ataquesGenericosConArma } from "./hg/ataqueGenericoConArma.js"
+import { ataquesGenericosSinArma } from "./hg/ataqueGenericoSinArma.js"
+import { EmbedBuilder } from "discord.js";
+import bignum from 'bignum';
+import fs from 'fs';
+import readline from 'readline';
+import nthline from 'nthline';
+import {
+  join, 
+  dirname
+} from 'path';
+import { fileURLToPath } from 'url';
+import { returnClient } from './app.js';
+import { buscarPorID } from './hg/utils.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+var contador = 0;
+var maxHP = 1000;
+var teams = [];
+
 
 //                     (nombre, categoria, daño base, usos, pronombre, pluralidad)
 const pistola = new Arma("pistola","pistola",190,3,"f","");
 const granada = new Arma("granada","explosivos",480,1,"f","");
 const guitarra = new Arma("guitarra","rompibles",100,1,"f","");
 const alfiler = new Arma("alfiler","alfiler",10,1,"m","");
-const martilloThor = new Arma("martillo de Thor","",500,2,"m","");
-const bomba = new Arma("bomba","",250,1,"f","");
+const martilloThor = new Arma("martillo de Thor","martillo de Thor",500,2,"m","");
+const bomba = new Arma("bomba","explosivos",250,1,"f","");
 const jeringuilla = new Arma("jeringuilla usada","jeringuilla",50,6,"f","");
 const bate = new Arma("bate de beisbol","rompibles",85,6,"m","");
 const jericho = new Arma("Jericho 941-R","pistola",380,4,"f","");
 const estrellasNinja = new Arma("estrellas ninja","estrellas",100,3,"f","p");
 const espadaCuadruple = new Arma("espada cuádruple","espada",300,2,"f","");
 const grimorio = new Arma("grimorio antiguo","grimorio",300,1,"m","");
-const daRules = new Arma("da rules","",100,1,"m","");
+const daRules = new Arma("da rules","da rules",100,1,"m","");
 const cuchillo = new Arma("cuchillo","arma blanca",50,4,"m","");
 const navaja = new Arma("navaja","arma blanca",66,5,"f","");
 const navajaVictorinox = new Arma("Navaja Suiza Multiusos Victorinox Climber 5000 ++","arma blanca",66,5,"f","");
-const tirachinas = new Arma("tirachinas","",75,15,"f","");
+const tirachinas = new Arma("tirachinas","tirachinas",75,15,"f","");
 const molotov = new Arma("molotov","explosivos",275,1,"f","");
 const roca = new Arma("roca","roca",100,1,"f","");
 const cuchilloCarnicero = new Arma("cuchillo de carnicero","arma blanca",159,4,"m","");
 const trozoCristal = new Arma("trozo de cristal","arma blanca",70,2,"m","");
 const granadaFruta = new Arma("granada (pero la fruta)","granada fruta",10,1,"f","");
-const lanza = new Arma("lanza","",110,2,"f","");
-const punioAmericano = new Arma("puño americano","",100,9,"m","");
-const latigo = new Arma("latigo","",50,6,"m","");
+const lanza = new Arma("lanza","lanza",110,2,"f","");
+const punioAmericano = new Arma("puño americano","arma blanca",100,9,"m","");
+const latigo = new Arma("látigo","látigo",50,6,"m","");
 const sableDeLuz = new Arma("sable de luz","sable de luz",250,4,"m","");
 const revolver = new Arma("revolver","pistola",310,4,"m","");
-const gasPimienta = new Arma("gas pimienta","",30,8,"m","");
-const banana = new Arma("banana","",5,1,"f","");
+const gasPimienta = new Arma("gas pimienta","gas pimienta",30,8,"m","");
+const banana = new Arma("banana","banana",5,1,"f","");
 const plantaVenenosa = new Arma("planta venenosa","veneno",90,1,"f","");
 const espadaMadera = new Arma("espada de madera", "espada",80,2,"f","");
 const guadania = new Arma("guadaña","espada",250,3,"f","");
-const hoz = new Arma("hoz","espada",165,2,"f","");
-const tridente = new Arma("tridente demoníaco","",300,3,"m","");
-const lapiz = new Arma("lapiz","arma blanca",10,1,"m","");
+const azada = new Arma("azada","espada",165,2,"f","");
+const tridente = new Arma("tridente demoníaco","tridente demoníaco",300,3,"m","");
+const lapiz = new Arma("lápiz","arma blanca",10,1,"m","");
 const ballesta = new Arma("ballesta", "arco y flecha",100,4,"f","");
 const dardosVenenosos = new Arma("dardos venenosos","veneno",175,3,"m","p");
 const reglaMetal = new Arma("regla de metal","regla",130,2,"f","");
-const rocaPequenia = new Arma("roca pequeña","",30,1,"f","");
+const rocaPequenia = new Arma("roca pequeña","roca pequeña",30,1,"f","");
 const samsungGalaxy = new Arma("Samsung Galaxy Note 7","explosivos",320,1,"m","");
 const encendedor = new Arma("encendedor","encendedor",15,3,"m","");
-const caniche = new Arma("caniche","",80,2,"m","");
+const caniche = new Arma("caniche","caniche",80,2,"m","");
 const varitaMagica = new Arma("varita mágica","varita magica",20,3,"f","");
 const pescado = new Arma("pescado congelado","espada",70,1,"m","");
 const lanzacohetes = new Arma("lanzacohetes","lanzacohetes",150,3,"m","");
@@ -60,7 +95,7 @@ const espadaIron = new Arma("espada de iron","espada",100,3,"f","");
 const espadaOro = new Arma("espada de oro","espada",80,1,"f","");
 const pikachu = new Arma("pikachu","pikachu",150,3,"m","");
 const caparazonAzul = new Arma("caparazón azul","caparazon",35,1,"m","");
-const ramoDeFlores = new Arma("ramo de flores","",35,2,"m","");
+const ramoDeFlores = new Arma("ramo de flores","ramo de flores",35,2,"m","");
 const arcoYFlechas = new Arma("arco y flechas","arco y flecha",80,7,"m","");
 const mandoPlei = new Arma("mando de plei","mando",50,1,"m","");
 const mandoXbox = new Arma("mando de xbox","mando",50,1,"m","");
@@ -81,114 +116,281 @@ const estiletes = new Arma("par de estiletes de color dorado","arma blanca",127,
 const espadaEsgrima = new Arma("espada de esgrima","espada",90,2,"f","");
 const escopeta = new Arma("escopeta","pistola",487,2,"f","");
 const agujas = new Arma("agujas","arma blanca",50,10,"f","p");
+const soulEdge = new Arma("Soul Edge","espada",200,4,"f","");
+const serrucho = new Arma("serrucho","serrucho",90,3,"m","");
+const porra = new Arma("porra de policía","porra de policía",90,6,"f","");
+const kusarigama = new Arma("kusarigama","kusarigama",112,7,"f","");
+const alabarda = new Arma("alabarda","espada",109,4,"f","");
+const tijeras = new Arma("tijeras","tijeras",25,2,"f","p");
+const espadaTijera = new Arma("espada tijera color rojo","espada",350,4,"f","");
+const globoConfeti = new Arma("globo con confeti","globo con confeti",3,1,"m","");
+const senketsu = new Arma("Senketsu","senketsu",500,3,"m","");
+const escoba = new Arma("escoba","escoba",75,4,"f","");
+const plumaDeAve = new Arma("pluma de ave","plumaDeAve",1,1,"f","");
+const taser = new Arma("taser","taser",90,5,"m","");
+const tetaDePlastico = new Arma("teta de plástico","teta de plástico",10,2,"f","");
+const jeringuillaConVirus = new Arma("jeringuilla con un virus","jeringuilla",199,1,"f","");
+const testEmbarazo = new Arma("test de embarazo","test de embarazo",30,1,"m","");
+const carnetConducir = new Arma("carnet de conducir","carnet de conducir",2,1,"m","");
+const misil = new Arma("misil","misil",777,1,"m","");
+const abanico = new Arma("abanico","abanico",19,3,"m","");
+const ganzuas = new Arma("ganzúas","ganzúas",62,5,"f","p");
+const tijerasJardineria = new Arma("tijeras de jardinería","tijeras de jardineria",89,6,"f","p");
+const craneo = new Arma("cráneo humano","cráneo humano",72,2,"m","");
+const tenedor = new Arma("tenedor","tenedor",20,4,"m","");
+const repelenteTiburones = new Arma("repelente de tiburones","repelente de tiburones",90,2,"m","");
+const bumeran = new Arma("bumeran","bumeran",62,6,"m","");
+const huevo = new Arma("huevo","huevo",27,1,"m","");
+const taco = new Arma("taco","taco",11,1,"m","");
+const tacoPool = new Arma("taco de pool","taco de pool",72,3,"m","");
+const estaca = new Arma("estaca de madera","arma blanca",70,2,"f","");
+const cuerda = new Arma("cuerda","cuerda",30,3,"f","");
+const martillo = new Arma("martillo","martillo",100,5,"m","");
+const machete = new Arma("machete","arma blanca",225,4,"m","");
+const paloGolf = new Arma("palo de golf","palo de golf",72,3,"m","");
+const punial = new Arma("puñal","arma blanca",125,5,"m","");
+const linterna = new Arma("linterna","linterna",12,2,"f","");
+const palillos = new Arma("palillos chinos","palillos chinos",51,1,"m","p");
+const excalibur = new Arma("Excalibur","espada",415,2,"f","");
+const pizzaconpina = new Arma("pizza con piña","pizza con piña",4,1,"f","");
+const pistolaBengalas = new Arma("pistola de bengalas", "pistola", 230,3,"f","");
+const pistolaPesada = new Arma("pistola pesada", "pistola", 400,2,"f","");
+const subfusil = new Arma("subfusil", "pistola", 275,5,"m","");
+const fusilAsalto = new Arma("fusil de asalto", "pistola", 290,5,"m","");
+const ametralladora = new Arma("ametralladora", "pistola", 190,8,"f","");
+const rifle = new Arma("rifle", "pistola", 510,2,"m","");
+const francotirador = new Arma("fusil de francotirador", "pistola", 750,2,"m","");
+const mosquete = new Arma("mosquete", "pistola", 80,2,"m","");
+const lanzagranadas = new Arma("lanzagranadas","lanzagranadas",700,2,"m","");
+const minigun = new Arma("minigun","pistola",475,3,"f","");
+const canion = new Arma("cañón","canion", 623,1,"m","");
+const gasLacrimogeno = new Arma("gas lacrimógeno","gas lacrimogeno",80,4,"m","");
+const nerf = new Arma("NERF","pistola",55,4,"f","");
+const cucco = new Arma("cucco", "cucco", 40, 2, "m", "");
+const redQueen = new Arma("espada Red Queen","espada",345,3,"f","");
+const aspaVentilador = new Arma("aspa de ventilador", "aspa de ventilador", 100, 2, "m", "");
+const rama = new Arma("rama", "rama", 30, 3, "f", "");
+const cadenas = new Arma("cadenas", "cadenas", 120, 2, "f", "p");
+const esposas = new Arma("esposas", "esposas", 20, 3, "f", "p");
+const ringBlade = new Arma("ring blade","ring blade",195,5,"f","");
+const espadaOndulada = new Arma("espada ondulada","espada",223,5,"f","");
+const plumero = new Arma("plumero", "plumero", 40, 3, "m", "");
+const aspiradora = new Arma("aspiradora", "aspiradora", 170, 2, "f", "");
+const iPhone13 = new Arma("iPhone 13","iPhone 13",16,1,"m","");
+const crucifijo = new Arma("crucifijo","crucifijo",5,10,"m","");
+const bolaBoliche = new Arma("bola de boliche","bola de boliche",70,2,"f","");
+const terranator = new Arma("Terranator","terranator",183,2,"m","");
+const microfono = new Arma("micrófono", "micrófono", 60, 3, "m", "");
+const ps5 = new Arma("PS5","ps5",71,1,"f","");
+const chancla = new Arma("chancla","chancla",640,2,"f","");
+const cinturon = new Arma("cinturón","cinturón",99,5,"m","");
+const caniaPescar = new Arma("caña de pescar","cania",50,2,"f","");
+const rolloPapel = new Arma("rollo de papel higiénico","rollo de papel higiénico",2,1,"m","");
+const fazerblaster = new Arma("fazerblaster","fazerblaster", 30, 3, "m", "");
+const boina = new Arma("boina con cuchillas","boina con cuchillas",88,7,"f","");
+const resorte = new Arma("resorte", "resorte", 20, 5, "m", "");
+const dentadura = new Arma("dentadura","dentadura", 8, 2, "f", "");
+const piernaProtesica = new Arma("pierna protésica", "pierna", 100, 2, "f", "");
+const teclado = new Arma("teclado gaymer","gaymer",52,2,"m","");
+const fundaCelular = new Arma("funda de celular", "funda de celular", 10, 5, "f", "");
+const lupa = new Arma("lupa","lupa",12,1,"f","");
+const banjo = new Arma("banjo", "rompibles", 130, 3, "m", "");
+const telescopio = new Arma("telescopio","telescopio",121,1,"m","");
+const bongos = new Arma("bongos", "rompibles", 100, 4, "m", "p");
+const ak47 = new Arma("AK-47", "pistola", 190, 7, "f", "");
+const tarjetaCredito = new Arma("tarjeta de crédito","tarjeta",3,1,"f","");
+const minaProximidad = new Arma("mina de proximidad", "explosivos", 250, 1, "f", "");
+const tentaculo = new Arma("tentáculo de pulpo","tentaculo",18,1,"m","");
+const tnt = new Arma("TNT", "explosivos", 300, 1, "m", "");
+const lanzaVenenosa = new Arma("lanza venenosa", "veneno",189,2,"f","");
+const ladrillo = new Arma("ladrillo", "ladrillo", 150, 2, "m", "");
+const nokia3300 = new Arma("nokia 3300","nokia",999,1,"m","");
+const colmena = new Arma("colmena", "colmena", 60, 2, "f", "");
+const ppp = new Arma("poderosa pimienta peruana", "poderosa pimienta peruana", 100, 3, "f", "");
+const manifesto = new Arma("Manifiesto comunista", "manifesto", 27, 3, "m", "");
+const frf2 = new Arma("sniper FR F2", "pistola", 360, 2, "m", "");
+const oniball = new Arma("oniball", "oniball",89,6,"f","");
+const banhammer = new Arma("banhammer","banhammer",150,6,"m","");
+const lancer = new Arma("lancer de gears of war", "pistola", 120, 2, "m", "");
+const purh2 = new Arma("PGM Ultima Ratio Hecate II", "pistola", 520, 1, "m", "");
+const nambre = new Arma("nambre","nambre",45,2,"m","");
+const zweihander = new Arma("Zweihander", "espada", 235, 4, "f", "");
+const lanzallamas = new Arma("lanzallamas", "lanzallamas", 150, 2, "m", "");
+const viejaConfiable = new Arma("vieja confiable","vieja", 470, 1, "f", "");
+const pepino = new Arma("pepino", "pepino", 35, 3, "m", "");
+const empanada = new Arma("empanada", "empanada", 100, 5, "f", "");
+const prensa = new Arma("prensa hidráulica", "prensa", 325, 5, "f", "");
+const fotocopiadora = new Arma("fotocopiadora", "fotocopiadora",112,1,"f","");
+const uchigatana = new Arma("uchigatana", "espada", 140, 3, "f", "");
+const tableta = new Arma("tableta de dibujo", "tableta", 31, 8, "f", "");
+const contrato = new Arma("Contrato Virtuoso", "espada", 140, 3, "f", "");
+const zanpakuto = new Arma("Zanpakuto", "espada", 250, 3, "f", "");
+const claymore = new Arma("claymore", "espada", 200, 2, "m", "");
+const masamune = new Arma("Masamune", "espada", 363, 1, "f", "");
+const espadaTiempo = new Arma("Espada del Tiempo", "espada", 150, 3, "f", "");
+const figuraAnime = new Arma("figura de anime", "figura de anime", 40, 3, "f", "");
+const hojasAzzinoth = new Arma("hojas gemelas de Azzinoth", "gemelas", 182, 6, "f", "p");
+const frostmourne = new Arma("Frostmourne", "espada", 165, 3, "f", "");
+const espadaFuego = new Arma("espada de fuego", "espada", 150, 3, "f", "");
+const riosDeSangre = new Arma("espada Ríos de Sangre", "espada", 200, 3, "f", "");
+const chun = new Arma("chunchunmaru", "espada", 200, 2, "f", "");
+const m4a1 = new Arma("M4A1", "pistola", 245, 6, "f", "");
+const escopetaDoble = new Arma("escopeta de doble cañón", "pistola", 535, 4, "f", "");
+const dragonSlayer = new Arma("dragon slayer", "espada", 300, 2, "f", "");
+const cetroMegumin = new Arma("cetro de Megumin", "megumin", 100, 5, "m", "");
+const manipuladorCampos = new Arma("manipulador de campos de energía oscura", "manipulador", 275, 2, "m", "");
+const makoKatana = new Arma("Mako Katana", "espada", 150, 3, "f", "");
+const kokoroWatari = new Arma("Kokoro Watari", "espada", 245, 2, "f", "");
+const hanJian = new Arma("espada Han Jian", "espada", 132, 4, "f", "");
+const dominator = new Arma("Dominator", "pistola", 200, 2, "f", "");
+const emperor = new Arma("Emperor", "pistola", 279, 4, "f", "");
+const cetroChitauri = new Arma("cetro chitauri", "chitauri", 165, 2, "m", "");
+const pelota = new Arma("pelota de fulbo", "pelota de fulbo", 85, 3, "f", "");
+const mancuerna = new Arma("mancuerna", "mancuerna", 120, 2, "f", "");
+const caneria = new Arma("cañería", "", 72, 3, "f", "");
+const tuboPVC = new Arma("tubo de PVC", "", 35, 2, "m", "");
 
-
+//armas esteticas (no se guardan en el player)
+const bigote = new Arma("bigote falso","",0,1,"m","");
+const gorrito = new Arma("gorrito de lana","",0,1,"m","");
+const rei = new Arma("Rei chiquita","",0,1,"f","");
+const sombrero = new Arma("sombrero mexicano","",0,1,"m","");
+const corona = new Arma("corona","",0,1,"f","");
+const trajeFurro = new Arma("traje de furro","",0,1,"m","");
+const pokeplatino = new Arma("copia del pokemon platino", "",0,1,"f","");
+const fumo = new Arma("fumo", "", 0,1,"m","");
     
 var armas = [pistola,granada,guitarra,alfiler,martilloThor,bomba,jeringuilla,bate,jericho,estrellasNinja,espadaCuadruple,grimorio,daRules,cuchillo,navaja,
 tirachinas,molotov,roca,cuchilloCarnicero,trozoCristal,granadaFruta,lanza,punioAmericano,latigo,sableDeLuz,revolver,gasPimienta,banana,plantaVenenosa,
-espadaMadera,guadania,hoz,tridente,lapiz,ballesta,dardosVenenosos,reglaMetal,rocaPequenia,samsungGalaxy,encendedor,caniche,varitaMagica,pescado,lanzacohetes,
+espadaMadera,guadania,azada,tridente,lapiz,ballesta,dardosVenenosos,reglaMetal,rocaPequenia,samsungGalaxy,encendedor,caniche,varitaMagica,pescado,lanzacohetes,
 llaveEspada,espadaMaestra,nokia1100,espadaIron,espadaOro,pikachu,caparazonAzul,ramoDeFlores,arcoYFlechas,mandoPlei,mandoXbox,libroMatematicas,manzana,deathNote,
-botellaDeFernet,botellaDeVino,botellaDeVodka,fuegosArtificiales,skate,motosierra,panDuro,nunchaku,cuboRubik,navajaVictorinox,kunai,estiletes,espadaEsgrima,escopeta,agujas];
+botellaDeFernet,botellaDeVino,botellaDeVodka,fuegosArtificiales,skate,motosierra,panDuro,nunchaku,cuboRubik,navajaVictorinox,kunai,estiletes,espadaEsgrima,escopeta,
+agujas,soulEdge,serrucho,porra,kusarigama,alabarda,tijeras,espadaTijera,globoConfeti,senketsu,escoba,plumaDeAve,taser,tetaDePlastico,jeringuillaConVirus,testEmbarazo,
+carnetConducir,misil,abanico,ganzuas,tijerasJardineria,craneo,tenedor,repelenteTiburones,bumeran,huevo,taco,tacoPool,estaca,cuerda,martillo,machete,paloGolf,punial,
+linterna,palillos,excalibur,pizzaconpina,pistolaBengalas,pistolaPesada,subfusil,fusilAsalto,ametralladora,rifle,francotirador,mosquete,lanzagranadas,minigun,canion,
+gasLacrimogeno,nerf,cucco,redQueen,aspaVentilador,rama,cadenas,esposas,ringBlade,espadaOndulada,plumero,aspiradora,iPhone13,crucifijo,bolaBoliche,terranator,microfono,
+ps5,chancla,cinturon,caniaPescar,rolloPapel,fazerblaster,boina,resorte,dentadura,piernaProtesica,teclado,fundaCelular,lupa,banjo,telescopio,bongos,ak47,tarjetaCredito,
+minaProximidad,tentaculo,tnt,lanzaVenenosa,ladrillo,nokia3300,colmena,ppp,manifesto,frf2,oniball,banhammer,lancer,purh2,nambre,zweihander,lanzallamas,viejaConfiable,pepino,
+empanada,prensa,fotocopiadora,uchigatana,tableta,contrato,zanpakuto,claymore,masamune,espadaTiempo,figuraAnime,espadaFuego,hojasAzzinoth,frostmourne,riosDeSangre,chun,m4a1,
+escopetaDoble,dragonSlayer,cetroMegumin,manipuladorCampos,makoKatana,kokoroWatari,hanJian,dominator,emperor,cetroChitauri,pelota,mancuerna,caneria,tuboPVC,
+bigote,gorrito,rei,sombrero,corona,trajeFurro,pokeplatino,fumo];
 
-//                   (nombre, id) <-- esto se va a tener que recibir de discord
-const lynn = new Jugador("lynn",1074);
-const robert = new Jugador("robert",15644);
-const k = new Jugador("k",561);
-const yugito = new Jugador("yugito",54356);
-const draco = new Jugador("draco",5486);
-const chun = new Jugador("chun",1010);
-const lynn2 = new Jugador("lynn",10741);
-const robert2 = new Jugador("robert",156144);
-const k2 = new Jugador("k",5611);
-const yugito2 = new Jugador("yugito",543516);
-const draco2 = new Jugador("draco",54861);
-const chun2 = new Jugador("chun",10101);
-const lynn3 = new Jugador("lynn",107411);
-const robert3 = new Jugador("robert",1561344);
-const k3 = new Jugador("k",55611);
-const yugito3 = new Jugador("yugito",5643516);
-const draco3 = new Jugador("draco",548761);
-const chun3 = new Jugador("chun",101801);
-const lynn4 = new Jugador("lynn",1067411);
-const robert4 = new Jugador("robert",15613474);
 
-var maxHP = 1000;
-var teams = [];
+//                               (nombre, url foto)
+const johnCena = new JugadorFake("John Cena","https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/jc512.png");
+const laRoca = new JugadorFake("La Roca","https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/thrck.png");
+const ibai = new JugadorFake("ibai","https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/ibai.png");
+const messi = new JugadorFake("Lio Messi","https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/messi.png");
+const freddy = new JugadorFake("Freddy Fazbear","https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/freddy.png");
+const bts = new JugadorFake("BTS","https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/bts.png");
+const bowser = new JugadorFake("Bowser","https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/bowser.png");
+const kim = new JugadorFake("Kim Jong-Un","https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/kim.png");
+const unRandom = new JugadorFake("un random","https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/unRandom.png");
+const spiderman = new JugadorFake("Spiderman","https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/spiderman.png");
+const chayanne = new JugadorFake("Chayanne","https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/chayanne.png");
+const shrek = new JugadorFake("Shrek", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/shrek.png");
+const nicage = new JugadorFake("Nicolas Cage", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/nicage.png");
+const keanu = new JugadorFake("Keanu Reeves", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/keanu.png");
+const knuckles = new JugadorFake("Ugandan Knuckles", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/ugandanknuckles.png");
+const terminator = new JugadorFake("Terminator", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/terminator.png");
+const dios = new JugadorFake("Dios", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/dios.png");
+const unCarpincho = new JugadorFake("un carpincho", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/unCarpincho.png");
+const elmo = new JugadorFake("Elmo", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/elmo.png");
+const batman = new JugadorFake("Batman", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/batman.png");
+const yoda = new JugadorFake("Yoda", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/yoda.png");
+const babyYoda = new JugadorFake("Baby Yoda", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/babyyoda.png");
+const tonyStark = new JugadorFake("Tony Stark", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/tonystark.png");
+const unMinion = new JugadorFake("un Minion", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/unminion.png");
+const groot = new JugadorFake("Groot", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/groot.png");
+const darthVader = new JugadorFake("Darth Vader", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/darthvader.png");
+const elBromas = new JugadorFake("El Bromas", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/elbromas.png");
+const saitama = new JugadorFake("Saitama", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/saitama.png");
+const winniepooh = new JugadorFake("Winnie Pooh", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/winnietheppoh.png");
+const gollum = new JugadorFake("Gollum", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/gollum.png");
+const powerRangers = new JugadorFake("Los Power Rangers", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/powerrangers.png");
+const bobEsponja = new JugadorFake("Bob Esponja", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/bobesponja.png");
+const elvis = new JugadorFake("Elvis Presley", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/elvis.png");
+const jackSparrow = new JugadorFake("Jack Sparrow", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/sparrow.png");
+const gandalf = new JugadorFake("Gandalf", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/gandalf.png");
+const walterWhite = new JugadorFake("Walter White", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/walterwhite.png");
+const matt = new JugadorFake("Matt", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/matt.png");
+const unOni = new JugadorFake("un oni", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/unoni.png");
+const masamuneJug = new JugadorFake("Masamune", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/masamune.png");
+const frozono = new JugadorFake("Frozono", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/frozono.png");
+const mesi = new JugadorFake("mesi", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/mesi.png");
+const dehecho = new JugadorFake("De hecho,", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/dehecho.png");
+const maurisio = new JugadorFake("maurisio", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/maurisio.png");
+const johnLemon = new JugadorFake("John Lemon", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/johnlemon.png");
+const njug = new JugadorFake("n", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/npic.png");
+const serval = new JugadorFake("Serval", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/serval.png");
+const floppa = new JugadorFake("Floppa", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/floppa.png");
+const julioprofe = new JugadorFake("Julioprofe", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/julioprofe.png");
+const patron = new JugadorFake("patron", "https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/patron.png")
 
-let buscarTeamDe2 = ()=>{   //retorna null si no hay teams de 2 miembros
-    let team;
-    let idTeam;
-    for(let i=0; i < teams.length; i++){
-        team = teams[i];
-        idTeam = team.getID();
-        if(team.nombresVivos().length == 2){
-            console.log(`buscarTeamDe2 devuelve ${idTeam}`);
-            return idTeam;
-        }
+var jugadoresFake = [johnCena,laRoca,ibai,messi,freddy,bts,bowser,kim,unRandom,spiderman,chayanne,shrek,nicage,
+                     keanu,knuckles,terminator,dios,unCarpincho,elmo,batman,yoda,babyYoda,tonyStark,unMinion,
+                     groot,darthVader,elBromas,saitama,winniepooh,gollum,powerRangers,bobEsponja,elvis,jackSparrow,
+                     gandalf,walterWhite,matt,unOni,masamuneJug,frozono,mesi,dehecho,maurisio,johnLemon,njug,
+                     serval,floppa,julioprofe,patron];
+
+
+
+export function VerifyDiscordRequest(clientKey) {
+  return function (req, res, buf, encoding) {
+    const signature = req.get('X-Signature-Ed25519');
+    const timestamp = req.get('X-Signature-Timestamp');
+
+    const isValidRequest = verifyKey(buf, signature, timestamp, clientKey);
+    if (!isValidRequest) {
+      res.status(401).send('Bad request signature');
+      throw new Error('Bad request signature');
     }
-    console.log(`buscarTeamDe2 no encontro team de 2`);
-    return null;
+  };
 }
 
-let imprimirTeams = (teams1 = teams)=>{
-    for(let countTeams = 0; countTeams < teams1.length; countTeams++){
-        console.log("\x1b[36m%s\x1b[0m",`TEAM ${teams1[countTeams].getID()}`);
-        if(teams1[countTeams].getPlayer1() != null){
-            if(teams1[countTeams].getPlayer1().getHP()==0){
-            console.log("\x1b[31m%s\x1b[0m",`${teams1[countTeams].getPlayer1().getNombre()} - HP: ${teams1[countTeams].getPlayer1().getHP()}`);
-            }else{
-            console.log("\x1b[36m%s\x1b[0m",`${teams1[countTeams].getPlayer1().getNombre()} - HP: ${teams1[countTeams].getPlayer1().getHP()}`);
-            }
-        }        
-        if(teams1[countTeams].getPlayer2() != null){
-            if(teams1[countTeams].getPlayer2().getHP()==0){
-            console.log("\x1b[31m%s\x1b[0m",`${teams1[countTeams].getPlayer2().getNombre()} - HP: ${teams1[countTeams].getPlayer2().getHP()}`);
-            }else{
-            console.log("\x1b[36m%s\x1b[0m",`${teams1[countTeams].getPlayer2().getNombre()} - HP: ${teams1[countTeams].getPlayer2().getHP()}`);
-            }
-        }    
-        if(teams1[countTeams].getPlayer3() != null){
-            if(teams1[countTeams].getPlayer3().getHP()==0){
-            console.log("\x1b[31m%s\x1b[0m",`${teams1[countTeams].getPlayer3().getNombre()} - HP: ${teams1[countTeams].getPlayer3().getHP()}`);
-            }
-            else{
-            console.log("\x1b[36m%s\x1b[0m",`${teams1[countTeams].getPlayer3().getNombre()} - HP: ${teams1[countTeams].getPlayer3().getHP()}`);                
-            }
-        }    
-        console.log(``);
-    }
+export async function DiscordRequest(endpoint, options) {
+  // append endpoint to root API URL
+  const url = 'https://discord.com/api/v10/' + endpoint;
+  // Stringify payloads
+  if (options.body) options.body = JSON.stringify(options.body);
+  // Use node-fetch to make requests
+  const res = await fetch(url, {
+    headers: {
+      Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+      'Content-Type': 'application/json; charset=UTF-8',
+      'User-Agent': 'DiscordBot (https://github.com/discord/discord-example-app, 1.0.0)',
+    },
+    ...options
+  });
+  // throw API errors
+  if (!res.ok) {
+    const data = await res.json();
+    console.log(res.status);
+    throw new Error(JSON.stringify(data));
+  }
+  // return original response
+  return res;
 }
 
+// Simple method that returns a random emoji from list
+export function getRandomEmoji() {
+  const emojiList = ['😭','😄','😌','🤓','😎','😤','🤖','😶‍🌫️','🌏','📸','💿','👋','🌊','✨','hdp'];
+  return emojiList[Math.floor(Math.random() * emojiList.length)];
+}
 
-let generarArma = ()=>{
-    var rand = parseInt(Math.random()*armas.length);
-    //console.log(`%c${JSON.stringify(armas[rand])}`,"color:orange");
-
-    //return armas[rand];
-    return JSON.parse(JSON.stringify(armas[rand]));
+export function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 
-let danioExtra = (min,max)=>{
-    let danio = Math.floor(Math.random() * (max - min + 1) + min)
-    console.log("\x1b[90m%s\x1b[0m",`${danio} de danio extra`);
-    return danio;
-}
 
-let porcentajeDeVidaRandom = (min,max)=>{
-    let vida = Math.floor(Math.random() * (max - min + 1) + min)
-    console.log("\x1b[90m%s\x1b[0m",`${vida} de vida`);
-    return vida;
-}
+// funciones del juego //
 
-let randomSelector = (min,max)=>{
-    let selected = Math.floor(Math.random() * (max - min + 1) + min)
-    console.log("\x1b[90m%s\x1b[0m",`${selected} selected`);
-    return selected;
-}
+/*export function limpiarPlayers(players){
+  players = [];
+}*/
 
-
-let calcularVivos = (jugadores)=>{
+export function calcularVivos (jugadores) {
     let cantConVida = 0;
     let player;
     for(let m=0; m<jugadores.length; m++){
@@ -200,7 +402,1091 @@ let calcularVivos = (jugadores)=>{
     return cantConVida;
 }
 
-let copiarJugadores = (jugadores)=>{
+export function agregarJugador (res, jugador, players) {
+    if (!(players.some(j => j.id == jugador.id))){
+//    if (1){
+    players.push(jugador);
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
+export function funcionEventos(){
+  let arrayEventos = [1,2,3,-1];  //simula 3 eventos, termina la partida, y a la 4ta iteración devuelve un -1
+  let resultado = arrayEventos[contador];
+  contador++;
+  return resultado;
+}
+
+export function createObject(evento, names, id, foto, hp, danio, extra){
+  const json = {
+    evento: evento,
+    names: names,
+    id: id,
+    foto: foto,
+    hp: hp,
+    danioRecibido: danio,
+    extra: extra
+  }
+  return json
+}
+
+export function exampleEmbed(channel){
+  //0x0099FF
+  const exampleEmbed = new EmbedBuilder()
+	.setColor(randomHexColor())
+	.setTitle('Some title')
+	.setURL('https://discord.js.org/')
+	.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
+	.setDescription('Some description here')
+	.setThumbnail('https://i.imgur.com/AfFp7pu.png')
+	.addFields(
+		{ name: 'Regular field title', value: "<:peekliz:977705940319096854>" },
+		{ name: '\u200B', value: '\u200B' },
+		{ name: 'Inline field title', value: 'Some value here', inline: true },
+		{ name: 'Inline field title', value: 'Some value here', inline: true },
+	)
+	.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
+	.setImage('https://i.imgur.com/AfFp7pu.png')
+	.setTimestamp()
+	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+
+channel.send({ embeds: [exampleEmbed] });
+}
+
+export function funcionRetornaJson(){
+  //console.log(`En la funcion del json`);
+  const json = {
+    evento: function(){return `${this.names[0]} ayuda a ${this.names[1]} a atacar a ${this.names[2]}`},
+    names: ["jugador1", "jugador2", "jugador3"],
+    id: ["2311", "456", "456145"],
+    foto: ["47458465", "4189465", "454880"],
+    hp: ["250","999","1000"],
+    danioRecibido: ["0","0","280"],
+    };  
+  
+  if(contador === 0){
+    contador++;
+    //console.log(contador);
+    return json;
+  }
+  else{
+    //console.log(contador);
+    return -1;
+  }
+
+}
+
+export function reiniciarContador(){
+  contador = 0;
+  console.log("Reiniciando contador...");
+}
+
+export function limpiarTeams(){
+  teams = [];
+  console.log("Limpiando teams...")
+}
+
+export function reiniciarJugadoresFake(){
+  let jugador;
+  for(let i=0; i<jugadoresFake.length; i++){
+    jugador = jugadoresFake[i];
+    jugador.yaUnido = 0;
+  }  
+  console.log('Reiniciando jugadores fake...')
+}
+    
+
+export function randomHexColor(){
+   var letters = "0123456789ABCDEF";
+      
+    // html color code starts with #
+    var color = '#';
+      
+    // generating 6 times as HTML color code consist
+    // of 6 letter or digits
+    for (var i = 0; i < 6; i++)
+    color += letters[(Math.floor(Math.random() * 16))];
+  var hex = parseInt(color.replace(/^#/, ''), 16);
+  
+  return hex;
+}
+
+export function mostrarEvento1(resultado){
+  
+  if(resultado != -1){return `Soy el evento ${resultado}`;}
+  else{return `Terminó la partida.`}
+  //esta funcion mostraria el(los) console log que detallan qué sucede en el evento
+  //cosa que probablemente despues la reciba por parametro como un json
+  //y con eso haría un res.send ... para mostrarlo en un mensaje en discord
+}
+
+export function get_line(line_no, callback) {
+    var data = fs.readFileSync('./hg/archivos/adjetivos.txt', 'utf8');
+    var lines = data.split("\n");
+ 
+    if(+line_no > lines.length){
+      throw new Error('File end reached without finding line');
+    }
+ 
+    callback(null, lines[+line_no]);
+}
+
+export function get_food(line_no, callback) {
+    var data = fs.readFileSync('./hg/archivos/comidas.txt', 'utf8');
+    var lines = data.split("\n");
+ 
+    if(+line_no > lines.length){
+      throw new Error('File end reached without finding line');
+    }
+ 
+    callback(null, lines[+line_no]);
+}
+
+export async function get_lineOfFile(line_no, callback, fileName){
+    var data = fs.readFileSync(`./hg/archivos/${fileName}`, 'utf8');
+    var lines = data.split("\n");
+ 
+    if(+line_no > lines.length){
+      throw new Error('File end reached without finding line');
+    }
+ 
+    callback(null, lines[+line_no]);
+}
+
+export function leerArchivoDevolverLinea(linea){
+  var adjetivosFile = './hg/adjetivos.txt';
+  var leido = "";
+  
+   /*   var r = readline.createInterface({
+        input : fs.createReadStream(adjetivosFile)
+    });
+    r.on('line', function (text) {
+    console.log(text);
+    return text;
+    });*/
+  
+  nthline(linea, adjetivosFile)
+  .then(line => leido = line)
+
+  console.log(leido);
+  return leido;
+}
+
+let generarArma = ()=>{
+    var rand = parseInt(Math.random()*armas.length);
+    //console.log(`%c${JSON.stringify(armas[rand])}`,"color:orange");
+
+    //return armas[rand];
+    return JSON.parse(JSON.stringify(armas[rand]));
+}
+
+export function mostrarEvento(req,resultado,channel){
+  //ahora resultado es un json con arrays
+  if(resultado != -1){
+    let a = resultado.evento();
+
+    //crearImagen(req,resultado,channel);     descomentar despues
+    
+    return a;
+    
+    }
+  
+  else{return `Terminó la partida.`}
+}
+
+export function contarAtacantes(arrayLugares){
+  let contador = 0;
+  for (let element of arrayLugares) {
+  if (element == "Atacante") {
+        contador++;
+    }
+};
+  return contador;
+}
+
+export function encontrarGanador (jugadores) {
+    let ganador;
+    for (let i = 0; i < jugadores.length; i++) {
+        ganador = jugadores[i];
+        if(ganador.alive == 1){return ganador};
+    }
+    return null;
+}
+
+let randomFondo = ()=>{
+  let fondos = ['https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo1.jpg?v=1682525176619',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo2.jpg?v=1682525175861',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo3.jpg?v=1682525175140',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo4.jpg?v=1682572950088',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo5.jpg?v=1682572983997',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo6.jpg?v=1682572987053',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo7.jpg?v=1682572996806',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo8.jpg?v=1682572999191',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo9.jpg?v=1682573002881',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo10.jpg?v=1682573005676',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo11.jpg?v=1682573008070',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo12.jpg?v=1682573011644',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo13.jpg?v=1682573014037',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo14.jpg?v=1682573016223',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo15.png?v=1683124873711',
+                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo16.png?v=1683124872345'
+               ]
+  let fondosHalloween = [
+    'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondoHalloween1.png?v=1698703587696',
+    'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondoHalloween2.png?v=1698703658698',
+    'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondoHalloween3.png?v=1698703661751',
+    'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondoHalloween4.png?v=1698703666322',
+    'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondoHalloween5.png?v=1698703670253',
+  ]
+  
+  let fondosChoosen = fondos; //solo cambiar aqui
+  
+  let choosen = randomSelector(0,fondosChoosen.length-1);
+  
+  return fondosChoosen[choosen];
+}
+
+export async function cargarAvatar(foto,id,tieneOtraFoto,guild,players){
+  let cliente = returnClient();
+  let jugador = null;
+  let guildMember = null;
+  
+  //let players = "NO TENEMOS EL ARRAY DE PLAYERS AYUDA";
+  //console.log(`Estoy en cargarAvatar y quizas entro`);
+   if(id.length >= 5){
+    guildMember = await cliente.guilds.cache.get(guild).members.fetch(id);
+    //console.log(`el id es: ${id}`);
+    //console.log(guildMember);
+
+    //re-verificar el avatar por si cambió en mitad de la partida
+         if(guildMember.user.avatar != null){
+           if(guildMember.avatar != null){
+             jugador = buscarPorID(id,players);
+             jugador.setFoto(guildMember.avatar);
+             jugador.tieneOtraFoto = 1;
+           }else{ 
+             jugador = buscarPorID(id,players);
+             jugador.setFoto(guildMember.user.avatar);
+           }
+         }else{
+           //si tiene discriminador 0, es que ya migro al username nuevo
+           if(guildMember.user.discriminator == 0){  //esto despues va a cambiar porque lo van a quitar el 0
+             let user_id = bignum((guildMember.user.id).toString());
+             let avatar = user_id.shiftRight(22).mod(6).toString();
+             
+             //let avatar = (((user_id)>>22)%6).toString();
+             
+             jugador = buscarPorID(id,players);
+             jugador.setFoto(avatar);
+           //sino, tiene username viejo con discriminador de 4 digitos
+           }else{
+             let lastNumber = (guildMember.user.discriminator).slice(-1);
+             lastNumber = (parseInt(lastNumber)%5).toString();
+             jugador = buscarPorID(id,players);
+             jugador.setFoto(lastNumber);
+           } 
+         }
+     //console.log(jugador.getFoto());
+   }
+  
+  //console.log(guildMember);
+  let avatar;
+  if(id.length < 5){
+    //jugador fakes
+      avatar = await loadImage(`${foto}?size=1024`);
+  }else{
+    if(foto.length == 1){
+      avatar = await loadImage(`https://cdn.discordapp.com/embed/avatars/${jugador.getFoto()}.png?size=1024`);
+    }else if(tieneOtraFoto != null){
+      avatar = await loadImage(`https://cdn.discordapp.com/guilds/${guild}/users/${id}/avatars/${jugador.getFoto()}.png?size=1024`)
+    }else{
+      avatar = await loadImage(`https://cdn.discordapp.com/avatars/${id}/${jugador.getFoto()}.png?size=1024`);
+    }    
+  }
+
+  return avatar;
+}
+
+export function cantidadArmas(){
+  return armas.length;
+}
+
+async function dibujarTeam(canvas,context,team,offsetX,offsetY,guild,players){
+  let player;
+  let id;
+  let foto;
+  let name;
+  let avatar;
+  //console.log(team);
+  
+  //fondo azul
+  const halloweenColor = '#c34a07';
+  const classicColor =   '#414E5E';
+  context.fillStyle = classicColor;
+  context.fillRect(offsetX-15, offsetY-47, 204, 231);
+  
+  //name
+  if(team.getName() == null){
+    name = `Team ${team.getID()}`;
+  }else{
+    name = `${team.getName()}`;
+  }
+  context.font = betterApplyText(canvas, name, 24, 173);;
+  context.fillStyle = '#FFFFFF';
+  context.fillText(name, offsetX, offsetY-6-12);
+  
+  
+
+  if(team.getPlayer2() == null && team.getPlayer3() == null){  //team de 1
+    player = team.getPlayer1();
+    id = player.getID();
+    foto = player.getFoto();
+    
+    //avatar
+    avatar = await cargarAvatar(foto,id,player.getTieneOtraFoto(),guild,players);
+    context.drawImage(avatar, offsetX, offsetY, 80, 80);
+    
+    //cuadro rojo si murió
+    if(player.getAlive() != 1){
+      context.beginPath();
+      context.rect(offsetX-4, offsetY-4, 88, 88);
+      context.fillStyle = 'rgba(236,28,36,0.5)';
+      context.fill();
+    }
+  }
+  
+  if(team.getPlayer2() != null && team.getPlayer3() == null){  //team de 2
+    //player1
+    player = team.getPlayer1();
+    id = player.getID();
+    foto = player.getFoto();
+    
+    //avatar
+    avatar = await cargarAvatar(foto,id,player.getTieneOtraFoto(),guild,players);
+    context.drawImage(avatar, offsetX, offsetY, 80, 80);
+    
+    //cuadro rojo si murió
+    if(player.getAlive() != 1){
+      context.beginPath();
+      context.rect(offsetX-4, offsetY-4, 88, 88);
+      context.fillStyle = 'rgba(236,28,36,0.5)';
+      context.fill();
+    }
+    
+    //player2
+    player = team.getPlayer2();
+    id = player.getID();
+    foto = player.getFoto();
+    
+    //avatar
+    avatar = await cargarAvatar(foto,id,player.getTieneOtraFoto(),guild,players);
+    context.drawImage(avatar, offsetX+80+14, offsetY, 80, 80);
+    
+    //cuadro rojo si murió
+    if(player.getAlive() != 1){
+      context.beginPath();
+      context.rect(offsetX+80+14-4, offsetY-4, 88, 88);
+      context.fillStyle = 'rgba(236,28,36,0.5)';
+      context.fill();
+    }
+  }
+  
+  if(team.getPlayer2() != null && team.getPlayer3() != null){  //team de 3
+    //player1
+    player = team.getPlayer1();
+    id = player.getID();
+    foto = player.getFoto();
+    
+    //avatar
+    avatar = await cargarAvatar(foto,id,player.getTieneOtraFoto(),guild,players);
+    context.drawImage(avatar, offsetX, offsetY, 80, 80);
+    
+    //cuadro rojo si murió
+    if(player.getAlive() != 1){
+      context.beginPath();
+      context.rect(offsetX-4, offsetY-4, 88, 88);
+      context.fillStyle = 'rgba(236,28,36,0.5)';
+      context.fill();
+    }
+    
+    //player2
+    player = team.getPlayer2();
+    id = player.getID();
+    foto = player.getFoto();
+    
+    //avatar
+    avatar = await cargarAvatar(foto,id,player.getTieneOtraFoto(),guild,players);
+    context.drawImage(avatar, offsetX+80+14, offsetY, 80, 80);
+    
+    //cuadro rojo si murió
+    if(player.getAlive() != 1){
+      context.beginPath();
+      context.rect(offsetX+80+14-4, offsetY-4, 88, 88);
+      context.fillStyle = 'rgba(236,28,36,0.5)';
+      context.fill();
+    }
+    
+    //player3
+    player = team.getPlayer3();
+    id = player.getID();
+    foto = player.getFoto();
+    
+    //avatar
+    avatar = await cargarAvatar(foto,id,player.getTieneOtraFoto(),guild,players);
+    context.drawImage(avatar, offsetX+40+7, offsetY+80+11, 80, 80); 
+    
+    //cuadro rojo si murió
+    if(player.getAlive() != 1){
+      context.beginPath();
+      context.rect(offsetX+40+7-4, offsetY+80+11-4, 88, 88);
+      context.fillStyle = 'rgba(236,28,36,0.5)';
+      context.fill();
+    }
+    
+  }
+  
+}
+
+export async function mostrarTeams(channel, guildId,players){  //pensar funcion matematica que haga la suma sola, en vez de hacer mas ifs
+  let canvasHeight = 255;
+  let filas = ~~((teams.length-1)/5) + 1;
+  /*if (teams.length > 1 && teams.length < 6 ){
+      canvasHeight = 255;
+    }
+  if (teams.length > 5 && teams.length < 11 ){
+      canvasHeight = 510;
+  }
+  if (teams.length > 10 && teams.length < 16 ){
+      canvasHeight = 765;
+  }
+  if (teams.length > 15 && teams.length < 21 ){
+      canvasHeight = 1020;
+  }
+  if (teams.length > 20 && teams.length < 26 ){
+      canvasHeight = 1275;
+  }  
+  if (teams.length > 25 && teams.length < 31 ){
+      canvasHeight = 1530;
+  }   */
+  canvasHeight = 255 * filas;
+  //GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'AppleColorEmoji@2x.ttf'), 'Apple Emoji');
+  //GlobalFonts.registerFromPath('/ARIAL.ttf', 'Typographica');
+  //GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/TypoGraphica.otf'), 'Typographica');
+  //GlobalFonts.register_from_path('/ARIAL.ttf', 'Typographica');
+
+  const canvas = createCanvas(1107, canvasHeight);
+  
+  const context = canvas.getContext('2d');  
+  
+  const halloweenColor = '#160260';
+  const classicColor =   '#1E2C37';
+  
+  context.fillStyle = classicColor;
+  
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  
+  let cantLineas = Math.ceil((teams.length / 5));
+  let teamNumber = 0;
+  let offsetX = 27;  
+  let offsetY = 57;
+  
+  for(let i=0; i < cantLineas; i++ ){
+    
+    for(let j=0; j < 5; j++){     
+      let team = teams[teamNumber];
+      //console.log(team);
+      if (team !== undefined){
+        await dibujarTeam(canvas,context,team,offsetX,offsetY,guildId,players);    
+        teamNumber++;
+        offsetX += 220;
+      }
+    }
+    
+    offsetX = 27;
+    offsetY += 244;
+  }
+
+  /*const background = await Canvas.loadImage('https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/testimg.png?v=1679946476790');
+  context.drawImage(background, 0, 0, canvas.width, canvas.height);*/
+  
+  let attachment = new AttachmentBuilder(await canvas.encode('png'), { name: 'event-image.png' });
+  channel.send({ files: [attachment] });
+}
+
+async function dibujarJugador(canvas,context,name,id,foto,hp,danioRecibido,avatarSize,offsetX,offsetY,fontSize){
+
+     //avatar
+    context.drawImage(foto, offsetX, offsetY, avatarSize, avatarSize);
+    //GlobalFonts.registerFromPath(join(__dirname,'assets','https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/NotoEmoji-VariableFont_wght.ttf'),'Noto Emoji');
+    //GlobalFonts.registerFromPath(join(__dirname,'https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf'),'Noto Color Emoji');
+    //GlobalFonts.registerFromPath(join(__dirname, 'fonts', 'https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf'),'Noto Color Emoji');
+    //GlobalFonts.registerFromPath(join(__dirname, 'fonts', 'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/COLRv1.ttf?v=1682536765461'), 'Colrv1')
+    //GlobalFonts.registerFromPath('https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/COLRv1.ttf', 'Colrv1');
+    //GlobalFonts.registerFromPath('https://fonts.gstatic.com/s/notocolremojiglyf/v14/~ChYKFE5vdG8gQ29sciBFbW9qaSBHbHlmIAVCCQoFZW1vamkQAA==.0.woff2', 'Colrv1');    
+    GlobalFonts.registerFromPath('https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/NotoEmoji-VariableFont_wght.ttf?v=1682532182459','notocolor');
+  
+     //nombre
+    context.font = (await betterApplyText(canvas,name,fontSize,avatarSize));
+    //context.font = "25 px Noto Color Emoji";
+    /*var gradient = context.createLinearGradient(offsetX, 0, offsetX+avatarSize, 0);
+    gradient.addColorStop(0, "magenta");
+    gradient.addColorStop(0.5, "blue");
+    gradient.addColorStop(1.0, "purple");
+    context.fillStyle = gradient;*/
+  
+    const halloweenColor = '#c34a07';
+    const classicColor =   'white';
+    context.fillStyle = classicColor;
+  
+    context.strokeStyle = 'black';
+
+    context.fillText(name, offsetX, offsetY+13+(~~(fontSize/2))+avatarSize);
+    context.strokeText(name, offsetX, offsetY+13+(~~(fontSize/2))+avatarSize);
+
+  
+      //hp
+    //fondo negro
+    context.beginPath();
+    context.rect(offsetX, offsetY-40, avatarSize, 20);
+    context.fillStyle = "black";
+    context.fill();
+  
+    //danio recibido o curado
+    if(danioRecibido < 0){
+      context.beginPath();
+      context.rect(offsetX, offsetY-40, Math.max(0,hp*avatarSize/maxHP), 20);
+      context.fillStyle = "white";
+      context.fill();
+    }else{
+      context.beginPath();
+      context.rect(offsetX, offsetY-40, Math.max(0,(hp+danioRecibido)*avatarSize/maxHP), 20);
+      context.fillStyle = "#FF2727";
+      context.fill();
+    }
+  
+    //hp que le queda luego del evento
+    if(danioRecibido < 0){
+      context.beginPath();
+      context.rect(offsetX, offsetY-40, Math.max(0,(hp + danioRecibido)*avatarSize/maxHP), 20);
+      context.fillStyle = "#2AB140";
+      context.fill();
+    }else{
+      context.beginPath();
+      context.rect(offsetX, offsetY-40, Math.max(0,(hp)*avatarSize/maxHP), 20);
+      context.fillStyle = "#2AB140";
+      context.fill();
+    }
+  
+    //cantidad HP
+    /*if(danioRecibido < 0){
+      context.font = "16px URW Gothic L";
+      context.fillStyle = '#FFFFFF';
+      context.fillText(`${hp}`, offsetX+5, offsetY-25);
+    }else{
+      let hpBaja = hp-danioRecibido;
+      context.font = "16px URW Gothic L";
+      context.fillStyle = '#FFFFFF';
+      context.fillText(`${hpBaja}`, offsetX+5, offsetY-25);      
+    }*/
+      context.font = "16px URW Gothic L";
+      context.fillStyle = '#FFFFFF';
+      context.fillText(`${hp}`, offsetX+5, offsetY-25);
+  
+    //borde  
+    context.strokeStyle = "#FFFFFF";
+    context.strokeRect(offsetX-1, offsetY-41, avatarSize+2, 22);
+}
+
+
+async function generarImagenEventoCero(fondo){
+  //GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'AppleColorEmoji@2x.ttf'), 'Apple Emoji');
+  //GlobalFonts.registerFromPath('./ARIAL.ttf', 'Typographica');
+  //GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/TypoGraphica.otf'), 'Typographica');
+  //GlobalFonts.register_from_path('/ARIAL.ttf', 'Typographica');
+  //console.log(GlobalFonts.families)  //fuentes
+
+  // Create a 700x250 pixel canvas and get its context
+  // The context will be used to modify the canvas
+  const canvas = createCanvas(700, 500);
+  const context = canvas.getContext('2d');  
+
+  //const background = await loadImage('https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/wallpaper.jpg?v=1679546499781');
+  const background = await loadImage(fondo);
+  context.drawImage(background, 0, 0, canvas.width, canvas.height);
+  
+  let attachment = new AttachmentBuilder(await canvas.encode('png'), { name: 'event-image.png' });
+  //channel.send({ files: [attachment] });
+  return attachment;
+}
+
+async function generarImagenEvento(json,tipoEvento){
+  //GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'AppleColorEmoji@2x.ttf'), 'Apple Emoji');
+  //GlobalFonts.registerFromPath('./ARIAL.ttf', 'Typographica');
+  //GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/TypoGraphica.otf'), 'Typographica');
+  //GlobalFonts.register_from_path('/ARIAL.ttf', 'Typographica');
+  //console.log(GlobalFonts.families)  //fuentes
+
+  // Create a 700x250 pixel canvas and get its context
+  // The context will be used to modify the canvas
+  const canvas = createCanvas(700, 500);
+  const context = canvas.getContext('2d');  
+
+  //const background = await loadImage('https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/wallpaper.jpg?v=1679546499781');
+  let fondo = randomFondo();
+  const background = await loadImage(fondo);
+  context.drawImage(background, 0, 0, canvas.width, canvas.height);
+  
+  /* const avatar = await Canvas.loadImage(`https://cdn.discordapp.com/avatars/${json.id[0]}/${json.foto[0]}.png`);
+   context.drawImage(avatar, 244, 144, 212, 212);
+
+   //nombre
+   context.font = applyText(canvas,json.names[0]),50;
+   context.fillStyle = '#000000';
+   context.fillText(json.names[0], 244, 144+218);*/
+  
+  switch(tipoEvento){
+      case("0"):
+        //await dibujarEvento0(canvas, context, json.evento);
+      break;
+      
+      case("1"):
+        //const avatar = await Canvas.loadImage(`https://cdn.discordapp.com/avatars/${json.id[0]}/${json.foto[0]}.png`);
+        await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 212, 244, 144, 50);
+        //para poner un jugador en el canvas, recibe el canvas, el nombre id foto hp y danio recibido del jugador, el tamanio del avatar y el desplazamiento horiz-vertic, y el tamanio del nombre donde se lo quiere poner
+      break;
+      
+      case("2"):
+        await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 162, 158, 190, 42);
+        await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 162, 414, 190, 42);
+      break;
+      
+      case("3"):
+        await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 158, 88, 38);
+        await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 414, 88, 38);
+        await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 286, 314, 38);
+      break;
+      
+      case("1x1"):
+        await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 125, 190, 38);     
+        await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 474, 190, 38);   
+      break;
+      
+      case("2x1"):
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 46, 190, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 200, 190, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 493, 190, 38);
+      break;
+      
+      case("3x1"):
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 56, 91, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 216, 91, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 131, 298, 38);
+       await dibujarJugador(canvas, context, json.names[3], json.id[3], json.foto[3], json.hp[3], json.danioRecibido[3], 128, 505, 190, 38);
+      break;
+      
+      case("1x2"):
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 46, 190, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 372, 190, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 526, 190, 38);
+      break;
+      
+      case("1x3"):
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 56, 190, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 376, 91, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 536, 91, 38);
+       await dibujarJugador(canvas, context, json.names[3], json.id[3], json.foto[3], json.hp[3], json.danioRecibido[3], 128, 451, 298, 38);
+      break;      
+      
+      default:
+      
+      break;
+  }  
+  
+  let attachment = new AttachmentBuilder(await canvas.encode('png'), { name: 'event-image.png' });
+  //channel.send({ files: [attachment] });
+  return attachment;
+}
+
+async function generarImagenEventoVieja(json,tipoEvento){
+  //GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'AppleColorEmoji@2x.ttf'), 'Apple Emoji');
+  //GlobalFonts.registerFromPath('./ARIAL.ttf', 'Typographica');
+  //GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/TypoGraphica.otf'), 'Typographica');
+  //GlobalFonts.register_from_path('/ARIAL.ttf', 'Typographica');
+  //console.log(GlobalFonts.families)  //fuentes
+
+  // Create a 700x250 pixel canvas and get its context
+  // The context will be used to modify the canvas
+  const canvas = createCanvas(700, 500);
+  const context = canvas.getContext('2d');  
+
+  //const background = await loadImage('https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/wallpaper.jpg?v=1679546499781');
+  let fondo = randomFondo();
+  const background = await loadImage(fondo);
+  context.drawImage(background, 0, 0, canvas.width, canvas.height);
+  
+  /* const avatar = await Canvas.loadImage(`https://cdn.discordapp.com/avatars/${json.id[0]}/${json.foto[0]}.png`);
+   context.drawImage(avatar, 244, 144, 212, 212);
+
+   //nombre
+   context.font = applyText(canvas,json.names[0]),50;
+   context.fillStyle = '#000000';
+   context.fillText(json.names[0], 244, 144+218);*/
+  
+  switch(tipoEvento){
+      case("0"):
+        //await dibujarEvento0(canvas, context, json.evento);
+      break;
+      
+      case("1"):
+        //const avatar = await Canvas.loadImage(`https://cdn.discordapp.com/avatars/${json.id[0]}/${json.foto[0]}.png`);
+        await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 212, 244, 144, 50);
+        //para poner un jugador en el canvas, recibe el canvas, el nombre id foto hp y danio recibido del jugador, el tamanio del avatar y el desplazamiento horiz-vertic, y el tamanio del nombre donde se lo quiere poner
+      break;
+      
+      case("2"):
+        await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 162, 158, 190, 42);
+        await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 162, 414, 190, 42);
+      break;
+      
+      case("3"):
+        await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 158, 88, 38);
+        await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 414, 88, 38);
+        await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 286, 314, 38);
+      break;
+      
+      case("1x1"):
+        if(json.lugares[0] == "Atacante"){
+        await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 125, 190, 38);     
+        await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 474, 190, 38);   
+      }else{
+        await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 125, 190, 38);     
+        await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 474, 190, 38);          
+        }
+      break;
+      
+      case("2x1"):
+       if(json.lugares[0] == "Victima"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 493, 190, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 46, 190, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 200, 190, 38);
+       }else if(json.lugares[1] == "Victima"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 46, 190, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 493, 190, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 200, 190, 38);         
+       }else if(json.lugares[2] == "Victima"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 46, 190, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 200, 190, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 493, 190, 38);           
+       }
+      break;
+      
+      case("3x1"):
+       if(json.lugares[0] == "Victima"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 505, 190, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 56, 91, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 216, 91, 38);
+       await dibujarJugador(canvas, context, json.names[3], json.id[3], json.foto[3], json.hp[3], json.danioRecibido[3], 128, 131, 298, 38);
+       }else if(json.lugares[1] == "Victima"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 56, 91, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 505, 190, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 216, 91, 38);
+       await dibujarJugador(canvas, context, json.names[3], json.id[3], json.foto[3], json.hp[3], json.danioRecibido[3], 128, 131, 298, 38);
+       }else if(json.lugares[2] == "Victima"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 56, 91, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 216, 91, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 505, 190, 38);
+       await dibujarJugador(canvas, context, json.names[3], json.id[3], json.foto[3], json.hp[3], json.danioRecibido[3], 128, 131, 298, 38);
+       }else if(json.lugares[3] == "Victima"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 56, 91, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 216, 91, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 131, 298, 38);
+       await dibujarJugador(canvas, context, json.names[3], json.id[3], json.foto[3], json.hp[3], json.danioRecibido[3], 128, 505, 190, 38);
+       }  
+      break;
+      
+      case("1x2"):
+       if(json.lugares[0] == "Atacante"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 46, 190, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 372, 190, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 526, 190, 38);
+       }else if(json.lugares[1] == "Atacante"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 372, 190, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 46, 190, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 526, 190, 38);         
+       }else if(json.lugares[2] == "Atacante"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 372, 190, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 526, 190, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 46, 190, 38);           
+       }
+      break;
+      
+      case("1x3"):
+       if(json.lugares[0] == "Atacante"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 56, 190, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 376, 91, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 536, 91, 38);
+       await dibujarJugador(canvas, context, json.names[3], json.id[3], json.foto[3], json.hp[3], json.danioRecibido[3], 128, 451, 298, 38);
+       }else if(json.lugares[1] == "Atacante"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 376, 91, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 56, 190, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 536, 91, 38);
+       await dibujarJugador(canvas, context, json.names[3], json.id[3], json.foto[3], json.hp[3], json.danioRecibido[3], 128, 451, 298, 38);
+       }else if(json.lugares[2] == "Atacante"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 376, 91, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 536, 91, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 56, 190, 38);
+       await dibujarJugador(canvas, context, json.names[3], json.id[3], json.foto[3], json.hp[3], json.danioRecibido[3], 128, 451, 298, 38);
+       }else if(json.lugares[3] == "Atacante"){
+       await dibujarJugador(canvas, context, json.names[0], json.id[0], json.foto[0], json.hp[0], json.danioRecibido[0], 128, 376, 91, 38);
+       await dibujarJugador(canvas, context, json.names[1], json.id[1], json.foto[1], json.hp[1], json.danioRecibido[1], 128, 536, 91, 38);
+       await dibujarJugador(canvas, context, json.names[2], json.id[2], json.foto[2], json.hp[2], json.danioRecibido[2], 128, 451, 298, 38);
+       await dibujarJugador(canvas, context, json.names[3], json.id[3], json.foto[3], json.hp[3], json.danioRecibido[3], 128, 56, 190, 38);
+       }  
+      break;      
+      
+      default:
+      
+      break;
+  }  
+  
+  let attachment = new AttachmentBuilder(await canvas.encode('png'), { name: 'event-image.png' });
+  //channel.send({ files: [attachment] });
+  return attachment;
+}
+
+export async function funcionCrearImagenCero(json,channel,fondo){
+  let textosExtra = "";
+
+  //channel.send(`Soy un evento 0`);
+
+  //generar imagen
+  let attachment = await generarImagenEventoCero(fondo);
+
+  //generar Color
+  let color = randomHexColor();
+
+  //si tiene textos extra, los agrego
+  if(json.extra.length > 0){
+        for(let i=0; i<json.extra.length; i++){
+          let textoIterado = json.extra[i];        
+          textosExtra = textosExtra.concat(textoIterado);
+          textosExtra = textosExtra.concat('\n');
+      }
+  }
+  
+  //enviar
+  if(textosExtra != ""){
+    channel.send({
+      embeds: [ new EmbedBuilder()
+                .setColor(color)
+                .setImage(`attachment://${attachment.name}`),
+                new EmbedBuilder()
+                .setColor(color)
+                .setDescription(`**${json.evento}**\n`)
+                //.setDescription(`${textosExtra}`)
+               	.addFields(
+		            { name: ' ', value: `${textosExtra}` })
+                .setTimestamp()
+                .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png'})
+              ],
+      files: [attachment]
+    });
+  }else{
+    channel.send({
+      embeds: [ new EmbedBuilder()
+                .setColor(color)
+                .setImage(`attachment://${attachment.name}`),
+                new EmbedBuilder()
+                .setColor(color)
+                .setDescription(`**${json.evento}**\n`)
+                .setTimestamp()
+                .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png'})
+              ],
+      files: [attachment]
+    });    
+  }
+}
+
+export async function funcionCrearImagen(json,tipoEvento,channel){
+  let textosExtra = "";
+
+  //channel.send(`Soy un evento ${tipoEvento}`);
+
+  //generar imagen
+  let attachment = await generarImagenEvento(json,tipoEvento);
+
+  //generar Color
+  let color = randomHexColor();
+
+  //si tiene textos extra, los agrego
+  if(json.extra.length > 0){
+        for(let i=0; i<json.extra.length; i++){
+          let textoIterado = json.extra[i];        
+          textosExtra = textosExtra.concat(textoIterado);
+          textosExtra = textosExtra.concat('\n');
+      }
+  }
+  
+  //enviar
+  if(textosExtra != ""){
+    channel.send({
+      embeds: [ new EmbedBuilder()
+                .setColor(color)
+                .setImage(`attachment://${attachment.name}`),
+                new EmbedBuilder()
+                .setColor(color)
+                .setDescription(`**${json.evento}**\n`)
+                //.setDescription(`${textosExtra}`)
+               	.addFields(
+		            { name: ' ', value: `${textosExtra}` })
+                .setTimestamp()
+                .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png'})
+              ],
+      files: [attachment]
+    });
+  }else{
+    channel.send({
+      embeds: [ new EmbedBuilder()
+                .setColor(color)
+                .setImage(`attachment://${attachment.name}`),
+                new EmbedBuilder()
+                .setColor(color)
+                .setDescription(`**${json.evento}**\n`)
+                .setTimestamp()
+                .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png'})
+              ],
+      files: [attachment]
+    });    
+  }
+}
+
+export function funcionDePrueba(json,channel){
+  
+    if (json.lugares[0] == "" && json.names.length == 0){  //entonces es evento de tipo 0
+      //channel.send("Soy un evento 0");
+    }
+    if (json.lugares[0] == "" && json.names.length == 1){  //entonces es evento de tipo 1
+      funcionCrearImagen(json,"1",channel);
+    }
+    if (json.lugares[0] == "" && json.names.length == 2){  //entonces es evento de tipo 2
+      funcionCrearImagen(json,"2",channel);
+    }
+    if (json.lugares[0] == "" && json.names.length == 3){  //entonces es evento de tipo 3
+      funcionCrearImagen(json,"3",channel);    
+    }
+    if (json.lugares.length == 2 && contarAtacantes(json.lugares) == 1 && json.names[0] != ""){ //entonces es evento de tipo 1x1
+      funcionCrearImagen(json,"1x1",channel);
+    }
+    if (json.lugares.length == 3 && contarAtacantes(json.lugares) == 2 && json.names[0] != ""){ //entonces es evento de tipo 2x1
+      funcionCrearImagen(json,"2x1",channel);
+    }
+    if (json.lugares.length == 4 && contarAtacantes(json.lugares) == 3 && json.names[0] != ""){ //entonces es evento de tipo 3x1
+      funcionCrearImagen(json,"3x1",channel);
+    }
+    if (json.lugares.length == 3 && contarAtacantes(json.lugares) == 1 && json.names[0] != ""){ //entonces es evento de tipo 1x2
+      funcionCrearImagen(json,"1x2",channel);
+    }
+    if (json.lugares.length == 4 && contarAtacantes(json.lugares) == 1 && json.names[0] != ""){ //entonces es evento de tipo 1x3
+      funcionCrearImagen(json,"1x3",channel);
+    }  
+}
+
+function printAt( context , text, x, y, lineHeight, fitWidth)
+{
+    fitWidth = fitWidth || 0;
+    
+    if (fitWidth <= 0)
+    {
+         context.fillText( text, x, y );
+        return;
+    }
+    
+    for (var idx = 1; idx <= text.length; idx++)
+    {
+        var str = text.substr(0, idx);
+        console.log(str, context.measureText(str).width, fitWidth);
+        if (context.measureText(str).width > fitWidth)
+        {
+            context.fillText( text.substr(0, idx-1), x, y );
+            printAt(context, text.substr(idx-1), x, y + lineHeight, lineHeight,  fitWidth);
+            return;
+        }
+    }
+    context.fillText( text, x, y );
+}
+
+function printAtWordWrap( context , text, x, y, lineHeight, fitWidth)
+{
+    fitWidth = fitWidth || 0;
+    
+    if (fitWidth <= 0)
+    {
+        context.fillText( text, x, y );
+        return;
+    }
+    var words = text.split(' ');
+    var currentLine = 0;
+    var idx = 1;
+    while (words.length > 0 && idx <= words.length)
+    {
+        var str = words.slice(0,idx).join(' ');
+        var w = context.measureText(str).width;
+        if ( w > fitWidth )
+        {
+            if (idx==1)
+            {
+                idx=2;
+            }
+            context.fillText( words.slice(0,idx-1).join(' '), x, y + (lineHeight*currentLine) );
+            currentLine++;
+            words = words.splice(idx-1);
+            idx = 1;
+        }
+        else
+        {idx++;}
+    }
+    if  (idx > 0)
+        context.fillText( words.join(' '), x, y + (lineHeight*currentLine) );
+}
+
+const betterApplyText = (canvas, text, fsize, maxWidth) =>{
+	const context = canvas.getContext('2d');
+	let fontSize = fsize;
+  //GlobalFonts.registerFromPath(join(__dirname,'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/NotoEmoji-VariableFont_wght.ttf'),'Noto Emoji');
+	do {
+		context.font = (fontSize -= 1) + `px DejaVu Sans`;
+	} while (context.measureText(text).width > (maxWidth+25));
+
+  //console.log(context.font);
+	return context.font;
+};
+
+const applyText = (canvas, text, fsize, avatarSize) => {
+	const context = canvas.getContext('2d');
+
+	// Declare a base size of the font
+	let fontSize = fsize;
+
+	do {
+		// Assign the font to the context and decrement it so it can be measured again
+		context.font = (fontSize -= 10) + `px`;
+		// Compare pixel width of the text to the canvas minus the approximate avatar size
+	} while (context.measureText(text).width > canvas.width - avatarSize);
+
+	// Return the result to use in the actual canvas
+  //console.log(context.font);
+	return context.font;
+};
+
+
+
+export async function sleep(ms){
+  await new Promise(r => setTimeout(r, ms))
+};
+
+export function copiarJugadores(jugadores) {
     let copia = [];
     for(let i=0;i<jugadores.length;i++){ 
         copia[i] = jugadores[i];
@@ -209,42 +1495,144 @@ let copiarJugadores = (jugadores)=>{
     return copia;
 }
 
-const shuffleJugadores = (jugadores)=>{         //algoritmo de Fisher-Yates para reordenar los players de forma random
-       for (let i = jugadores.length - 1; i > 0; i--) {
-         const j = Math.floor(Math.random() * (i + 1));
-         const temp = jugadores[i];
-         jugadores[i] = jugadores[j];
-         jugadores[j] = temp;
-        }
-
-}
-
-let buscarPorID = (id, players)=>{
-    let jugador;
-    for(let i=0;i<players.length;i++){
-        jugador = players[i];
-        if(jugador.getID() == id){
-            return players[i];
-        }
+export function copiarTeams(teams) {
+    let copia = [];
+    for(let i=0;i<teams.length;i++){ 
+        copia[i] = teams[i];
     }
-    console.log("no lo encontre");
-    return null;
+
+    return copia;
 }
 
-let esDelMismoTeam = (jugadora,jugadorb)=>{
-    return (jugadora.team.getID() == jugadorb.team.getID());
+export function setearPistolaATodos(jugadores){
+  let jugador;
+  for(let i=0; i<jugadores.length; i++){
+    jugador = jugadores[i];
+    jugador.setArma(pistola);
+  }
 }
 
-let buscarJugador = (jugador,jugadores)=>{    //el jugador del parametro es el q ataca, y esta funcion retorna otro jugador vivo 
-    shuffleJugadores(jugadores);                
-    let victima;
-    for(let i=0;i<jugadores.length;i++){
-        victima = jugadores[i];
-        if((victima.alive==1) && victima.id != jugador.id){
-            return victima;
-        }
-    }
-return null;
+export function crearJugadoresFake(jugadores){
+  let idEquipo;
+  var team;
+  //const k = new Jugador("🔥K", "617015532394250259", "92065173f81292dcd5407172ebb679d8");
+  const eltaquito = new Jugador("eltaquito", "400", "https://i.imgur.com/jpos1yo.png");
+  const faalgru = new Jugador("Faalgru", "100", "https://i.imgur.com/r3TzBk1.png");
+  const robert = new Jugador("RobertJMP", "200", "https://i.imgur.com/j7Lribn.png");
+  const dreher = new Jugador("Drehersho", "300", "https://i.imgur.com/F15xMIk.png");
+  //const shin = new Jugador("Shin MS", "933153313992630321", "4895d45f6e73bdf05a60876d367aa2ed");
+  const shin = new Jugador("Shin MS", "500", "https://i.imgur.com/xQUweVw.png");
+  
+  // const frozono2 = new Jugador("Frozono", "101", "https://images3.memedroid.com/images/UPLOADED683/636ab7ebcfa58.webp");
+  // const njug1 = new Jugador("n", "102", "https://i.imgur.com/XcqwX6F.png");
+  // const brutal = new Jugador("brutal", "103", "https://a.wattpad.com/useravatar/ApoloMetemeTusDedos.256.559054.jpg");
+  // const cj = new Jugador("CJ", "104", "https://i.pinimg.com/236x/fc/64/94/fc649415f82f453fa4c5a9432a633a70.jpg");
+  // const dehecho1 = new Jugador("De hecho,", "105", "https://images3.memedroid.com/images/UPLOADED775/643765ba04bd1.jpeg");
+  // //const cheems = new Jugador("cheems", "106", "https://styles.redditmedia.com/t5_3g0nth/styles/communityIcon_326mpvyt6i061.png");
+  // const jose = new Jugador("José", "107", "https://images7.memedroid.com/images/UPLOADED353/603872f2adc3c.jpeg");
+  // const pedro = new Jugador("Pedro of war", "108", "https://a.wattpad.com/useravatar/Dxrk_M4nxx.256.666216.jpg");
+  // const maurisio1 = new Jugador("maurisio", "109", "https://i.pinimg.com/originals/13/cb/b6/13cbb6ccc36fb5064fe11281c0de49ca.jpg");
+  // const lucas = new Jugador("lucas", "110", "https://i.pinimg.com/736x/8b/8e/a6/8b8ea6bd7c066b4b90bd4dcb1b85dcb1.jpg");
+  // const rodrigo = new Jugador("Rodrigo.", "111", "https://i.pinimg.com/564x/b7/d6/b8/b7d6b8a8f0c3cf41395c241101bf6a54.jpg");
+  // const antonio = new Jugador("Antonio", "112", "https://i.pinimg.com/564x/48/52/26/4852266a6c709195f2cdc9084b9e7829.jpg");
+  // const mesi1 = new Jugador("mesi", "113", "https://i.pinimg.com/564x/69/77/ee/6977ee4d222b30ec6ead221668231021.jpg");
+  // const melon = new Jugador("Melon Musk", "114", "https://i.pinimg.com/564x/88/62/c6/8862c6e17552ff867013fb7fe10bf00e.jpg");
+
+//   const bread = new Jugador("Bread Sheeran", "115", "https://i.pinimg.com/564x/7a/3c/77/7a3c773d0fe183e0ac1b75c6c780a455.jpg");
+//   const shrekira = new Jugador("Shrekira", "116", "https://i.pinimg.com/564x/22/2e/9a/222e9a3cb5b44381c670ee63160e6dc8.jpg");
+//   const docthor = new Jugador("DocThor", "117", "https://i.pinimg.com/564x/48/2c/7e/482c7e2f71c7c65efefbceeeaf821fd2.jpg");
+//   const robrownie = new Jugador("Robert Brownie Jr.", "118", "https://i.pinimg.com/564x/87/03/f9/8703f9cf740951fec53ef1131a2d2832.jpg");
+//   const johnlemon1 = new Jugador("John Lemon", "119", "https://i.pinimg.com/564x/80/61/63/80616304991bdad640942c32f4923628.jpg");
+//   const huevardo = new Jugador("Huevardo", "120", "https://i.pinimg.com/564x/54/e8/ad/54e8ad7f029acc1d39db7c0acedb5766.jpg");
+//   const crock = new Jugador("The crock", "121", "https://i.pinimg.com/564x/27/2d/b5/272db57fcee9666f1f5251a0fcfa02f2.jpg");
+//   const grumba = new Jugador("Grumba", "122", "https://i.pinimg.com/564x/3e/fd/b2/3efdb28d34e08fcd190f57f56df1c1c7.jpg");
+//   const tristeza = new Jugador("Tristeza", "123", "https://i.pinimg.com/564x/eb/e1/f1/ebe1f1c9ac245730584c63902b923a7c.jpg");
+//   const coca = new Jugador("coca", "124", "https://i.pinimg.com/564x/c6/d8/d0/c6d8d010684fbae669f673c70c4553c4.jpg");
+  
+  
+    //k.setArma(pistola);
+    //eltaquito.setArma(pistola);
+    //faalgru.setArma(pistola);
+  
+    /*idEquipo = teams.length + 1;
+    team = new Team(idEquipo);
+    team.setPlayer1 = k;
+    teams.push(team);
+    k.setTeam(team);
+    jugadores.push(k);
+  
+    idEquipo = teams.length + 1;
+    team = new Team(idEquipo);
+    team.setPlayer1 = eltaquito;
+    teams.push(team);
+    eltaquito.setTeam(team);
+    jugadores.push(eltaquito);
+  
+    idEquipo = teams.length + 1;
+    team = new Team(idEquipo);
+    team.setPlayer1 = faalgru;
+    teams.push(team);
+    faalgru.setTeam(team);
+    jugadores.push(faalgru);*/
+  
+//         idEquipo = teams.length + 1;
+//         team = new Team(idEquipo);
+//         team.setPlayer1 = eltaquito;
+//         eltaquito.setTeam(team);
+//         jugadores.push(eltaquito);
+//         team.setPlayer2 = faalgru;
+//         faalgru.setTeam(team);
+//         jugadores.push(faalgru);
+//         team.setPlayer3 = robert;
+//         robert.setTeam(team);
+//         jugadores.push(robert);
+//         teams.push(team);
+
+//         idEquipo += 1;
+//         team = new Team(idEquipo);
+//         team.setPlayer1 = dreher;
+//         dreher.setTeam(team);
+//         jugadores.push(dreher);
+//         teams.push(team);
+
+//         idEquipo += 1;
+//         team = new Team(idEquipo);
+//         team.setPlayer1 = shin;
+//         shin.setTeam(team);
+//         jugadores.push(shin);    
+//         teams.push(team);
+  jugadores.push(eltaquito);
+  jugadores.push(faalgru);
+  jugadores.push(robert);
+  jugadores.push(dreher);
+  jugadores.push(shin);     
+  
+  // jugadores.push(frozono2);
+  // jugadores.push(njug1);
+  // jugadores.push(brutal);
+  // jugadores.push(cj);
+  // jugadores.push(dehecho1);
+  // //jugadores.push(cheems);
+  // jugadores.push(jose);
+  // jugadores.push(pedro);
+  // jugadores.push(maurisio1);
+  // jugadores.push(lucas);
+  // jugadores.push(rodrigo);
+  // jugadores.push(antonio);
+  // jugadores.push(mesi1);
+  // jugadores.push(melon);
+  
+  // jugadores.push(bread);
+  // jugadores.push(shrekira);
+  // jugadores.push(docthor);
+  // jugadores.push(robrownie);
+  // jugadores.push(johnlemon1);
+  // jugadores.push(huevardo);
+  // jugadores.push(crock);
+  // jugadores.push(grumba);
+  // jugadores.push(tristeza);
+  // jugadores.push(coca);
+  
 }
 
 let buscarJugadorOtroTeam = (jugador,jugadores)=>{    //el jugador del parametro es el q ataca, y esta funcion retorna otro jugador vivo DE OTRO TEAM
@@ -259,61 +1647,246 @@ let buscarJugadorOtroTeam = (jugador,jugadores)=>{    //el jugador del parametro
 return null;
 }
 
-let buscarJugadorDistintoA2 = (jugador1,jugador2,jugadores)=>{    //esta funcion retorna un jugador vivo distinto a los 2 recibidos
-    shuffleJugadores(jugadores);                
-    let victima;
-    for(let i=0;i<jugadores.length;i++){
-        victima = jugadores[i];
-        if((victima.alive==1) && victima.id != jugador1.id && victima.id != jugador2.id){
-            return victima;
-        }
+export function buscarTresTeamsSolo(){
+  let team;
+  let arraySolos = [];
+  
+  let copia = copiarTeams(teams);
+  shuffleJugadores(copia);
+  
+  for(let i=0; i<copia.length;i++){
+    team = copia[i];
+    if(arraySolos.length == 3){
+      console.log(arraySolos);
+      return arraySolos;
     }
-return null;
-}
-
-let buscarJugadorConArma = (jugador,jugadores)=>{    //esta funcion retorna otro jugador vivo que tenga arma 
-    shuffleJugadores(jugadores);
-    let victima;
-    for(let i=0;i<jugadores.length;i++){
-        victima = jugadores[i];
-        if((victima.alive==1) && victima.id != jugador.id && victima.arma){
-            return victima.getID();
-        }
+    if(team.esTeamDe1() && team.estaVivo1()){
+      arraySolos.push(team.getID());
     }
-return null;
+  }
+  if(arraySolos.length == 3){
+    console.log(arraySolos);
+    return arraySolos;
+  }
+  return null;
 }
 
-let encontrarGanador = (jugadores)=>{
-    let ganador;
-    for (let i = 0; i < jugadores.length; i++) {
-        ganador = jugadores[i];
-        if(ganador.alive == 1){return ganador};
+let arreglarIDs= ()=>{
+    let team;
+    for(let i=0;i<teams.length;i++){
+        team = teams[i];
+        team.setID = i+1;
     }
-    return null;
 }
 
-let recibirJugadores = ()=>{
-    //20
-    //let jugadores = [lynn, yugito, robert, k, draco, chun,lynn2, yugito2, robert2, k2, draco2, chun2,lynn3, yugito3, robert3, k3, draco3, chun3,lynn4,robert4];
-    
-    //6
-    let jugadores = [lynn, yugito, robert, k, draco, chun];
-    return jugadores;
+export function eliminarTeam(teamID){
+    let index;
+    console.log(`eliminando el team ${teamID}`);
+    index = teamID-1;
+    teams.splice(index,1);
+    arreglarIDs();
 }
 
-let haySuficientes = (jugadores)=> {
-    let cont = 0;
-    let jugador;
-    for(let i=0; i<jugadores.length; i++){
-        jugador = jugadores[i];
-        if(jugador.team == null){
-            cont++;
+async function dibujarJugadorDeTeam(canvas,context,player,avatarSize,offsetX,offsetY,fontSize,guild,teamOGanador,players){
+        //si teamOGanador es 0 es pa mostrar team al principio, si es 1 es para mostrar team ganador al final - falta filtro rojo
+    //avatar
+    let foto = await cargarAvatar(player.getFoto(),player.getID(),player.getTieneOtraFoto(),guild,players);
+    context.drawImage(foto, offsetX, offsetY, avatarSize, avatarSize);
+  
+    //cuadro rojo si murió
+    if(player.getAlive() != 1){
+      context.beginPath();
+      context.rect(offsetX-2, offsetY-2, avatarSize+4, avatarSize+4);
+      context.fillStyle = 'rgba(236,28,36,0.5)';
+      context.fill();
+    }
+  
+    //nombre
+    let name = player.getNombre();
+    context.font = (await betterApplyText(canvas,name,fontSize,avatarSize));
+    /*var gradient = context.createLinearGradient(offsetX, 0, offsetX+avatarSize, 0);
+    gradient.addColorStop(0, "magenta");
+    gradient.addColorStop(0.5, "blue");
+    gradient.addColorStop(1.0, "purple");
+    context.fillStyle = gradient;*/
+    const halloweenColor = '#c34a07';
+    const classicColor =   'white';
+    let colorNombre = classicColor;
+  
+    if(avatarSize < 150){colorNombre = 'black';}
+    context.fillStyle = colorNombre;
+    let colorBorde = 'black';
+    if(avatarSize < 150){colorBorde = classicColor;}
+    context.strokeStyle = colorBorde;
+
+    context.fillText(name, offsetX, offsetY+13+(~~(fontSize/2))+avatarSize+3);
+    context.strokeText(name, offsetX, offsetY+13+(~~(fontSize/2))+avatarSize+3);
+
+    if(teamOGanador){
+    //hp
+    let hp = player.getHP();
+      
+    //fondo negro
+    context.beginPath();
+    context.rect(offsetX, offsetY-35, avatarSize, 20);
+    context.fillStyle = "black";
+    context.fill();
+  
+    //verde
+    context.beginPath();
+    context.rect(offsetX, offsetY-35, Math.max(0,(hp)*avatarSize/maxHP), 20);
+    context.fillStyle = "#2AB140";
+    context.fill();
+  
+    //cantidad vida
+    context.font = "16px URW Gothic L";
+    context.fillStyle = '#FFFFFF';
+    context.fillText(`${hp}`, offsetX+5, offsetY-20);
+      
+    //borde  
+    context.strokeStyle = "#FFFFFF";
+    context.strokeRect(offsetX-1, offsetY-36, avatarSize+2, 22);
+   }
+   
+    //nombre team
+    if(teamOGanador){
+      let teamID = player.getTeam()["id"];
+      let teamName = player.getTeam()["name"];
+      let finalName;
+      if(teamName != null){
+        finalName = teamName;
+      }else{
+        finalName = `Team ${teamID}`;
+      }
+      context.font = "40px URW Gothic L";
+      context.fillStyle = '#000000';
+      context.textAlign = "center";
+      context.fillText(finalName, canvas.width/2, 40);  
+      context.textAlign = "start";
+    }else{
+      let teamName = player.getTeam()["id"];
+      context.font = "40px URW Gothic L";
+      context.fillStyle = '#000000';
+      context.fillText(`Team ${teamName}`, 269, 84);    
+    }
+
+}
+
+async function displayOneTeam(channel,team,guild,players){
+  let embed;
+  const canvas = createCanvas(700, 500);
+  const context = canvas.getContext('2d');  
+  let color = randomHexColor();
+
+  const background = await loadImage('https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondoTeam2.png?v=1683124846200');
+
+  context.drawImage(background, 0, 0, canvas.width, canvas.height);
+  
+  if(team.esTeamDe1()){
+    await dibujarJugadorDeTeam(canvas,context,team.getPlayer1(),212,233,143,50,guild,0,players);
+  }
+  
+  if(team.esTeamDe2()){
+    await dibujarJugadorDeTeam(canvas,context,team.getPlayer1(),162,158,177,42,guild,0,players);
+    await dibujarJugadorDeTeam(canvas,context,team.getPlayer2(),162,376,177,42,guild,0,players);
+  }
+  
+  if(team.esTeamDe3()){
+    await dibujarJugadorDeTeam(canvas,context,team.getPlayer1(),145,172,113,38,guild,0,players);
+    await dibujarJugadorDeTeam(canvas,context,team.getPlayer2(),145,393,113,38,guild,0,players);
+    await dibujarJugadorDeTeam(canvas,context,team.getPlayer3(),145,282,310,38,guild,0,players); 
+  }
+  
+  let attachment = new AttachmentBuilder(await canvas.encode('png'), { name: 'team-image.png' });
+  embed = generarEmbedImagen(color, `attachment://${attachment.name}`);
+  channel.send({ embeds: [embed],
+                 files: [attachment]
+               });
+}
+
+export async function displayWinnerTeam(channel,team,guild,players){
+  let embed;
+  const canvas = createCanvas(700, 500);
+  const context = canvas.getContext('2d');
+  let color = randomHexColor();
+
+  const background = await loadImage('https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondowinners.png?v=1682989589799');
+
+  context.drawImage(background, 0, 0, canvas.width, canvas.height);
+  
+  if(team.esTeamDe1()){
+    await dibujarJugadorDeTeam(canvas,context,team.getPlayer1(),212,233,143,50,guild,1,players);
+  }
+  
+  if(team.esTeamDe2()){
+    await dibujarJugadorDeTeam(canvas,context,team.getPlayer1(),162,158,177,42,guild,1,players);
+    await dibujarJugadorDeTeam(canvas,context,team.getPlayer2(),162,376,177,42,guild,1,players);
+  }
+  
+  if(team.esTeamDe3()){
+    await dibujarJugadorDeTeam(canvas,context,team.getPlayer1(),145,172,90,38,guild,1,players);
+    await dibujarJugadorDeTeam(canvas,context,team.getPlayer2(),145,393,90,38,guild,1,players);
+    await dibujarJugadorDeTeam(canvas,context,team.getPlayer3(),145,282,310,38,guild,1,players); 
+  }
+  
+  let attachment = new AttachmentBuilder(await canvas.encode('png'), { name: 'winners-image.png' });
+  embed = generarEmbedImagen(color, `attachment://${attachment.name}`);
+  channel.send({ embeds: [embed],
+                 files: [attachment]
+               });
+}
+
+export async function displayTeamByTeam(channel,guild,players){
+  let team;
+  for(let i=0; i<teams.length; i++){
+    team = teams[i];
+    await displayOneTeam(channel,team,guild,players);
+    await sleep(5000);
+  }
+
+}
+
+export function shuffleJugadores (jugadores) {  //algoritmo de Fisher-Yates para reordenar los players de forma random
+       for (let i = jugadores.length - 1; i > 0; i--) {
+         const j = Math.floor(Math.random() * (i + 1));
+         const temp = jugadores[i];
+         jugadores[i] = jugadores[j];
+         jugadores[j] = temp;
         }
-     }
-     return cont;
+
 }
 
-let chequearSonMismoEquipo = (players)=> {
+export function generarEmbedTexto(color, texto){
+  let embed = new EmbedBuilder()
+              .setColor(color)
+              .setTitle(texto)
+              .setTimestamp()
+              .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png'});
+  
+  return embed;
+}
+
+export function generarEmbedDescripcion(color, texto){
+  let embed = new EmbedBuilder()
+              .setColor(color)
+              .setDescription(`**${texto}**`)
+              .setTimestamp()
+              .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png'});
+  
+  return embed;
+}
+
+export function generarEmbedImagen(color, url){
+  let embed = new EmbedBuilder()
+              .setColor(color)
+              .setImage(url)
+              .setTimestamp()
+              .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png'});
+  
+  return embed;
+}
+
+export function chequearSonMismoEquipo (players){
     var ganadores = [];
     let jugador;
     let team;
@@ -334,11 +1907,57 @@ let chequearSonMismoEquipo = (players)=> {
             }
 
         }
-     }  
+     }
      return ganadores;
 }
 
-let formarEquipo = (jugadores)=> {
+let danioExtra = (min,max)=>{
+    let danio = Math.floor(Math.random() * (max - min + 1) + min)
+    console.log("\x1b[90m%s\x1b[0m",`${danio} de danio extra`);
+    return danio;
+}
+
+let porcentajeDeVidaRandom = (min,max)=>{
+    let vida = Math.floor(Math.random() * (max - min + 1) + min)
+    console.log("\x1b[90m%s\x1b[0m",`${vida} de vida`);
+    return vida;
+}
+
+let randomSelector = (min,max)=>{
+    let selected = Math.floor(Math.random() * (max - min + 1) + min)
+    console.log("\x1b[90m%s\x1b[0m",`${selected} selected`);
+    return selected;
+}
+
+export function generarJugadorFake(){
+    var rand = parseInt(Math.random()*jugadoresFake.length);
+    return jugadoresFake[rand];
+}
+
+let haySuficientes = (jugadores)=> {
+    let cont = 0;
+    let jugador;
+    for(let i=0; i<jugadores.length; i++){
+        jugador = jugadores[i];
+        if(jugador.team == null){
+            cont++;
+        }
+     }
+     return cont;
+}
+
+export function buscarUnMuerto (players) {
+    let jugador;
+    for(let i=0;i<players.length;i++){
+        jugador = players[i];
+        if(jugador.alive == 0){
+            return jugador;
+        }
+    }
+    return null;
+}
+
+export function formarEquipo (jugadores) {
     let jugador;
     let jugadorA;   //auxiliar
     let jugadorB;   //auxiliar
@@ -347,6 +1966,17 @@ let formarEquipo = (jugadores)=> {
      for(let i=0; i<jugadores.length; i++){ 
         jugador = jugadores[i];
         if(jugador.team == null){   //si no tiene equipo definido
+          
+          if(jugadores.length<=3){  //si solo juegan 2 o 3 personas
+                //team de 1 - 100% prob
+                var thisTeam = new Team(idEquipo);  
+                thisTeam.setPlayer1 = jugador;
+                teams.push(thisTeam);
+
+                jugador.setTeam(thisTeam);
+
+                idEquipo++;  
+          }else{
             let r = Math.random();
 
             if(r > 0.5){
@@ -415,7 +2045,10 @@ let formarEquipo = (jugadores)=> {
                 jugador.setTeam(thisTeam);
 
                 idEquipo++; 
-            }
+            }  
+          }
+          
+            
         }
     }  
 
@@ -449,57 +2082,96 @@ let formarEquipo = (jugadores)=> {
 }
 
 
-let mostrarResultados = (players) =>{
-    let jugador;
-    console.log("\x1b[90m%s\x1b[0m",`--------------------`);
-    for(let i=0; i<players.length; i++){
-        let jugador = players[i];
-        //faltaria ordenar la lista por kills en orden descendente
-        console.log("\x1b[90m%s\x1b[0m",`${jugador.getNombre()} -  Kills: ${jugador.getKills()}`);
+export function imprimirTeams (teams1 = teams) {
+    for(let countTeams = 0; countTeams < teams1.length; countTeams++){
+        console.log("\x1b[36m%s\x1b[0m",`TEAM ${teams1[countTeams].getID()}`);
+        if(teams1[countTeams].getPlayer1() != null){
+            if(teams1[countTeams].getPlayer1().getHP()==0){
+            console.log("\x1b[31m%s\x1b[0m",`${teams1[countTeams].getPlayer1().getNombre()} - HP: ${teams1[countTeams].getPlayer1().getHP()} - alive  ${teams1[countTeams].getPlayer1().getAlive()}`);
+            }else{
+            console.log("\x1b[36m%s\x1b[0m",`${teams1[countTeams].getPlayer1().getNombre()} - HP: ${teams1[countTeams].getPlayer1().getHP()} - alive  ${teams1[countTeams].getPlayer1().getAlive()}`);
+            }
+        }        
+        if(teams1[countTeams].getPlayer2() != null){
+            if(teams1[countTeams].getPlayer2().getHP()==0){
+            console.log("\x1b[31m%s\x1b[0m",`${teams1[countTeams].getPlayer2().getNombre()} - HP: ${teams1[countTeams].getPlayer2().getHP()} - alive  ${teams1[countTeams].getPlayer2().getAlive()}`);
+            }else{
+            console.log("\x1b[36m%s\x1b[0m",`${teams1[countTeams].getPlayer2().getNombre()} - HP: ${teams1[countTeams].getPlayer2().getHP()} - alive  ${teams1[countTeams].getPlayer2().getAlive()}`);
+            }
+        }    
+        if(teams1[countTeams].getPlayer3() != null){
+            if(teams1[countTeams].getPlayer3().getHP()==0){
+            console.log("\x1b[31m%s\x1b[0m",`${teams1[countTeams].getPlayer3().getNombre()} - HP: ${teams1[countTeams].getPlayer3().getHP()} - alive  ${teams1[countTeams].getPlayer3().getAlive()}`);
+            }
+            else{
+            console.log("\x1b[36m%s\x1b[0m",`${teams1[countTeams].getPlayer3().getNombre()} - HP: ${teams1[countTeams].getPlayer3().getHP()} - alive  ${teams1[countTeams].getPlayer3().getAlive()}`);                
+            }
+        }    
+        console.log(``);
     }
 }
 
-let eventoAleatorio1 = (jugador, players)=>{
+
+export async function muerteJugador(guildID, channel, players){
+    let embed;
+    let color = randomHexColor();
+  
+    let cantidadConVida = calcularVivos(players);
+  
+    await sleep(3000);
+    console.log(`Quedan ${cantidadConVida} jugadores con vida.`);
+    embed = generarEmbedTexto(color, "Queda" + (cantidadConVida != 1 ? "n" : "") + ` ${cantidadConVida} jugador`+ (cantidadConVida != 1 ? "es" : "") + " con vida.");
+    channel.send({embeds:[embed]});
+    
+    await sleep(1000);
+    imprimirTeams();
+    mostrarTeams(channel, guildID, players);
+}
+
+////////////
+
+let eventoAleatorio1 = async (jugador, players, req, channel)=>{
     let resultado;
     console.log(" Sucedió un evento aleatorio 1");
     do{
         var rand = parseInt(Math.random()*eventosAleatorios1.length);  
         console.log("\x1b[33m%s\x1b[0m",` ${rand}`);
-        resultado = eventosAleatorios1[rand](jugador, players, maxHP, teams); //le paso el array original
+        resultado = await eventosAleatorios1[rand](jugador, players, maxHP, teams, req, channel); //le paso el array original
     }
     while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 
 };
+  
+let lootEspecificoxCategoria = async (jugador, arma, players, req, channel)=>{
 
-let lootEspecificoxCategoria1 = (jugador, arma)=>{
-    jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
-};
-
-let lootEspecificoxCategoria = (jugador, arma, players)=>{
-    
-    eventoslootEspecificoxCategoria[0](jugador, players, arma); //le paso el array original
+  await eventoslootEspecificoxCategoria[0](jugador, players, arma, req, channel); //le paso el array original
 
 };
+  
+let lootArmaEstetica = async (jugador, arma, players, req, channel)=>{
 
-let lootGenerico = (jugador, arma, players)=>{
-    //console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
-    let resultado;
-    do{
-        var rand = parseInt(Math.random()*eventosLootGenerico.length);  
-        console.log("\x1b[33m%s\x1b[0m",` ${rand}`);
-        resultado = eventosLootGenerico[rand](jugador, players, arma, maxHP); //le paso el array original
-    }
-    while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
+await eventosLootArmaEstetica[0](jugador, players, arma, req, channel); //le paso el array original
+
 };
 
-let eventoAleatorio2 = (jugador, players)=>{
+let lootGenerico = async (jugador, arma, players, req, channel)=>{
+  //console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
+  let resultado;
+  do{
+      var rand = parseInt(Math.random()*eventosLootGenerico.length);  
+      console.log("\x1b[33m%s\x1b[0m",` ${rand}`);
+      resultado = await eventosLootGenerico[rand](jugador, players, arma, maxHP, req, channel); //le paso el array original
+  }
+  while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
+};
+  
+let eventoAleatorio2 = async (jugador, players, req, channel,playersReal)=>{
     let resultado;
     console.log(" Sucedió un evento aleatorio 2");
     do{
         var rand = parseInt(Math.random()*eventosAleatorios2.length);  
         console.log("\x1b[33m%s\x1b[0m",` ${rand}`);
-        resultado = eventosAleatorios2[rand](jugador, players, maxHP, teams); //le paso el array original
+        resultado = await eventosAleatorios2[rand](jugador, players, maxHP, teams, req, channel, playersReal); //le paso el array original
     }
     while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 };
@@ -523,9 +2195,9 @@ let ataqueEspecificoxCategoria1 = (jugador, victima)=>{
     }
 };
 
-let ataqueEspecificoxCategoria = (jugador, players, victima)=>{
+let ataqueEspecificoxCategoria = async (jugador, copia, victima, req, channel, realPlayers)=>{
     
-    eventosAtaqueEspecificoxCategoria[0](jugador, players, victima); //le paso una COPIA, luego buscar la victima original
+    await eventosAtaqueEspecificoxCategoria[0](jugador, copia, victima, req, channel, realPlayers); //le paso una COPIA, luego buscar la victima original
 
 };
 
@@ -550,13 +2222,13 @@ let ataqueGenericoConArma1 = (jugador, victima)=>{
     }
 };
 
-let ataqueGenericoConArma = (jugador, players, victima)=>{
+async function ataqueGenericoConArma (jugador, players, victima, req, channel, playersOriginal){
     let resultado;
     console.log(`Ataque generico con arma`);
 do{
     var rand = parseInt(Math.random()*ataquesGenericosConArma.length);  
     console.log("\x1b[33m%s\x1b[0m",` ${rand}`);
-    resultado = ataquesGenericosConArma[rand](jugador, players, victima); //le paso una copia
+    resultado = await ataquesGenericosConArma[rand](jugador, players, victima, req, channel, playersOriginal); //le paso una copia
 }
 while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 };
@@ -575,30 +2247,37 @@ let ataqueGenericoSinArma1 = (jugador, victima)=>{
     }
 };
 
-let ataqueGenericoSinArma = (jugador, players, victima)=>{
+async function ataqueGenericoSinArma (jugador, players, victima, req, channel, playersOriginal){
     let resultado;
     console.log(`Ataque generico sin arma`);
 do{
     var rand = parseInt(Math.random()*ataquesGenericosSinArma.length);  
     console.log("\x1b[33m%s\x1b[0m",` ${rand}`);
-    resultado = ataquesGenericosSinArma[rand](jugador, players, victima); //le paso una copia
+    resultado = await ataquesGenericosSinArma[rand](jugador, players, victima, req, channel, playersOriginal); //le paso una copia
 }
 while(resultado!=1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
-};
+};  
+    
 
 // ronda de loot
-let rondaLoot = (jugador, players)=>{
+export async function rondaLoot (req, jugador, players, channel, nroEvento, modo = false) {
         //let armaVieja = jugador.getArma();
         let probabilidad = Math.random();
-        if(probabilidad < 0.2){
-            eventoAleatorio1(jugador, players);
+        let probabilidadExtra = Math.random();
+  
+        if(probabilidad < 0.2 - sumarProbabilidad(nroEvento, players.length, 20, modo)){ 
+            await eventoAleatorio1(jugador, players, req, channel);
         }else{
             let arma = generarArma();
-            
-            if(arma.categoria){
-                lootEspecificoxCategoria(jugador, arma);
+          
+            if(arma.danio == 0){
+              await lootArmaEstetica(jugador, arma, players, req, channel);
             }else{
-                lootGenerico(jugador, arma, players);
+              if(arma.categoria && probabilidadExtra < 0.75){
+                  await lootEspecificoxCategoria(jugador, arma, players, req, channel);
+              }else{
+                  await lootGenerico(jugador, arma, players, req, channel);
+              }              
             }
 
             /*if(armaVieja != null && armaVieja.danio > arma.danio){
@@ -608,170 +2287,48 @@ let rondaLoot = (jugador, players)=>{
         }
 };
 
-// ronda de ataque
-let rondaAtaque = (jugador, jugadores, cantidadConVida)=>{
+//ronda de ataque
+export async function rondaAtaque (req, jugador, jugadores, cantidadConVida, channel, playersOriginal, nroEvento, modo = false) {
         if(jugador.alive == 1){
             if(cantidadConVida >= 2){
              let probabilidad = Math.random();
+             let probabilidadAleatorios = Math.random();
              if(probabilidad < 0.2){
-                eventoAleatorio2(jugador, jugadores);
+                if(probabilidadAleatorios < 0.5 - sumarProbabilidad(nroEvento, playersOriginal.length, 50, modo)){
+                  await eventoAleatorio1(jugador, playersOriginal, req, channel);
+                }else{
+                  await eventoAleatorio2(jugador, jugadores, req, channel, playersOriginal);
+                } 
              }else{
             let victima = buscarJugadorOtroTeam(jugador,jugadores);
             if(victima == null){console.log("hay problemas");}
               if(!jugador.arma){
-                    ataqueGenericoSinArma(jugador,jugadores,victima);
+                    await ataqueGenericoSinArma(jugador,jugadores,victima, req, channel, playersOriginal);
                 }else{
                     if(jugador.arma.categoria){
                         let probabilidadEspecial = Math.random();
                         if(probabilidadEspecial < 0.4){
-                            ataqueEspecificoxCategoria(jugador,jugadores,victima);
+                            await ataqueEspecificoxCategoria(jugador,jugadores,victima, req, channel, playersOriginal);
                         }else{
-                            ataqueGenericoConArma(jugador,jugadores,victima);
+                            await ataqueGenericoConArma(jugador,jugadores,victima, req, channel, playersOriginal);
                         }
                     }else{
-                            ataqueGenericoConArma(jugador,jugadores,victima); 
+                            await ataqueGenericoConArma(jugador,jugadores,victima, req, channel, playersOriginal); 
                     }
                 }
              }
         }
     }
+};
+  
+
+function polinomioNewton(x=0){
+  return -2.292119782-0.2016887131*(x-80)+0.000730706225*(x-80)*(x-70)-0.00003732680067*(x-80)*(x-70)*(x-60)+0.0000006834432208*(x-80)*(x-70)*(x-60)*(x-50)-0.00000002529093684*(x-80)*(x-70)*(x-60)*(x-50)*(x-40)+0.000000001236588063*(x-80)*(x-70)*(x-60)*(x-50)*(x-40)*(x-30);
 }
-
-let arreglarIDs= ()=>{
-    let team;
-    for(let i=0;i<teams.length;i++){
-        team = teams[i];
-        team.setID = i+1;
-    }
-}
-
-let eliminarTeam = (teamID)=>{
-    let index;
-    console.log(`eliminando el team ${teamID}`);
-    index = teamID-1;
-    teams.splice(index,1);
-    arreglarIDs();
-}
-
-let buscarUnMuerto = (players)=>{
-    let jugador;
-    for(let i=0;i<players.length;i++){
-        jugador = players[i];
-        if(jugador.alive == 0){
-            return jugador;
-        }
-    }
-    return null;
-}
-
-let pronombreElLaLosLas = (arma)=>{
-    let pronombre = "";
-    console.log(`111111111111`);
-    if(arma["plural"] == ""){
-        if(arma["pronombre"] == "m"){
-            pronombre = "El";
-        }
-        else{
-            pronombre = "La";
-        }
-    }else{
-        if(arma["pronombre"] == "m"){
-            pronombre = "Los";
-        }
-        else{
-            pronombre = "Las";
-        }
-    }
-
-    return pronombre;
-}
-
-let pronombreUnUnaUnosUnas = (arma)=>{
-    let pronombre = "";
-    console.log(`111111111111`);
-    if(arma["plural"] == ""){
-        if(arma["pronombre"] == "m"){
-            pronombre = "un";
-        }
-        else{
-            pronombre = "una";
-        }
-    }else{
-        if(arma["pronombre"] == "m"){
-            pronombre = "unos";
-        }
-        else{
-            pronombre = "unas";
-        }
-    }
-
-    return pronombre;
-}
-
-let pronombreOAOsAs = (arma)=>{
-    let pronombre = "";
-    console.log(`111111111111`);
-    if(arma["plural"] == ""){
-        if(arma["pronombre"] == "m"){
-            pronombre = "o";
-        }
-        else{
-            pronombre = "a";
-        }
-    }else{
-        if(arma["pronombre"] == "m"){
-            pronombre = "os";
-        }
-        else{
-            pronombre = "as";
-        }
-    }
-
-    return pronombre;
-}
-
-
-let pluralS = (arma)=>{
-    let plural = "";
-    if(arma["plural"] == "p"){plural = "s"};
-    return plural;
-}
-
-export {
-    ataqueEspecificoxCategoria,
-    ataqueGenericoConArma,
-    ataqueGenericoSinArma,
-    buscarJugador,
-    buscarJugadorConArma,
-    buscarPorID,
-    calcularVivos,
-    chequearSonMismoEquipo,
-    copiarJugadores,
-    danioExtra,
-    encontrarGanador,
-    esDelMismoTeam,
-    eventoAleatorio1,
-    eventoAleatorio2,
-    formarEquipo,
-    generarArma,
-    haySuficientes,
-    lootEspecificoxCategoria,
-    lootGenerico,
-    mostrarResultados,
-    recibirJugadores,
-    rondaAtaque,
-    rondaLoot,
-    shuffleJugadores,
-    imprimirTeams,
-    buscarTeamDe2,
-    eliminarTeam,
-    buscarJugadorDistintoA2,
-    buscarUnMuerto,
-    porcentajeDeVidaRandom,
-    randomSelector,
-    pronombreElLaLosLas,
-    pluralS,
-    pronombreUnUnaUnosUnas,
-    pronombreOAOsAs,
-    buscarJugadorOtroTeam
-}
+  
+  
+export function sumarProbabilidad(eventos, jugadores, porc, modo = false){
+  let numMode = modo ? 0 : 1;
+  let num = numMode*(50 * Math.atan((eventos + polinomioNewton(porc) - jugadores) / 10) + porc - 25 * Math.PI);
+  return num >= 0 ? num/100 : 0;
+};

@@ -1,29 +1,29 @@
 {
-  "name": "robertbot",
-  "version": "1.0.2",
-  "description": "Bot",
-  "main": "main.js",
-  "scripts": {
-    "test": "node main.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ArielPiwko/RobertBot-Discord.git"
-  },
-  "keywords": [
-    "Bot",
-    "Discord",
-    "HG",
-    "Hunger-Games",
-    "Robert",
-    "JS",
-    "Javascript"
-  ],
-  "author": "Lynn",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ArielPiwko/RobertBot-Discord/issues"
-  },
+  "name": "getting-started",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
   "type": "module",
-  "homepage": "https://github.com/ArielPiwko/RobertBot-Discord#readme"
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Shay DeWael",
+  "license": "MIT",
+  "dependencies": {
+    "discord-interactions": "^3.3.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.0",
+    "discord.js": "^14.8.0",
+    "@napi-rs/canvas": "^0.1.40",
+    "nthline": "^1.0.2",
+    "bignum": "^0.13.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "16.x"
+  }
 }
