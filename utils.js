@@ -22,7 +22,6 @@ import { eventosAtaqueEspecificoxCategoria } from "./hg/ataqueEspecificoxCategor
 import { ataquesGenericosConArma } from "./hg/ataqueGenericoConArma.js"
 import { ataquesGenericosSinArma } from "./hg/ataqueGenericoSinArma.js"
 import { EmbedBuilder } from "discord.js";
-import bignum from 'bignum';
 import fs from 'fs';
 import readline from 'readline';
 import nthline from 'nthline';
@@ -673,8 +672,8 @@ export async function cargarAvatar(foto,id,tieneOtraFoto,guild,players){
          }else{
            //si tiene discriminador 0, es que ya migro al username nuevo
            if(guildMember.user.discriminator == 0){  //esto despues va a cambiar porque lo van a quitar el 0
-             let user_id = bignum((guildMember.user.id).toString());
-             let avatar = user_id.shiftRight(22).mod(6).toString();
+            let user_id = BigInt(guildMember.user.id);
+            let avatar = ((user_id >> 22n) % 6n).toString();
              
              //let avatar = (((user_id)>>22)%6).toString();
              

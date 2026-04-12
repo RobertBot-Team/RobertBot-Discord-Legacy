@@ -43,8 +43,6 @@ import {
 import { mostrarKills } from "../../hg/utils.js"
 import {GlobalFonts} from "@napi-rs/canvas";
 import { getPartidaActiva, setPartidaActiva } from "../../app.js"
-import bignum from 'bignum';
-
 var players = [];
 let modoK = 0;
 let slowMode = false;
@@ -86,8 +84,8 @@ export async function messagePlay_1(req, res, client){
           }
       }//si tiene discriminador 0, es que ya migro al username nuevo
       else if(req.body.member.user.discriminator == 0){  //esto despues va a cambiar porque lo van a quitar el 0
-          let user_id = bignum((req.body.member.user.id).toString());
-          let avatar = user_id.shiftRight(22).mod(6).toString();
+          let user_id = BigInt(req.body.member.user.id);
+          let avatar = ((user_id >> 22n) % 6n).toString();
              
           //let avatar = (((user_id)>>22)%6).toString();
             
