@@ -11,7 +11,7 @@ import {
   reiniciarContador,
   reiniciarJugadoresFake
 } from "../../utils.js"
-import { limpiarPlayers } from "../message_component/play.js"
+import { limpiarPlayersPorGuild } from "../message_component/play.js"
 import { EmbedBuilder } from "discord.js";
 import { getPartidaActiva, setPartidaActiva } from "../../app.js"
 
@@ -173,8 +173,9 @@ const sendMessage = async (res, message) => {
 }
 
 
-export async function play(req, res, partidaActiva, client){
+export async function play(req, res, client){
   const channel = client.channels.cache.get(`${req.body.channel_id}`);
+  const guildId = req.body.guild_id || req.body.channel?.guild_id || channel?.guildId || "global";
   let color = randomHexColor();
   let idTimeout;
   let messagee = res.send({
@@ -221,9 +222,9 @@ export async function play(req, res, partidaActiva, client){
     },
   })
   
-  if(getPartidaActiva() == 0){
+  if(getPartidaActiva(guildId) == 0){
     
-    setPartidaActiva(1);
+    setPartidaActiva(1, guildId);
 
     const filter = (message) => message.author.id == '1067669524192702464' && message.content == "Se ha iniciado una nueva partida de Los Juegos del Hambre";
     const collector = channel.createMessageCollector({ filter, time: 7000 });
@@ -238,7 +239,7 @@ export async function play(req, res, partidaActiva, client){
     });
 
     
-    setTimeout(async function () { await desactivarComando(channel,idTimeout,partidaActiva);
+    setTimeout(async function () { await desactivarComando(channel,idTimeout,guildId);
                                },600000);  //6 mins
     
 return messagee;
@@ -509,10 +510,10 @@ async function desactivarComando2(req,client,msgid,partidaActiva){
            partidaActiva.activa = 0;                                                              
 }
 
-async function desactivarComando(channel,msgid,partidaActiva){
+async function desactivarComando(channel,msgid,guildId){
   //const messageFetched = await channel.messages.fetch(msgid);
   //console.log(messageFetched.components);
-      if(getPartidaActiva() == 1){  //si es 1 está en espera, si es 2 ya comenzó
+  if(getPartidaActiva(guildId) == 1){  //si es 1 está en espera, si es 2 ya comenzó
             
         channel.messages.edit(msgid,{
             content: "Se ha acabado el tiempo de espera. Por favor inicia una nueva partida.",
@@ -543,18 +544,18 @@ async function desactivarComando(channel,msgid,partidaActiva){
             ]
           });
 
-            limpiarPlayers();
+                limpiarPlayersPorGuild(guildId);
             reiniciarContador();
             limpiarTeams();
             reiniciarJugadoresFake();
-            setPartidaActiva(0);
+                setPartidaActiva(0, guildId);
             //no se reinicia slowMode ni modoK porque aqui no estan las variables
             //espero que no moleste en el futuro (?)
         }
 }
 
 
-export function partidaEnCurso(req, res, partidaActiva, client){
+          export function partidaEnCurso(req, res, client){
         res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: {content: `Ya hay una partida en curso`,

@@ -25,7 +25,7 @@ import {
   //LYNN_COMMAND,
   STOP_COMMAND,
   //JOIN_COMMAND,
-  HasGuildCommands
+  HasGlobalCommands
 } from "./commands.js";
 import {
   Jugador
@@ -58,14 +58,18 @@ app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 // Store for in-progress games. In production, you'd want to use a DB
 const activeGames = {};
 
-var partidaActiva = { activa: 0 };
+const partidaActivaPorGuild = new Map();
 
-export function setPartidaActiva(n){
-  partidaActiva.activa = n;
+function getGuildIdFromBody(body) {
+  return body?.guild_id || body?.channel?.guild_id || "global";
 }
 
-export function getPartidaActiva(){
-  return partidaActiva.activa;
+export function setPartidaActiva(n, guildId = "global"){
+  partidaActivaPorGuild.set(guildId, n);
+}
+
+export function getPartidaActiva(guildId = "global"){
+  return partidaActivaPorGuild.get(guildId) || 0;
 }
 
 /**
@@ -90,16 +94,17 @@ app.post("/interactions", async function (req, res) {
    */
   if (type === InteractionType.APPLICATION_COMMAND) {
     const { name } = data;
+    const guildId = getGuildIdFromBody(req.body);
     switch(name){
       // case "test":  // "test" guild command
       //   return test(req, res);  // Send a message into the channel where command was triggered from
       //   break;
       case "play":
         //console.log(version);
-        if(getPartidaActiva() == 0){
-        return await play(req, res, partidaActiva, client);
+        if(getPartidaActiva(guildId) == 0){
+        return await play(req, res, client);
         }else{
-        return partidaEnCurso(req, res, partidaActiva, client);
+        return partidaEnCurso(req, res, client);
         }
         break;
         
@@ -144,7 +149,7 @@ app.post("/interactions", async function (req, res) {
         messagePlay_1(req, res, client);
         break;
       case "my_button_begin":
-        await messagePlay_2(req, res, partidaActiva, client);
+        await messagePlay_2(req, res, client);
         break;
       case "my_button_slow_mode":
         await messageSlowMode(req, res, client);
@@ -176,8 +181,8 @@ client.login(process.env.DISCORD_TOKEN);
 app.listen(PORT, () => {
   console.log("Listening on port", PORT);
   
-  // Check if guild commands from commands.js are installed (if not, install them)
-  HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
+  // Register global commands so the bot works in any server where it is invited.
+  HasGlobalCommands(process.env.APP_ID, [
     //TEST_COMMAND,
     PLAY_COMMAND,
     //LYNN_COMMAND,

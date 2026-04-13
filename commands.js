@@ -2,15 +2,20 @@ import { getRPSChoices } from './game.js';
 import { capitalize, DiscordRequest } from './utils.js';
 
 export async function HasGuildCommands(appId, guildId, commands) {
-  if (guildId === '' || appId === '') return;
+  if (appId === '') return;
 
   commands.forEach((c) => HasGuildCommand(appId, guildId, c));
 }
 
+export async function HasGlobalCommands(appId, commands) {
+  if (appId === '') return;
+
+  commands.forEach((c) => HasGuildCommand(appId, null, c));
+}
+
 // Checks for a command
 async function HasGuildCommand(appId, guildId, command) {
-  // API endpoint to get and post guild commands
-  const endpoint = `applications/${appId}/guilds/${guildId}/commands`;
+  const endpoint = getCommandsEndpoint(appId, guildId);
 
   try {
     const res = await DiscordRequest(endpoint, { method: 'GET' });
@@ -33,14 +38,21 @@ async function HasGuildCommand(appId, guildId, command) {
 
 // Installs a command
 export async function InstallGuildCommand(appId, guildId, command) {
-  // API endpoint to get and post guild commands
-  const endpoint = `applications/${appId}/guilds/${guildId}/commands`;
+  const endpoint = getCommandsEndpoint(appId, guildId);
   // install command
   try {
     await DiscordRequest(endpoint, { method: 'POST', body: command });
   } catch (err) {
     console.error(err);
   }
+}
+
+function getCommandsEndpoint(appId, guildId) {
+  if (guildId) {
+    return `applications/${appId}/guilds/${guildId}/commands`;
+  }
+
+  return `applications/${appId}/commands`;
 }
 
 // Get the game choices from game.js

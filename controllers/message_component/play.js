@@ -43,13 +43,39 @@ import {
 import { mostrarKills } from "../../hg/utils.js"
 import {GlobalFonts} from "@napi-rs/canvas";
 import { getPartidaActiva, setPartidaActiva } from "../../app.js"
-var players = [];
-let modoK = 0;
-let slowMode = false;
+const guildGameStates = new Map();
+
+function getGuildIdFromReq(req) {
+  return req.body.guild_id || req.body.channel?.guild_id || "global";
+}
+
+function getGuildGameState(guildId) {
+  if (!guildGameStates.has(guildId)) {
+    guildGameStates.set(guildId, {
+      players: [],
+      modoK: 0,
+      slowMode: false,
+    });
+  }
+
+  return guildGameStates.get(guildId);
+}
+
+export function resetGuildGameState(guildId) {
+  if (!guildId) return;
+
+  const gameState = getGuildGameState(guildId);
+  gameState.players = [];
+  gameState.modoK = 0;
+  gameState.slowMode = false;
+}
 
 //const client = new Client();
 
 export async function messagePlay_1(req, res, client){
+  const guildId = getGuildIdFromReq(req);
+  const gameState = getGuildGameState(guildId);
+  const players = gameState.players;
   let newPlayer;
   let color;
   let nick;
@@ -134,7 +160,10 @@ export async function messagePlay_1(req, res, client){
       }
 };
 
-export async function messagePlay_2(req, res, partidaActiva, client){
+export async function messagePlay_2(req, res, client){
+  const guildId = getGuildIdFromReq(req);
+  const gameState = getGuildGameState(guildId);
+  const players = gameState.players;
   let resultado;
   let component;
   let color;
@@ -143,9 +172,9 @@ export async function messagePlay_2(req, res, partidaActiva, client){
 
   const channel = client.channels.cache.get(`${req.body.channel_id}`);
     //console.log(req.body);
-      if(req.body.message.interaction.user.id === req.body.member.user.id && players.length >= 2 && modoK == 0){      //luego >=2
+      if(req.body.message.interaction.user.id === req.body.member.user.id && players.length >= 2 && gameState.modoK == 0){      //luego >=2
         
-        let modo = (slowMode) ? "Modo Rápido" : "Modo Lento";
+        let modo = (gameState.slowMode) ? "Modo Rapido" : "Modo Lento";
         
         channel.messages.edit(req.body.message.id,{components: [
             {
@@ -178,10 +207,10 @@ export async function messagePlay_2(req, res, partidaActiva, client){
         
           await res.send({
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-            data: {content: `Se viene <:OkJoto:853342567273857045>` },
+            data: {content: `Se viene la batalla` },
           });
         
-        setPartidaActiva(2);
+        setPartidaActiva(2, guildId);
         
         /*for(let i=0; i<.., i++){
           component = ..
@@ -238,7 +267,7 @@ export async function messagePlay_2(req, res, partidaActiva, client){
             await sleep(2000);
             //message.edit("Editado");
             console.log(evento);
-            await rondaLoot(req, jugador, players, channel, 1, slowMode);
+            await rondaLoot(req, jugador, players, channel, 1, gameState.slowMode);
             }
         await sleep(2000); 
         mostrarTeams(channel, req.body.channel.guild_id,players);
@@ -322,22 +351,22 @@ export async function messagePlay_2(req, res, partidaActiva, client){
                   //si el jugador no tiene arma, tiene 80% de chances de lootear
                     if(probabilidad < 0.80){
                       console.log(`> Loot`);
-                      await rondaLoot(req, jugador, players, channel, nroEvento, slowMode);
+                      await rondaLoot(req, jugador, players, channel, nroEvento, gameState.slowMode);
                     }else{
                       console.log(`> Ataque`);
                       let copia = copiarJugadores(players);
-                      await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, slowMode);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random                      
+                      await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, gameState.slowMode);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random                      
                     }
                   }
                   //si el jugador tiene arma, tiene 80% de chances de atacar
                   else{
-                    if(probabilidad < 0.2 - sumarProbabilidad(nroEvento, players.length, 20, slowMode)){
+                    if(probabilidad < 0.2 - sumarProbabilidad(nroEvento, players.length, 20, gameState.slowMode)){
                       console.log(`> Loot`);
-                      await rondaLoot(req, jugador, players, channel, nroEvento, slowMode);
+                      await rondaLoot(req, jugador, players, channel, nroEvento, gameState.slowMode);
                     }else{
                       console.log(`> Ataque`);
                       let copia = copiarJugadores(players);
-                      await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, slowMode);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random
+                      await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, gameState.slowMode);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random
                     }
                   }
               }
@@ -412,13 +441,11 @@ export async function messagePlay_2(req, res, partidaActiva, client){
         
         //vaciar variables
         //players = [];
-        limpiarPlayers();
+        resetGuildGameState(guildId);
         reiniciarContador();
         reiniciarJugadoresFake();
         limpiarTeams();
-        setPartidaActiva(0);
-        modoK = 0;
-        slowMode = false;
+        setPartidaActiva(0, guildId);
         
         /////////////////////////////////
         
@@ -432,17 +459,17 @@ export async function messagePlay_2(req, res, partidaActiva, client){
           })
         
       }else if(req.body.message.interaction.user.id != req.body.member.user.id && req.body.member.user.id == "435210238711300107"){
-        modoK = 1;
+        gameState.modoK = 1;
         await res.send({
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             data: {content: `Modo K activado.`,
             flags: InteractionResponseFlags.EPHEMERAL
             }
         })
-      }else if(req.body.message.interaction.user.id === req.body.member.user.id && players.length >= 1 && modoK == 1){
+      }else if(req.body.message.interaction.user.id === req.body.member.user.id && players.length >= 1 && gameState.modoK == 1){
             
                 
-        let modo = (slowMode) ? "Modo Rápido" : "Modo Lento";
+        let modo = (gameState.slowMode) ? "Modo Rapido" : "Modo Lento";
         
         channel.messages.edit(req.body.message.id,{components: [
             {
@@ -478,16 +505,14 @@ export async function messagePlay_2(req, res, partidaActiva, client){
           data: {content: `Comienza la partida` },
         });
         
-        setPartidaActiva(2);
+        setPartidaActiva(2, guildId);
         color = randomHexColor();
         embed = generarEmbedTexto(color, `Todos se mataron y K ganó`);
-        setPartidaActiva(0);
-        limpiarPlayers();
+        setPartidaActiva(0, guildId);
+        resetGuildGameState(guildId);
         reiniciarContador();
         reiniciarJugadoresFake();
         limpiarTeams();
-        modoK = 0;
-        slowMode = false;
         channel.send({embeds:[embed]});
       
       }else{
@@ -504,12 +529,14 @@ export async function messagePlay_2(req, res, partidaActiva, client){
 };
 
 export async function messageSlowMode(req,res,client){
+  const guildId = getGuildIdFromReq(req);
+  const gameState = getGuildGameState(guildId);
   if(req.body.message.interaction.user.id === req.body.member.user.id){
-    slowMode = !slowMode;
+    gameState.slowMode = !gameState.slowMode;
             
         const channel = client.channels.cache.get(`${req.body.channel_id}`);
     
-        let modo = (slowMode) ? "Modo Rápido" : "Modo Lento";
+        let modo = (gameState.slowMode) ? "Modo Rapido" : "Modo Lento";
         
         channel.messages.edit(req.body.message.id,{components: [
             {
@@ -539,7 +566,7 @@ export async function messageSlowMode(req,res,client){
     
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: {content: `Se cambió el modo a Modo ` + (slowMode ? "Lento" : "Rápido")},
+      data: {content: `Se cambió el modo a Modo ` + (gameState.slowMode ? "Lento" : "Rapido")},
     });
     
   }else{
@@ -553,6 +580,9 @@ export async function messageSlowMode(req,res,client){
 }
 
 export async function messageJoin(req, res, client){
+let guildId = getGuildIdFromReq(req);
+  const gameState = getGuildGameState(guildId);
+  const players = gameState.players;
 let newPlayer;
   let nick;
   if (req.body.member.nick == null){
@@ -594,6 +624,15 @@ let newPlayer;
 }
 
 export function limpiarPlayers(){
-  players = [];
-  console.log("Limpiando players...");
+  for (const gameState of guildGameStates.values()) {
+    gameState.players = [];
+  }
+  console.log("Limpiando players en todas las guilds...");
+}
+
+export function limpiarPlayersPorGuild(guildId){
+  if (!guildId) return;
+  const gameState = getGuildGameState(guildId);
+  gameState.players = [];
+  console.log(`Limpiando players de guild ${guildId}...`);
 }
