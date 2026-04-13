@@ -615,22 +615,20 @@ export function encontrarGanador (jugadores) {
 }
 
 let randomFondo = ()=>{
-  let fondos = ['https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo1.jpg?v=1682525176619',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo2.jpg?v=1682525175861',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo3.jpg?v=1682525175140',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo4.jpg?v=1682572950088',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo5.jpg?v=1682572983997',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo6.jpg?v=1682572987053',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo7.jpg?v=1682572996806',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo8.jpg?v=1682572999191',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo9.jpg?v=1682573002881',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo10.jpg?v=1682573005676',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo11.jpg?v=1682573008070',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo12.jpg?v=1682573011644',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo13.jpg?v=1682573014037',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo14.jpg?v=1682573016223',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo15.png?v=1683124873711',
-                'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondo16.png?v=1683124872345'
+  let fondos = ['https://i.imgur.com/xtHFP7O.png', //1
+                'https://i.imgur.com/Cyov2n5.png', //2
+                'https://i.imgur.com/KvrFcHD.png', //3
+                'https://i.imgur.com/JWkeImg.png', //4
+                'https://i.imgur.com/FM9eG84.png', //5
+                'https://i.imgur.com/GXVKy4J.png', //6
+                'https://i.imgur.com/UkZL0No.png', //7
+                'https://i.imgur.com/3ELcvAR.png', //8
+                'https://i.imgur.com/5Hrt7CF.png', //9
+                'https://i.imgur.com/4RlbJZr.png', //10
+                'https://i.imgur.com/nYs9zz1.png', //11
+                'https://i.imgur.com/WuuZiVk.png', //12
+                'https://i.imgur.com/E0QA4zD.png', //13
+                'https://i.imgur.com/dzuPonQ.png', //14
                ]
   let fondosHalloween = [
     'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondoHalloween1.png?v=1698703587696',
@@ -1777,7 +1775,7 @@ async function displayOneTeam(channel,team,guild,players){
   const context = canvas.getContext('2d');  
   let color = randomHexColor();
 
-  const background = await loadImage('https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondoTeam2.png?v=1683124846200');
+  const background = await loadImage('https://i.imgur.com/rE1O5wh.png');
 
   context.drawImage(background, 0, 0, canvas.width, canvas.height);
   
@@ -1809,7 +1807,7 @@ export async function displayWinnerTeam(channel,team,guild,players){
   const context = canvas.getContext('2d');
   let color = randomHexColor();
 
-  const background = await loadImage('https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondowinners.png?v=1682989589799');
+  const background = await loadImage('https://i.imgur.com/f7p1xJO.png');
 
   context.drawImage(background, 0, 0, canvas.width, canvas.height);
   
