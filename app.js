@@ -183,7 +183,7 @@ app.listen(PORT, () => {
   console.log("Listening on port", PORT);
   
   // Register global commands so the bot works in any server where it is invited.
-  HasGuildCommands(process.env.APP_ID, [
+  HasGlobalCommands(process.env.APP_ID, [
     //TEST_COMMAND,
     PLAY_COMMAND,
     //LYNN_COMMAND,
