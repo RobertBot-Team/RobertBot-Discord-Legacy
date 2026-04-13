@@ -48,12 +48,10 @@ export async function InstallGuildCommand(appId, guildId, command) {
 }
 
 function getCommandsEndpoint(appId, guildId) {
-  console.log(`Getting commands endpoint for appId: ${appId} and guildId: ${guildId}`);
   if (guildId) {
-    console.log(`applications/${appId}/guilds/${guildId}/commands`)
     return `applications/${appId}/guilds/${guildId}/commands`;
   }
-  console.log(`applications/${appId}/commands`)
+
   return `applications/${appId}/commands`;
 }
 
