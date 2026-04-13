@@ -25,7 +25,8 @@ import {
   //LYNN_COMMAND,
   STOP_COMMAND,
   //JOIN_COMMAND,
-  HasGlobalCommands
+  HasGlobalCommands,
+  HasGuildCommands
 } from "./commands.js";
 import {
   Jugador
@@ -182,7 +183,7 @@ app.listen(PORT, () => {
   console.log("Listening on port", PORT);
   
   // Register global commands so the bot works in any server where it is invited.
-  HasGlobalCommands(process.env.APP_ID, [
+  HasGuildCommands(process.env.APP_ID, [
     //TEST_COMMAND,
     PLAY_COMMAND,
     //LYNN_COMMAND,
