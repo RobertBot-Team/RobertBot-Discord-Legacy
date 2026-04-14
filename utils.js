@@ -980,14 +980,14 @@ async function dibujarJugador(canvas, context, name, id, foto, hp, danioRecibido
   for (const char of Array.from(name)) {
     const code = char.codePointAt(0);
 
+    let nameOffsetX = offsetX;
+    let nameOffsetY = offsetY;
+
     if (code > 0x1F000) {
       const codeHex = code.toString(16);
       const url = `https://twemoji.maxcdn.com/v/latest/72x72/${codeHex}.png`;
 
       try {
-        let nameOffsetX = offsetX;
-        let nameOffsetY = offsetY;
-
         const img = await loadImage(url);
         const size = fontSize * 1.1;
         context.drawImage(
