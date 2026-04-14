@@ -22,6 +22,7 @@ import { eventosAtaqueEspecificoxCategoria } from "./hg/ataqueEspecificoxCategor
 import { ataquesGenericosConArma } from "./hg/ataqueGenericoConArma.js"
 import { ataquesGenericosSinArma } from "./hg/ataqueGenericoSinArma.js"
 import { EmbedBuilder } from "discord.js";
+import emojiRegex from 'emoji-regex';
 import fs from 'fs';
 import readline from 'readline';
 import nthline from 'nthline';
@@ -35,7 +36,6 @@ import { buscarPorID } from './hg/utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const emojiRegex = require("emoji-regex");
 
 var contador = 0;
 var maxHP = 1000;
