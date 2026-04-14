@@ -977,11 +977,11 @@ async function dibujarJugador(canvas, context, name, id, foto, hp, danioRecibido
   //   }
   // }
 
+  let nameOffsetX = offsetX;
+  let nameOffsetY = offsetY;
+
   for (const char of Array.from(name)) {
     const code = char.codePointAt(0);
-
-    let nameOffsetX = offsetX;
-    let nameOffsetY = offsetY;
 
     if (code > 0x1F000) {
       const codeHex = code.toString(16);
