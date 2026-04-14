@@ -36,6 +36,7 @@ import { buscarPorID } from './hg/utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const emojiRegex = require("emoji-regex");
 
 var contador = 0;
 var maxHP = 1000;
@@ -916,6 +917,9 @@ export async function mostrarTeams(channel, guildId, players) {  //pensar funcio
 }
 
 async function dibujarJugador(canvas, context, name, id, foto, hp, danioRecibido, avatarSize, offsetX, offsetY, fontSize) {
+  RegisterFont("./assets/fonts/NotoSans-Regular.ttf", {
+    family: "Noto Sans",
+  });
 
   //avatar
   context.drawImage(foto, offsetX, offsetY, avatarSize, avatarSize);
@@ -942,9 +946,39 @@ async function dibujarJugador(canvas, context, name, id, foto, hp, danioRecibido
 
   context.strokeStyle = 'black';
 
-  context.fillText(name, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
-  context.strokeText(name, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
+  const regex = emojiRegex();
+  const parts = name.split(regex);
+  const emojis = name.match(regex) || [];
 
+  for (let i = 0; i < parts.length; i++) {
+    //  texto
+    if (parts[i]) {
+      context.fillText(parts[i], offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
+      context.strokeText(name, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
+    }
+    // emoji 
+    if (emojis[i]) {
+      const codePoints = Array.from(emojis[i])
+        .map(c => c.codePointAt(0).toString(16))
+        .join("-");
+
+      const url = `https://twemoji.maxcdn.com/v/latest/72x72/${codePoints}.png`;
+
+      try {
+        const img = await loadImage(url);
+
+        const size = fontSize; // tamaño del emoji igual al texto
+        context.drawImage(img, offsetX, offsetY - size + 5, size, size);
+
+        offsetX += size;
+      } catch (err) {
+        console.log("Error cargando emoji:", url);
+      }
+    }
+  }
+
+  // context.fillText(name, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
+  // context.strokeText(name, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
 
   //hp
   //fondo negro
@@ -1446,7 +1480,7 @@ const betterApplyText = (canvas, text, fsize, maxWidth) => {
   let fontSize = fsize;
   //GlobalFonts.registerFromPath(join(__dirname,'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/NotoEmoji-VariableFont_wght.ttf'),'Noto Emoji');
   do {
-    context.font = (fontSize -= 1) + `px DejaVu Sans`;
+    context.font = (fontSize -= 1) + `px Noto Sans`;
   } while (context.measureText(text).width > (maxWidth + 25));
 
   //console.log(context.font);
