@@ -11,12 +11,14 @@
   "author": "Shay DeWael",
   "license": "MIT",
   "dependencies": {
+    "@napi-rs/canvas": "^0.1.40",
+    "canvas": "^3.2.3",
     "discord-interactions": "^3.4.0",
+    "discord.js": "^14.8.0",
     "dotenv": "^16.6.1",
+    "emoji-regex": "^10.6.0",
     "express": "^4.22.1",
     "node-fetch": "^3.3.0",
-    "discord.js": "^14.8.0",
-    "@napi-rs/canvas": "^0.1.40",
     "nthline": "^1.0.2"
   },
   "devDependencies": {
