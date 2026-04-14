@@ -22,20 +22,10 @@ import { eventosAtaqueEspecificoxCategoria } from "./hg/ataqueEspecificoxCategor
 import { ataquesGenericosConArma } from "./hg/ataqueGenericoConArma.js"
 import { ataquesGenericosSinArma } from "./hg/ataqueGenericoSinArma.js"
 import { EmbedBuilder } from "discord.js";
-import emojiRegex from 'emoji-regex';
 import fs from 'fs';
-import readline from 'readline';
 import nthline from 'nthline';
-import {
-  join,
-  dirname
-} from 'path';
-import { fileURLToPath } from 'url';
 import { returnClient } from './app.js';
 import { buscarPorID } from './hg/utils.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 var contador = 0;
 var maxHP = 1000;
@@ -953,7 +943,7 @@ async function dibujarJugador(canvas, context, name, id, foto, hp, danioRecibido
         const size = fontSize * 1.1;
         context.drawImage(
           img,
-          nameOffsetX - (~~(fontSize / 2)),
+          nameOffsetX - (~~(fontSize / 3)),
           nameOffsetY - size + fontSize * 0.15 + 13 + (~~(fontSize / 2)) + avatarSize,
           size,
           size
