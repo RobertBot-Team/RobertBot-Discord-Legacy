@@ -11,7 +11,6 @@ import {
   createCanvas,
   loadImage,
   GlobalFonts,
-  RegisterFont
 } from "@napi-rs/canvas";
 import { AttachmentBuilder } from "discord.js";
 import { eventosLootGenerico } from "./hg/lootGenerico.js";
@@ -917,9 +916,10 @@ export async function mostrarTeams(channel, guildId, players) {  //pensar funcio
 }
 
 async function dibujarJugador(canvas, context, name, id, foto, hp, danioRecibido, avatarSize, offsetX, offsetY, fontSize) {
-  RegisterFont("./assets/fonts/NotoSans-Regular.ttf", {
-    family: "Noto Sans",
-  });
+  GlobalFonts.registerFromPath(
+    "./assets/fonts/NotoSans-Regular.ttf",
+    "Noto Sans"
+  );
 
   //avatar
   context.drawImage(foto, offsetX, offsetY, avatarSize, avatarSize);
