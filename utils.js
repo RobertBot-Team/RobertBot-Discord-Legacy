@@ -923,17 +923,9 @@ async function dibujarJugador(canvas, context, name, id, foto, hp, danioRecibido
 
   //avatar
   context.drawImage(foto, offsetX, offsetY, avatarSize, avatarSize);
-  //GlobalFonts.registerFromPath(join(__dirname,'assets','https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/NotoEmoji-VariableFont_wght.ttf'),'Noto Emoji');
-  //GlobalFonts.registerFromPath(join(__dirname,'https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf'),'Noto Color Emoji');
-  //GlobalFonts.registerFromPath(join(__dirname, 'fonts', 'https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf'),'Noto Color Emoji');
-  //GlobalFonts.registerFromPath(join(__dirname, 'fonts', 'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/COLRv1.ttf?v=1682536765461'), 'Colrv1')
-  //GlobalFonts.registerFromPath('https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/COLRv1.ttf', 'Colrv1');
-  //GlobalFonts.registerFromPath('https://fonts.gstatic.com/s/notocolremojiglyf/v14/~ChYKFE5vdG8gQ29sciBFbW9qaSBHbHlmIAVCCQoFZW1vamkQAA==.0.woff2', 'Colrv1');    
-  GlobalFonts.registerFromPath('https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/NotoEmoji-VariableFont_wght.ttf?v=1682532182459', 'notocolor');
 
   //nombre
   context.font = (await betterApplyText(canvas, name, fontSize, avatarSize));
-  //context.font = "25 px Noto Color Emoji";
   /*var gradient = context.createLinearGradient(offsetX, 0, offsetX+avatarSize, 0);
   gradient.addColorStop(0, "magenta");
   gradient.addColorStop(0.5, "blue");
@@ -945,37 +937,6 @@ async function dibujarJugador(canvas, context, name, id, foto, hp, danioRecibido
   context.fillStyle = classicColor;
 
   context.strokeStyle = 'black';
-
-  // const regex = emojiRegex();
-  // const parts = name.split(regex);
-  // const emojis = name.match(regex) || [];
-
-  // for (let i = 0; i < parts.length; i++) {
-  //   //  texto
-  //   if (parts[i]) {
-  //     context.fillText(parts[i], offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
-  //     context.strokeText(parts[i], offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
-  //   }
-  //   // emoji 
-  //   if (emojis[i]) {
-  //     const codePoints = Array.from(emojis[i])
-  //       .map(c => c.codePointAt(0).toString(16))
-  //       .join("-");
-
-  //     const url = `https://twemoji.maxcdn.com/v/latest/72x72/${codePoints}.png`;
-
-  //     try {
-  //       const img = await loadImage(url);
-
-  //       const size = fontSize; // tamaño del emoji igual al texto
-  //       context.drawImage(img, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize - size + 5, size, size);
-
-  //       offsetX += size;
-  //     } catch (err) {
-  //       console.log("Error cargando emoji:", url);
-  //     }
-  //   }
-  // }
 
   let nameOffsetX = offsetX;
   let nameOffsetY = offsetY;
@@ -1743,6 +1704,11 @@ export function eliminarTeam(teamID) {
 }
 
 async function dibujarJugadorDeTeam(canvas, context, player, avatarSize, offsetX, offsetY, fontSize, guild, teamOGanador, players) {
+  GlobalFonts.registerFromPath(
+    "./assets/fonts/NotoSans-Regular.ttf",
+    "Noto Sans"
+  );
+
   //si teamOGanador es 0 es pa mostrar team al principio, si es 1 es para mostrar team ganador al final - falta filtro rojo
   //avatar
   let foto = await cargarAvatar(player.getFoto(), player.getID(), player.getTieneOtraFoto(), guild, players);
@@ -1774,8 +1740,39 @@ async function dibujarJugadorDeTeam(canvas, context, player, avatarSize, offsetX
   if (avatarSize < 150) { colorBorde = classicColor; }
   context.strokeStyle = colorBorde;
 
-  context.fillText(name, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize + 3);
-  context.strokeText(name, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize + 3);
+  let nameOffsetX = offsetX;
+  let nameOffsetY = offsetY;
+
+  for (const char of Array.from(name)) {
+    const code = char.codePointAt(0);
+
+    if (code > 0x1F000) {
+      const codeHex = code.toString(16);
+      const url = `https://twemoji.maxcdn.com/v/latest/72x72/${codeHex}.png`;
+
+      try {
+        const img = await loadImage(url);
+        const size = fontSize * 1.1;
+        context.drawImage(
+          img,
+          nameOffsetX - (~~(fontSize / 2)),
+          nameOffsetY - size + fontSize * 0.15 + 13 + (~~(fontSize / 2)) + avatarSize,
+          size,
+          size
+        );
+        nameOffsetX += size * 0.9;
+      } catch {
+        nameOffsetX += fontSize * 0.6;
+      }
+    } else {
+      context.fillText(char, nameOffsetX, nameOffsetY + 13 + (~~(fontSize / 2)) + avatarSize);
+      context.strokeText(char, nameOffsetX, nameOffsetY + 13 + (~~(fontSize / 2)) + avatarSize);
+      nameOffsetX += context.measureText(char).width;
+    }
+  }
+
+  // context.fillText(name, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize + 3);
+  // context.strokeText(name, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize + 3);
 
   if (teamOGanador) {
     //hp
