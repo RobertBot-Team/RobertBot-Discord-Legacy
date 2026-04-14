@@ -629,6 +629,8 @@ let randomFondo = ()=>{
                 'https://i.imgur.com/WuuZiVk.png', //12
                 'https://i.imgur.com/E0QA4zD.png', //13
                 'https://i.imgur.com/dzuPonQ.png', //14
+                'https://i.imgur.com/1VdpFZk.png', //15
+                'https://i.imgur.com/a1w5R3r.png', //16
                ]
   let fondosHalloween = [
     'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/fondoHalloween1.png?v=1698703587696',
