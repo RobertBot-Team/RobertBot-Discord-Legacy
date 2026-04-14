@@ -946,34 +946,62 @@ async function dibujarJugador(canvas, context, name, id, foto, hp, danioRecibido
 
   context.strokeStyle = 'black';
 
-  const regex = emojiRegex();
-  const parts = name.split(regex);
-  const emojis = name.match(regex) || [];
+  // const regex = emojiRegex();
+  // const parts = name.split(regex);
+  // const emojis = name.match(regex) || [];
 
-  for (let i = 0; i < parts.length; i++) {
-    //  texto
-    if (parts[i]) {
-      context.fillText(parts[i], offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
-      context.strokeText(name, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
-    }
-    // emoji 
-    if (emojis[i]) {
-      const codePoints = Array.from(emojis[i])
-        .map(c => c.codePointAt(0).toString(16))
-        .join("-");
+  // for (let i = 0; i < parts.length; i++) {
+  //   //  texto
+  //   if (parts[i]) {
+  //     context.fillText(parts[i], offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
+  //     context.strokeText(parts[i], offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
+  //   }
+  //   // emoji 
+  //   if (emojis[i]) {
+  //     const codePoints = Array.from(emojis[i])
+  //       .map(c => c.codePointAt(0).toString(16))
+  //       .join("-");
 
-      const url = `https://twemoji.maxcdn.com/v/latest/72x72/${codePoints}.png`;
+  //     const url = `https://twemoji.maxcdn.com/v/latest/72x72/${codePoints}.png`;
+
+  //     try {
+  //       const img = await loadImage(url);
+
+  //       const size = fontSize; // tamaño del emoji igual al texto
+  //       context.drawImage(img, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize - size + 5, size, size);
+
+  //       offsetX += size;
+  //     } catch (err) {
+  //       console.log("Error cargando emoji:", url);
+  //     }
+  //   }
+  // }
+
+  for (const char of Array.from(text)) {
+    const code = char.codePointAt(0);
+
+    if (code > 0x1F000) {
+      const codeHex = code.toString(16);
+      const url = `https://twemoji.maxcdn.com/v/latest/72x72/${codeHex}.png`;
 
       try {
         const img = await loadImage(url);
-
-        const size = fontSize; // tamaño del emoji igual al texto
-        context.drawImage(img, offsetX, offsetY - size + 5, size, size);
-
-        offsetX += size;
-      } catch (err) {
-        console.log("Error cargando emoji:", url);
+        const size = fontSize * 1.1;
+        context.drawImage(
+          img,
+          offsetX,
+          offsetY - size + fontSize * 0.15 + 13 + (~~(fontSize / 2)) + avatarSize,
+          size,
+          size
+        );
+        offsetX += size * 0.9;
+      } catch {
+        offsetX += fontSize * 0.6;
       }
+    } else {
+      context.fillText(char, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
+      context.strokeText(char, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
+      offsetX += context.measureText(char).width;
     }
   }
 
