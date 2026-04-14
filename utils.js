@@ -977,7 +977,7 @@ async function dibujarJugador(canvas, context, name, id, foto, hp, danioRecibido
   //   }
   // }
 
-  for (const char of Array.from(text)) {
+  for (const char of Array.from(name)) {
     const code = char.codePointAt(0);
 
     if (code > 0x1F000) {
