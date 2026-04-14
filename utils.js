@@ -977,7 +977,7 @@ async function dibujarJugador(canvas, context, name, id, foto, hp, danioRecibido
   //   }
   // }
 
-  for (const char of Array.from(name)) {
+  for (const char of Array.from(text)) {
     const code = char.codePointAt(0);
 
     if (code > 0x1F000) {
@@ -985,23 +985,26 @@ async function dibujarJugador(canvas, context, name, id, foto, hp, danioRecibido
       const url = `https://twemoji.maxcdn.com/v/latest/72x72/${codeHex}.png`;
 
       try {
+        let nameOffsetX = offsetX;
+        let nameOffsetY = offsetY;
+
         const img = await loadImage(url);
         const size = fontSize * 1.1;
         context.drawImage(
           img,
-          offsetX,
-          offsetY - size + fontSize * 0.15 + 13 + (~~(fontSize / 2)) + avatarSize,
+          nameOffsetX - (~~(fontSize / 2)),
+          nameOffsetY - size + fontSize * 0.15 + 13 + (~~(fontSize / 2)) + avatarSize,
           size,
           size
         );
-        offsetX += size * 0.9;
+        nameOffsetX += size * 0.9;
       } catch {
-        offsetX += fontSize * 0.6;
+        nameOffsetX += fontSize * 0.6;
       }
     } else {
-      context.fillText(char, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
-      context.strokeText(char, offsetX, offsetY + 13 + (~~(fontSize / 2)) + avatarSize);
-      offsetX += context.measureText(char).width;
+      context.fillText(char, nameOffsetX, nameOffsetY + 13 + (~~(fontSize / 2)) + avatarSize);
+      context.strokeText(char, nameOffsetX, nameOffsetY + 13 + (~~(fontSize / 2)) + avatarSize);
+      nameOffsetX += context.measureText(char).width;
     }
   }
 
