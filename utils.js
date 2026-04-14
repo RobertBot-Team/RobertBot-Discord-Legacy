@@ -250,20 +250,19 @@ const trajeFurro = new Arma("traje de furro", "", 0, 1, "m", "");
 const pokeplatino = new Arma("copia del pokemon platino", "", 0, 1, "f", "");
 const fumo = new Arma("fumo", "", 0, 1, "m", "");
 
-var armas = [pistola, granada, guitarra, alfiler, martilloThor, bomba, jeringuilla, bate, jericho, estrellasNinja, espadaCuadruple, grimorio, daRules, cuchillo, navaja,
-  tirachinas, molotov, roca, cuchilloCarnicero, trozoCristal, granadaFruta, lanza, punioAmericano, latigo, sableDeLuz, revolver, gasPimienta, banana, plantaVenenosa,
-  espadaMadera, guadania, azada, tridente, lapiz, ballesta, dardosVenenosos, reglaMetal, rocaPequenia, samsungGalaxy, encendedor, caniche, varitaMagica, pescado, lanzacohetes,
-  llaveEspada, espadaMaestra, nokia1100, espadaIron, espadaOro, pikachu, caparazonAzul, ramoDeFlores, arcoYFlechas, mandoPlei, mandoXbox, libroMatematicas, manzana, deathNote,
-  botellaDeFernet, botellaDeVino, botellaDeVodka, fuegosArtificiales, skate, motosierra, panDuro, nunchaku, cuboRubik, navajaVictorinox, kunai, estiletes, espadaEsgrima, escopeta,
-  agujas, soulEdge, serrucho, porra, kusarigama, alabarda, tijeras, espadaTijera, globoConfeti, senketsu, escoba, plumaDeAve, taser, tetaDePlastico, jeringuillaConVirus, testEmbarazo,
-  carnetConducir, misil, abanico, ganzuas, tijerasJardineria, craneo, tenedor, repelenteTiburones, bumeran, huevo, taco, tacoPool, estaca, cuerda, martillo, machete, paloGolf, punial,
-  linterna, palillos, excalibur, pizzaconpina, pistolaBengalas, pistolaPesada, subfusil, fusilAsalto, ametralladora, rifle, francotirador, mosquete, lanzagranadas, minigun, canion,
-  gasLacrimogeno, nerf, cucco, redQueen, aspaVentilador, rama, cadenas, esposas, ringBlade, espadaOndulada, plumero, aspiradora, iPhone13, crucifijo, bolaBoliche, terranator, microfono,
-  ps5, chancla, cinturon, caniaPescar, rolloPapel, fazerblaster, boina, resorte, dentadura, piernaProtesica, teclado, fundaCelular, lupa, banjo, telescopio, bongos, ak47, tarjetaCredito,
-  minaProximidad, tentaculo, tnt, lanzaVenenosa, ladrillo, nokia3300, colmena, ppp, manifesto, frf2, oniball, banhammer, lancer, purh2, nambre, zweihander, lanzallamas, viejaConfiable, pepino,
-  empanada, prensa, fotocopiadora, uchigatana, tableta, contrato, zanpakuto, claymore, masamune, espadaTiempo, figuraAnime, espadaFuego, hojasAzzinoth, frostmourne, riosDeSangre, chun, m4a1,
-  escopetaDoble, dragonSlayer, cetroMegumin, manipuladorCampos, makoKatana, kokoroWatari, hanJian, dominator, emperor, cetroChitauri, pelota, mancuerna, caneria, tuboPVC,
-  bigote, gorrito, rei, sombrero, corona, trajeFurro, pokeplatino, fumo];
+var armas = [pistola, granada, guitarra, alfiler, martilloThor, bomba, jeringuilla, bate, estrellasNinja, cuchillo, navaja,
+  tirachinas, molotov, roca, trozoCristal, granadaFruta, lanza, punioAmericano, latigo, revolver, gasPimienta, banana, plantaVenenosa,
+  espadaMadera, guadania, azada, tridente, lapiz, ballesta, dardosVenenosos, encendedor, pescado, lanzacohetes,
+  nokia1100, espadaIron, espadaOro, ramoDeFlores, arcoYFlechas, libroMatematicas, manzana,
+  fuegosArtificiales, skate, motosierra, panDuro, nunchaku, cuboRubik, kunai, estiletes, espadaEsgrima, escopeta,
+  agujas, serrucho, porra, tijeras, globoConfeti, escoba, plumaDeAve, taser, jeringuillaConVirus,
+  misil, abanico, ganzuas, tijerasJardineria, craneo, tenedor, repelenteTiburones, bumeran, huevo, tacoPool, estaca, cuerda, martillo, machete, paloGolf, punial,
+  linterna, palillos, excalibur, pistolaBengalas, pistolaPesada, subfusil, fusilAsalto, ametralladora, rifle, francotirador, mosquete, lanzagranadas, minigun, canion,
+  gasLacrimogeno, aspaVentilador, rama, cadenas, esposas, ringBlade, plumero, aspiradora, bolaBoliche, microfono,
+  chancla, cinturon, caniaPescar, rolloPapel, boina, resorte, dentadura, piernaProtesica, teclado, fundaCelular, lupa, banjo, telescopio, bongos, ak47, tarjetaCredito,
+  tentaculo, tnt, lanzaVenenosa, ladrillo, nokia3300, colmena, lanzallamas, pepino,
+  empanada, prensa, fotocopiadora, uchigatana, tableta, contrato, zanpakuto, claymore, masamune, espadaTiempo, espadaFuego, frostmourne, riosDeSangre,
+  escopetaDoble, makoKatana, hanJian, pelota, mancuerna, caneria, tuboPVC];
 
 
 //                               (nombre, url foto)
