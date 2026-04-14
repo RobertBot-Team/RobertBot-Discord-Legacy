@@ -943,7 +943,7 @@ async function dibujarJugador(canvas, context, name, id, foto, hp, danioRecibido
         const size = fontSize * 1.1;
         context.drawImage(
           img,
-          nameOffsetX - (~~(fontSize / 3)),
+          nameOffsetX,
           nameOffsetY - size + fontSize * 0.15 + 13 + (~~(fontSize / 2)) + avatarSize,
           size,
           size
@@ -1745,7 +1745,7 @@ async function dibujarJugadorDeTeam(canvas, context, player, avatarSize, offsetX
         const size = fontSize * 1.1;
         context.drawImage(
           img,
-          nameOffsetX - (~~(fontSize / 2)),
+          nameOffsetX,
           nameOffsetY - size + fontSize * 0.15 + 13 + (~~(fontSize / 2)) + avatarSize,
           size,
           size
