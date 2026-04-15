@@ -22,6 +22,7 @@ eventosAleatorios2[0] = async (jugador, players, maxHP, teams, req, channel, pla
 }
 
 eventosAleatorios2[1] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} es atacado por onis salvajes y muere en el acto.`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -37,6 +38,7 @@ eventosAleatorios2[1] = async (jugador, players, maxHP, teams, req, channel, pla
 }
 
 eventosAleatorios2[2] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} es atacado por onis salvajes y logra escapar por los pelos.`; 
     console.log(evento);
 
@@ -126,6 +128,7 @@ eventosAleatorios2[4] = async (jugador, players, maxHP, teams, req, channel, pla
 }
 
 eventosAleatorios2[5] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     const paises = ["argentina","bolivia","brasil","colombia","venezuela","ecuador","chile","uruguay","paraguay"];
     let pais;
     var rand = parseInt(Math.random()*paises.length);  
@@ -182,6 +185,7 @@ eventosAleatorios2[6] = async (jugador, players, maxHP, teams, req, channel, pla
 }
 
 eventosAleatorios2[7] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} accidentalmente pisa una mina de la segunda guerra mundial.`; 
     console.log(evento);
   
@@ -230,6 +234,7 @@ eventosAleatorios2[8] = async (jugador, players, maxHP, teams, req, channel, pla
 }
 
 eventosAleatorios2[9] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
 
     let copiaJugadores = copiarJugadores(players);
     let jugadorDos = buscarJugador(jugador,copiaJugadores);
@@ -268,6 +273,7 @@ eventosAleatorios2[9] = async (jugador, players, maxHP, teams, req, channel, pla
 }
 
 eventosAleatorios2[10] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} murió de cringe.`; 
     console.log(evento);
     
@@ -287,6 +293,7 @@ eventosAleatorios2[10] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[11] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} vió una pelicula de K.`; 
     console.log(evento);
     
@@ -344,6 +351,7 @@ eventosAleatorios2[13] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[14] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} jura que fue atacado por un misterioso tulanejo, pero nadie le cree.`; 
     console.log(evento);
     
@@ -371,6 +379,7 @@ eventosAleatorios2[14] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[15] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} decide acabar con su sufrimiento.`; 
     console.log(evento);
     
@@ -499,6 +508,7 @@ eventosAleatorios2[20] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[21] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento = `Avión`; 
     console.log(evento);
   
@@ -591,6 +601,7 @@ eventosAleatorios2[25] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[26] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} no quiere ganar esta partida del bot y decide suicidarse.`; 
     console.log(evento);
     
@@ -610,6 +621,7 @@ eventosAleatorios2[26] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[27] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} entró a Wabi Sabi y se murió del asco.`; 
     console.log(evento);
     
@@ -629,6 +641,7 @@ eventosAleatorios2[27] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[28] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} se pone a jugar LOL y K lo mata personalmente.`; 
     console.log(evento);
     
@@ -668,6 +681,7 @@ eventosAleatorios2[29] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[30] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` A ${jugador.getNombre()} se le fue el internet y se desconectó del juego. LATAM moment`; 
     console.log(evento);
   
@@ -705,6 +719,7 @@ eventosAleatorios2[31] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[32] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} decide matarse por si había apostado algo muy feo (no recuerda)`; 
     console.log(evento);
   
@@ -782,6 +797,7 @@ eventosAleatorios2[35] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[36] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} se cayó de las escaleras llevando un paraguas...`; 
     console.log(evento);
   
@@ -870,6 +886,7 @@ eventosAleatorios2[39] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[40] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} se fue de vacaciones, hay se ven bitches 😎`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -887,6 +904,7 @@ eventosAleatorios2[40] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[41] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} decide regalar todos sus wabis, qué caritativo!`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [jugador.getHP()], [0], []);
@@ -897,6 +915,7 @@ eventosAleatorios2[41] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[42] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let jugadorDos = buscarJugador(jugador,players);
     if(jugadorDos==null){return null;}
   
@@ -915,6 +934,7 @@ eventosAleatorios2[42] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[43] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} consiguió +15 social credits 👍`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [jugador.getHP()], [0], []);
@@ -925,6 +945,7 @@ eventosAleatorios2[43] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[44] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} perdió -1000 social credits 👎`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [jugador.getHP()], [0], []);
@@ -995,6 +1016,7 @@ eventosAleatorios2[46] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[47] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =`${jugador.getNombre()} se puso un Padoru antes de diciembre y todo el server se unió para matarlo.`; 
     console.log(evento);
   
@@ -1037,6 +1059,7 @@ eventosAleatorios2[48] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[49] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento = `juan.`; 
     console.log(evento);
   
@@ -1049,6 +1072,7 @@ eventosAleatorios2[49] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[50] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento = `CUBA`; 
     console.log(evento);
   
@@ -1061,6 +1085,7 @@ eventosAleatorios2[50] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[51] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento = `nambre`; 
     console.log(evento);
   
@@ -1122,6 +1147,7 @@ eventosAleatorios2[54] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[55] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} tropieza y muere. Haber tenido piernas útiles.`; 
     console.log(evento);
   
@@ -1160,6 +1186,7 @@ eventosAleatorios2[56] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[57] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} se hace comunista. Muere de hambre.`; 
     console.log(evento);
   
@@ -1179,6 +1206,7 @@ eventosAleatorios2[57] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[58] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} se nacionaliza Español, se da de alta como autónomo y muere instantáneamente. Casualidad?`; 
     console.log(evento);
   
@@ -1198,6 +1226,7 @@ eventosAleatorios2[58] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[59] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} mezcló pastillas para dormir con alcohol y F.`; 
     console.log(evento);
   
@@ -1217,6 +1246,7 @@ eventosAleatorios2[59] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[60] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` La Vara de la Verdad cae del cielo, y le parte la cabeza a ${jugador.getNombre()}`; 
     console.log(evento);
   
@@ -1236,6 +1266,7 @@ eventosAleatorios2[60] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[61] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} pidió ayuda a un Mod. ${jugador.getNombre()} murió esperando`; 
     console.log(evento);
   
@@ -1255,6 +1286,7 @@ eventosAleatorios2[61] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[62] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} habló de LOL y Arcane en el canal general. No se supo más de él.`; 
     console.log(evento);
   
@@ -1274,6 +1306,7 @@ eventosAleatorios2[62] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[63] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` Se ofrece una recompensa de 1 Wabi extra para el banco, para quien mate a ${jugador.getNombre()}!!`; 
     console.log(evento);
   
@@ -1286,6 +1319,7 @@ eventosAleatorios2[63] = async (jugador, players, maxHP, teams, req, channel, pl
 
 
 eventosAleatorios2[64] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento =` ${jugador.getNombre()} despreocupadamente va entre la maleza y ve una planta venenosa. ${jugador.getNombre()} intenta recogerla pero tuvo 0 de iq y la tocó con las manos desprotegidas, así que se hace daño.`; 
     console.log(evento);
   
@@ -1323,6 +1357,7 @@ eventosAleatorios2[64] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[65] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
   
   let evento = `${jugador.getNombre()} se encuentra con un cucco. Y tuvo la pésima idea de golpearlo. En consecuencia, el cucco llama toda una bandada y le dejan moribundo.`;
   console.log(evento);
@@ -1430,6 +1465,7 @@ eventosAleatorios2[68] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[69] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
+  return null;
     let evento = `Es el cumpleaños de taco. ¡Feliz cum! 🎉`;
     console.log(evento);
   

@@ -15,6 +15,7 @@ let filePersonajes = 'personajesAnime.txt';
 let fileFumos = 'fumos.txt';
 
 eventosAleatorios1[0] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     if(jugador.hp == maxHP){return null};
 
     let curacion;
@@ -653,6 +654,7 @@ eventosAleatorios1[14] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[15] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let idTeamDe2;
     let team;
     let teamActual;
@@ -718,6 +720,7 @@ eventosAleatorios1[17] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[18] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} se queda dormido viendo zzzznother.`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
@@ -727,6 +730,7 @@ eventosAleatorios1[18] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[19] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} se queda dormido jugando Dark Souls.`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
@@ -736,6 +740,7 @@ eventosAleatorios1[19] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[20] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} come hongos alucinógenos`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
@@ -745,6 +750,7 @@ eventosAleatorios1[20] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[21] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} grita "VIVA ESPAÑA"`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
@@ -754,6 +760,7 @@ eventosAleatorios1[21] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[22] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let jugador2;
     let jugador3;
     let copiaJugadores = copiarJugadores(players);
@@ -783,6 +790,7 @@ eventosAleatorios1[22] =async (jugador, players, maxHP, teams, req, channel)=>{
 
 eventosAleatorios1[23] =async (jugador, players, maxHP, teams, req, channel)=>{    //se crea un jugador RobertBot
   
+  return null;
     let probabilidad = Math.random();
     if(probabilidad < 0.35){return null;}         //menor probabilidad de que ocurra
 
@@ -821,6 +829,7 @@ eventosAleatorios1[24] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[25] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let idMuerto;
     let jugadorOriginal;
     let vidaConQueRevive;
@@ -858,6 +867,7 @@ eventosAleatorios1[25] =async (jugador, players, maxHP, teams, req, channel)=>{
 
 
 eventosAleatorios1[26] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
   let team = jugador.getTeam();
   let adjetivo = "test";
   let rowNumber = 0;
@@ -963,6 +973,7 @@ return null;
 }
 
 eventosAleatorios1[27] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
   let team = jugador.getTeam();
   let adjetivo = "test";
   let rowNumber = 0;
@@ -1068,6 +1079,7 @@ return null;
 }
 
 eventosAleatorios1[28] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
   let team = jugador.getTeam();
   let adjetivo = "test";
   let rowNumber = 0;
@@ -1173,6 +1185,7 @@ return null;
 }
 
 eventosAleatorios1[29] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
   let team = jugador.getTeam();
   let adjetivo = "test";
   let rowNumber = 0;
@@ -1278,6 +1291,7 @@ return null;
 }
 
 eventosAleatorios1[30] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
   let team = jugador.getTeam();
   let adjetivo = "test";
   let rowNumber = 0;
@@ -1384,6 +1398,7 @@ return null;
 
 
 eventosAleatorios1[31] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} ve un pastel en una silla y se sienta encima`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
@@ -1393,6 +1408,7 @@ eventosAleatorios1[31] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[32] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} ve un pastel en una silla pero no se sienta encima.....`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
@@ -1481,6 +1497,7 @@ eventosAleatorios1[36] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[37] =async (jugador, players, maxHP, teams, req, channel)=>{    //se crea un jugador 
+  return null;
   let jugadorFake;
     let probabilidad = Math.random();
     if(probabilidad > 0.3){return null;}              //menor probabilidad de que ocurra
@@ -1596,7 +1613,7 @@ eventosAleatorios1[39] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[40] =async (jugador, players, maxHP, teams, req, channel)=>{
-  //return null;
+  return null;
     let otroJugador;
     let copiaJugadores = copiarJugadores(players);
         otroJugador = buscarJugador(jugador, copiaJugadores);
@@ -1617,6 +1634,7 @@ eventosAleatorios1[40] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[41] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} ha encontrado unas setas misteriosas y decide probarlas. El goblin azul le convence que quizás no era buena idea.`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -1635,6 +1653,7 @@ eventosAleatorios1[42] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[43] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let evento = `${jugador.getNombre()} se va al río a bañarse. Olía a otaku`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -1644,6 +1663,7 @@ eventosAleatorios1[43] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[44] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} aplica su experiencia en FFXV para pescar... No consigue peces`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -1662,6 +1682,7 @@ eventosAleatorios1[45] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[46] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
   //return null;
     let otroJugador;
     let copiaJugadores = copiarJugadores(players);
@@ -1683,6 +1704,7 @@ eventosAleatorios1[46] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[47] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     if(jugador.arma == null){return null};
     let armaQuitada = jugador.getArma();
     let plural = pluralS(jugador.getArma());
@@ -1699,6 +1721,7 @@ eventosAleatorios1[47] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[48] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     if(jugador.hp == maxHP){return null};
        
     let cantRandomCuracion = porcentajeDeVidaRandom(1,200); 
@@ -1723,6 +1746,7 @@ eventosAleatorios1[48] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[49] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} se pega una nota en el pecho que pone "puto el que me mate"`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -1750,6 +1774,7 @@ eventosAleatorios1[51] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[52] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let evento = ` En una plaza mística, ${jugador.getNombre()} encuentra una fuente decorada con monedas y objetos olvidados. Al arrojar un Wabi, una luz brillante ilumina la fuente y, cuando se despeja el agua... No hay nada. Gran manera de perder un Wabi.`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -1759,7 +1784,7 @@ eventosAleatorios1[52] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[53] =async (jugador, players, maxHP, teams, req, channel)=>{
-  //return null;
+  return null;
     let otroJugador;
     let copiaJugadores = copiarJugadores(players);
         otroJugador = buscarJugador(jugador, copiaJugadores);
@@ -1795,6 +1820,7 @@ eventosAleatorios1[53] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[54] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
 
   let rowNumber = 0;
   let personaje = "test";
@@ -1820,6 +1846,7 @@ eventosAleatorios1[54] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[55] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
 
   let rowNumber = 0;
   let personaje = "test";
@@ -1845,6 +1872,7 @@ eventosAleatorios1[55] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[56] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
 
   let rowNumber = 0;
   let personaje = "test";
@@ -1870,6 +1898,7 @@ eventosAleatorios1[56] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[57] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
 
   let rowNumber = 0;
   let personaje = "test";
@@ -1895,6 +1924,7 @@ eventosAleatorios1[57] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[58] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
 
   let rowNumber = 0;
   let personaje = "test";
@@ -1920,6 +1950,7 @@ eventosAleatorios1[58] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[59] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
 
   let rowNumber = 0;
   let personaje = "test";
@@ -1946,6 +1977,7 @@ eventosAleatorios1[59] =async (jugador, players, maxHP, teams, req, channel)=>{
 
 
 eventosAleatorios1[60] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let evento = ` ${jugador.getNombre()} se desnuda`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
@@ -1985,6 +2017,7 @@ eventosAleatorios1[62] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[63] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null;
     let otroJugador;
     let copiaJugadores = copiarJugadores(players);
         otroJugador = buscarJugador(jugador, copiaJugadores);
