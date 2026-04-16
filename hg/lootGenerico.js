@@ -288,7 +288,7 @@ eventosLootGenerico[17] = async (jugador, players, arma, maxHP, req, channel)=>{
     curacion = -(0.05*hp);
   }
 
-  let evento = ` ${jugador.getNombre()} toma awa`;
+  let evento = ` ${jugador.getNombre()} toma agua`;
   console.log(evento);
 
   console.log(` HP antes: ${hp}`);
@@ -302,6 +302,7 @@ eventosLootGenerico[17] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[18] = async (jugador, players, arma, maxHP, req, channel)=>{
+  return null;
   let copia = copiarJugadores(players);
   let idVictima = buscarJugadorConArma(jugador, copia);
   if(idVictima==null){return null;}
@@ -380,6 +381,7 @@ eventosLootGenerico[19] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[20] = async (jugador, players, arma, maxHP, req, channel)=>{
+  return null;
   let pronombre = pronombreUnUnaUnosUnas(arma);
 
   jugador.setArma(arma);
@@ -404,6 +406,7 @@ eventosLootGenerico[21] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[22] = async (jugador, players, arma, maxHP, req, channel)=>{
+  return null;
   let pronombre = pronombreUnUnaUnosUnas(arma);
 
   jugador.setArma(arma);
@@ -416,6 +419,7 @@ eventosLootGenerico[22] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[23] = async (jugador, players, arma, maxHP, req, channel)=>{
+  return null;
   let pronombre = pronombreUnUnaUnosUnas(arma);
 
   jugador.setArma(arma);
@@ -440,6 +444,7 @@ eventosLootGenerico[24] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[25] = async (jugador, players, arma, maxHP, req, channel)=>{
+  return null;
   let agregaS = pluralS(arma);
 
   jugador.setArma(arma);
@@ -464,6 +469,7 @@ eventosLootGenerico[26] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[27] = async (jugador, players, arma, maxHP, req, channel)=>{
+  return null;
   if(jugador.getArma() == null){return null}
   let pronombre1 = pronombreUnUnaUnosUnas(arma);
   let elLa1 = pronombreElLaLosLas(arma);
@@ -480,6 +486,7 @@ eventosLootGenerico[27] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[28] = async (jugador, players, arma, maxHP, req, channel)=>{
+  return null;
   let agregaS = pluralS(arma);
 
   jugador.setArma(arma);
@@ -492,6 +499,7 @@ eventosLootGenerico[28] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[29] = async (jugador, players, arma, maxHP, req, channel)=>{
+  return null;
   if(jugador.getArma() == null){return null}
   let pronombre1 = pronombreUnUnaUnosUnas(arma);
   let armaRobada;
@@ -523,6 +531,7 @@ eventosLootGenerico[29] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[30] = async (jugador, players, arma, maxHP, req, channel)=>{
+  return null;
   let pronombre = pronombreUnUnaUnosUnas(arma);
 
   jugador.setArma(arma);
@@ -548,6 +557,7 @@ eventosLootGenerico[31] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[32] = async (jugador, players, arma, maxHP, req, channel)=>{
+  return null;
   let pronombre = pronombreUnUnaUnosUnas(arma);
   let oAosas = pronombreOAOsAs(arma);
   
