@@ -250,12 +250,12 @@ const trajeFurro = new Arma("traje de furro", "", 0, 1, "m", "");
 const pokeplatino = new Arma("copia del pokemon platino", "", 0, 1, "f", "");
 const fumo = new Arma("fumo", "", 0, 1, "m", "");
 
-var armas = [pistola, granada, guitarra, alfiler, martilloThor, bomba, jeringuilla, bate, estrellasNinja, cuchillo, navaja,
+var armas = [pistola, granada, guitarra, alfiler, martilloThor, bomba, bate, estrellasNinja, cuchillo, navaja,
   tirachinas, molotov, roca, trozoCristal, granadaFruta, lanza, punioAmericano, latigo, revolver, gasPimienta, banana, plantaVenenosa,
   espadaMadera, guadania, azada, tridente, lapiz, ballesta, dardosVenenosos, encendedor, pescado, lanzacohetes,
   nokia1100, espadaIron, espadaOro, ramoDeFlores, arcoYFlechas, libroMatematicas, manzana,
   fuegosArtificiales, skate, motosierra, panDuro, nunchaku, cuboRubik, kunai, estiletes, espadaEsgrima, escopeta,
-  agujas, serrucho, porra, tijeras, globoConfeti, escoba, plumaDeAve, taser, jeringuillaConVirus,
+  agujas, serrucho, porra, tijeras, globoConfeti, escoba, plumaDeAve, taser,
   misil, abanico, ganzuas, tijerasJardineria, craneo, tenedor, repelenteTiburones, bumeran, huevo, tacoPool, estaca, cuerda, martillo, machete, paloGolf, punial,
   linterna, palillos, excalibur, pistolaBengalas, pistolaPesada, subfusil, fusilAsalto, ametralladora, rifle, francotirador, mosquete, lanzagranadas, minigun, canion,
   gasLacrimogeno, aspaVentilador, rama, cadenas, esposas, ringBlade, plumero, aspiradora, bolaBoliche, microfono,
