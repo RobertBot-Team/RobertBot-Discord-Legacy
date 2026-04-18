@@ -28,7 +28,8 @@ async function HasGuildCommand(appId, guildId, command) {
         console.log(`Installing "${command['name']}"`);
         InstallGuildCommand(appId, guildId, command);
       } else {
-        console.log(`"${command['name']}" command already installed`);
+        console.log(`Updating "${command['name']}" command`);
+        InstallGuildCommand(appId, guildId, command);
       }
     }
   } catch (err) {
@@ -81,6 +82,24 @@ export const TEST_COMMAND = {
 export const PLAY_COMMAND = {
   name: 'play',
   description: 'Comenzar una partida nueva de los Juegos del Hambre.',
+  options: [
+    {
+      type: 3,
+      name: 'idioma',
+      description: 'Idioma de la partida',
+      required: true,
+      choices: [
+        {
+          name: 'Espanol',
+          value: 'es',
+        },
+        {
+          name: 'English',
+          value: 'en',
+        },
+      ],
+    },
+  ],
   type: 1,
 };
 

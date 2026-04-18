@@ -1,8 +1,9 @@
 import {InteractionResponseType, InteractionResponseFlags} from "discord-interactions";
 import { PermissionsBitField } from "discord.js";
-import { setPartidaActiva } from "../../app.js";
+import { clearGuildPlayLanguage, getGuildPlayLanguage, setPartidaActiva } from "../../app.js";
 import { resetGuildGameState } from "../message_component/play.js";
 import { reiniciarContador, reiniciarJugadoresFake, limpiarTeams } from "../../utils.js";
+import { tPlay } from "../play_i18n.js";
 
 function hasStopPermission(req) {
   const permissions = req.body.member?.permissions;
@@ -17,6 +18,7 @@ function hasStopPermission(req) {
 
 export async function stop(req, res, client){
   const guildId = req.body.guild_id || req.body.channel?.guild_id || "global";
+  const language = getGuildPlayLanguage(guildId);
   let nick;
   if(hasStopPermission(req)){
     
@@ -35,11 +37,12 @@ export async function stop(req, res, client){
 
       res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {content: `${nick} ha detenido la partida de los Juegos del Hambre.`,
+        data: {content: tPlay(language, "stop_by_staff", { nick }),
               }
       });
 
       setPartidaActiva(0, guildId);
+      clearGuildPlayLanguage(guildId);
       resetGuildGameState(guildId);
       reiniciarContador();
       reiniciarJugadoresFake();
@@ -49,7 +52,7 @@ export async function stop(req, res, client){
     
     res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: {content: `No te hagas el chistoso, solo Staff puede detener una partida.`,
+      data: {content: tPlay(language, "stop_no_permission"),
             flags: InteractionResponseFlags.EPHEMERAL
             }
       });

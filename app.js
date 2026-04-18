@@ -48,6 +48,7 @@ import {
   messageSlowMode
 } from "./controllers/message_component/play.js";
 import { SlashCommandBuilder } from 'discord.js';
+import { DEFAULT_PLAY_LANGUAGE, getPlayLanguageFromOptions } from "./controllers/play_i18n.js";
 
 // Create an express app
 const app = express();
@@ -60,6 +61,7 @@ app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 const activeGames = {};
 
 const partidaActivaPorGuild = new Map();
+const playLanguagePorGuild = new Map();
 
 function getGuildIdFromBody(body) {
   return body?.guild_id || body?.channel?.guild_id || "global";
@@ -71,6 +73,18 @@ export function setPartidaActiva(n, guildId = "global"){
 
 export function getPartidaActiva(guildId = "global"){
   return partidaActivaPorGuild.get(guildId) || 0;
+}
+
+export function setGuildPlayLanguage(language, guildId = "global") {
+  playLanguagePorGuild.set(guildId, language || DEFAULT_PLAY_LANGUAGE);
+}
+
+export function getGuildPlayLanguage(guildId = "global") {
+  return playLanguagePorGuild.get(guildId) || DEFAULT_PLAY_LANGUAGE;
+}
+
+export function clearGuildPlayLanguage(guildId = "global") {
+  playLanguagePorGuild.delete(guildId);
 }
 
 /**
@@ -103,7 +117,8 @@ app.post("/interactions", async function (req, res) {
       case "play":
         //console.log(version);
         if(getPartidaActiva(guildId) == 0){
-        return await play(req, res, client);
+        const selectedLanguage = getPlayLanguageFromOptions(req.body.data?.options || []);
+        return await play(req, res, client, selectedLanguage);
         }else{
         return partidaEnCurso(req, res, client);
         }

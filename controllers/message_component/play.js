@@ -34,7 +34,8 @@ import {
   EmbedBuilder
 } from "discord.js"
 import { mostrarKills } from "../../hg/utils.js"
-import { setPartidaActiva } from "../../app.js"
+import { clearGuildPlayLanguage, getGuildPlayLanguage, setPartidaActiva } from "../../app.js"
+import { getModeLabel, tPlay } from "../play_i18n.js";
 const guildGameStates = new Map();
 
 function getGuildIdFromReq(req) {
@@ -66,6 +67,7 @@ export function resetGuildGameState(guildId) {
 
 export async function messagePlay_1(req, res, client) {
   const guildId = getGuildIdFromReq(req);
+  const language = getGuildPlayLanguage(guildId);
   const gameState = getGuildGameState(guildId);
   const players = gameState.players;
   let newPlayer;
@@ -132,7 +134,10 @@ export async function messagePlay_1(req, res, client) {
       embeds:
         [new EmbedBuilder()
           .setColor(color)
-          .setDescription(`${players.length} Jugadores unidos\n ${jugadoresUnidos}`)
+          .setDescription(tPlay(language, "joined_count", {
+            count: players.length,
+            playersList: jugadoresUnidos,
+          }))
           .setTimestamp()
           .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
         ],
@@ -140,14 +145,14 @@ export async function messagePlay_1(req, res, client) {
 
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: { content: `⚔ ${nick} se unió a la batalla` }, // 🎃
+      data: { content: tPlay(language, "joined_battle", { nick }) }, // 🎃
     });
   }
   else {
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
-        content: `Ya te has unido a esta partida`,
+        content: tPlay(language, "already_joined"),
         flags: InteractionResponseFlags.EPHEMERAL
       }
     })
@@ -156,6 +161,7 @@ export async function messagePlay_1(req, res, client) {
 
 export async function messagePlay_2(req, res, client) {
   const guildId = getGuildIdFromReq(req);
+  const language = getGuildPlayLanguage(guildId);
   const gameState = getGuildGameState(guildId);
   const players = gameState.players;
   let resultado;
@@ -168,7 +174,7 @@ export async function messagePlay_2(req, res, client) {
   //console.log(req.body);
   if (req.body.message.interaction.user.id === req.body.member.user.id && players.length >= 2 && gameState.modoK == 0) {      //luego >=2
 
-    let modo = (gameState.slowMode) ? "Modo Rapido" : "Modo Lento";
+    let modo = getModeLabel(language, gameState.slowMode);
 
     channel.messages.edit(req.body.message.id, {
       components: [
@@ -178,14 +184,14 @@ export async function messagePlay_2(req, res, client) {
             {
               type: MessageComponentTypes.BUTTON,
               custom_id: "my_button",
-              label: "Unirse a la batalla",
+              label: tPlay(language, "join_button"),
               style: ButtonStyleTypes.PRIMARY,
               disabled: true
             },
             {
               type: MessageComponentTypes.BUTTON,
               custom_id: "my_button_begin",
-              label: "Comenzar",
+              label: tPlay(language, "begin_button"),
               style: ButtonStyleTypes.SUCCESS,
               disabled: true
             },
@@ -203,7 +209,7 @@ export async function messagePlay_2(req, res, client) {
 
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: { content: `Se viene la batalla` },
+      data: { content: tPlay(language, "battle_coming") },
     });
 
     setPartidaActiva(2, guildId);
@@ -229,7 +235,7 @@ export async function messagePlay_2(req, res, client) {
         ]
      }); */
     color = randomHexColor();
-    embed = generarEmbedTexto(color, `Hay ${cantidadConVida} jugadores con vida`);
+    embed = generarEmbedTexto(color, tPlay(language, "alive_count", { count: cantidadConVida }));
     channel.send({ embeds: [embed] });
 
     //Inicio del juego
@@ -280,7 +286,11 @@ export async function messagePlay_2(req, res, client) {
           ]
     });*/
     await sleep(2000);
-    embed = generarEmbedTexto(color, "Queda" + (cantidadConVida != 1 ? "n" : "") + ` ${cantidadConVida} jugador` + (cantidadConVida != 1 ? "es" : "") + " con vida.");
+    embed = generarEmbedTexto(color, tPlay(language, "remaining_count", {
+      count: cantidadConVida,
+      pluralN: cantidadConVida != 1 ? "n" : "",
+      pluralEs: cantidadConVida != 1 ? "es" : "",
+    }));
     channel.send({ embeds: [embed] });
 
     let nroRonda = 1;
@@ -305,7 +315,11 @@ export async function messagePlay_2(req, res, client) {
             displayWinnerTeam(channel, check[0].getTeam(), req.body.channel.guild_id, players);
             await sleep(3000);
             console.log(` Los ganadores son ${check[0].getNombre()}, ${check[1].getNombre()} y ${check[2].getNombre()}`);  //despues hacerlo imagen
-            embed = generarEmbedTexto(color, ` Los ganadores son ${check[0].getNombre()}, ${check[1].getNombre()} y ${check[2].getNombre()}`);
+            embed = generarEmbedTexto(color, tPlay(language, "winners_three", {
+              a: check[0].getNombre(),
+              b: check[1].getNombre(),
+              c: check[2].getNombre(),
+            }));
             channel.send({ embeds: [embed] });
             let finalKills = mostrarKills(players);
             embed2 = generarEmbedDescripcion(color, finalKills);
@@ -323,7 +337,10 @@ export async function messagePlay_2(req, res, client) {
             displayWinnerTeam(channel, check[0].getTeam(), req.body.channel.guild_id, players);
             await sleep(3000);
             console.log(` Los ganadores son ${check[0].getNombre()} y ${check[1].getNombre()}`);
-            embed = generarEmbedTexto(color, ` Los ganadores son ${check[0].getNombre()} y ${check[1].getNombre()}`);
+            embed = generarEmbedTexto(color, tPlay(language, "winners_two", {
+              a: check[0].getNombre(),
+              b: check[1].getNombre(),
+            }));
             channel.send({ embeds: [embed] });
             let finalKills = mostrarKills(players);
             embed2 = generarEmbedDescripcion(color, finalKills);
@@ -398,7 +415,7 @@ export async function messagePlay_2(req, res, client) {
       displayWinnerTeam(channel, ganador.getTeam(), req.body.channel.guild_id, players);
       await sleep(3000);
       console.log(` El ganador es ${ganador.getNombre()}`);
-      embed = generarEmbedTexto(color, ` El ganador es ${ganador.getNombre()}`);
+      embed = generarEmbedTexto(color, tPlay(language, "winner_one", { name: ganador.getNombre() }));
       channel.send({ embeds: [embed] });
       let finalKills = mostrarKills(players);
       embed2 = generarEmbedDescripcion(color, finalKills);
@@ -409,7 +426,7 @@ export async function messagePlay_2(req, res, client) {
     if (cantidadConVida < 1) {
       await sleep(3000);
       console.log(` Parece que esta vez no hubo ganadores...`);
-      embed = generarEmbedTexto(color, ` Parece que esta vez no hubo ganadores...`);
+      embed = generarEmbedTexto(color, tPlay(language, "no_winners"));
       channel.send({ embeds: [embed] });
       await sleep(3000);
       let finalKills = mostrarKills(players);
@@ -442,6 +459,7 @@ export async function messagePlay_2(req, res, client) {
     reiniciarJugadoresFake();
     limpiarTeams();
     setPartidaActiva(0, guildId);
+    clearGuildPlayLanguage(guildId);
 
     /////////////////////////////////
 
@@ -450,7 +468,7 @@ export async function messagePlay_2(req, res, client) {
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
-        content: `Se necesitan al menos 2 jugadores para comenzar.`,
+        content: tPlay(language, "need_two_players"),
         flags: InteractionResponseFlags.EPHEMERAL
       }
     })
@@ -460,14 +478,14 @@ export async function messagePlay_2(req, res, client) {
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
-        content: `Modo K activado.`,
+        content: tPlay(language, "mode_k_enabled"),
         flags: InteractionResponseFlags.EPHEMERAL
       }
     })
   } else if (req.body.message.interaction.user.id === req.body.member.user.id && players.length >= 1 && gameState.modoK == 1) {
 
 
-    let modo = (gameState.slowMode) ? "Modo Rapido" : "Modo Lento";
+    let modo = getModeLabel(language, gameState.slowMode);
 
     channel.messages.edit(req.body.message.id, {
       components: [
@@ -477,14 +495,14 @@ export async function messagePlay_2(req, res, client) {
             {
               type: MessageComponentTypes.BUTTON,
               custom_id: "my_button",
-              label: "Unirse a la batalla",
+              label: tPlay(language, "join_button"),
               style: ButtonStyleTypes.PRIMARY,
               disabled: true
             },
             {
               type: MessageComponentTypes.BUTTON,
               custom_id: "my_button_begin",
-              label: "Comenzar",
+              label: tPlay(language, "begin_button"),
               style: ButtonStyleTypes.SUCCESS,
               disabled: true
             },
@@ -502,13 +520,14 @@ export async function messagePlay_2(req, res, client) {
 
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: { content: `Comienza la partida` },
+      data: { content: tPlay(language, "game_starting") },
     });
 
     setPartidaActiva(2, guildId);
     color = randomHexColor();
-    embed = generarEmbedTexto(color, `Todos se mataron y K ganó`);
+    embed = generarEmbedTexto(color, tPlay(language, "mode_k_win"));
     setPartidaActiva(0, guildId);
+    clearGuildPlayLanguage(guildId);
     resetGuildGameState(guildId);
     reiniciarContador();
     reiniciarJugadoresFake();
@@ -519,7 +538,7 @@ export async function messagePlay_2(req, res, client) {
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
-        content: `No tienes permisos para comenzar la batalla.`,
+        content: tPlay(language, "no_permission_start_battle"),
         flags: InteractionResponseFlags.EPHEMERAL
       }
     })
@@ -531,13 +550,14 @@ export async function messagePlay_2(req, res, client) {
 
 export async function messageSlowMode(req, res, client) {
   const guildId = getGuildIdFromReq(req);
+  const language = getGuildPlayLanguage(guildId);
   const gameState = getGuildGameState(guildId);
   if (req.body.message.interaction.user.id === req.body.member.user.id) {
     gameState.slowMode = !gameState.slowMode;
 
     const channel = client.channels.cache.get(`${req.body.channel_id}`);
 
-    let modo = (gameState.slowMode) ? "Modo Rapido" : "Modo Lento";
+    let modo = getModeLabel(language, gameState.slowMode);
 
     channel.messages.edit(req.body.message.id, {
       components: [
@@ -547,13 +567,13 @@ export async function messageSlowMode(req, res, client) {
             {
               type: MessageComponentTypes.BUTTON,
               custom_id: "my_button",
-              label: "Unirse a la batalla",
+              label: tPlay(language, "join_button"),
               style: ButtonStyleTypes.PRIMARY,
             },
             {
               type: MessageComponentTypes.BUTTON,
               custom_id: "my_button_begin",
-              label: "Comenzar",
+              label: tPlay(language, "begin_button"),
               style: ButtonStyleTypes.SUCCESS,
             },
             {
@@ -569,14 +589,16 @@ export async function messageSlowMode(req, res, client) {
 
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: { content: `Se cambió el modo a Modo ` + (gameState.slowMode ? "Lento" : "Rapido") },
+      data: { content: tPlay(language, "mode_changed", {
+        mode: gameState.slowMode ? tPlay(language, "slow_mode") : tPlay(language, "fast_mode"),
+      }) },
     });
 
   } else {
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
-        content: `No tienes permisos para cambiar el modo de la partida.`,
+        content: tPlay(language, "no_permission_change_mode"),
         flags: InteractionResponseFlags.EPHEMERAL
       }
     })
@@ -585,6 +607,7 @@ export async function messageSlowMode(req, res, client) {
 
 export async function messageJoin(req, res, client) {
   let guildId = getGuildIdFromReq(req);
+  const language = getGuildPlayLanguage(guildId);
   const gameState = getGuildGameState(guildId);
   const players = gameState.players;
   let newPlayer;
@@ -614,14 +637,14 @@ export async function messageJoin(req, res, client) {
   if (resultado === 1) {
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: { content: `:crossed_swords: ${nick} se unió a la batalla` }, //🎃
+      data: { content: tPlay(language, "joined_battle", { nick }) }, //🎃
     });
   }
   else {
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
-        content: `Ya te has unido a esta partida`,
+        content: tPlay(language, "already_joined"),
         flags: InteractionResponseFlags.EPHEMERAL
       }
     })

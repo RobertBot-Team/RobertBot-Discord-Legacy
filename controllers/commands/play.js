@@ -13,7 +13,8 @@ import {
 } from "../../utils.js"
 import { limpiarPlayersPorGuild } from "../message_component/play.js"
 import { EmbedBuilder } from "discord.js";
-import { getPartidaActiva, setPartidaActiva } from "../../app.js"
+import { clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, setGuildPlayLanguage, setPartidaActiva } from "../../app.js"
+import { getModeLabel, tPlay } from "../play_i18n.js";
 
 export function play4(req, res, partidaActiva, client){
   let color = randomHexColor();
@@ -173,15 +174,19 @@ const sendMessage = async (res, message) => {
 }
 
 
-export async function play(req, res, client){
+export async function play(req, res, client, selectedLanguage){
   const channel = client.channels.cache.get(`${req.body.channel_id}`);
   const guildId = req.body.guild_id || req.body.channel?.guild_id || channel?.guildId || "global";
+  const language = selectedLanguage || getGuildPlayLanguage(guildId);
   let color = randomHexColor();
   let idTimeout;
+
+  setGuildPlayLanguage(language, guildId);
+
   let messagee = res.send({
     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
     data: {
-      content: "Se ha iniciado una nueva partida de Los Juegos del Hambre",
+      content: tPlay(language, "game_started"),
       
       // Buttons are inside of action rows
       components: [
@@ -192,21 +197,21 @@ export async function play(req, res, client){
               type: MessageComponentTypes.BUTTON,
               // Value for your app to identify the button
               custom_id: "my_button",
-              label: "Unirse a la batalla",
+              label: tPlay(language, "join_button"),
               style: ButtonStyleTypes.PRIMARY
             },
             {
               type: MessageComponentTypes.BUTTON,
               // Value for your app to identify the button
               custom_id: "my_button_begin",
-              label: "Comenzar",
+              label: tPlay(language, "begin_button"),
               style: ButtonStyleTypes.SUCCESS
             },
             {
               type: MessageComponentTypes.BUTTON,
               // Value for your app to identify the button
               custom_id: "my_button_slow_mode",
-              label: "Modo Lento",
+              label: getModeLabel(language, false),
               style: ButtonStyleTypes.SECONDARY
             }
           ],
@@ -215,7 +220,7 @@ export async function play(req, res, client){
           
           embeds: [ new EmbedBuilder()
           .setColor(color)
-          .setDescription(`Jugadores unidos`)
+          .setDescription(tPlay(language, "joined_players"))
           .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png'})
         ],
 
@@ -226,7 +231,7 @@ export async function play(req, res, client){
     
     setPartidaActiva(1, guildId);
 
-    const filter = (message) => message.author.id == '1067669524192702464' && message.content == "Se ha iniciado una nueva partida de Los Juegos del Hambre";
+    const filter = (message) => message.author.id == '1067669524192702464' && message.content == tPlay(language, "game_started");
     const collector = channel.createMessageCollector({ filter, time: 7000 });
     collector.on('collect', (message) => {
       console.log(`Collected message: ${message.content}`);
@@ -250,7 +255,7 @@ return messagee;
     
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {content: `Ya hay una partida en curso`,
+        data: {content: tPlay(language, "already_running"),
               flags: InteractionResponseFlags.EPHEMERAL
               }
       })
@@ -514,9 +519,10 @@ async function desactivarComando(channel,msgid,guildId){
   //const messageFetched = await channel.messages.fetch(msgid);
   //console.log(messageFetched.components);
   if(getPartidaActiva(guildId) == 1){  //si es 1 está en espera, si es 2 ya comenzó
+        const language = getGuildPlayLanguage(guildId);
             
         channel.messages.edit(msgid,{
-            content: "Se ha acabado el tiempo de espera. Por favor inicia una nueva partida.",
+            content: tPlay(language, "wait_timeout"),
           
           // Buttons are inside of action rows
           components: [
@@ -527,7 +533,7 @@ async function desactivarComando(channel,msgid,guildId){
                   type: MessageComponentTypes.BUTTON,
                   // Value for your app to identify the button
                   custom_id: "my_button",
-                  label: "Unirse a la batalla",
+                  label: tPlay(language, "join_button"),
                   style: ButtonStyleTypes.PRIMARY,
                   disabled: true
                 },
@@ -535,7 +541,7 @@ async function desactivarComando(channel,msgid,guildId){
                   type: MessageComponentTypes.BUTTON,
                   // Value for your app to identify the button
                   custom_id: "my_button_begin",
-                  label: "Comenzar",
+                  label: tPlay(language, "begin_button"),
                   style: ButtonStyleTypes.SUCCESS,
                   disabled: true
                 }
@@ -548,7 +554,8 @@ async function desactivarComando(channel,msgid,guildId){
             reiniciarContador();
             limpiarTeams();
             reiniciarJugadoresFake();
-                setPartidaActiva(0, guildId);
+            setPartidaActiva(0, guildId);
+            clearGuildPlayLanguage(guildId);
             //no se reinicia slowMode ni modoK porque aqui no estan las variables
             //espero que no moleste en el futuro (?)
         }
@@ -556,9 +563,11 @@ async function desactivarComando(channel,msgid,guildId){
 
 
           export function partidaEnCurso(req, res, client){
+        const guildId = req.body.guild_id || req.body.channel?.guild_id || "global";
+        const language = getGuildPlayLanguage(guildId);
         res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-          data: {content: `Ya hay una partida en curso`,
+          data: {content: tPlay(language, "already_running"),
                 flags: InteractionResponseFlags.EPHEMERAL
                 }
         })
