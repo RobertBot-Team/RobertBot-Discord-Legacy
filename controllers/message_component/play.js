@@ -34,7 +34,7 @@ import {
   EmbedBuilder
 } from "discord.js"
 import { mostrarKills } from "../../hg/utils.js"
-import { clearGuildPlayLanguage, getGuildPlayLanguage, setPartidaActiva } from "../../app.js"
+import { clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, setPartidaActiva } from "../../app.js"
 import { getModeLabel, tPlay } from "../play_i18n.js";
 const guildGameStates = new Map();
 
@@ -261,6 +261,7 @@ export async function messagePlay_2(req, res, client) {
     //primera ronda de loot
     //for(let loop = 0;loop<5;loop++){
     for (let i = 0; i < cantidadConVida; i++) {
+      if(getPartidaActiva(guildId) == 0){return;}
       await sleep(10000);
       let jugador = players[i];
       let evento = `Ronda inicial de Loot - ${jugador.getNombre()}`;
@@ -305,6 +306,8 @@ export async function messagePlay_2(req, res, client) {
       console.log(`• Ronda ${nroRonda}.`);
       shuffleJugadores(players);      //por cada ronda, reordeno la lista para que ataquen en orden random
       for (let j = 0; j < players.length; j++) {
+
+        if(getPartidaActiva(guildId) == 0){return;}
 
         cantidadConVida = calcularVivos(players);
 
