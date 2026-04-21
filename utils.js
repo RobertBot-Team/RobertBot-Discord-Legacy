@@ -2227,7 +2227,7 @@ let lootArmaEstetica = async (jugador, arma, players, req, channel) => {
 
 };
 
-let lootGenerico = async (jugador, arma, players, req, channel) => {
+let lootGenerico = async (jugador, arma, players, req, channel, idioma) => {
   //console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
   let resultado;
 
