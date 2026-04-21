@@ -272,7 +272,7 @@ export async function messagePlay_2(req, res, client) {
       await sleep(2000);
       //message.edit("Editado");
       console.log(evento);
-      await rondaLoot(req, jugador, players, channel, 1, gameState.slowMode);
+      await rondaLoot(req, jugador, players, channel, 1, language, gameState.slowMode);
     }
     await sleep(2000);
     mostrarTeams(channel, req.body.channel.guild_id, players);
@@ -370,22 +370,22 @@ export async function messagePlay_2(req, res, client) {
             //si el jugador no tiene arma, tiene 80% de chances de lootear
             if (probabilidad < 0.80) {
               console.log(`> Loot`);
-              await rondaLoot(req, jugador, players, channel, nroEvento, gameState.slowMode);
+              await rondaLoot(req, jugador, players, channel, nroEvento, language, gameState.slowMode);
             } else {
               console.log(`> Ataque`);
               let copia = copiarJugadores(players);
-              await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, gameState.slowMode);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random                      
+              await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, language, gameState.slowMode);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random                      
             }
           }
           //si el jugador tiene arma, tiene 80% de chances de atacar
           else {
             if (probabilidad < 0.2 - sumarProbabilidad(nroEvento, players.length, 20, gameState.slowMode)) {
               console.log(`> Loot`);
-              await rondaLoot(req, jugador, players, channel, nroEvento, gameState.slowMode);
+              await rondaLoot(req, jugador, players, channel, nroEvento, language, gameState.slowMode);
             } else {
               console.log(`> Ataque`);
               let copia = copiarJugadores(players);
-              await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, gameState.slowMode);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random
+              await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, language, gameState.slowMode);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random
             }
           }
         }
