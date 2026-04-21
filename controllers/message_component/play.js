@@ -170,6 +170,8 @@ export async function messagePlay_2(req, res, client) {
   let embed;
   let embed2;
 
+  console.log(`Idioma: ${language}`);
+
   const channel = client.channels.cache.get(`${req.body.channel_id}`);
   //console.log(req.body);
   if (req.body.message.interaction.user.id === req.body.member.user.id && players.length >= 2 && gameState.modoK == 0) {      //luego >=2
