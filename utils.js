@@ -14,13 +14,20 @@ import {
 } from "@napi-rs/canvas";
 import { AttachmentBuilder } from "discord.js";
 import { eventosLootGenerico } from "./hg/lootGenerico.js";
+import { eventosLootGenerico as eventosLootGenericoEn } from "./hg/EN/ENlootGenerico.js";
 import { eventosAleatorios1 } from "./hg/eventosAleatorios1.js";
+import { eventosAleatorios1 as eventosAleatorios1En } from './hg/EN/ENeventosAleatorios1.js';
 import { eventosAleatorios2 } from "./hg/eventosAleatorios2.js";
+import { eventosAleatorios2 as eventosAleatorios2En } from "./hg/EN/ENeventosAleatorios2.js";
 import { eventoslootEspecificoxCategoria } from "./hg/lootEspecificoxCategoria.js"
+import { eventoslootEspecificoxCategoria as eventoslootEspecificoxCategoriaEn } from "./hg/EN/ENlootEspecificoxCategoria.js"
 import { eventosLootArmaEstetica } from "./hg/lootArmasEsteticas.js"
 import { eventosAtaqueEspecificoxCategoria } from "./hg/ataqueEspecificoxCategoria.js"
+import { eventosAtaqueEspecificoxCategoria as eventosAtaqueEspecificoxCategoriaEn } from "./hg/EN/ENataqueEspecificoxCategoria.js"
 import { ataquesGenericosConArma } from "./hg/ataqueGenericoConArma.js"
+import { ataquesGenericosConArma as ataquesGenericosConArmaEn } from "./hg/EN/ENataqueGenericoConArma.js"
 import { ataquesGenericosSinArma } from "./hg/ataqueGenericoSinArma.js"
+import { ataquesGenericosSinArma as ataquesGenericosSinArmaEn } from "./hg/EN/ENataqueGenericoSinArma.js"
 import { EmbedBuilder } from "discord.js";
 import fs from 'fs';
 import nthline from 'nthline';
@@ -2173,21 +2180,44 @@ export async function muerteJugador(guildID, channel, players) {
 
 ////////////
 
-let eventoAleatorio1 = async (jugador, players, req, channel) => {
+let eventoAleatorio1 = async (jugador, players, req, channel, idioma) => {
   let resultado;
   console.log(" Sucedió un evento aleatorio 1");
-  do {
-    var rand = parseInt(Math.random() * eventosAleatorios1.length);
-    console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
-    resultado = await eventosAleatorios1[rand](jugador, players, maxHP, teams, req, channel); //le paso el array original
-  }
-  while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
+  if(idioma === "es"){
 
+    console.log("Eventos aleatorios 1 en español");
+
+    do {
+      var rand = parseInt(Math.random() * eventosAleatorios1.length);
+      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      resultado = await eventosAleatorios1[rand](jugador, players, maxHP, teams, req, channel); //le paso el array original
+    }
+    while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
+
+  }else{
+
+    console.log("Eventos aleatorios 1 en ingles");
+
+    do {
+      var rand = parseInt(Math.random() * eventosAleatorios1En.length);
+      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      resultado = await eventosAleatorios1En[rand](jugador, players, maxHP, teams, req, channel); //le paso el array original
+    }
+    while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
+
+
+  }
 };
 
-let lootEspecificoxCategoria = async (jugador, arma, players, req, channel) => {
+let lootEspecificoxCategoria = async (jugador, arma, players, req, channel, idioma) => {
 
-  await eventoslootEspecificoxCategoria[0](jugador, players, arma, req, channel); //le paso el array original
+  if(idioma === "es"){
+    console.log("Eventos loot especifico por categoria en español");
+    await eventoslootEspecificoxCategoria[0](jugador, players, arma, req, channel); //le paso el array original
+  }else{
+    console.log("Eventos loot especifico por categoria en ingles");
+    await eventoslootEspecificoxCategoriaEn[0](jugador, players, arma, req, channel); //le paso el array original
+  }
 
 };
 
@@ -2200,23 +2230,48 @@ let lootArmaEstetica = async (jugador, arma, players, req, channel) => {
 let lootGenerico = async (jugador, arma, players, req, channel) => {
   //console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
   let resultado;
-  do {
-    var rand = parseInt(Math.random() * eventosLootGenerico.length);
-    console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
-    resultado = await eventosLootGenerico[rand](jugador, players, arma, maxHP, req, channel); //le paso el array original
+
+  if(idioma === "es"){
+    console.log("Eventos loot generico en español");
+    do {
+      var rand = parseInt(Math.random() * eventosLootGenerico.length);
+      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      resultado = await eventosLootGenerico[rand](jugador, players, arma, maxHP, req, channel); //le paso el array original
+    }
+    while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
+  }else{
+    console.log("Eventos loot generico en ingles");
+    do {
+      var rand = parseInt(Math.random() * eventosLootGenerico.length);
+      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      resultado = await eventosLootGenericoEn[rand](jugador, players, arma, maxHP, req, channel); //le paso el array original
+    }
+    while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
   }
-  while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 };
 
-let eventoAleatorio2 = async (jugador, players, req, channel, playersReal) => {
+let eventoAleatorio2 = async (jugador, players, req, channel, playersReal, idioma) => {
   let resultado;
   console.log(" Sucedió un evento aleatorio 2");
-  do {
-    var rand = parseInt(Math.random() * eventosAleatorios2.length);
-    console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
-    resultado = await eventosAleatorios2[rand](jugador, players, maxHP, teams, req, channel, playersReal); //le paso el array original
+  if(idioma === "es"){
+    console.log("Eventos aleatorios 2 en español");
+    do {
+      var rand = parseInt(Math.random() * eventosAleatorios2.length);
+      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      resultado = await eventosAleatorios2[rand](jugador, players, maxHP, teams, req, channel, playersReal); //le paso el array original
+    }
+    while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento 
+  }else{
+    console.log("Eventos aleatorios 2 en ingles");
+    do {
+      var rand = parseInt(Math.random() * eventosAleatorios2.length);
+      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      resultado = await eventosAleatorios2En[rand](jugador, players, maxHP, teams, req, channel, playersReal); //le paso el array original
+    }
+    while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
+    
+
   }
-  while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 };
 
 let ataqueEspecificoxCategoria1 = (jugador, victima) => {
@@ -2238,9 +2293,15 @@ let ataqueEspecificoxCategoria1 = (jugador, victima) => {
   }
 };
 
-let ataqueEspecificoxCategoria = async (jugador, copia, victima, req, channel, realPlayers) => {
+let ataqueEspecificoxCategoria = async (jugador, copia, victima, req, channel, realPlayers, idioma) => {
 
-  await eventosAtaqueEspecificoxCategoria[0](jugador, copia, victima, req, channel, realPlayers); //le paso una COPIA, luego buscar la victima original
+  if(idioma === "es"){
+    console.log("Eventos ataque especifico por categoria en español");
+    await eventosAtaqueEspecificoxCategoria[0](jugador, copia, victima, req, channel, realPlayers); //le paso una COPIA, luego buscar la victima original
+  }else{
+    console.log("Eventos ataque especifico por categoria en ingles");
+    await eventosAtaqueEspecificoxCategoriaEn[0](jugador, copia, victima, req, channel, realPlayers); //le paso una COPIA, luego buscar la victima original
+  }
 
 };
 
@@ -2265,15 +2326,27 @@ let ataqueGenericoConArma1 = (jugador, victima) => {
   }
 };
 
-async function ataqueGenericoConArma(jugador, players, victima, req, channel, playersOriginal) {
+async function ataqueGenericoConArma(jugador, players, victima, req, channel, playersOriginal, idioma) {
   let resultado;
   console.log(`Ataque generico con arma`);
-  do {
-    var rand = parseInt(Math.random() * ataquesGenericosConArma.length);
-    console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
-    resultado = await ataquesGenericosConArma[rand](jugador, players, victima, req, channel, playersOriginal); //le paso una copia
+  if(idioma === "es"){
+    console.log("Eventos ataque generico con arma en español");
+    do {
+      var rand = parseInt(Math.random() * ataquesGenericosConArma.length);
+      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      resultado = await ataquesGenericosConArma[rand](jugador, players, victima, req, channel, playersOriginal); //le paso una copia
+    }
+    while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
+  }else{
+    console.log("Eventos ataque generico con arma en ingles");
+    do {
+      var rand = parseInt(Math.random() * ataquesGenericosConArma.length);
+      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      resultado = await ataquesGenericosConArmaEn[rand](jugador, players, victima, req, channel, playersOriginal); //le paso una copia
+    }
+    while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
+
   }
-  while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 };
 
 let ataqueGenericoSinArma1 = (jugador, victima) => {
@@ -2290,26 +2363,37 @@ let ataqueGenericoSinArma1 = (jugador, victima) => {
   }
 };
 
-async function ataqueGenericoSinArma(jugador, players, victima, req, channel, playersOriginal) {
+async function ataqueGenericoSinArma(jugador, players, victima, req, channel, playersOriginal, idioma) {
   let resultado;
   console.log(`Ataque generico sin arma`);
-  do {
-    var rand = parseInt(Math.random() * ataquesGenericosSinArma.length);
-    console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
-    resultado = await ataquesGenericosSinArma[rand](jugador, players, victima, req, channel, playersOriginal); //le paso una copia
+  if(idioma === "es"){
+    console.log("Eventos ataque generico sin arma en español");
+    do {
+      var rand = parseInt(Math.random() * ataquesGenericosSinArma.length);
+      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      resultado = await ataquesGenericosSinArma[rand](jugador, players, victima, req, channel, playersOriginal); //le paso una copia
+    }
+    while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
+  }else{
+    console.log("Eventos ataque generico sin arma en ingles");
+    do {
+      var rand = parseInt(Math.random() * ataquesGenericosSinArma.length);
+      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      resultado = await ataquesGenericosSinArmaEn[rand](jugador, players, victima, req, channel, playersOriginal); //le paso una copia
+    }
+    while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
   }
-  while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 };
 
 
 // ronda de loot
-export async function rondaLoot(req, jugador, players, channel, nroEvento, modo = false) {
+export async function rondaLoot(req, jugador, players, channel, nroEvento, idioma = "en", modo = false) {
   //let armaVieja = jugador.getArma();
   let probabilidad = Math.random();
   let probabilidadExtra = Math.random();
 
   if (probabilidad < 0.2 - sumarProbabilidad(nroEvento, players.length, 20, modo)) {
-    await eventoAleatorio1(jugador, players, req, channel);
+    await eventoAleatorio1(jugador, players, req, channel, idioma);
   } else {
     let armaAux = generarArma()
     let arma = new Arma(armaAux.nombre, armaAux.categoria, armaAux.danio, armaAux.usos, armaAux.pronombre, armaAux.plural);
@@ -2318,9 +2402,9 @@ export async function rondaLoot(req, jugador, players, channel, nroEvento, modo 
       await lootArmaEstetica(jugador, arma, players, req, channel);
     } else {
       if (arma.categoria && probabilidadExtra < 0.75) {
-        await lootEspecificoxCategoria(jugador, arma, players, req, channel);
+        await lootEspecificoxCategoria(jugador, arma, players, req, channel, idioma);
       } else {
-        await lootGenerico(jugador, arma, players, req, channel);
+        await lootGenerico(jugador, arma, players, req, channel, idioma);
       }
     }
 
@@ -2332,32 +2416,32 @@ export async function rondaLoot(req, jugador, players, channel, nroEvento, modo 
 };
 
 //ronda de ataque
-export async function rondaAtaque(req, jugador, jugadores, cantidadConVida, channel, playersOriginal, nroEvento, modo = false) {
+export async function rondaAtaque(req, jugador, jugadores, cantidadConVida, channel, playersOriginal, nroEvento, idioma = "en", modo = false) {
   if (jugador.alive == 1) {
     if (cantidadConVida >= 2) {
       let probabilidad = Math.random();
       let probabilidadAleatorios = Math.random();
       if (probabilidad < 0.2) {
         if (probabilidadAleatorios < 0.5 - sumarProbabilidad(nroEvento, playersOriginal.length, 50, modo)) {
-          await eventoAleatorio1(jugador, playersOriginal, req, channel);
+          await eventoAleatorio1(jugador, playersOriginal, req, channel, idioma);
         } else {
-          await eventoAleatorio2(jugador, jugadores, req, channel, playersOriginal);
+          await eventoAleatorio2(jugador, jugadores, req, channel, playersOriginal, idioma);
         }
       } else {
         let victima = buscarJugadorOtroTeam(jugador, jugadores);
         if (victima == null) { console.log("hay problemas"); }
         if (!jugador.arma) {
-          await ataqueGenericoSinArma(jugador, jugadores, victima, req, channel, playersOriginal);
+          await ataqueGenericoSinArma(jugador, jugadores, victima, req, channel, playersOriginal, idioma);
         } else {
           if (jugador.arma.categoria) {
             let probabilidadEspecial = Math.random();
             if (probabilidadEspecial < 0.4) {
-              await ataqueEspecificoxCategoria(jugador, jugadores, victima, req, channel, playersOriginal);
+              await ataqueEspecificoxCategoria(jugador, jugadores, victima, req, channel, playersOriginal, idioma);
             } else {
-              await ataqueGenericoConArma(jugador, jugadores, victima, req, channel, playersOriginal);
+              await ataqueGenericoConArma(jugador, jugadores, victima, req, channel, playersOriginal, idioma);
             }
           } else {
-            await ataqueGenericoConArma(jugador, jugadores, victima, req, channel, playersOriginal);
+            await ataqueGenericoConArma(jugador, jugadores, victima, req, channel, playersOriginal, idioma);
           }
         }
       }
