@@ -31,7 +31,7 @@ import { ataquesGenericosSinArma as ataquesGenericosSinArmaEn } from "./hg/EN/EN
 import { EmbedBuilder } from "discord.js";
 import fs from 'fs';
 import nthline from 'nthline';
-import { returnClient } from './app.js';
+import { returnClient, getGuildPlayLanguage } from './app.js';
 import { buscarPorID } from './hg/utils.js';
 
 var contador = 0;
