@@ -4,12 +4,12 @@ import {
   pronombreUnUnaUnosUnas,
   pronombreOAOsAs,
   pronombreElLaLosLas
-} from "./utils.js"
+} from "../utils.js"
 import {
   createObject,
   cargarAvatar,
   funcionCrearImagen
-} from "../utils.js";
+} from "../../utils.js";
 
 var eventoslootEspecificoxCategoria = [];
 

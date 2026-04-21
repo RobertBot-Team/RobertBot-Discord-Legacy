@@ -7,8 +7,8 @@ import {
   pronombreUnUnaUnosUnas,
   pluralS,
   pluralQuedar,
-} from "./utils.js"
-import { createObject, funcionCrearImagen, cargarAvatar, muerteJugador } from "../utils.js";
+} from "../utils.js"
+import { createObject, funcionCrearImagen, cargarAvatar, muerteJugador } from "../../utils.js";
 
 var ataquesGenericosConArma = [];
 

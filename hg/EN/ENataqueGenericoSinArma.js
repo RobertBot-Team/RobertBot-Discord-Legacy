@@ -5,8 +5,8 @@ import {
   pronombreOAOsAs,
   pluralS,
   pluralQuedar,
-} from "./utils.js"
-import { createObject, funcionCrearImagen, cargarAvatar, muerteJugador } from "../utils.js";
+} from "../utils.js"
+import { createObject, funcionCrearImagen, cargarAvatar, muerteJugador } from "../../utils.js";
 
 var ataquesGenericosSinArma = [];
 

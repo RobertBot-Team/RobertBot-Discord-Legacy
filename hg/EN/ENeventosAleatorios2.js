@@ -1,7 +1,7 @@
 /*------------ eventos aleatorios 2 ------------*/
-import { buscarTeamDe2, copiarJugadores, buscarPorID, danioExtra, buscarJugador, buscarJugadorOtroTeam, buscarJugadorDistintoA2, buscarUnMuerto, shuffleJugadores, porcentajeDeVidaRandom,pluralS,pronombreElLaLosLas } from "./utils.js";
-import {Team,Jugador} from "./clases.js";
-import {createObject, funcionDePrueba, cargarAvatar, funcionCrearImagen, funcionCrearImagenCero, muerteJugador} from "../utils.js";
+import { buscarTeamDe2, copiarJugadores, buscarPorID, danioExtra, buscarJugador, buscarJugadorOtroTeam, buscarJugadorDistintoA2, buscarUnMuerto, shuffleJugadores, porcentajeDeVidaRandom,pluralS,pronombreElLaLosLas } from "../utils.js";
+import {Team,Jugador} from "../clases.js";
+import {createObject, funcionDePrueba, cargarAvatar, funcionCrearImagen, funcionCrearImagenCero, muerteJugador} from "../../utils.js";
 
 var eventosAleatorios2 = [];
 

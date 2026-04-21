@@ -1,7 +1,7 @@
 /*------------ eventos aleatorios 1 ------------*/
-import { buscarTeamDe2, copiarJugadores, buscarPorID, imprimirTeams, buscarJugador, buscarJugadorDistintoA2, shuffleJugadores, porcentajeDeVidaRandom, pluralS, randomSelector} from "./utils.js";
-import {Team, Jugador} from "./clases.js";
-import {createObject, buscarUnMuerto, funcionDePrueba, leerArchivoDevolverLinea, get_line, get_food, get_lineOfFile, cargarAvatar, funcionCrearImagen, generarJugadorFake, muerteJugador, buscarTresTeamsSolo, eliminarTeam} from "../utils.js";
+import { buscarTeamDe2, copiarJugadores, buscarPorID, imprimirTeams, buscarJugador, buscarJugadorDistintoA2, shuffleJugadores, porcentajeDeVidaRandom, pluralS, randomSelector} from "../utils.js";
+import {Team, Jugador} from "../clases.js";
+import {createObject, buscarUnMuerto, funcionDePrueba, leerArchivoDevolverLinea, get_line, get_food, get_lineOfFile, cargarAvatar, funcionCrearImagen, generarJugadorFake, muerteJugador, buscarTresTeamsSolo, eliminarTeam} from "../../utils.js";
 
 var eventosAleatorios1 = [];
 var totalAdjetivos = 395;

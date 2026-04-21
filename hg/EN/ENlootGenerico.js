@@ -30,13 +30,13 @@ import {
   pronombreUnUnaUnosUnas,
   pronombreOAOsAs,
   pronombreElLaLosLas
-} from "./utils.js"
+} from "../utils.js"
 import {
   createObject,
   funcionDePrueba,
   cargarAvatar,
   funcionCrearImagen
-} from "../utils.js";
+} from "../../utils.js";
 
 var eventosLootGenerico = [];
 

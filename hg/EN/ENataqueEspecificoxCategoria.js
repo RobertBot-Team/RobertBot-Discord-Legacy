@@ -8,13 +8,13 @@ import {
   pronombreOAOsAs,
   pronombreElLaLosLas,
   pluralQuedar
-} from "./utils.js"
+} from "../utils.js"
 import {
   createObject,
   funcionCrearImagen,
   cargarAvatar,
   muerteJugador
-} from "../utils.js";
+} from "../../utils.js";
 
 var eventosAtaqueEspecificoxCategoria = [];
 var maxHP = 1000;
