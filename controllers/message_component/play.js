@@ -261,7 +261,7 @@ export async function messagePlay_2(req, res, client) {
     //primera ronda de loot
     //for(let loop = 0;loop<5;loop++){
     for (let i = 0; i < cantidadConVida; i++) {
-      if(getPartidaActiva(guildId) == 0){return;}
+      if (getPartidaActiva(guildId) == 0) { return; }
       await sleep(10000);
       let jugador = players[i];
       let evento = `Ronda inicial de Loot - ${jugador.getNombre()}`;
@@ -287,10 +287,11 @@ export async function messagePlay_2(req, res, client) {
           ]
     });*/
     await sleep(2000);
+    let pluralSByLanguage = language === "es" ? "es" : "s";
     embed = generarEmbedTexto(color, tPlay(language, "remaining_count", {
       count: cantidadConVida,
       pluralN: cantidadConVida != 1 ? "n" : "",
-      pluralEs: cantidadConVida != 1 ? "es" : "",
+      pluralEs: cantidadConVida != 1 ? pluralSByLanguage : "",
     }));
     channel.send({ embeds: [embed] });
 
@@ -307,7 +308,7 @@ export async function messagePlay_2(req, res, client) {
       shuffleJugadores(players);      //por cada ronda, reordeno la lista para que ataquen en orden random
       for (let j = 0; j < players.length; j++) {
 
-        if(getPartidaActiva(guildId) == 0){return;}
+        if (getPartidaActiva(guildId) == 0) { return; }
 
         cantidadConVida = calcularVivos(players);
 
@@ -592,9 +593,11 @@ export async function messageSlowMode(req, res, client) {
 
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: { content: tPlay(language, "mode_changed", {
-        mode: gameState.slowMode ? tPlay(language, "slow_mode") : tPlay(language, "fast_mode"),
-      }) },
+      data: {
+        content: tPlay(language, "mode_changed", {
+          mode: gameState.slowMode ? tPlay(language, "slow_mode") : tPlay(language, "fast_mode"),
+        })
+      },
     });
 
   } else {

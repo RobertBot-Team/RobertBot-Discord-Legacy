@@ -20,7 +20,7 @@ const PLAY_TRANSLATIONS = {
     mode_k_enabled: "Modo K activado.",
     mode_k_win: "Todos se mataron y K gano",
     no_permission_start_battle: "No tienes permisos para comenzar la batalla.",
-    mode_changed: "Se cambio el modo a Modo {mode}",
+    mode_changed: "Se cambio el modo a {mode}",
     no_permission_change_mode: "No tienes permisos para cambiar el modo de la partida.",
     alive_count: "Hay {count} jugadores con vida",
     remaining_count: "Queda{pluralN} {count} jugador{pluralEs} con vida.",
