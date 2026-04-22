@@ -1,11 +1,12 @@
 class Arma{
-    constructor(nombre,categoria,danio,usos,genero,plural){
+    constructor(nombre,categoria,danio,usos,genero,plural,name){
         this.nombre = nombre;
         this.categoria = categoria;
         this.danio = danio;
         this.usos = usos;
         this.pronombre = genero;
         this.plural = plural;
+        this.name = name;
     };
 };
 
