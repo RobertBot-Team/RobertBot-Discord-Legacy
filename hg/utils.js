@@ -7,7 +7,7 @@ import { eventosLootGenerico } from "./lootGenerico.js";
 import { ataquesGenericosSinArma } from "./ataqueGenericoSinArma.js"
 import { ataquesGenericosConArma } from "./ataqueGenericoConArma.js"
 
-//                     (nombre, categoria, daño base, usos, pronombre, pluralidad)
+//En español               (nombre, categoria, daño base, usos, pronombre, pluralidad)
 const pistola = new Arma("pistola","pistola",190,3,"f","");
 const granada = new Arma("granada","explosivos",480,1,"f","");
 const guitarra = new Arma("guitarra","rompibles",100,1,"f","");
