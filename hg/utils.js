@@ -790,7 +790,7 @@ let englishPronoun = (arma) => {
     const firstLetter = arma["name"][0].toLowerCase();
     const vowels = ["a", "e", "i", "o", "u"];
 
-    return vowels.includes(firstLetter) ? "an" : "a";
+    return vowels.includes(firstLetter) ? "an " : "a ";
 };
 
 let pluralQuedar = (arma) => {
