@@ -793,6 +793,11 @@ let englishPronoun = (arma) => {
     return vowels.includes(firstLetter) ? "an " : "a ";
 };
 
+let pronounIsAre = (arma) => {
+    if (arma["pluralEn"] === "p") return "are";
+    return "is";
+}
+
 let pluralQuedar = (arma) => {
     let plural = "quedó";
     if (arma["plural"] == "p") { plural = "quedaron" };
@@ -835,6 +840,7 @@ export {
     pronombreElLaLosLas,
     pluralS,
     englishPronoun,
+    pronounIsAre,
     pronombreUnUnaUnosUnas,
     pronombreOAOsAs,
     pluralQuedar,
