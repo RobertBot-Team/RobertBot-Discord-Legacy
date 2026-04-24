@@ -29,7 +29,8 @@ import {
   pluralS,
   pronombreUnUnaUnosUnas,
   pronombreOAOsAs,
-  pronombreElLaLosLas
+  pronombreElLaLosLas,
+  englishPronoun
 } from "../utils.js"
 import {
   createObject,
@@ -42,8 +43,8 @@ var eventosLootGenerico = [];
 
 
 eventosLootGenerico[0] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let evento = ` ${jugador.getNombre()} looteó ${pronombre} ${arma["nombre"]}`;
+  let pronombre = englishPronoun(arma);
+  let evento = ` ${jugador.getNombre()} looted ${pronombre}${arma["nombre"]}`;
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -53,8 +54,8 @@ eventosLootGenerico[0] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[1] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let evento = ` ${jugador.getNombre()} encontró ${pronombre} ${arma["nombre"]} en un rincón`;
+  let pronombre = englishPronoun(arma);
+  let evento = ` ${jugador.getNombre()} found ${pronombre}${arma["name"]} in a corner`;
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -64,8 +65,8 @@ eventosLootGenerico[1] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[2] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let evento = ` ${jugador.getNombre()} abre una caja misteriosa. La caja contenía ${pronombre} ${arma["nombre"]}!`;
+  let pronombre = englishPronoun(arma);
+  let evento = ` ${jugador.getNombre()} opens a mystery box. The box contained ${pronombre}${arma["name"]}!`;
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -75,9 +76,8 @@ eventosLootGenerico[2] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[3] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let oAosas = pronombreOAOsAs(arma);
-  let evento = ` ${jugador.getNombre()} iba caminando cuando pisó ${pronombre} ${arma["nombre"]}. Agradecido con Dios por su suerte, l${oAosas} levanta y se l${oAosas} guarda.`
+  let pronombre = englishPronoun(arma);
+  let evento = ` ${jugador.getNombre()} was walking when they stepped on ${pronombre}${arma["name"]}. Thanking God for their luck, they takes it.`
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -87,10 +87,10 @@ eventosLootGenerico[3] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[4] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
+  let pronombre = englishPronoun(arma);
 
   jugador.setArma(arma);
-  let evento =` Una misteriosa figura le ofrece ${pronombre} ${arma["nombre"]} a ${jugador.getNombre()}`;
+  let evento =` A mysterious figure offers ${pronombre}${arma["name"]} to ${jugador.getNombre()}`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -99,8 +99,8 @@ eventosLootGenerico[4] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[5] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let evento = ` ${jugador.getNombre()} consigue ${pronombre} ${arma["nombre"]}`
+  let pronombre = englishPronoun(arma);
+  let evento = ` ${jugador.getNombre()} gets ${pronombre}${arma["nombre"]}`
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -110,8 +110,8 @@ eventosLootGenerico[5] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[6] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let evento = ` ${jugador.getNombre()} encuentra ${pronombre} ${arma["nombre"]}. Nada mal.`
+  let pronombre = englishPronoun(arma);
+  let evento = ` ${jugador.getNombre()} finds ${pronombre}${arma["name"]}. Not bad.`
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -121,9 +121,8 @@ eventosLootGenerico[6] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[7] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let oAosas = pronombreOAOsAs(arma);
-  let evento = ` ${jugador.getNombre()} saca de su bolso ${pronombre} ${arma["nombre"]} que tenía guardad${oAosas} desde antes de empezar el juego. Ilegalísimo?`
+  let pronombre = englishPronoun(arma);
+  let evento = ` ${jugador.getNombre()} takes out from their backpack ${pronombre}${arma["name"]} that had hidden since the game started. Is that cheating?`
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -133,11 +132,10 @@ eventosLootGenerico[7] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[8] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre1 = pronombreUnUnaUnosUnas(arma);
-  let elLa1 = pronombreElLaLosLas(arma);
+  let pronombre1 = englishPronoun(arma);
   let arma2 = generarArma();
-  let pronombre2 = pronombreUnUnaUnosUnas(arma2);
-  let evento = ` A ${jugador.getNombre()} no le alcanzan las manos para elegir entre ${pronombre1} ${arma["nombre"]} y ${pronombre2} ${arma2["nombre"]}, así que decide quedarse con ${elLa1.toLowerCase()} ${arma["nombre"]}.`
+  let pronombre2 = englishPronoun(arma2);
+  let evento = ` ${jugador.getNombre()} has their hands full choosing between ${pronombre1}${arma["name"]} and ${pronombre2}${arma2["name"]}, so decides to keep the ${arma["name"]}.`
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);   
   console.log(json.evento);
@@ -147,12 +145,11 @@ eventosLootGenerico[8] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[9] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre1 = pronombreUnUnaUnosUnas(arma);
-  let elLa1 = pronombreElLaLosLas(arma);
+  let pronombre1 = englishPronoun(arma);
   jugador.setArma(arma);
   let arma2 = generarArma();
-  let pronombre2 = pronombreUnUnaUnosUnas(arma2);
-  let evento = ` A ${jugador.getNombre()} no le alcanzan las manos para elegir entre ${pronombre2} ${arma2["nombre"]} y ${pronombre1} ${arma["nombre"]}, así que decide quedarse con ${elLa1.toLowerCase()} ${arma["nombre"]}.`;
+  let pronombre2 = englishPronoun(arma2);
+  let evento = ` ${jugador.getNombre()} has their hands full choosing between ${pronombre2}${arma2["name"]} and ${pronombre1}${arma["name"]}, so decides to keep the ${arma["name"]}.`;
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
   //channel.send(json.evento);
@@ -161,12 +158,11 @@ eventosLootGenerico[9] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[10] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre1 = pronombreUnUnaUnosUnas(arma);
-  let elLa1 = pronombreElLaLosLas(arma);
+  let pronombre1 = englishPronoun(arma);
   jugador.setArma(arma);
   let arma2 = generarArma();
-  let pronombre2 = pronombreUnUnaUnosUnas(arma2);
-  let evento = ` ${jugador.getNombre()} ve ${pronombre2} ${arma2["nombre"]} y ${pronombre1} ${arma["nombre"]} en el suelo, obviamente se queda con ${elLa1.toLowerCase()} ${arma["nombre"]}.`
+  let pronombre2 = englishPronoun(arma2);
+  let evento = ` ${jugador.getNombre()} sees ${pronombre2}${arma2["name"]} and ${pronombre1}${arma["name"]} on the ground, obviously they keeps the ${arma["name"]}.`
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
   //channel.send(json.evento);
@@ -175,12 +171,11 @@ eventosLootGenerico[10] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[11] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre1 = pronombreUnUnaUnosUnas(arma);
-  let elLa1 = pronombreElLaLosLas(arma);
+  let pronombre1 = englishPronoun(arma);
   jugador.setArma(arma);
   let arma2 = generarArma();
-  let pronombre2 = pronombreUnUnaUnosUnas(arma2);
-  let evento = ` ${jugador.getNombre()} ve ${pronombre1} ${arma["nombre"]} y ${pronombre2} ${arma2["nombre"]} en el suelo, obviamente se queda con ${elLa1.toLowerCase()} ${arma["nombre"]}.`;
+  let pronombre2 = englishPronoun(arma2);
+  let evento = ` ${jugador.getNombre()} sees ${pronombre1}${arma["name"]} and ${pronombre2}${arma2["name"]} on the ground, obviously they keeps the ${arma["name"]}.`;
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
   //channel.send(json.evento);
@@ -189,8 +184,8 @@ eventosLootGenerico[11] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[12] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let evento = ` ${jugador.getNombre()} encuentra ${pronombre} ${arma["nombre"]}.`
+  let pronombre = englishPronoun(arma);
+  let evento = ` ${jugador.getNombre()} finds ${pronombre}${arma["name"]}.`
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -200,9 +195,8 @@ eventosLootGenerico[12] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[13] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let oAosas = pronombreOAOsAs(arma);
-  let evento = ` ${jugador.getNombre()} encuentra ${pronombre} ${arma["nombre"]} semi-enterrad${oAosas} y decide llevársel${oAosas}.`
+  let pronombre = englishPronoun(arma);
+  let evento = ` ${jugador.getNombre()} finds ${pronombre}${arma["name"]} partially buried and decides to keep it.`
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -212,8 +206,8 @@ eventosLootGenerico[13] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[14] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let evento = ` ${jugador.getNombre()} se hace con ${pronombre} ${arma["nombre"]}.`
+  let pronombre = englishPronoun(arma);
+  let evento = ` ${jugador.getNombre()} obtains ${pronombre}${arma["nombre"]}.`
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -236,7 +230,7 @@ eventosLootGenerico[15] = async (jugador, players, arma, maxHP, req, channel)=>{
   }
 
 
-  let evento=` ${jugador.getNombre()} come frutas de un árbol.`;
+  let evento=` ${jugador.getNombre()} eats fruits from a tree.`;
   console.log(evento);
 
   console.log(` HP antes: ${hp}`);
@@ -262,7 +256,7 @@ eventosLootGenerico[16] = async (jugador, players, arma, maxHP, req, channel)=>{
     curacion = -(0.55*hp);
   }
 
-  let evento = ` ${jugador.getNombre()} encuentra un medikit con vendas y cura sus heridas.`;
+  let evento = ` ${jugador.getNombre()} finds a first aid kit with bandages and heals their wounds.`;
   console.log(evento);
 
   console.log(` HP antes: ${hp}`);
@@ -288,7 +282,7 @@ eventosLootGenerico[17] = async (jugador, players, arma, maxHP, req, channel)=>{
     curacion = -(0.05*hp);
   }
 
-  let evento = ` ${jugador.getNombre()} toma agua`;
+  let evento = ` ${jugador.getNombre()} drinks water`;
   console.log(evento);
 
   console.log(` HP antes: ${hp}`);
@@ -314,7 +308,7 @@ eventosLootGenerico[18] = async (jugador, players, arma, maxHP, req, channel)=>{
 
   let agregaS = pluralS(jugadorOriginal.getArma());
 
-  let evento =` ${jugador.getNombre()} le dice a ${jugadorOriginal.getNombre()} “Mira, tu waifu!” y cuando se da la vuelta le roba su${agregaS} ${jugadorOriginal.getArma()["nombre"]}.`;
+  let evento =` ${jugador.getNombre()} tells to ${jugadorOriginal.getNombre()} “Look there, your waifu!” and when ${jugadorOriginal.getNombre()} turns around, they steals their ${jugadorOriginal.getArma()["name"]}.`;
   console.log(evento);
 
   jugador.arma=jugadorOriginal.getArma();
@@ -354,7 +348,7 @@ eventosLootGenerico[19] = async (jugador, players, arma, maxHP, req, channel)=>{
   let elLa1 = pronombreElLaLosLas(jugadorOriginal.getArma());
 
   //console.log(JSON.stringify(jugadorOriginal));
-  let evento = ` ${jugador.getNombre()} le quita ${elLa1.toLowerCase()} ${jugadorOriginal.getArma()["nombre"]} a ${jugadorOriginal.getNombre()} mientras está distraido.`; 
+  let evento = ` ${jugador.getNombre()} took ${jugadorOriginal.getNombre()}'s ${jugadorOriginal.getArma()["name"]} away while they were distracted.`; 
   console.log(evento);
  
   jugador.arma=jugadorOriginal.getArma();
@@ -382,10 +376,10 @@ eventosLootGenerico[19] = async (jugador, players, arma, maxHP, req, channel)=>{
 
 eventosLootGenerico[20] = async (jugador, players, arma, maxHP, req, channel)=>{
   return null;
-  let pronombre = pronombreUnUnaUnosUnas(arma);
+  let pronombre = englishPronoun(arma);
 
   jugador.setArma(arma);
-  let evento =` ${jugador.getNombre()} encontró ${pronombre} ${arma["nombre"]}. Waos`;
+  let evento =` ${jugador.getNombre()} found ${pronombre}${arma["name"]}. Woah.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -394,10 +388,9 @@ eventosLootGenerico[20] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[21] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let oAosas = pronombreOAOsAs(arma);
+  let pronombre = englishPronoun(arma);
   //jugador.setArma(arma);
-  let evento =` ${jugador.getNombre()} ve ${pronombre} ${arma["nombre"]}. Pero como no sabe usarl${oAosas}, l${oAosas} deja ahí.`;
+  let evento =` ${jugador.getNombre()} sees ${pronombre}${arma["name"]}. But since they don't know how to use it, they leave it there.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -432,10 +425,10 @@ eventosLootGenerico[23] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[24] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
+  let pronombre = englishPronoun(arma);
 
   jugador.setArma(arma);
-  let evento =` ${jugador.getNombre()} recoge ${pronombre} ${arma["nombre"]}`;
+  let evento =` ${jugador.getNombre()} picks up ${pronombre}${arma["name"]}`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -460,7 +453,7 @@ eventosLootGenerico[26] = async (jugador, players, arma, maxHP, req, channel)=>{
   let agregaS = pluralS(arma);
 
   jugador.setArma(arma);
-  let evento =` A ${jugador.getNombre()} se lo ve feliz con su${agregaS} ${arma["nombre"]}.`;
+  let evento =` ${jugador.getNombre()} looks happy with their ${arma["name"]}.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -544,11 +537,10 @@ eventosLootGenerico[30] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[31] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let oAosas = pronombreOAOsAs(arma);
+  let pronombre = englishPronoun(arma);
   
   jugador.setArma(arma);
-  let evento =` ${jugador.getNombre()} levanta ${pronombre} ${arma["nombre"]}. ¿Cómo nadie l${oAosas} vio antes?`;
+  let evento =` ${jugador.getNombre()} picks up ${pronombre}${arma["name"]}. How did nobody notice it before?`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -571,11 +563,10 @@ eventosLootGenerico[32] = async (jugador, players, arma, maxHP, req, channel)=>{
 }
 
 eventosLootGenerico[33] = async (jugador, players, arma, maxHP, req, channel)=>{
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let oAosas = pronombreOAOsAs(arma);
+  let pronombre = englishPronoun(arma);
   
   jugador.setArma(arma);
-  let evento =` ${jugador.getNombre()} levanta ${pronombre} ${arma["nombre"]} del suelo.`;
+  let evento =` ${jugador.getNombre()} picks up ${pronombre}${arma["name"]} from the ground.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
