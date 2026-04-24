@@ -3,7 +3,8 @@ import {
   randomSelector,
   pronombreUnUnaUnosUnas,
   pronombreOAOsAs,
-  pronombreElLaLosLas
+  pronombreElLaLosLas,
+  englishPronoun
 } from "../utils.js"
 import {
   createObject,
@@ -30,7 +31,7 @@ eventoslootEspecificoxCategoria[0] = async (jugador, players, arma, req, channel
   let seleccionado;
   let arrayPosiciones = [];
 
-  let pronombreUno = pronombreUnUnaUnosUnas(arma);
+  let pronombreUno = englishPronoun(arma);
 
   switch (categoria) {
 
@@ -1061,7 +1062,7 @@ eventoslootEspecificoxCategoria[0] = async (jugador, players, arma, req, channel
 
     default:
       jugador.setArma(arma);
-      let evento = ` ${jugador.getNombre()} looteó ${pronombreUno} ${arma["nombre"]}.`
+      let evento = ` ${jugador.getNombre()} looted ${pronombreUno}${arma["name"]}.`
       let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
       console.log(json.evento);
       //channel.send(json.evento);
@@ -1076,7 +1077,7 @@ eventoslootEspecificoxCategoria[0] = async (jugador, players, arma, req, channel
 
 // "martillo de Thor"
 eventoslootEspecificoxCategoria[1] = async (jugador, players, arma, req, channel) => {
-  let evento = ` ${jugador.getNombre()} encontró el Martillo de Thor 🔨. Lamentablemente no lo pudo levantar porque no es digno.`;
+  let evento = ` ${jugador.getNombre()} found the Thor's hammer 🔨. Unfortunately they couldn't lift it because they are not worthy.`;
   //jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -1086,7 +1087,7 @@ eventoslootEspecificoxCategoria[1] = async (jugador, players, arma, req, channel
 }
 
 eventoslootEspecificoxCategoria[2] = async (jugador, players, arma, req, channel) => {
-  let evento = ` ${jugador.getNombre()} encontró el Martillo de Thor 🔨. Como ${jugador.getNombre()} es “alguien digno”, lo puede levantar y se lo lleva.`;
+  let evento = ` ${jugador.getNombre()} found the Thor's hammer 🔨. As ${jugador.getNombre()} is "someone worthy", they can lift it and take it.`;
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -1097,7 +1098,7 @@ eventoslootEspecificoxCategoria[2] = async (jugador, players, arma, req, channel
 
 // "ramo de flores"
 eventoslootEspecificoxCategoria[3] = async (jugador, players, arma, req, channel) => {
-  let evento = ` ${jugador.getNombre()} recolecta flores con espinas de sus alrededores, y arma un ramo de flores. 🌼`;
+  let evento = ` ${jugador.getNombre()} collects flowers with thorns from their surroundings, and creates a bouquet of flowers. 🌼`;
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -1107,7 +1108,7 @@ eventoslootEspecificoxCategoria[3] = async (jugador, players, arma, req, channel
 }
 
 eventoslootEspecificoxCategoria[4] = async (jugador, players, arma, req, channel) => {
-  let evento = ` ¡¿Un Ramo de flores?! ¿${jugador.getNombre()} va a tener una cita? ¿Quién estaría tan demente como para aceptar eso? `;
+  let evento = ` A bouquet of flowers?! Is ${jugador.getNombre()} going on a date? Who would be so crazy as to accept that? `;
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -1160,7 +1161,7 @@ eventoslootEspecificoxCategoria[8] = async (jugador, players, arma, req, channel
 
 // "espada de madera"
 eventoslootEspecificoxCategoria[9] = async (jugador, players, arma, req, channel) => {
-  let evento = ` ${jugador.getNombre()} construye una espada de madera con ramas de los árboles.`
+  let evento = ` ${jugador.getNombre()} craft a wooden sword with branches from the trees.`
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -1170,7 +1171,7 @@ eventoslootEspecificoxCategoria[9] = async (jugador, players, arma, req, channel
 }
 
 eventoslootEspecificoxCategoria[10] = async (jugador, players, arma, req, channel) => {
-  let evento = ` ${jugador.getNombre()} encuentra una Espada de Madera. ¿Algo así no es inútil?`;
+  let evento = ` ${jugador.getNombre()} finds a wooden sword. Is this not useless?`;
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -1202,7 +1203,7 @@ eventoslootEspecificoxCategoria[12] = async (jugador, players, arma, req, channe
 
 // "espada de iron"
 eventoslootEspecificoxCategoria[13] = async (jugador, players, arma, req, channel) => {
-  let evento = ` ${jugador.getNombre()} se fue a minar un rato y consiguió 2 trozos de hierro, así que crafteó una espada de iron. ¿No es muy poco hierro para hacer una espada?`
+  let evento = ` ${jugador.getNombre()} went to mine and got 2 iron ores, so they crafted an iron sword. Isn't that too little iron to make a sword?`
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -1212,7 +1213,7 @@ eventoslootEspecificoxCategoria[13] = async (jugador, players, arma, req, channe
 }
 
 eventoslootEspecificoxCategoria[14] = async (jugador, players, arma, req, channel) => {
-  let evento = ` ${jugador.getNombre()} se fue a minar y consiguió 2 trozos de hierro, se crafteó una espada de iron y ahora va en búsqueda de diamante... Espera ¿qué juego era este?`;
+  let evento = ` ${jugador.getNombre()} went to mine and got 2 iron ores, so they crafted an iron sword. Now they're on the hunt for diamonds... Wait, what game was this?`;
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -1223,7 +1224,7 @@ eventoslootEspecificoxCategoria[14] = async (jugador, players, arma, req, channe
 
 // "espada de oro"
 eventoslootEspecificoxCategoria[15] = async (jugador, players, arma, req, channel) => {
-  let evento = ` ${jugador.getNombre()} crafteó una espada de oro. Ya no suena tan mal la de madera.`;
+  let evento = ` ${jugador.getNombre()} crafted a golden sword. It doesn't sound as bad as the wooden one.`;
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -1245,7 +1246,7 @@ eventoslootEspecificoxCategoria[16] = async (jugador, players, arma, req, channe
 
 // "pescado congelado"
 eventoslootEspecificoxCategoria[17] = async (jugador, players, arma, req, channel) => {
-  let evento = ` ${jugador.getNombre()} encontró un pescado. Genial, va a matar a todos con el mal olor`;
+  let evento = ` ${jugador.getNombre()} found a fish. Great, they're going to kill everyone with the bad smell`;
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -1255,7 +1256,7 @@ eventoslootEspecificoxCategoria[17] = async (jugador, players, arma, req, channe
 }
 
 eventoslootEspecificoxCategoria[18] = async (jugador, players, arma, req, channel) => {
-  let evento = ` ${jugador.getNombre()} encontró un pescado. Al menos está congelado, así que servirá para usarlo de espada.`;
+  let evento = ` ${jugador.getNombre()} found a frozen fish. At least it's frozen, so it will serve as a sword.`;
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -1265,7 +1266,7 @@ eventoslootEspecificoxCategoria[18] = async (jugador, players, arma, req, channe
 }
 
 eventoslootEspecificoxCategoria[19] = async (jugador, players, arma, req, channel) => {
-  let evento = ` ${jugador.getNombre()} encontró un pescado congelado. 🥶`
+  let evento = ` ${jugador.getNombre()} found a frozen fish. 🥶`
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   console.log(json.evento);
@@ -1276,10 +1277,10 @@ eventoslootEspecificoxCategoria[19] = async (jugador, players, arma, req, channe
 
 // "espada"
 eventoslootEspecificoxCategoria[20] = async (jugador, players, arma, req, channel) => {
-  let pronombre = pronombreUnUnaUnosUnas(arma);
+  let pronombre = englishPronoun(arma);
 
 
-  jugador.setArma(arma); let evento = ` ${jugador.getNombre()} looteó ${pronombre} ${arma["nombre"]}.`;
+  jugador.setArma(arma); let evento = ` ${jugador.getNombre()} looted ${pronombre}${arma["name"]}.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1288,11 +1289,9 @@ eventoslootEspecificoxCategoria[20] = async (jugador, players, arma, req, channe
 }
 
 eventoslootEspecificoxCategoria[21] = async (jugador, players, arma, req, channel) => {
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let pronombre2 = pronombreOAOsAs(arma);
+  let pronombre = englishPronoun(arma);
 
-
-  jugador.setArma(arma); let evento = ` ${jugador.getNombre()} looteó ${pronombre} ${arma["nombre"]}. A ver a quién se l${pronombre2.toLowerCase()} clava.`;
+  jugador.setArma(arma); let evento = ` ${jugador.getNombre()} looted ${pronombre} ${arma["name"]}. Let's see who they thrust it into.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1301,10 +1300,9 @@ eventoslootEspecificoxCategoria[21] = async (jugador, players, arma, req, channe
 }
 
 eventoslootEspecificoxCategoria[22] = async (jugador, players, arma, req, channel) => {
-  let pronombre = pronombreUnUnaUnosUnas(arma);
+  let pronombre = englishPronoun(arma)
 
-
-  jugador.setArma(arma); let evento = ` ${jugador.getNombre()} looteó ${pronombre} ${arma["nombre"]} y piensa "ojala hubiera tomado clases de esgrima"`;
+  jugador.setArma(arma); let evento = ` ${jugador.getNombre()} looted ${pronombre}${arma["name"]} and thought "I wish I had taken fencing lessons"`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1315,7 +1313,7 @@ eventoslootEspecificoxCategoria[22] = async (jugador, players, arma, req, channe
 // "alfiler"
 eventoslootEspecificoxCategoria[23] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = ` ${jugador.getNombre()} abrió una lata de galletas... Pero solo habían materiales de costura. Al menos consiguió un alfiler.`;
+  jugador.setArma(arma); let evento = ` ${jugador.getNombre()} opened a butter cookies can... But there were only sewing materials. At least they got a pin.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1326,7 +1324,7 @@ eventoslootEspecificoxCategoria[23] = async (jugador, players, arma, req, channe
 // "nokia"
 eventoslootEspecificoxCategoria[24] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `Algo cae del cielo frente a ${jugador.getNombre()}. Es un Nokia 1100. Que suerte que no le cayó en la cabeza`;
+  jugador.setArma(arma); let evento = `Something falls from the sky in front of ${jugador.getNombre()}. It's a Nokia 1100. Fortunately it didn't hit them on the head.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1380,7 +1378,7 @@ eventoslootEspecificoxCategoria[28] = async (jugador, players, arma, req, channe
 // "arco y flecha"
 eventoslootEspecificoxCategoria[29] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} consigue un Arco y Flechas. Se parece a esa chica.. ¿Cómo se llamaba? ¿Catnip?`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} gets a bow and arrows. They looks like that girl... What was her name? Catnip?`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1390,7 +1388,7 @@ eventoslootEspecificoxCategoria[29] = async (jugador, players, arma, req, channe
 
 eventoslootEspecificoxCategoria[30] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} encuentra un Arco y Flechas. Modo Legolas`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} finds a bow and arrows. Legolas mode`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1401,7 +1399,7 @@ eventoslootEspecificoxCategoria[30] = async (jugador, players, arma, req, channe
 // "ballesta"
 eventoslootEspecificoxCategoria[31] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} le quita una ballesta a unos señores muy narigones. ¿Serán Argentinos? 👃`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} took a crossbow away from some big-nosed guys. Hmmmmmmm 👃`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1423,7 +1421,7 @@ eventoslootEspecificoxCategoria[32] = async (jugador, players, arma, req, channe
 // "libro de mates"
 eventoslootEspecificoxCategoria[33] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} sacó un Libro de Matemáticas de algún sitio. Esperemos que lo tenga todo calculado`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} takes a math book out from somewhere. Let's hope they have all calculated`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1433,7 +1431,7 @@ eventoslootEspecificoxCategoria[33] = async (jugador, players, arma, req, channe
 
 eventoslootEspecificoxCategoria[34] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} se sienta con su Libro de Matemáticas. ¿Estas son horas de resolver ecuaciones?`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} sits down with their math book. Is this the time to be solving equations?`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1444,7 +1442,7 @@ eventoslootEspecificoxCategoria[34] = async (jugador, players, arma, req, channe
 // "manzana"
 eventoslootEspecificoxCategoria[35] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} consiguió una Manzana. Lastima que no es de oro`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} got an apple. Too bad it's not a golden one`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1454,7 +1452,7 @@ eventoslootEspecificoxCategoria[35] = async (jugador, players, arma, req, channe
 
 eventoslootEspecificoxCategoria[36] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `A ${jugador.getNombre()} le cae una manzana en la cabeza, y en vez de pensar en la teoría de la gravitación, piensa a quien se la puede arrojar en la cabeza.`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} got hit on the head by an apple, and instead of thinking about the theory of gravity, they think about who they can throw it at.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1464,7 +1462,7 @@ eventoslootEspecificoxCategoria[36] = async (jugador, players, arma, req, channe
 
 eventoslootEspecificoxCategoria[37] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `A ${jugador.getNombre()} le cae una manzana en la cabeza. El asunto tiene "gravedad" 🤡`;
+  jugador.setArma(arma); let evento = `An apple falls on ${jugador.getNombre()}'s head. It's a matter of "gravity" 🤡`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1474,7 +1472,7 @@ eventoslootEspecificoxCategoria[37] = async (jugador, players, arma, req, channe
 
 eventoslootEspecificoxCategoria[38] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} saca una manzana de un árbol, pero en vez de comerla para recuperar vida, se la guarda para usarla de arma.`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} takes an apple from a tree, but instead of eating it to recover health, they keeps it to use as a weapon.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1485,7 +1483,7 @@ eventoslootEspecificoxCategoria[38] = async (jugador, players, arma, req, channe
 // "motosierra"
 eventoslootEspecificoxCategoria[39] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `¿Pochita? Ah, no... Solo es una motosierra que consiguió ${jugador.getNombre()}`;
+  jugador.setArma(arma); let evento = `¿Pochita? Ow, no... It's just a chainsaw that ${jugador.getNombre()} got`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1495,7 +1493,7 @@ eventoslootEspecificoxCategoria[39] = async (jugador, players, arma, req, channe
 
 eventoslootEspecificoxCategoria[40] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `¿Pochita? Ah, no... Solo es una motosierra que consiguió ${jugador.getNombre()}`;
+  jugador.setArma(arma); let evento = `¿Pochita? Ow, no... It's just a chainsaw that ${jugador.getNombre()} got`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1505,7 +1503,7 @@ eventoslootEspecificoxCategoria[40] = async (jugador, players, arma, req, channe
 
 eventoslootEspecificoxCategoria[41] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} encontró una motosierra y ya se cree Leatherface`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} found a chainsaw and now thinks they're Leatherface`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1516,7 +1514,7 @@ eventoslootEspecificoxCategoria[41] = async (jugador, players, arma, req, channe
 // "pan duro"
 eventoslootEspecificoxCategoria[42] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `A ${jugador.getNombre()} le dio hambre y fue a revisar su nevera. Pero solo consiguió un pan duro. Al menos sirve de arma, supongo.`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} got hungry and went to check their fridge. But they only found a stale bread. At least it can be used as a weapon, I guess.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1527,7 +1525,7 @@ eventoslootEspecificoxCategoria[42] = async (jugador, players, arma, req, channe
 // "nunchaku"
 eventoslootEspecificoxCategoria[43] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} le robó un nunchaku a una..., ¿Tortuga?`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} stole nunchucks from a..., Turtle?`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1538,7 +1536,7 @@ eventoslootEspecificoxCategoria[43] = async (jugador, players, arma, req, channe
 // "estrellas"
 eventoslootEspecificoxCategoria[44] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()}: "Ahora sí conocerán el poder de ${jugador.getNombre()}, la Tormenta devastadora". Las Estrellas Ninja que encontró le convirtieron en chuunibyou`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()}: "Now you will know the power of ${jugador.getNombre()}, the Devastating Storm". The shurikens they found turned them into a chuunibyou`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1581,7 +1579,7 @@ eventoslootEspecificoxCategoria[47] = async (jugador, players, arma, req, channe
 // "roca"
 eventoslootEspecificoxCategoria[48] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} ve algo que se parece a una roca así que se acerca a investigar... Es una roca.`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} sees something that looks like a rock so they approach to investigate... It's a rock.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1624,7 +1622,7 @@ eventoslootEspecificoxCategoria[51] = async (jugador, players, arma, req, channe
 // "granada fruta"
 eventoslootEspecificoxCategoria[52] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} encontró una granada!!!! (ah, pero la fruta)`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} found a pomegranate!!!`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1635,7 +1633,7 @@ eventoslootEspecificoxCategoria[52] = async (jugador, players, arma, req, channe
 // "lapiz"
 eventoslootEspecificoxCategoria[53] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} encuentra un lápiz. Parece que ya está listo para el examen.`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} finds a pencil. It looks like they're ready for the exam.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1646,7 +1644,7 @@ eventoslootEspecificoxCategoria[53] = async (jugador, players, arma, req, channe
 // "navaja"
 eventoslootEspecificoxCategoria[54] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `Pueden sacar a ${jugador.getNombre()} del barrio pero no el barrio de ${jugador.getNombre()}. Todos se asustan al ver la navaja que encontró`;
+  jugador.setArma(arma); let evento = `You can take ${jugador.getNombre()} out of the streets but you can't take out the streets of ${jugador.getNombre()}. Everyone get scared when they see the pocket knife they found`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1668,7 +1666,7 @@ eventoslootEspecificoxCategoria[55] = async (jugador, players, arma, req, channe
 // "cuchillo"
 eventoslootEspecificoxCategoria[56] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} encontró un cuchillo. A cortar lazos de amistad.`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} found a knife. Time to cut some friendship ties.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1690,7 +1688,7 @@ eventoslootEspecificoxCategoria[57] = async (jugador, players, arma, req, channe
 // "trozo de cristal"
 eventoslootEspecificoxCategoria[58] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} rompe una ventana y se guarda un trozo de cristal.`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} breaks a window and takes a crystal shard.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1700,7 +1698,7 @@ eventoslootEspecificoxCategoria[58] = async (jugador, players, arma, req, channe
 
 eventoslootEspecificoxCategoria[59] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} salta por una ventana y milagrosamente no se clava ningún trozo de cristal. Bueno, solo uno, pero luego podrá usarlo como arma.`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} jumps through a window and miraculously doesn't get stabbed by any crystal shards. Well, just one, but they can use it as a weapon.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1711,7 +1709,7 @@ eventoslootEspecificoxCategoria[59] = async (jugador, players, arma, req, channe
 // "kunai"
 eventoslootEspecificoxCategoria[60] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} encuentra un kunai. Al fin haber visto 720 capítulos de Naruto va a servir de algo!`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} finds a kunai. Finally, all those 720 episodes of Naruto will come in handy!`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1721,12 +1719,12 @@ eventoslootEspecificoxCategoria[60] = async (jugador, players, arma, req, channe
 
 // "arma blanca"
 eventoslootEspecificoxCategoria[61] = async (jugador, players, arma, req, channel) => {
-  let pronombre = pronombreUnUnaUnosUnas(arma);
+  let pronombre = englishPronoun(arma);
   let oAosas = pronombreOAOsAs(arma);
   let elLaLosLas = pronombreElLaLosLas(arma);
 
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} encuentra ${pronombre} ${arma["nombre"]} y se l${oAosas} guarda para clavársel${oAosas} a alguien. (${elLaLosLas} ${arma["nombre"]}).`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} finds ${pronombre}${arma["name"]} and keeps it to thrust someone. (With the ${arma["name"]}).`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1735,11 +1733,10 @@ eventoslootEspecificoxCategoria[61] = async (jugador, players, arma, req, channe
 }
 
 eventoslootEspecificoxCategoria[62] = async (jugador, players, arma, req, channel) => {
-  let pronombre = pronombreUnUnaUnosUnas(arma);
+  let pronombre = englishPronoun(arma);
   let oAosas = pronombreOAOsAs(arma);
 
-
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} encuentra ${pronombre} ${arma["nombre"]} y se l${oAosas} guarda, imaginandose ya en su mente atacando a otros con saltos ninja y volteretas innecesarias.`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} finds ${pronombre}${arma["name"]} and keeps it, imagining themself attacking others with ninja jumps and unnecessary somersaults and backflips.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1750,7 +1747,7 @@ eventoslootEspecificoxCategoria[62] = async (jugador, players, arma, req, channe
 // "cubo rubik"
 eventoslootEspecificoxCategoria[63] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} saca del bolso un cubo Rubik. Maldito nerd`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} takes out a Rubik's Cube from their bag. What a nerd!`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1794,7 +1791,7 @@ eventoslootEspecificoxCategoria[66] = async (jugador, players, arma, req, channe
 // "granada"
 eventoslootEspecificoxCategoria[67] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} encontró una granada. Cuidado con la argolla 👀`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} found a grenade. Caution with the pull ring 👀`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1805,7 +1802,7 @@ eventoslootEspecificoxCategoria[67] = async (jugador, players, arma, req, channe
 // "molotov"
 eventoslootEspecificoxCategoria[68] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} fabrica una molotov con una botella vacía.`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} makes a molotov cocktail with an empty bottle.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1827,7 +1824,7 @@ eventoslootEspecificoxCategoria[69] = async (jugador, players, arma, req, channe
 // "fuegos artificiales"
 eventoslootEspecificoxCategoria[70] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `¿Feliz año? ¿De donde sacó ${jugador.getNombre()} esos fuegos artificiales?`;
+  jugador.setArma(arma); let evento = `Happy new year? Where did ${jugador.getNombre()} get those fireworks?`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1838,7 +1835,7 @@ eventoslootEspecificoxCategoria[70] = async (jugador, players, arma, req, channe
 // "skate"
 eventoslootEspecificoxCategoria[71] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} quiso aprenderle a la chaviza y se compró un skate`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} wanted to feel young again and bought a skate`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1848,12 +1845,12 @@ eventoslootEspecificoxCategoria[71] = async (jugador, players, arma, req, channe
 
 // "rompibles"
 eventoslootEspecificoxCategoria[72] = async (jugador, players, arma, req, channel) => {
-  let pronombre = pronombreUnUnaUnosUnas(arma);
+  let pronombre = englishPronoun(arma);
   let oAosas = pronombreOAOsAs(arma);
 
 
   jugador.setArma(arma);
-  let evento = `${jugador.getNombre()} encuentra ${pronombre} ${arma["nombre"]} y planea a quién partirsel${oAosas} en la cabeza.`;
+  let evento = `${jugador.getNombre()} finds ${pronombre}${arma["name"]} and plans to break it on somebody's head.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1864,7 +1861,7 @@ eventoslootEspecificoxCategoria[72] = async (jugador, players, arma, req, channe
 // "bate de beisbol"
 eventoslootEspecificoxCategoria[73] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} encuentra un bate de beisbol, y lejos de querer hacer deporte, se lo guarda para partirle la cabeza a alguien.`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} finds a baseball bat, and far from wanting to workout, they keeps it to break it on somebody's head.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1875,7 +1872,7 @@ eventoslootEspecificoxCategoria[73] = async (jugador, players, arma, req, channe
 // "guitarra"
 eventoslootEspecificoxCategoria[74] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} encontró una guitarra y se puso a tocar temas durante 1 hora y media. Nadie se atrevió a acercarse.`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} found a guitar and started to play songs during 1 hour and a half. Nobody dared to approach.`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1887,7 +1884,7 @@ eventoslootEspecificoxCategoria[74] = async (jugador, players, arma, req, channe
 // "taser"
 eventoslootEspecificoxCategoria[75] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} asalta una central de policía y se lleva un taser`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} robbed a police station and took a taser`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1898,7 +1895,7 @@ eventoslootEspecificoxCategoria[75] = async (jugador, players, arma, req, channe
 // "lanzacohetes"
 eventoslootEspecificoxCategoria[76] = async (jugador, players, arma, req, channel) => {
 
-  jugador.setArma(arma); let evento = `${jugador.getNombre()} encuentra un lanzacohetes y se lo lleva consigo para... pues, lanzar cohetes`;
+  jugador.setArma(arma); let evento = `${jugador.getNombre()} finds a rocket launcher and takes it with them to... well, launch rockets`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   //channel.send(json.evento);
@@ -1908,7 +1905,7 @@ eventoslootEspecificoxCategoria[76] = async (jugador, players, arma, req, channe
 
 // "Excalibur"
 eventoslootEspecificoxCategoria[77] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} intentó sacar a Excalibur de la piedra. No pudo`;
+  let evento = `${jugador.getNombre()} tried to pull Excalibur out of the stone. They could not`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   funcionCrearImagen(json, "1", channel);
@@ -1916,7 +1913,7 @@ eventoslootEspecificoxCategoria[77] = async (jugador, players, arma, req, channe
 }
 
 eventoslootEspecificoxCategoria[78] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} intentó sacar a Excalibur de la piedra... y lo logró! ¿Deberíamos comenzar a llamarle Arturo?`;
+  let evento = `${jugador.getNombre()} tried to pull Excalibur out of the stone... and they did! Should we start calling them Arthur?`;
   console.log(evento);
   jugador.setArma(arma);
   jugador.setNombre("Arturo");
@@ -1937,7 +1934,7 @@ eventoslootEspecificoxCategoria[79] = async (jugador, players, arma, req, channe
 
 // "gas pimienta"
 eventoslootEspecificoxCategoria[80] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} encuentra un gas pimienta en una central de policía`;
+  let evento = `${jugador.getNombre()} finds a pepper spray in a police station`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -1946,7 +1943,7 @@ eventoslootEspecificoxCategoria[80] = async (jugador, players, arma, req, channe
 }
 
 eventoslootEspecificoxCategoria[81] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} se armó una lata de gas pimienta con pimienta y gases`;
+  let evento = `${jugador.getNombre()} made a can of pepper spray using pepper to spray with`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -1976,7 +1973,7 @@ eventoslootEspecificoxCategoria[83] = async (jugador, players, arma, req, channe
 
 // "caniche"
 eventoslootEspecificoxCategoria[84] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} se compró un caniche. ¡Ay, pero que cosa más bonita! Seguro no lo va a entrenar para matar, ¿no?... ¿No?`;
+  let evento = `${jugador.getNombre()} bought a poodle. ¡Awww, what a beauty! Surely they're not going to train it for killing, right?... Right?`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -1985,7 +1982,7 @@ eventoslootEspecificoxCategoria[84] = async (jugador, players, arma, req, channe
 }
 
 eventoslootEspecificoxCategoria[85] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} se encuentra un caniche abandonado y lo adopta`;
+  let evento = `${jugador.getNombre()} finds an abandoned poodle and adopts it`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -1994,7 +1991,7 @@ eventoslootEspecificoxCategoria[85] = async (jugador, players, arma, req, channe
 }
 
 eventoslootEspecificoxCategoria[86] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} se compra un caniche y le pone de nombre "Luna". La originalidad ante todo`;
+  let evento = `${jugador.getNombre()} bought a poodle and named it "Luna". Originality above all`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2004,7 +2001,7 @@ eventoslootEspecificoxCategoria[86] = async (jugador, players, arma, req, channe
 
 // "encendedor"
 eventoslootEspecificoxCategoria[87] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} encuentra un encendedor ZIPPO en un cadáver. Le da asco, pero un encendedor ZIPPO es un encendedor ZIPPO, así que hace el esfuerzo por llevarselo`;
+  let evento = `${jugador.getNombre()} finds a ZIPPO lighter in a corpse. They are disgusted, but a ZIPPO lighter is a ZIPPO lighter, so they makes the effort to take it with them`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2013,7 +2010,7 @@ eventoslootEspecificoxCategoria[87] = async (jugador, players, arma, req, channe
 }
 
 eventoslootEspecificoxCategoria[88] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} encuentra un encendedor. O le sirve para fumar o para prender fuego a alguien, ni tan mal`;
+  let evento = `${jugador.getNombre()} finds a lighter. It can be used for smoking or set someone on fire, not too bad`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2022,7 +2019,7 @@ eventoslootEspecificoxCategoria[88] = async (jugador, players, arma, req, channe
 }
 
 eventoslootEspecificoxCategoria[89] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} encuentra un encendedor, decide usarlo para fumar hierbas random del bosque y se pierde en un viaje astral psicodélico`;
+  let evento = `${jugador.getNombre()} finds a lighter, they decides to use it for smoking random herbs of the forest and gets lost in a psychedelic astral travel`;
   console.log(evento);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
   funcionCrearImagen(json, "1", channel);
@@ -2041,7 +2038,7 @@ eventoslootEspecificoxCategoria[90] = async (jugador, players, arma, req, channe
 
 // "dardos venenosos"
 eventoslootEspecificoxCategoria[91] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} encuentra unos cuantos dardos y los impregna con una planta venenosa`;
+  let evento = `${jugador.getNombre()} finds some darts and coats them with a poisonous plant`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2051,7 +2048,7 @@ eventoslootEspecificoxCategoria[91] = async (jugador, players, arma, req, channe
 
 // "pistola"
 eventoslootEspecificoxCategoria[92] = async (jugador, players, arma, req, channel) => {
-  let pronombre = pronombreUnUnaUnosUnas(arma); let evento = `${jugador.getNombre()} looteó ${pronombre} ${arma["nombre"]}. Espero que haya practicado suficiente en el counter.`;
+  let pronombre = englishPronoun(arma); let evento = `${jugador.getNombre()} looted ${pronombre}${arma["name"]}. I hope they've practiced enough in the counter strike.`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2071,7 +2068,7 @@ eventoslootEspecificoxCategoria[93] = async (jugador, players, arma, req, channe
 
 // "arma blanca" > "machete"
 eventoslootEspecificoxCategoria[94] = async (jugador, players, arma, req, channel) => {
-  let pronombre = pronombreUnUnaUnosUnas(arma); let evento = `${jugador.getNombre()} va caminando y encuentra un machete. Ahora sí está listo para ir a pelear con el diablo al cerro.`;
+  let pronombre = pronombreUnUnaUnosUnas(arma); let evento = `${jugador.getNombre()} was walking when found a machete. They're already ready to go fight the devil on the hill.`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2081,7 +2078,7 @@ eventoslootEspecificoxCategoria[94] = async (jugador, players, arma, req, channe
 
 // "arma blanca > kunai"
 eventoslootEspecificoxCategoria[95] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} está listo con su kunai. "Yo soy el más perrón aqui"`;
+  let evento = `${jugador.getNombre()} is ready with their kunai. "I am the coolest here"`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2101,7 +2098,7 @@ eventoslootEspecificoxCategoria[96] = async (jugador, players, arma, req, channe
 
 // "explosivos" > "bomba"
 eventoslootEspecificoxCategoria[97] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} encuentra una bomba. Prepárense para unas EXPLOSION!!`;
+  let evento = `${jugador.getNombre()} finds a bomb. Get ready for some EXPLOSION!!`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2111,7 +2108,7 @@ eventoslootEspecificoxCategoria[97] = async (jugador, players, arma, req, channe
 
 // "tirachinas"  
 eventoslootEspecificoxCategoria[98] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} lleva unas tirachinas. Contrario a lo que su nombre indica, sirven para tirar piedras, no chinas.`;
+  let evento = `${jugador.getNombre()} is armed with a slingshot. Despite of its name, it shoots rocks, not slings.`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2121,8 +2118,8 @@ eventoslootEspecificoxCategoria[98] = async (jugador, players, arma, req, channe
 
 // "veneno"
 eventoslootEspecificoxCategoria[99] = async (jugador, players, arma, req, channel) => {
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let pronombre2 = pronombreOAOsAs(arma); let evento = `${jugador.getNombre()} ve ${pronombre} ${arma["nombre"]} y se l${pronombre2} lleva. Planeando como envenenar a alguien.`;
+  let pronombre = englishPronoun(arma);
+  let pronombre2 = pronombreOAOsAs(arma); let evento = `${jugador.getNombre()} sees ${pronombre}${arma["name"]} and keeps it. They're planning how to poison someone.`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2132,8 +2129,8 @@ eventoslootEspecificoxCategoria[99] = async (jugador, players, arma, req, channe
 
 // "veneno"
 eventoslootEspecificoxCategoria[100] = async (jugador, players, arma, req, channel) => {
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let pronombre2 = pronombreOAOsAs(arma); let evento = `${jugador.getNombre()} casi se envenena por pisar ${pronombre} ${arma["nombre"]}. L${pronombre2} recoge con cuidado y se l${pronombre2} lleva para usar de arma.`;
+  let pronombre = englishPronoun(arma);
+  let pronombre2 = pronombreOAOsAs(arma); let evento = `${jugador.getNombre()} almost got poisoned by stepping on ${pronombre} ${arma["name"]}. They carefully pick it up and take it for use as a weapon.`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2143,7 +2140,7 @@ eventoslootEspecificoxCategoria[100] = async (jugador, players, arma, req, chann
 
 // "escoba"
 eventoslootEspecificoxCategoria[101] = async (jugador, players, arma, req, channel) => {
-  let evento = `¿Es un pájaro? ¿Es un avión? No, es ${jugador.getNombre()} que pasó corriendo montando la escoba que acaba de encontrar.`;
+  let evento = `Is it a bird? Is it a plane? No, it's ${jugador.getNombre()} sprinting by on the broom they just found.`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2153,7 +2150,7 @@ eventoslootEspecificoxCategoria[101] = async (jugador, players, arma, req, chann
 
 // "plumaDeAve"
 eventoslootEspecificoxCategoria[102] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} está desesperado por la pelea. Está viendo al cielo buscando paz, cuando un ave pasa volando sobre él y deja caer una pluma. ${jugador.getNombre()} se la guarda.`;
+  let evento = `${jugador.getNombre()} is desperate for the fight to end. They're looking at the sky searching for peace, when a bird flies overhead and drops a feather. ${jugador.getNombre()} tucks it away.`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2163,7 +2160,7 @@ eventoslootEspecificoxCategoria[102] = async (jugador, players, arma, req, chann
 
 // "arma blanca" > "par de estiletes de color dorado"
 eventoslootEspecificoxCategoria[103] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} encuentra un par de estiletes de color dorado. Esto me suena de algo...`;
+  let evento = `${jugador.getNombre()} finds a pair of golden stilettos. This feels familiar...`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2193,8 +2190,8 @@ eventoslootEspecificoxCategoria[105] = async (jugador, players, arma, req, chann
 
 // "explosivos"
 eventoslootEspecificoxCategoria[106] = async (jugador, players, arma, req, channel) => {
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let pronombre2 = pronombreOAOsAs(arma); let evento = `${jugador.getNombre()} recoge ${pronombre} ${arma["nombre"]} del suelo. Sale corriendo para pensar una trampa explosiva con est${pronombre2}.`;
+  let pronombre = englishPronoun(arma);
+  let pronombre2 = pronombreOAOsAs(arma); let evento = `${jugador.getNombre()} picks up ${pronombre}${arma["name"]} from the ground. They run off to think of an explosive trap with it.`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2204,8 +2201,8 @@ eventoslootEspecificoxCategoria[106] = async (jugador, players, arma, req, chann
 
 // "explosivos"
 eventoslootEspecificoxCategoria[107] = async (jugador, players, arma, req, channel) => {
-  let pronombre = pronombreUnUnaUnosUnas(arma);
-  let pronombre2 = pronombreOAOsAs(arma); let evento = `${jugador.getNombre()} encuentra ${pronombre} ${arma["nombre"]} y se pone a pensar a quien explotarsel${pronombre2}.`;
+  let pronombre = englishPronoun(arma);
+  let pronombre2 = pronombreOAOsAs(arma); let evento = `${jugador.getNombre()} finds ${pronombre}${arma["name"]} and starts thinking about who they can blowing up with it.`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
