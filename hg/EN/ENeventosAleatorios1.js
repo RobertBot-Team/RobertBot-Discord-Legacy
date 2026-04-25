@@ -48,7 +48,7 @@ eventosAleatorios1[1] =async (jugador, players, maxHP, teams, req, channel)=>{
 
     console.log(` HP antes: ${jugador.getHP()}`);
     jugador.hp = Math.min(maxHP, jugador.hp+=20);
-    let evento = ` ${jugador.getNombre()} se come un pescao crudo.`;
+    let evento = ` ${jugador.getNombre()} eats a raw fish.`;
     console.log(evento);
     console.log(` HP luego: ${jugador.getHP()}`);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [curacion], []);
@@ -59,7 +59,7 @@ eventosAleatorios1[1] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[2] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = ` ${jugador.getNombre()} va tan sobrado que ni busca armas.`;
+    let evento = ` ${jugador.getNombre()} is so cracked they doesn't even look for weapons.`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -69,7 +69,7 @@ eventosAleatorios1[2] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[3] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = ` ${jugador.getNombre()} toma una mochila y se va corriendo mientras rie maniáticamente. Lástima que está vacía. Al menos se ve feliz.`;
+    let evento = ` ${jugador.getNombre()} takes a backpack and runs while laughing maniacally. Too bad it's empty. At least they looks happy.`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -79,7 +79,7 @@ eventosAleatorios1[3] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[4] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = ` ${jugador.getNombre()} se sienta a pescar.`;
+    let evento = ` ${jugador.getNombre()} sits down to fish.`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -88,7 +88,7 @@ eventosAleatorios1[4] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[5] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = ` ${jugador.getNombre()} se acuesta a dormir todo el día.`;
+    let evento = ` ${jugador.getNombre()} goes to bed and sleeps all day.`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -97,7 +97,7 @@ eventosAleatorios1[5] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[6] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = ` ${jugador.getNombre()} no sabe cómo se juega esto`;
+    let evento = ` ${jugador.getNombre()} doesn't know how to play this game.`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -106,7 +106,7 @@ eventosAleatorios1[6] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[7] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = ` ${jugador.getNombre()} pregunta "¿Ya me morí?"`;
+    let evento = ` ${jugador.getNombre()} asks "Have I died yet?"`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -117,7 +117,7 @@ eventosAleatorios1[7] =async (jugador, players, maxHP, teams, req, channel)=>{
 eventosAleatorios1[8] =async (jugador, players, maxHP, teams, req, channel)=>{
     if(jugador.arma == null){return null};
     let plural = pluralS(jugador.getArma());
-    let evento = ` ${jugador.getNombre()} necesitaba dinero para gachas así que vendió su${plural} ${jugador.getArma()["nombre"]}`;
+    let evento = ` ${jugador.getNombre()} needed money for gachas, so they sold their ${jugador.getArma()["name"]}`;
     console.log(evento);
     jugador.arma = null;
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], [])
@@ -147,7 +147,7 @@ eventosAleatorios1[9] =async (jugador, players, maxHP, teams, req, channel)=>{
 
     id = comprador.getID();
     jugadorACambiar = buscarPorID(id, players);
-    let evento = ` ${jugador.getNombre()} necesitaba dinero para gachas así que vendió su${plural} ${jugador.getArma()["nombre"]} a ${jugadorACambiar.getNombre()}`;
+    let evento = ` ${jugador.getNombre()} needed money for gachas, so they sold their ${plural} ${jugador.getArma()["name"]} to ${jugadorACambiar.getNombre()}`;
     console.log(evento);
     jugadorACambiar.arma = jugador.getArma();
     jugador.arma = null;
@@ -191,7 +191,7 @@ eventosAleatorios1[10] =async (jugador, players, maxHP, teams, req, channel)=>{
     if(cantEnTeam == 2){
         if(!(team.estaVivo1() && team.estaVivo2())){ return null}    //si alguno de los 2 está muerto, no se hace este evento
         if(r < 0.5){
-            let evento = `${player1.getNombre()} no se aguanta más a ${player2.getNombre()} y decide irse del equipo por su cuenta.`;
+            let evento = `${player1.getNombre()} can't stand ${player2.getNombre()} and decides to leave the team on their own.`;
             console.log(evento);
             let json = createObject(evento, [player1.getNombre(), player2.getNombre()], [player1.getID(), player2.getID()], 
                                     [await cargarAvatar(player1.getFoto(),player1.getID(),player1.getTieneOtraFoto(),req.body.channel.guild_id,players), 
@@ -210,7 +210,7 @@ eventosAleatorios1[10] =async (jugador, players, maxHP, teams, req, channel)=>{
 
 
         } else {
-            let evento = `${player2.getNombre()} no se aguanta más a ${player1.getNombre()} y decide irse del equipo por su cuenta.`;
+            let evento = `${player2.getNombre()} can't stand ${player1.getNombre()} and decides to leave the team on their own.`;
             console.log(evento);
             let json = createObject(evento, [player2.getNombre(), player1.getNombre()], [player2.getID(), player1.getID()], 
                                     [await cargarAvatar(player2.getFoto(),player2.getID(),player2.getTieneOtraFoto(),req.body.channel.guild_id,players), 
@@ -233,7 +233,7 @@ eventosAleatorios1[10] =async (jugador, players, maxHP, teams, req, channel)=>{
 
         if(r < 0.3){
             if(!(team.estaVivo1() && team.estaVivo2())){ return null;}
-            let evento = `${player1.getNombre()} no se aguanta más a ${player2.getNombre()} y decide irse del equipo por su cuenta.`;
+            let evento = `${player1.getNombre()} can't stand ${player2.getNombre()} and decides to leave the team on their own.`;
             console.log(evento);
             let json = createObject(evento, [player1.getNombre(), player2.getNombre()], [player1.getID(), player2.getID()], 
                                     [await cargarAvatar(player1.getFoto(),player1.getID(),player1.getTieneOtraFoto(),req.body.channel.guild_id,players), 
@@ -254,7 +254,7 @@ eventosAleatorios1[10] =async (jugador, players, maxHP, teams, req, channel)=>{
 
         } else if(r < 0.6){
             if(!(team.estaVivo2() && team.estaVivo3())){ return null;}
-            let evento = `${player2.getNombre()} no se aguanta más a ${player3.getNombre()} y decide irse del equipo por su cuenta.`;
+            let evento = `${player2.getNombre()} can't stand ${player3.getNombre()} and decides to leave the team on their own.`;
             console.log(evento);
             let json = createObject(evento, [player2.getNombre(), player3.getNombre()], [player2.getID(), player3.getID()], 
                                     [await cargarAvatar(player2.getFoto(),player2.getID(),player2.getTieneOtraFoto(),req.body.channel.guild_id,players), 
@@ -274,7 +274,7 @@ eventosAleatorios1[10] =async (jugador, players, maxHP, teams, req, channel)=>{
 
         } else {
             if(!(team.estaVivo3() && team.estaVivo1())){ return null;}
-            let evento = `${player3.getNombre()} no se aguanta más a ${player1.getNombre()} y decide irse del equipo por su cuenta.`;
+            let evento = `${player3.getNombre()} can't stand ${player1.getNombre()} and decides to leave the team on their own.`;
             console.log(evento);
             let json = createObject(evento, [player3.getNombre(), player1.getNombre()], [player3.getID(), player1.getID()], 
                                     [await cargarAvatar(player3.getFoto(),player3.getID(),player3.getTieneOtraFoto(),req.body.channel.guild_id,players), 
@@ -306,7 +306,7 @@ eventosAleatorios1[11] =async (jugador, players, maxHP, teams, req, channel)=>{
     if(team.getPlayer2()!=null && team.getPlayer3()!= null) //team de 3
     {
         if(vivos.length == 3){
-            let evento = `${vivos[0]}, ${vivos[1]} y ${vivos[2]} hacen un concurso de talentos. Las habilidades de canto de ${jugador.getNombre()} sorprendieron a todos.`;
+            let evento = `${vivos[0]}, ${vivos[1]} and ${vivos[2]} held a talent show. The singing skills of ${jugador.getNombre()} surprised everyone.`;
             console.log(evento);
             json = createObject(evento, 
                                     [team.getPlayer1().getNombre(), team.getPlayer2().getNombre(),team.getPlayer3().getNombre()], 
@@ -322,7 +322,7 @@ eventosAleatorios1[11] =async (jugador, players, maxHP, teams, req, channel)=>{
             return 1;
         }
         if(vivos.length == 2){
-            let evento = `${vivos[0]} y ${vivos[1]} hacen un concurso de talentos. Las habilidades de canto de ${jugador.getNombre()} sorprendieron a todos.`;
+            let evento = `${vivos[0]} and ${vivos[1]} held a talent show. The singing skills of ${jugador.getNombre()} surprised everyone.`;
             console.log(evento);
             if(quienesVivos == "12"){
               json = createObject(evento, 
@@ -362,7 +362,7 @@ eventosAleatorios1[11] =async (jugador, players, maxHP, teams, req, channel)=>{
     if(team.getPlayer2()!=null && team.getPlayer3()== null) //team de 2
     {
         if(vivos.length == 2){
-            let evento = `${vivos[0]} y ${vivos[1]} hacen un concurso de talentos. Las habilidades de canto de ${jugador.getNombre()} sorprendieron a todos.`;
+            let evento = `${vivos[0]} and ${vivos[1]} held a talent show. The singing skills of ${jugador.getNombre()} surprised everyone.`;
             console.log(evento);
             if(quienesVivos == "12"){
               json = createObject(evento, 
@@ -419,7 +419,7 @@ eventosAleatorios1[12] =async (jugador, players, maxHP, teams, req, channel)=>{
             let id2 = team.getPlayer2().getID();
             let id3 = team.getPlayer3().getID();
           
-            let evento = `${vivos[0]}, ${vivos[1]} y ${vivos[2]} hacen un concurso de talentos. ${jugador.getNombre()} es tan malo que deciden echarlo del equipo.`;
+            let evento = `${vivos[0]}, ${vivos[1]} and ${vivos[2]} held a talent show. ${jugador.getNombre()} is so bad that they decide to kick them out of the team.`;
             let json = createObject(evento, 
                 [team.getPlayer1().getNombre(), team.getPlayer2().getNombre(),team.getPlayer3().getNombre()], 
                 [team.getPlayer1().getID(),     team.getPlayer2().getID(),    team.getPlayer3().getID()],
@@ -495,7 +495,7 @@ eventosAleatorios1[13] =async (jugador, players, maxHP, teams, req, channel)=>{
     if(team.getPlayer2()!=null && team.getPlayer3()!= null) //team de 3
     {
         if(vivos.length == 3){
-            let evento = `${vivos[0]}, ${vivos[1]} y ${vivos[2]} se cuentan historias alrededor de una fogata.`;
+            let evento = `${vivos[0]}, ${vivos[1]} and ${vivos[2]} are telling stories around a campfire.`;
             console.log(evento);
             json = createObject(evento, 
                         [team.getPlayer1().getNombre(), team.getPlayer2().getNombre(),team.getPlayer3().getNombre()], 
@@ -511,7 +511,7 @@ eventosAleatorios1[13] =async (jugador, players, maxHP, teams, req, channel)=>{
             return 1;
         }
         if(vivos.length == 2){
-            let evento = `${vivos[0]} y ${vivos[1]} se cuentan historias alrededor de una fogata.`;
+            let evento = `${vivos[0]} and ${vivos[1]} are telling stories around a campfire.`;
             console.log(evento);
             if(quienesVivos == "12"){
               json = createObject(evento, 
@@ -547,7 +547,7 @@ eventosAleatorios1[13] =async (jugador, players, maxHP, teams, req, channel)=>{
           
         }
         if(vivos.length == 1){
-            let evento = `${vivos[0]} empieza a perder la cordura y hablar consigo mismo.`;
+            let evento = `${vivos[0]} starts to lose their mind and talk to themself.`;
             console.log(evento);            
             json = createObject(evento,[jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()],[0],[]);
             //channel.send(json.evento);
@@ -559,7 +559,7 @@ eventosAleatorios1[13] =async (jugador, players, maxHP, teams, req, channel)=>{
     if(team.getPlayer2()!=null && team.getPlayer3()== null) //team de 2
     {
         if(vivos.length == 2){
-          let evento = `${vivos[0]} y ${vivos[1]} se cuentan historias alrededor de una fogata.`;
+          let evento = `${vivos[0]} and ${vivos[1]} are telling stories around a campfire.`;
             console.log(evento);
             if(quienesVivos == "12"){
               json = createObject(evento, 
@@ -596,7 +596,7 @@ eventosAleatorios1[13] =async (jugador, players, maxHP, teams, req, channel)=>{
         }
       
         if(vivos.length == 1){
-            let evento = `${vivos[0]} empieza a perder la cordura y hablar consigo mismo.`;
+            let evento = `${vivos[0]} starts to lose their mind and talk to themself.`;
             console.log(evento);
             json = createObject(evento,[jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()],[0],[]);
             //channel.send(json.evento);
@@ -607,7 +607,7 @@ eventosAleatorios1[13] =async (jugador, players, maxHP, teams, req, channel)=>{
     }
     if(team.getPlayer2()==null && team.getPlayer3()== null) //team de 1
     {     
-        let evento = `${vivos[0]} empieza a perder la cordura y hablar consigo mismo.`;
+        let evento = `${vivos[0]} starts to lose their mind and talk to themself.`;
         console.log(evento);
         let json = createObject(evento,[team.getPlayer1().getNombre()], [team.getPlayer1().getID()], [await cargarAvatar(team.getPlayer1().getFoto(),team.getPlayer1().getID(),team.getPlayer1().getTieneOtraFoto(),req.body.channel.guild_id,players)], [team.getPlayer1().getHP()],[0],[]);
         //channel.send(json.evento);
@@ -629,7 +629,7 @@ eventosAleatorios1[14] =async (jugador, players, maxHP, teams, req, channel)=>{
     idTeamDe2 = buscarTeamDe2();
     if(idTeamDe2==null){return null;}
     team = teams[idTeamDe2 - 1];
-    let evento = `${jugador.getNombre()} encuentra a ${team.getPlayer1().getNombre()} y ${team.getPlayer2().getNombre()} y les suplica hacer equipo. ${team.getPlayer1().getNombre()} y ${team.getPlayer2().getNombre()} aceptan y permiten que ${jugador.getNombre()} se una.`;
+    let evento = `${jugador.getNombre()} met ${team.getPlayer1().getNombre()} and ${team.getPlayer2().getNombre()} and begs to team up. ${team.getPlayer1().getNombre()} and ${team.getPlayer2().getNombre()} agree and allow ${jugador.getNombre()} to join.`;
     console.log(evento);
     let json = createObject(evento,
                             [jugador.getNombre(), team.getPlayer1().getNombre(), team.getPlayer2().getNombre()], 
@@ -694,7 +694,7 @@ eventosAleatorios1[16] =async (jugador, players, maxHP, teams, req, channel)=>{
     let otroJugador;
     let copiaJugadores = copiarJugadores(players);
         otroJugador = buscarJugador(jugador, copiaJugadores);
-    let evento = ` ${jugador.getNombre()} y ${otroJugador.getNombre()} ven el fin acercandose y deciden casarse 🎊`;
+    let evento = ` ${jugador.getNombre()} and ${otroJugador.getNombre()} see the end approaching and decide to get married 🎊`;
     console.log(evento);
     let json = createObject(evento,
                             [jugador.getNombre(), otroJugador.getNombre()],
@@ -711,7 +711,7 @@ eventosAleatorios1[16] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[17] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = ` ${jugador.getNombre()} decide emborracharse.`;
+    let evento = ` ${jugador.getNombre()} decides to get drunk.`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -819,7 +819,7 @@ eventosAleatorios1[24] =async (jugador, players, maxHP, teams, req, channel)=>{
 
     console.log(` HP antes: ${jugador.getHP()}`);
     jugador.hp = maxHP;
-    let evento = ` ${jugador.getNombre()} activó los hacks y se subió la vida a full.`;
+    let evento = ` ${jugador.getNombre()} enabled hacks and maxed out their HP  .`;
     console.log(evento);
     console.log(` HP luego: ${jugador.getHP()}`);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);  //la vida la va a tener en 1000 asi que no importa cuanto se cura, la barra verde va a cubir todo
@@ -1418,7 +1418,7 @@ eventosAleatorios1[32] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[33] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = ` ${jugador.getNombre()} se pone a cocinar`;
+    let evento = ` ${jugador.getNombre()} starts cooking`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -1427,7 +1427,7 @@ eventosAleatorios1[33] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[34] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = ` ${jugador.getNombre()} tiene hambre`;
+    let evento = ` ${jugador.getNombre()} is hungry`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -1447,7 +1447,7 @@ eventosAleatorios1[35] =async (jugador, players, maxHP, teams, req, channel)=>{
 
     console.log(` HP antes: ${jugador.getHP()}`);
     jugador.hp = Math.min(maxHP, jugador.hp+=250);
-    let evento = ` Una misteriosa figura cura las heridas de ${jugador.getNombre()} `;
+    let evento = ` A mysterious figure heals ${jugador.getNombre()}'s wounds `;
     console.log(evento);
     console.log(` HP luego: ${jugador.getHP()}`);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id, players)], [jugador.getHP()], [curacion], []);
@@ -1458,6 +1458,7 @@ eventosAleatorios1[35] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[36] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null
   let comida = "test";
   let rowNumber = 0;
   
@@ -1564,7 +1565,7 @@ eventosAleatorios1[38] = async(jugador, players, maxHP, teams, req, channel)=>{
     jugador3 = team3.getPlayer1();
     
   
-    let evento = `${team1.getPlayer1().getNombre()}, ${jugador2.getNombre()} y ${jugador3.getNombre()} se encuentran y coinciden: “3 cabezas piensan mas que una”, y forman equipo.`;
+    let evento = `${team1.getPlayer1().getNombre()}, ${jugador2.getNombre()} and ${jugador3.getNombre()} meet and agree that: “three heads are better than one”, so they team up.`;
     console.log(evento);
     let json = createObject(evento,
                             [jugador1.getNombre(), jugador2.getNombre(), jugador3.getNombre()], 
@@ -1603,7 +1604,7 @@ eventosAleatorios1[39] =async (jugador, players, maxHP, teams, req, channel)=>{
   
     console.log(` HP antes: ${jugador.getHP()}`);
     jugador.hp = Math.min(maxHP, jugador.hp+=300);
-    let evento = `${jugador.getNombre()} se encuentra un spa revitalizador. ${jugador.getNombre()} se cura.`;
+    let evento = `${jugador.getNombre()} finds a revitalizing spa. ${jugador.getNombre()} gets healed.`;
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id, players)], [jugador.getHP()], [curacion], []);
     console.log(evento);
     console.log(` HP luego: ${jugador.getHP()}`);
@@ -1644,7 +1645,7 @@ eventosAleatorios1[41] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[42] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = ` ${jugador.getNombre()} se pone a llorar.`;
+    let evento = ` ${jugador.getNombre()} starts crying`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -1673,7 +1674,7 @@ eventosAleatorios1[44] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[45] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = `${jugador.getNombre()} toca la guitarra para pasar la noche. Se da cuenta que no sabe tocar la guitarra, ni tiene una. Cuestiona su cordura`;
+    let evento = `${jugador.getNombre()} plays the guitar to pass the night. They realize they don't know how to play the guitar, nor do they own one. They question their sanity`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -1756,7 +1757,7 @@ eventosAleatorios1[49] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[50] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = ` ${jugador.getNombre()} se cruza con un puesto de taquitos. Se come 24 y se acuesta a dormir, demasiado lleno como para moverse.`;
+    let evento = ` ${jugador.getNombre()} comes across a taco stand. They eat 24 tacos and lie down to sleep, too stuffed to move.`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -1765,7 +1766,7 @@ eventosAleatorios1[50] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[51] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = ` ${jugador.getNombre()} se crea una novia con IA`;
+    let evento = ` ${jugador.getNombre()} creates an AI girlfriend for themself`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -1987,7 +1988,7 @@ eventosAleatorios1[60] =async (jugador, players, maxHP, teams, req, channel)=>{
 };
 
 eventosAleatorios1[61] =async (jugador, players, maxHP, teams, req, channel)=>{
-    let evento = ` ${jugador.getNombre()} no encontró ningun arma. ¿En dónde mierda encuentran todos tantas cosas?`;
+    let evento = ` ${jugador.getNombre()} didnt find any weapon. Where the hell is everyone finding so much loot?`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,players)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
@@ -2000,7 +2001,7 @@ eventosAleatorios1[62] =async (jugador, players, maxHP, teams, req, channel)=>{
     let copiaJugadores = copiarJugadores(players);
         otroJugador = buscarJugador(jugador, copiaJugadores);
   
-    let evento = `${jugador.getNombre()} y ${otroJugador.getNombre()} duermen acurrucados, segun ellos "hace mucho frío"`;
+    let evento = `${jugador.getNombre()} and ${otroJugador.getNombre()} are cuddling while they sleep. According to them "it's just really cold"`;
     console.log(evento);
     let json = createObject(evento,
                             [jugador.getNombre(), otroJugador.getNombre()],

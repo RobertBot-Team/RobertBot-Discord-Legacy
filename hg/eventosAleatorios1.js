@@ -1458,6 +1458,7 @@ eventosAleatorios1[35] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[36] =async (jugador, players, maxHP, teams, req, channel)=>{
+  return null
   let comida = "test";
   let rowNumber = 0;
   
