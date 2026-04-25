@@ -798,6 +798,11 @@ let pronounIsAre = (arma) => {
     return "is";
 }
 
+let pronounItThem = (arma) => {
+    if (arma["pluralEn"] === "p") return "them";
+    return "it";
+}
+
 let pluralQuedar = (arma) => {
     let plural = "quedó";
     if (arma["plural"] == "p") { plural = "quedaron" };
@@ -841,6 +846,7 @@ export {
     pluralS,
     englishPronoun,
     pronounIsAre,
+    pronounItThem,
     pronombreUnUnaUnosUnas,
     pronombreOAOsAs,
     pluralQuedar,
