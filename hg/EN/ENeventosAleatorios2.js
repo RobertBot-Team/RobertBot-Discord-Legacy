@@ -6,7 +6,7 @@ import {createObject, funcionDePrueba, cargarAvatar, funcionCrearImagen, funcion
 var eventosAleatorios2 = [];
 
 eventosAleatorios2[0] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento = ` ${jugador.getNombre()} se cansó del juego, se escapó de la arena y se convirtió en un monje tibetano.`;
+    let evento = ` ${jugador.getNombre()} got tired of the game, escaped from the arena, and became a Tibetan monk.`;
     console.log(evento);
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
     //channel.send(json.evento);
@@ -66,7 +66,7 @@ eventosAleatorios2[2] = async (jugador, players, maxHP, teams, req, channel, pla
 }
 
 eventosAleatorios2[3] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` ${jugador.getNombre()} se tropieza con una ramita. Maldita naturaleza!!`; 
+    let evento =` ${jugador.getNombre()} trips over a twig. Damn you, nature!!`; 
     console.log(evento);
     
     let danio = danioExtra(50,150);
@@ -97,7 +97,7 @@ eventosAleatorios2[3] = async (jugador, players, maxHP, teams, req, channel, pla
 }
 
 eventosAleatorios2[4] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` Cae un rayo del cielo y le viene a pegar justo JUSTO a ${jugador.getNombre()}.`; 
+    let evento =` A lightning bolt falls from the sky and hits ${jugador.getNombre()} of all people.`; 
     console.log(evento);
     
     let danio = danioExtra(200,400);
@@ -154,7 +154,7 @@ eventosAleatorios2[5] = async (jugador, players, maxHP, teams, req, channel, pla
 }
 
 eventosAleatorios2[6] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` Comienza a granizar y ${jugador.getNombre()} no encontró refugio.`; 
+    let evento =` It starts hailing and ${jugador.getNombre()} didn't find shelter.`; 
     console.log(evento);
     
     let danio = danioExtra(100,350);
@@ -203,7 +203,7 @@ eventosAleatorios2[7] = async (jugador, players, maxHP, teams, req, channel, pla
 }
 
 eventosAleatorios2[8] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento = ` ${jugador.getNombre()} resbala con una cáscara de banana. Qué cliché.`; 
+    let evento = ` ${jugador.getNombre()} slips on a banana peel. How cliché.`; 
     console.log(evento);
     
     let danio = danioExtra(20,100);
@@ -313,7 +313,7 @@ eventosAleatorios2[11] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[12] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` ${jugador.getNombre()} intentó nadar en lava.`; 
+    let evento =` ${jugador.getNombre()} tried to swim in lava.`; 
     console.log(evento);
     
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -332,7 +332,7 @@ eventosAleatorios2[12] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[13] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` ${jugador.getNombre()} pensó que podía atravesar un lago nadando. Pero no sabía nadar.`; 
+    let evento =` ${jugador.getNombre()} thought they could cross a lake by swimming. But they forgot that they didn't know how to swim.`; 
     console.log(evento);
     
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -401,7 +401,7 @@ eventosAleatorios2[16] = async (jugador, players, maxHP, teams, req, channel, pl
 
     let plural = pluralS(jugador.getArma());
   
-    let evento = ` ${jugador.getNombre()} juega con su${plural} ${jugador.getArma()["nombre"]} y se corta un dedo.`;
+    let evento = ` ${jugador.getNombre()} is playing with their ${jugador.getArma()["name"]} and got a cut on their finger.`;
     console.log(evento);
     
     let danio = danioExtra(100,400);
@@ -437,7 +437,7 @@ eventosAleatorios2[17] = async (jugador, players, maxHP, teams, req, channel, pl
     let jugadorDos = buscarJugador(jugador,copiaJugadores);
     if(jugadorDos==null){return null;}
   
-    let evento = ` ${jugador.getNombre()} le pide por favor a ${jugadorDos.getNombre()} que lo mate. ${jugadorDos.getNombre()} se rehúsa.`;
+    let evento = ` ${jugador.getNombre()} begs ${jugadorDos.getNombre()} to kill them. ${jugadorDos.getNombre()} refuses.`;
     console.log(evento);
   
     let json = createObject(evento, 
@@ -454,7 +454,7 @@ eventosAleatorios2[17] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[18] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento = ` ${jugador.getNombre()} fue absorbido por un agujero negro.`;
+    let evento = ` ${jugador.getNombre()} was sucked into a black hole.`;
     console.log(evento);
     
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -471,7 +471,7 @@ eventosAleatorios2[18] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[19] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento = ` ${jugador.getNombre()} pasó a un mundo mejor.`;
+    let evento = ` ${jugador.getNombre()} has passed on to a better world.`;
     console.log(evento);
     
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -489,7 +489,7 @@ eventosAleatorios2[19] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[20] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento = ` A ${jugador.getNombre()} lo atropelló un camión y ya debe andar en algun mundo con elfas tetonas y animales que hablan.`;
+    let evento = ` ${jugador.getNombre()} got hit by a truck and is probably already in some world with busty elves and talking animals.`;
     console.log(evento);
     
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -521,7 +521,7 @@ eventosAleatorios2[21] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[22] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento = ` ${jugador.getNombre()} tocó antimateria y se desintegró.`; 
+    let evento = ` ${jugador.getNombre()} touched antimatter and was disintegrated.`; 
     console.log(evento);
     
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -540,7 +540,7 @@ eventosAleatorios2[22] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[23] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento = ` ${jugador.getNombre()} se pregunta ¿qué hago aquí?`;
+    let evento = ` ${jugador.getNombre()} wonders, "What am I even doing here?"`;
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [jugador.getHP()], [0], []);
@@ -551,7 +551,7 @@ eventosAleatorios2[23] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[24] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` ${jugador.getNombre()} intenta trepar un árbol para tener ventaja táctica. Pero se resbala y se cae.`; 
+    let evento =` ${jugador.getNombre()} tries to climb a tree for tactical advantage. But they slip and fall.`; 
     console.log(evento);
     
     let danio = danioExtra(100,250);
@@ -582,7 +582,7 @@ eventosAleatorios2[24] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[25] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` ${jugador.getNombre()} muere por la abstinencia de WiFi.`; 
+    let evento =` ${jugador.getNombre()} dies from WiFi withdrawal.`; 
     console.log(evento);
     
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -665,7 +665,7 @@ eventosAleatorios2[29] = async (jugador, players, maxHP, teams, req, channel, pl
     if(jugadorDos==null){return null;}
 
   
-    let evento =` ${jugador.getNombre()} ve a ${jugadorDos.getNombre()}. ${jugador.getNombre()} se aleja porque le da miedo.`; 
+    let evento =` ${jugador.getNombre()} sees ${jugadorDos.getNombre()}. ${jugador.getNombre()} and backs away in fear.`; 
     console.log(evento);
   
     let json = createObject(evento, 
@@ -700,7 +700,7 @@ eventosAleatorios2[30] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[31] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` ${jugador.getNombre()} murió. F en el chat.`; 
+    let evento =` ${jugador.getNombre()} died. F in the chat.`; 
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -739,7 +739,7 @@ eventosAleatorios2[32] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[33] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` Se extiende un incendio repentino, y ${jugador.getNombre()} no logró escapar.`; 
+    let evento =` A sudden fire breaks out, and ${jugador.getNombre()} didn't make it out.`; 
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -758,7 +758,7 @@ eventosAleatorios2[33] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[34] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` Cambiaron las reglas del juego, y el área en que estaba ${jugador.getNombre()} quedó fuera de los límites. ${jugador.getNombre()} fue descalificado.`; 
+    let evento =` The rules of the game changed, and the area ${jugador.getNombre()} was in is now out of bounds. ${jugador.getNombre()} has been disqualified.`; 
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -781,14 +781,14 @@ eventosAleatorios2[35] = async (jugador, players, maxHP, teams, req, channel, pl
     let elLa1 = pronombreElLaLosLas(jugador.getArma());
     let plural = pluralS(jugador.getArma());
   
-    let evento =` Una gaviota le roba ${elLa1.toLowerCase()} ${jugador.getArma()["nombre"]} a ${jugador.getNombre()}.`; 
+    let evento =` A seagull steals the ${jugador.getNombre()}'s ${jugador.getArma()["name"]}.`; 
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
     funcionCrearImagen(json,"1",channel);
     
-    let extra1 = `${jugador.getNombre()} perdió su${plural} ${jugador.getArma()["nombre"]}`;
+    let extra1 = `${jugador.getNombre()} lost their ${jugador.getArma()["name"]}`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -817,7 +817,7 @@ eventosAleatorios2[36] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[37] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` Surge una fiebre de disco repentina y todos se ponen a bailar incontroladamente. ${jugador.getNombre()} muere del cansancio.`; 
+    let evento =` A sudden disco fever breaks out and everyone starts dancing uncontrollably. ${jugador.getNombre()} dies of exhaustion.`; 
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -836,7 +836,7 @@ eventosAleatorios2[37] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[38] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` A ${jugador.getNombre()} lo ataca un pulpo, ya se a donde va esto...`; 
+    let evento =` ${jugador.getNombre()} is attacked by an octopus... I know where this is going.`; 
     console.log(evento);
     
     let danio = danioExtra(10,50);
@@ -870,14 +870,14 @@ eventosAleatorios2[39] = async (jugador, players, maxHP, teams, req, channel, pl
     if(jugador.getArma() == null){return null;}
     let plural = pluralS(jugador.getArma());
   
-    let evento =` ${jugador.getNombre()} no quiere pelear más y prende fuego su${plural} ${jugador.getArma()["nombre"]}.`; 
+    let evento =` ${jugador.getNombre()} doesn't want to fight anymore and sets fire to their ${jugador.getArma()["name"]}.`; 
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [jugador.getHP()], [0], []);
     //channel.send(json.evento);
     funcionCrearImagen(json,"1",channel);
     
-    let extra1 = `${jugador.getNombre()} perdió su${plural} ${jugador.getArma()["nombre"]}`;
+    let extra1 = `${jugador.getNombre()} lost their ${jugador.getArma()["name"]}`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -957,7 +957,7 @@ eventosAleatorios2[44] = async (jugador, players, maxHP, teams, req, channel, pl
 
 eventosAleatorios2[45] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
     let hp;
-    let evento = ` ${jugador.getNombre()} se lastima con las espinas de una flor.`;
+    let evento = ` ${jugador.getNombre()} pricks themself on the thorns of a flower.`;
     console.log(evento);
     hp = jugador.getHP();
     console.log(` HP antes: ${hp}`);
@@ -987,7 +987,7 @@ eventosAleatorios2[45] = async (jugador, players, maxHP, teams, req, channel, pl
 
 eventosAleatorios2[46] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
     let hp;
-    let evento = ` ${jugador.getNombre()} come algunas bayas silvestres. El problema es que eran tóxicas.`;
+    let evento = ` ${jugador.getNombre()} eats some wild berries. Unfortunately, they were toxic.`;
     console.log(evento);
     hp = jugador.getHP();
     console.log(` HP antes: ${hp}`);
@@ -1040,7 +1040,7 @@ eventosAleatorios2[47] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[48] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` Se encontró el cuerpo sin vida de ${jugador.getNombre()}. ¿Qué le habrá pasado?`; 
+    let evento =` The lifeless body of ${jugador.getNombre()} was found. What could have happened to them?`; 
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -1098,7 +1098,7 @@ eventosAleatorios2[51] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[52] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` ${jugador.getNombre()} se muere de forma misteriosa.. :thinking:`; 
+    let evento =` ${jugador.getNombre()} dies mysteriously... :thinking:`; 
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -1117,7 +1117,7 @@ eventosAleatorios2[52] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[53] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` Hubo una ola de calor y ${jugador.getNombre()} no soportó.`; 
+    let evento =` There was a heatwave and ${jugador.getNombre()} couldn't handle it.`; 
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -1136,7 +1136,7 @@ eventosAleatorios2[53] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[54] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` ${jugador.getNombre()} consigue un kit de primeros auxilios!! Lamentablemente no sabe usarlo.`; 
+    let evento =` ${jugador.getNombre()} finds a first aid kit!! Unfortunately, they don't know how to use it.`; 
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [jugador.getHP()], [0], []);
@@ -1167,7 +1167,7 @@ eventosAleatorios2[55] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[56] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` ${jugador.getNombre()} muere de aburrimiento.`; 
+    let evento =` ${jugador.getNombre()} died of boredom.`; 
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -1396,7 +1396,7 @@ eventosAleatorios2[65] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[66] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =`${jugador.getNombre()} murió en una estampida de ñus`; 
+    let evento =`${jugador.getNombre()} died in a wildebeest stampede.`; 
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -1415,7 +1415,7 @@ eventosAleatorios2[66] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[67] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` ${jugador.getNombre()} decide comer una planta que se ve bien sabrosa y bien roja. No será venenosa, no?`; 
+    let evento =` ${jugador.getNombre()} decides to eat a plant that looks tasty and bright red. It's not poisonous... Right?`; 
     console.log(evento);
   
     let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(),jugador.getID(),jugador.getTieneOtraFoto(),req.body.channel.guild_id,playersReal)], [0], [jugador.getHP()], []);
@@ -1434,7 +1434,7 @@ eventosAleatorios2[67] = async (jugador, players, maxHP, teams, req, channel, pl
 }
 
 eventosAleatorios2[68] = async (jugador, players, maxHP, teams, req, channel, playersReal)=>{
-    let evento =` ${jugador.getNombre()} deja picarse por una araña para convertirse en Spider-${jugador.getNombre()}. No funciona.`; 
+    let evento =` ${jugador.getNombre()} lets a spider bite them to become Spider-${jugador.getNombre()}. It doesn't work.`; 
     console.log(evento);
     
     let danio = danioExtra(100,250);
