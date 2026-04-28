@@ -1692,7 +1692,7 @@ eventosAtaqueEspecificoxCategoria[23] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -1745,7 +1745,7 @@ eventosAtaqueEspecificoxCategoria[24] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -1801,7 +1801,7 @@ eventosAtaqueEspecificoxCategoria[25] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -1856,7 +1856,7 @@ eventosAtaqueEspecificoxCategoria[26] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -1911,7 +1911,7 @@ eventosAtaqueEspecificoxCategoria[27] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -1962,7 +1962,7 @@ eventosAtaqueEspecificoxCategoria[28] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -2018,7 +2018,7 @@ eventosAtaqueEspecificoxCategoria[29] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -2074,7 +2074,7 @@ eventosAtaqueEspecificoxCategoria[30] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -2118,7 +2118,7 @@ eventosAtaqueEspecificoxCategoria[31] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -2191,7 +2191,7 @@ eventosAtaqueEspecificoxCategoria[33] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -2298,7 +2298,7 @@ eventosAtaqueEspecificoxCategoria[35] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -2352,7 +2352,7 @@ eventosAtaqueEspecificoxCategoria[36] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -2401,7 +2401,7 @@ eventosAtaqueEspecificoxCategoria[37] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
@@ -2459,7 +2459,7 @@ eventosAtaqueEspecificoxCategoria[38] = async (jugador, players, victima, req, c
 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
-    let extra1 = `The ${jugador.getArma()["name"]} of ${jugador.getNombre()} has run out of uses.`;
+    let extra1 = `The ${jugador.getNombre()}'s ${jugador.getArma()["name"]} has run out of uses.`;
     console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
