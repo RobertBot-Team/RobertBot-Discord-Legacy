@@ -2285,9 +2285,9 @@ eventoslootEspecificoxCategoria[123] = async (jugador, players, arma, req, chann
   return 1;
 }
 
-//"cinturón" /////////
+//"cinturón" 
 eventoslootEspecificoxCategoria[124] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} se saca el cinturón que llevaba puesto y le trae recuerdos de su padre... Bueno, algo aprendió, ¿no?`;
+  let evento = `${jugador.getNombre()} removes the belt they were wearing and decides to use it as their weapon. Their pants fall down constantly now`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
@@ -2345,9 +2345,9 @@ eventoslootEspecificoxCategoria[129] = async (jugador, players, arma, req, chann
   return 1;
 }
 
-//"fotocopiadora"  /////////
+//"fotocopiadora"
 eventoslootEspecificoxCategoria[130] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} va a un cyber y se roba una fotocopiadora. Latinos.`;
+  let evento = `${jugador.getNombre()} goes to a cyber cafe and steals a photocopier.`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
