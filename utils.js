@@ -2404,7 +2404,7 @@ export async function rondaLoot(req, jugador, players, channel, nroEvento, idiom
     await eventoAleatorio1(jugador, players, req, channel, idioma);
   } else {
     let armaAux = generarArma()
-    let arma = new Arma(armaAux.nombre, armaAux.categoria, armaAux.danio, armaAux.usos, armaAux.pronombre, armaAux.plural);
+    let arma = new Arma(armaAux.nombre, armaAux.categoria, armaAux.danio, armaAux.usos, armaAux.pronombre, armaAux.plural, armaAux.name, armaAux.pluralEn);
 
     if (arma.danio == 0) {
       await lootArmaEstetica(jugador, arma, players, req, channel);
