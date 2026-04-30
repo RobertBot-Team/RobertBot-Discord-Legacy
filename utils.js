@@ -569,7 +569,7 @@ export function leerArchivoDevolverLinea(linea) {
   return leido;
 }
 
-let generarArma = () => {
+export let generarArma = () => {
   var rand = parseInt(Math.random() * armas.length);
   //console.log(`%c${JSON.stringify(armas[rand])}`,"color:orange");
 
