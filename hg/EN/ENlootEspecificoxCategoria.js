@@ -1969,7 +1969,7 @@ eventoslootEspecificoxCategoria[92] = async (jugador, players, arma, req, channe
 
 // "ring blade"
 eventoslootEspecificoxCategoria[93] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} encontró una ring blade. De repente esto parece un RPG`;
+  let evento = `${jugador.getNombre()} found a ring blade. Suddenly this looks like a RPG.`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
