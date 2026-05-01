@@ -1,11 +1,14 @@
 import {InteractionResponseType, InteractionResponseFlags} from "discord-interactions";
 import { PermissionsBitField } from "discord.js";
-import { clearGuildPlayLanguage, getGuildPlayLanguage, setPartidaActiva } from "../../app.js";
+import { clearGuildPlayLanguage, getGuildPlayLanguage, setPartidaActiva, getGameCreator, clearGameCreator } from "../../app.js";
 import { resetGuildGameState } from "../message_component/play.js";
 import { reiniciarContador, reiniciarJugadoresFake, limpiarTeams } from "../../utils.js";
 import { tPlay } from "../play_i18n.js";
 
-function hasStopPermission(req) {
+function hasStopPermission(req, guildId) {
+  const isCreator = req.body.member?.user?.id === getGameCreator(guildId);
+  if (isCreator) return true;
+
   const permissions = req.body.member?.permissions;
   if (!permissions) return false;
 
@@ -20,7 +23,7 @@ export async function stop(req, res, client){
   const guildId = req.body.guild_id || req.body.channel?.guild_id || "global";
   const language = getGuildPlayLanguage(guildId);
   let nick;
-  if(hasStopPermission(req)){
+  if(hasStopPermission(req, guildId)){
     
      if (req.body.member.nick == null){
         if(req.body.member.user.global_name == null) {
@@ -43,6 +46,7 @@ export async function stop(req, res, client){
 
       setPartidaActiva(0, guildId);
       clearGuildPlayLanguage(guildId);
+      clearGameCreator(guildId);
       resetGuildGameState(guildId);
       reiniciarContador();
       reiniciarJugadoresFake();
