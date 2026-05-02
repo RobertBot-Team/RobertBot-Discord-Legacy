@@ -13,7 +13,7 @@ import {
 } from "../../utils.js"
 import { limpiarPlayersPorGuild } from "../message_component/play.js"
 import { EmbedBuilder } from "discord.js";
-import { clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, setGuildPlayLanguage, setPartidaActiva } from "../../app.js"
+import { clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, setGuildPlayLanguage, setPartidaActiva, setGameCreator, clearGameCreator } from "../../app.js"
 import { getModeLabel, tPlay } from "../play_i18n.js";
 
 export function play4(req, res, partidaActiva, client){
@@ -235,6 +235,7 @@ export async function play(req, res, client, selectedLanguage){
   if(getPartidaActiva(guildId) == 0){
     
     setPartidaActiva(1, guildId);
+    setGameCreator(req.body.member.user.id, guildId);
 
     const filter = (message) => message.author.id == '1067669524192702464' && message.content == tPlay(language, "game_started");
     const collector = channel.createMessageCollector({ filter, time: 7000 });
@@ -560,6 +561,7 @@ async function desactivarComando(channel,msgid,guildId){
             limpiarTeams();
             reiniciarJugadoresFake();
             setPartidaActiva(0, guildId);
+            clearGameCreator(guildId);
             clearGuildPlayLanguage(guildId);
             //no se reinicia slowMode ni modoK porque aqui no estan las variables
             //espero que no moleste en el futuro (?)

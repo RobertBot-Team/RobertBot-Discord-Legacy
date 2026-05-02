@@ -61,6 +61,7 @@ app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 const activeGames = {};
 
 const partidaActivaPorGuild = new Map();
+const gameCreatorPorGuild = new Map();
 const playLanguagePorGuild = new Map();
 
 function getGuildIdFromBody(body) {
@@ -73,6 +74,18 @@ export function setPartidaActiva(n, guildId = "global"){
 
 export function getPartidaActiva(guildId = "global"){
   return partidaActivaPorGuild.get(guildId) || 0;
+}
+
+export function setGameCreator(userId, guildId = "global"){
+  gameCreatorPorGuild.set(guildId, userId);
+}
+
+export function getGameCreator(guildId = "global"){
+  return gameCreatorPorGuild.get(guildId);
+}
+
+export function clearGameCreator(guildId = "global"){
+  gameCreatorPorGuild.delete(guildId);
 }
 
 export function setGuildPlayLanguage(language, guildId = "global") {

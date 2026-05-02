@@ -3,14 +3,14 @@ import {
   buscarJugadorConArma,
   buscarPorID,
   copiarJugadores,
-  generarArma,
   englishPronoun,
   pronounItThem
 } from "../utils.js"
 import {
   createObject,
   cargarAvatar,
-  funcionCrearImagen
+  funcionCrearImagen,
+  generarArma
 } from "../../utils.js";
 
 var eventosLootGenerico = [];
