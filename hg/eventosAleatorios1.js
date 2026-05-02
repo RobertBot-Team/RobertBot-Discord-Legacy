@@ -646,7 +646,7 @@ eventosAleatorios1[14] =async (jugador, players, maxHP, teams, req, channel)=>{
 
     jugador.setTeam(team);
     team.setPlayer3 = jugador;
-    //channel.send(json.evento);
+    //channel.send(json.evento, req.body.channel?.guild_id || req.body.guild_id);
     funcionCrearImagen(json,"1x2",channel)
     await muerteJugador(req.body.channel.guild_id, channel, players);
 
@@ -682,7 +682,7 @@ eventosAleatorios1[15] =async (jugador, players, maxHP, teams, req, channel)=>{
 
     jugador.setTeam(team);
     team.setPlayer3 = jugador;
-    //channel.send(json.evento);
+    //channel.send(json.evento, req.body.channel?.guild_id || req.body.guild_id);
     funcionCrearImagen(json,"1x2",channel)
     await muerteJugador(req.body.channel.guild_id, channel, players);
 
@@ -1549,7 +1549,7 @@ eventosAleatorios1[38] = async(jugador, players, maxHP, teams, req, channel)=>{
     let jugador2;
     let jugador3;
     
-    arraySolos = buscarTresTeamsSolo();
+    arraySolos = buscarTresTeamsSolo(req.body.channel?.guild_id || req.body.guild_id);
     if(arraySolos===null){return null;}
     
     pos1 = arraySolos[0]-1;
@@ -1585,7 +1585,7 @@ eventosAleatorios1[38] = async(jugador, players, maxHP, teams, req, channel)=>{
     eliminarTeam(team2.getID());
     eliminarTeam(team3.getID());
 
-    //channel.send(json.evento);
+    //channel.send(json.evento, req.body.channel?.guild_id || req.body.guild_id);
     funcionCrearImagen(json,"3",channel)
     await muerteJugador(req.body.channel.guild_id, channel, players);
 
@@ -2064,7 +2064,7 @@ eventosAleatorios1[39] =async (jugador, players, maxHP, teams, req, channel)=>{ 
     let jugador2;
     let jugador3;
   
-    arraySolos = buscarTresTeamsSolo();
+    arraySolos = buscarTresTeamsSolo(req.body.channel?.guild_id || req.body.guild_id);
     if(arraySolos===null){return null;}
     
     pos1 = arraySolos[0]-1;
@@ -2100,7 +2100,7 @@ eventosAleatorios1[39] =async (jugador, players, maxHP, teams, req, channel)=>{ 
     eliminarTeam(team2.getID());
     eliminarTeam(team3.getID());
 
-    //channel.send(json.evento);
+    //channel.send(json.evento, req.body.channel?.guild_id || req.body.guild_id);
     funcionCrearImagen(json,"3",channel)
     await muerteJugador(req.body.channel.guild_id, channel, players);
 
@@ -2119,7 +2119,7 @@ eventosAleatorios1[40] =async (jugador, players, maxHP, teams, req, channel)=>{ 
     let jugador2;
     let jugador3;
   
-    arraySolos = buscarTresTeamsSolo();
+    arraySolos = buscarTresTeamsSolo(req.body.channel?.guild_id || req.body.guild_id);
     if(arraySolos===null){return null;}
     
     pos1 = arraySolos[0]-1;
@@ -2155,7 +2155,7 @@ eventosAleatorios1[40] =async (jugador, players, maxHP, teams, req, channel)=>{ 
     eliminarTeam(team2.getID());
     eliminarTeam(team3.getID());
 
-    //channel.send(json.evento);
+    //channel.send(json.evento, req.body.channel?.guild_id || req.body.guild_id);
     funcionCrearImagen(json,"3",channel)
     await muerteJugador(req.body.channel.guild_id, channel, players);
 
@@ -2174,7 +2174,7 @@ eventosAleatorios1[41] =async (jugador, players, maxHP, teams, req, channel)=>{ 
     let jugador2;
     let jugador3;
   
-    arraySolos = buscarTresTeamsSolo();
+    arraySolos = buscarTresTeamsSolo(req.body.channel?.guild_id || req.body.guild_id);
     if(arraySolos===null){return null;}
     
     pos1 = arraySolos[0]-1;
@@ -2210,7 +2210,7 @@ eventosAleatorios1[41] =async (jugador, players, maxHP, teams, req, channel)=>{ 
     eliminarTeam(team2.getID());
     eliminarTeam(team3.getID());
 
-    //channel.send(json.evento);
+    //channel.send(json.evento, req.body.channel?.guild_id || req.body.guild_id);
     funcionCrearImagen(json,"3",channel)
     await muerteJugador(req.body.channel.guild_id, channel, players);
 

@@ -34,9 +34,26 @@ import nthline from 'nthline';
 import { returnClient, getGuildPlayLanguage } from './app.js';
 import { buscarPorID } from './hg/utils.js';
 
-var contador = 0;
 var maxHP = 1000;
-var teams = [];
+
+var guildTeams = new Map();
+export function getGuildTeams(guildId) {
+  if (!guildId) guildId = "global";
+  if (!guildTeams.has(guildId)) guildTeams.set(guildId, []);
+  return guildTeams.get(guildId);
+}
+
+var guildContador = new Map();
+export function getGuildContador(guildId) {
+  if (!guildId) guildId = "global";
+  if (!guildContador.has(guildId)) guildContador.set(guildId, 0);
+  return guildContador.get(guildId);
+}
+export function setGuildContador(guildId, val) {
+  if (!guildId) guildId = "global";
+  guildContador.set(guildId, val);
+}
+
 
 //                     (nombre, categoria, daño base, usos, pronombre, pluralidad, english name, english plurality)
 const pistola = new Arma("pistola", "pistola", 190, 3, "f", "", "gun", "");
@@ -407,10 +424,11 @@ export function agregarJugador(res, jugador, players) {
   }
 };
 
-export function funcionEventos() {
+export function funcionEventos(guildId) {
   let arrayEventos = [1, 2, 3, -1];  //simula 3 eventos, termina la partida, y a la 4ta iteración devuelve un -1
-  let resultado = arrayEventos[contador];
-  contador++;
+  let currentContador = getGuildContador(guildId);
+  let resultado = arrayEventos[currentContador];
+  setGuildContador(guildId, currentContador + 1);
   return resultado;
 }
 
@@ -450,7 +468,7 @@ export function exampleEmbed(channel) {
   channel.send({ embeds: [exampleEmbed] });
 }
 
-export function funcionRetornaJson() {
+export function funcionRetornaJson(guildId) {
   //console.log(`En la funcion del json`);
   const json = {
     evento: function () { return `${this.names[0]} ayuda a ${this.names[1]} a atacar a ${this.names[2]}` },
@@ -461,8 +479,9 @@ export function funcionRetornaJson() {
     danioRecibido: ["0", "0", "280"],
   };
 
-  if (contador === 0) {
-    contador++;
+  let currentContador = getGuildContador(guildId);
+  if (currentContador === 0) {
+    setGuildContador(guildId, currentContador + 1);
     //console.log(contador);
     return json;
   }
@@ -473,13 +492,13 @@ export function funcionRetornaJson() {
 
 }
 
-export function reiniciarContador() {
-  contador = 0;
+export function reiniciarContador(guildId) {
+  setGuildContador(guildId, 0);
   console.log("Reiniciando contador...");
 }
 
-export function limpiarTeams() {
-  teams = [];
+export function limpiarTeams(guildId) {
+  guildTeams.set(guildId || "global", []);
   console.log("Limpiando teams...")
 }
 
@@ -845,6 +864,7 @@ async function dibujarTeam(canvas, context, team, offsetX, offsetY, guild, playe
 }
 
 export async function mostrarTeams(channel, guildId, players) {  //pensar funcion matematica que haga la suma sola, en vez de hacer mas ifs
+  let teams = getGuildTeams(guildId);
   let canvasHeight = 255;
   let filas = ~~((teams.length - 1) / 5) + 1;
   /*if (teams.length > 1 && teams.length < 6 ){
@@ -1658,7 +1678,7 @@ let buscarJugadorOtroTeam = (jugador, jugadores) => {    //el jugador del parame
   return null;
 }
 
-export function buscarTresTeamsSolo() {
+export function buscarTresTeamsSolo(teams) {
   let team;
   let arraySolos = [];
 
@@ -1682,7 +1702,7 @@ export function buscarTresTeamsSolo() {
   return null;
 }
 
-let arreglarIDs = () => {
+let arreglarIDs = (teams) => {
   let team;
   for (let i = 0; i < teams.length; i++) {
     team = teams[i];
@@ -1690,12 +1710,12 @@ let arreglarIDs = () => {
   }
 }
 
-export function eliminarTeam(teamID) {
+export function eliminarTeam(teamID, teams) {
   let index;
   console.log(`eliminando el team ${teamID}`);
   index = teamID - 1;
   teams.splice(index, 1);
-  arreglarIDs();
+  arreglarIDs(teams);
 }
 
 async function dibujarJugadorDeTeam(canvas, context, player, avatarSize, offsetX, offsetY, fontSize, guild, teamOGanador, players) {
@@ -1885,7 +1905,8 @@ export async function displayWinnerTeam(channel, team, guild, players) {
   });
 }
 
-export async function displayTeamByTeam(channel, guild, players) {
+export async function displayTeamByTeam(channel, guildId, guild, players) {
+  let teams = getGuildTeams(guildId);
   let team;
   for (let i = 0; i < teams.length; i++) {
     team = teams[i];
@@ -2006,7 +2027,8 @@ export function buscarUnMuerto(players) {
   return null;
 }
 
-export function formarEquipo(jugadores) {
+export function formarEquipo(jugadores, guildId) {
+  let teams = getGuildTeams(guildId);
   let jugador;
   let jugadorA;   //auxiliar
   let jugadorB;   //auxiliar
@@ -2131,7 +2153,8 @@ export function formarEquipo(jugadores) {
 }
 
 
-export function imprimirTeams(teams1 = teams) {
+export function imprimirTeams(guildId, teams1) {
+  if (!teams1) teams1 = getGuildTeams(guildId);
   for (let countTeams = 0; countTeams < teams1.length; countTeams++) {
     console.log("\x1b[36m%s\x1b[0m", `TEAM ${teams1[countTeams].getID()}`);
     if (teams1[countTeams].getPlayer1() != null) {
@@ -2182,7 +2205,7 @@ export async function muerteJugador(guildID, channel, players) {
   channel.send({ embeds: [embed] });
 
   await sleep(1000);
-  imprimirTeams();
+  imprimirTeams(guildID);
   mostrarTeams(channel, guildID, players);
 }
 
