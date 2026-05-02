@@ -112,9 +112,10 @@ const chun3 = new Jugador("chun", 101801);
 const lynn4 = new Jugador("lynn", 1067411);
 const robert4 = new Jugador("robert", 15613474);
 
-export const maxHP = 1000;
+var maxHP = 1000;
+var teams = [];
 
-export let buscarTeamDe2 = (teams) => {   //retorna null si no hay teams de 2 miembros
+let buscarTeamDe2 = () => {   //retorna null si no hay teams de 2 miembros
     let team;
     let idTeam;
     for (let i = 0; i < teams.length; i++) {
@@ -129,7 +130,7 @@ export let buscarTeamDe2 = (teams) => {   //retorna null si no hay teams de 2 mi
     return null;
 }
 
-export let buscarTeamDe3 = (teams) => {   //retorna null si no hay teams de 3 miembros
+let buscarTeamDe3 = () => {   //retorna null si no hay teams de 3 miembros
     let team;
     let idTeam;
     for (let i = 0; i < teams.length; i++) {
@@ -144,7 +145,7 @@ export let buscarTeamDe3 = (teams) => {   //retorna null si no hay teams de 3 mi
     return null;
 }
 
-export let imprimirTeams = (teams1) => {
+let imprimirTeams = (teams1 = teams) => {
     for (let countTeams = 0; countTeams < teams1.length; countTeams++) {
         console.log("\x1b[36m%s\x1b[0m", `TEAM ${teams1[countTeams].getID()}`);
         if (teams1[countTeams].getPlayer1() != null) {
@@ -511,7 +512,7 @@ let eventoAleatorio1 = (jugador, players) => {
     do {
         var rand = parseInt(Math.random() * eventosAleatorios1.length);
         console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
-        resultado = eventosAleatorios1[rand](jugador, players, maxHP, gameState.teams); //le paso el array original
+        resultado = eventosAleatorios1[rand](jugador, players, maxHP, teams); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 
@@ -545,7 +546,7 @@ let eventoAleatorio2 = (jugador, players) => {
     do {
         var rand = parseInt(Math.random() * eventosAleatorios2.length);
         console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
-        resultado = eventosAleatorios2[rand](jugador, players, maxHP, gameState.teams); //le paso el array original
+        resultado = eventosAleatorios2[rand](jugador, players, maxHP, teams); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 };
