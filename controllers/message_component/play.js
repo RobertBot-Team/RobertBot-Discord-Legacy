@@ -246,7 +246,7 @@ export async function messagePlay_2(req, res, client) {
     //crearJugadoresFake(players);
 
     let copia1 = copiarJugadores(players)
-    formarEquipo(copia1, guildId);
+    formarEquipo(copia1);
 
 
     await sleep(2000);
@@ -255,7 +255,7 @@ export async function messagePlay_2(req, res, client) {
     await displayTeamByTeam(channel, req.body.channel.guild_id, players);
 
     //mostrar equipos
-    imprimirTeams(guildId);
+    imprimirTeams();
     mostrarTeams(channel, req.body.channel.guild_id, players);
 
     cantidadConVida = calcularVivos(players);
@@ -399,7 +399,7 @@ export async function messagePlay_2(req, res, client) {
       embed = generarEmbedTexto(color, `Quedan ${cantidadConVida} jugadores con vida.`);
       channel.send({embeds:[embed]});
 
-      imprimirTeams(guildId);
+      imprimirTeams();
       mostrarTeams(channel, req.body.channel.guild_id);*/
 
       if (nroRonda >= 4) {        //mas daño hacen las armas cuantas mas rondas hayan pasado
@@ -461,9 +461,9 @@ export async function messagePlay_2(req, res, client) {
     //vaciar variables
     //players = [];
     resetGuildGameState(guildId);
-    reiniciarContador(guildId);
+    reiniciarContador();
     reiniciarJugadoresFake();
-    limpiarTeams(guildId);
+    limpiarTeams();
     setPartidaActiva(0, guildId);
     clearGuildPlayLanguage(guildId);
 
@@ -535,9 +535,9 @@ export async function messagePlay_2(req, res, client) {
     setPartidaActiva(0, guildId);
     clearGuildPlayLanguage(guildId);
     resetGuildGameState(guildId);
-    reiniciarContador(guildId);
+    reiniciarContador();
     reiniciarJugadoresFake();
-    limpiarTeams(guildId);
+    limpiarTeams();
     channel.send({ embeds: [embed] });
 
   } else {

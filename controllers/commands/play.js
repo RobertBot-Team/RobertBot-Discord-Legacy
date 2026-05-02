@@ -557,8 +557,8 @@ async function desactivarComando(channel,msgid,guildId){
           });
 
                 limpiarPlayersPorGuild(guildId);
-            reiniciarContador(guildId);
-            limpiarTeams(guildId);
+            reiniciarContador();
+            limpiarTeams();
             reiniciarJugadoresFake();
             setPartidaActiva(0, guildId);
             clearGameCreator(guildId);
