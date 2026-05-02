@@ -2681,7 +2681,7 @@ eventoslootEspecificoxCategoria[162] = async (jugador, players, arma, req, chann
 
 //"lanza"  
 eventoslootEspecificoxCategoria[163] = async (jugador, players, arma, req, channel) => {
-  let evento = `${jugador.getNombre()} finds a spear piercing through a skeleton, next to a skeleton that holds a broken shield. ${jugador.getNombre} takes the spear and leaves.`;
+  let evento = `${jugador.getNombre()} finds a spear piercing through a skeleton, next to a skeleton that holds a broken shield. ${jugador.getNombre()} takes the spear and leaves.`;
   console.log(evento);
   jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
