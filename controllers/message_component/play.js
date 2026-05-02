@@ -46,6 +46,8 @@ function getGuildGameState(guildId) {
   if (!guildGameStates.has(guildId)) {
     guildGameStates.set(guildId, {
       players: [],
+      teams: [],
+      contador: 0,
       modoK: 0,
       slowMode: false,
     });
@@ -59,6 +61,8 @@ export function resetGuildGameState(guildId) {
 
   const gameState = getGuildGameState(guildId);
   gameState.players = [];
+  gameState.teams = [];
+  gameState.contador = 0;
   gameState.modoK = 0;
   gameState.slowMode = false;
 }
@@ -461,9 +465,9 @@ export async function messagePlay_2(req, res, client) {
     //vaciar variables
     //players = [];
     resetGuildGameState(guildId);
-    reiniciarContador();
+    reiniciarContador(gameState);
     reiniciarJugadoresFake();
-    limpiarTeams();
+    limpiarTeams(gameState);
     setPartidaActiva(0, guildId);
     clearGuildPlayLanguage(guildId);
 
@@ -535,9 +539,9 @@ export async function messagePlay_2(req, res, client) {
     setPartidaActiva(0, guildId);
     clearGuildPlayLanguage(guildId);
     resetGuildGameState(guildId);
-    reiniciarContador();
+    reiniciarContador(gameState);
     reiniciarJugadoresFake();
-    limpiarTeams();
+    limpiarTeams(gameState);
     channel.send({ embeds: [embed] });
 
   } else {

@@ -34,9 +34,7 @@ import nthline from 'nthline';
 import { returnClient, getGuildPlayLanguage } from './app.js';
 import { buscarPorID } from './hg/utils.js';
 
-var contador = 0;
-var maxHP = 1000;
-var teams = [];
+export const maxHP = 1000;
 
 //                     (nombre, categoria, daño base, usos, pronombre, pluralidad, english name, english plurality)
 const pistola = new Arma("pistola", "pistola", 190, 3, "f", "", "gun", "");
@@ -407,10 +405,10 @@ export function agregarJugador(res, jugador, players) {
   }
 };
 
-export function funcionEventos() {
+export function funcionEventos(gameState) {
   let arrayEventos = [1, 2, 3, -1];  //simula 3 eventos, termina la partida, y a la 4ta iteración devuelve un -1
-  let resultado = arrayEventos[contador];
-  contador++;
+  let resultado = arrayEventos[gameState.contador];
+  gameState.contador++;
   return resultado;
 }
 
@@ -450,7 +448,7 @@ export function exampleEmbed(channel) {
   channel.send({ embeds: [exampleEmbed] });
 }
 
-export function funcionRetornaJson() {
+export function funcionRetornaJson(gameState) {
   //console.log(`En la funcion del json`);
   const json = {
     evento: function () { return `${this.names[0]} ayuda a ${this.names[1]} a atacar a ${this.names[2]}` },
@@ -461,25 +459,25 @@ export function funcionRetornaJson() {
     danioRecibido: ["0", "0", "280"],
   };
 
-  if (contador === 0) {
-    contador++;
-    //console.log(contador);
+  if (gameState.contador === 0) {
+    gameState.contador++;
+    //console.log(gameState.contador);
     return json;
   }
   else {
-    //console.log(contador);
+    //console.log(gameState.contador);
     return -1;
   }
 
 }
 
-export function reiniciarContador() {
-  contador = 0;
+export function reiniciarContador(gameState) {
+  gameState.contador = 0;
   console.log("Reiniciando contador...");
 }
 
-export function limpiarTeams() {
-  teams = [];
+export function limpiarTeams(gameState) {
+  gameState.teams = [];
   console.log("Limpiando teams...")
 }
 
@@ -844,8 +842,9 @@ async function dibujarTeam(canvas, context, team, offsetX, offsetY, guild, playe
 
 }
 
-export async function mostrarTeams(channel, guildId, players) {  //pensar funcion matematica que haga la suma sola, en vez de hacer mas ifs
+export async function mostrarTeams(channel, guildId, players, gameState) {  //pensar funcion matematica que haga la suma sola, en vez de hacer mas ifs
   let canvasHeight = 255;
+  let teams = gameState.teams;
   let filas = ~~((teams.length - 1) / 5) + 1;
   /*if (teams.length > 1 && teams.length < 6 ){
       canvasHeight = 255;
@@ -2131,7 +2130,7 @@ export function formarEquipo(jugadores) {
 }
 
 
-export function imprimirTeams(teams1 = teams) {
+export function imprimirTeams(teams1) {
   for (let countTeams = 0; countTeams < teams1.length; countTeams++) {
     console.log("\x1b[36m%s\x1b[0m", `TEAM ${teams1[countTeams].getID()}`);
     if (teams1[countTeams].getPlayer1() != null) {
@@ -2198,7 +2197,7 @@ let eventoAleatorio1 = async (jugador, players, req, channel, idioma) => {
     do {
       var rand = parseInt(Math.random() * eventosAleatorios1.length);
       console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
-      resultado = await eventosAleatorios1[rand](jugador, players, maxHP, teams, req, channel); //le paso el array original
+      resultado = await eventosAleatorios1[rand](jugador, players, maxHP, gameState.gameState.teams, req, channel); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 
@@ -2209,7 +2208,7 @@ let eventoAleatorio1 = async (jugador, players, req, channel, idioma) => {
     do {
       var rand = parseInt(Math.random() * eventosAleatorios1En.length);
       console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
-      resultado = await eventosAleatorios1En[rand](jugador, players, maxHP, teams, req, channel); //le paso el array original
+      resultado = await eventosAleatorios1En[rand](jugador, players, maxHP, gameState.gameState.teams, req, channel); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 
@@ -2266,7 +2265,7 @@ let eventoAleatorio2 = async (jugador, players, req, channel, playersReal, idiom
     do {
       var rand = parseInt(Math.random() * eventosAleatorios2.length);
       console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
-      resultado = await eventosAleatorios2[rand](jugador, players, maxHP, teams, req, channel, playersReal); //le paso el array original
+      resultado = await eventosAleatorios2[rand](jugador, players, maxHP, gameState.gameState.teams, req, channel, playersReal); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento 
   } else {
@@ -2274,7 +2273,7 @@ let eventoAleatorio2 = async (jugador, players, req, channel, playersReal, idiom
     do {
       var rand = parseInt(Math.random() * eventosAleatorios2.length);
       console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
-      resultado = await eventosAleatorios2En[rand](jugador, players, maxHP, teams, req, channel, playersReal); //le paso el array original
+      resultado = await eventosAleatorios2En[rand](jugador, players, maxHP, gameState.gameState.teams, req, channel, playersReal); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 
