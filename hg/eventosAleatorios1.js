@@ -168,7 +168,6 @@ eventosAleatorios1[9] =async (jugador, players, maxHP, teams, req, channel)=>{
     //dejo este comentario porque hay que hacer lo mismo en varios eventos
 
 eventosAleatorios1[10] =async (jugador, players, maxHP, teams, req, channel)=>{
-    return null;
     let team = jugador.getTeam();
     let cantEnTeam = 1;
     let newTeamId = teams.length + 1;
@@ -407,7 +406,6 @@ eventosAleatorios1[11] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[12] =async (jugador, players, maxHP, teams, req, channel)=>{
-    return null;
     //console.log("\x1b[35m%s\x1b[0m",` this is evento 122222222222222222`);
     let team = jugador.getTeam();
     let vivos = team.nombresVivos();
@@ -620,7 +618,6 @@ eventosAleatorios1[13] =async (jugador, players, maxHP, teams, req, channel)=>{
 }
 
 eventosAleatorios1[14] =async (jugador, players, maxHP, teams, req, channel)=>{
-    return null;
     let idTeamDe2;
     let team;
     let teamActual;
@@ -1541,7 +1538,6 @@ eventosAleatorios1[37] =async (jugador, players, maxHP, teams, req, channel)=>{ 
 }
 
 eventosAleatorios1[38] = async(jugador, players, maxHP, teams, req, channel)=>{
-    return null;
     let arraySolos = [];
     let pos1;
     let pos2;
