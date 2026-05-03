@@ -2157,9 +2157,12 @@ export function imprimirTeams(teams1) {
 }
 
 
-export async function muerteJugador(guildID, channel, players, teams) {
+export async function muerteJugador(guildID, channel, players) {
   let embed;
   let color = randomHexColor();
+  
+  const gameState = getGuildGameState(guildID);
+  let teams = gameState.teams;
 
   let cantidadConVida = calcularVivos(players);
   let language = getGuildPlayLanguage(guildID);
