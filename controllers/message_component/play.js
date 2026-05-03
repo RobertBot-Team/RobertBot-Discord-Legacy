@@ -42,7 +42,7 @@ function getGuildIdFromReq(req) {
   return req.body.guild_id || req.body.channel?.guild_id || "global";
 }
 
-function getGuildGameState(guildId) {
+export function getGuildGameState(guildId) {
   if (!guildGameStates.has(guildId)) {
     guildGameStates.set(guildId, {
       players: [],

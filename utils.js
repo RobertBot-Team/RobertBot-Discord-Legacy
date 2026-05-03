@@ -33,6 +33,7 @@ import fs from 'fs';
 import nthline from 'nthline';
 import { returnClient, getGuildPlayLanguage } from './app.js';
 import { buscarPorID } from './hg/utils.js';
+import { getGuildGameState } from './controllers/message_component/play.js';
 
 var maxHP = 1000;
 
@@ -2160,7 +2161,7 @@ export function imprimirTeams(teams1) {
 export async function muerteJugador(guildID, channel, players) {
   let embed;
   let color = randomHexColor();
-  
+
   const gameState = getGuildGameState(guildID);
   let teams = gameState.teams;
 
