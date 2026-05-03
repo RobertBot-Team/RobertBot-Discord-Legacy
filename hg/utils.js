@@ -113,9 +113,8 @@ const lynn4 = new Jugador("lynn", 1067411);
 const robert4 = new Jugador("robert", 15613474);
 
 var maxHP = 1000;
-var teams = [];
 
-let buscarTeamDe2 = () => {   //retorna null si no hay teams de 2 miembros
+export let buscarTeamDe2 = (teams) => {   //retorna null si no hay teams de 2 miembros
     let team;
     let idTeam;
     for (let i = 0; i < teams.length; i++) {
@@ -130,7 +129,7 @@ let buscarTeamDe2 = () => {   //retorna null si no hay teams de 2 miembros
     return null;
 }
 
-let buscarTeamDe3 = () => {   //retorna null si no hay teams de 3 miembros
+let buscarTeamDe3 = (teams) => {   //retorna null si no hay teams de 3 miembros
     let team;
     let idTeam;
     for (let i = 0; i < teams.length; i++) {
@@ -145,29 +144,29 @@ let buscarTeamDe3 = () => {   //retorna null si no hay teams de 3 miembros
     return null;
 }
 
-let imprimirTeams = (teams1 = teams) => {
-    for (let countTeams = 0; countTeams < teams1.length; countTeams++) {
-        console.log("\x1b[36m%s\x1b[0m", `TEAM ${teams1[countTeams].getID()}`);
-        if (teams1[countTeams].getPlayer1() != null) {
-            if (teams1[countTeams].getPlayer1().getHP() == 0) {
-                console.log("\x1b[31m%s\x1b[0m", `${teams1[countTeams].getPlayer1().getNombre()} - HP: ${teams1[countTeams].getPlayer1().getHP()}`);
+export let imprimirTeams = (teams) => {
+    for (let countTeams = 0; countTeams < teams.length; countTeams++) {
+        console.log("\x1b[36m%s\x1b[0m", `TEAM ${teams[countTeams].getID()}`);
+        if (teams[countTeams].getPlayer1() != null) {
+            if (teams[countTeams].getPlayer1().getHP() == 0) {
+                console.log("\x1b[31m%s\x1b[0m", `${teams[countTeams].getPlayer1().getNombre()} - HP: ${teams[countTeams].getPlayer1().getHP()}`);
             } else {
-                console.log("\x1b[36m%s\x1b[0m", `${teams1[countTeams].getPlayer1().getNombre()} - HP: ${teams1[countTeams].getPlayer1().getHP()}`);
+                console.log("\x1b[36m%s\x1b[0m", `${teams[countTeams].getPlayer1().getNombre()} - HP: ${teams[countTeams].getPlayer1().getHP()}`);
             }
         }
-        if (teams1[countTeams].getPlayer2() != null) {
-            if (teams1[countTeams].getPlayer2().getHP() == 0) {
-                console.log("\x1b[31m%s\x1b[0m", `${teams1[countTeams].getPlayer2().getNombre()} - HP: ${teams1[countTeams].getPlayer2().getHP()}`);
+        if (teams[countTeams].getPlayer2() != null) {
+            if (teams[countTeams].getPlayer2().getHP() == 0) {
+                console.log("\x1b[31m%s\x1b[0m", `${teams[countTeams].getPlayer2().getNombre()} - HP: ${teams[countTeams].getPlayer2().getHP()}`);
             } else {
-                console.log("\x1b[36m%s\x1b[0m", `${teams1[countTeams].getPlayer2().getNombre()} - HP: ${teams1[countTeams].getPlayer2().getHP()}`);
+                console.log("\x1b[36m%s\x1b[0m", `${teams[countTeams].getPlayer2().getNombre()} - HP: ${teams[countTeams].getPlayer2().getHP()}`);
             }
         }
-        if (teams1[countTeams].getPlayer3() != null) {
-            if (teams1[countTeams].getPlayer3().getHP() == 0) {
-                console.log("\x1b[31m%s\x1b[0m", `${teams1[countTeams].getPlayer3().getNombre()} - HP: ${teams1[countTeams].getPlayer3().getHP()}`);
+        if (teams[countTeams].getPlayer3() != null) {
+            if (teams[countTeams].getPlayer3().getHP() == 0) {
+                console.log("\x1b[31m%s\x1b[0m", `${teams[countTeams].getPlayer3().getNombre()} - HP: ${teams[countTeams].getPlayer3().getHP()}`);
             }
             else {
-                console.log("\x1b[36m%s\x1b[0m", `${teams1[countTeams].getPlayer3().getNombre()} - HP: ${teams1[countTeams].getPlayer3().getHP()}`);
+                console.log("\x1b[36m%s\x1b[0m", `${teams[countTeams].getPlayer3().getNombre()} - HP: ${teams[countTeams].getPlayer3().getHP()}`);
             }
         }
         console.log(``);
@@ -361,7 +360,7 @@ let chequearSonMismoEquipo = (players) => {
     return ganadores;
 }
 
-let formarEquipo = (jugadores) => {
+let formarEquipo = (jugadores, teams) => {
     let jugador;
     let jugadorA;   //auxiliar
     let jugadorB;   //auxiliar
@@ -684,7 +683,7 @@ let rondaAtaque = (jugador, jugadores, cantidadConVida) => {
     }
 }
 
-let arreglarIDs = () => {
+let arreglarIDs = (teams) => {
     let team;
     for (let i = 0; i < teams.length; i++) {
         team = teams[i];
@@ -692,12 +691,12 @@ let arreglarIDs = () => {
     }
 }
 
-let eliminarTeam = (teamID) => {
+let eliminarTeam = (teamID, teams) => {
     let index;
     console.log(`eliminando el team ${teamID}`);
     index = teamID - 1;
     teams.splice(index, 1);
-    arreglarIDs();
+    arreglarIDs(teams);
 }
 
 let buscarUnMuerto = (players) => {
@@ -849,3 +848,10 @@ export {
     pluralQuedar,
     buscarJugadorOtroTeam
 }
+
+
+
+
+
+
+

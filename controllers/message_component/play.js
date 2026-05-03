@@ -48,6 +48,8 @@ function getGuildGameState(guildId) {
       players: [],
       modoK: 0,
       slowMode: false,
+      contador: 0,
+      teams: [],
     });
   }
 
@@ -61,6 +63,8 @@ export function resetGuildGameState(guildId) {
   gameState.players = [];
   gameState.modoK = 0;
   gameState.slowMode = false;
+  gameState.contador = 0;
+  gameState.teams = [];
 }
 
 //const client = new Client();
@@ -246,17 +250,17 @@ export async function messagePlay_2(req, res, client) {
     //crearJugadoresFake(players);
 
     let copia1 = copiarJugadores(players)
-    formarEquipo(copia1);
+    formarEquipo(copia1, gameState.teams);
 
 
     await sleep(2000);
 
     //mostrar equipos 1 a 1
-    await displayTeamByTeam(channel, req.body.channel.guild_id, players);
+    await displayTeamByTeam(channel, guildId, players, gameState.teams);
 
     //mostrar equipos
-    imprimirTeams();
-    mostrarTeams(channel, req.body.channel.guild_id, players);
+    imprimirTeams(gameState.teams);
+    mostrarTeams(channel, guildId, players, gameState.teams);
 
     cantidadConVida = calcularVivos(players);
 
@@ -272,10 +276,10 @@ export async function messagePlay_2(req, res, client) {
       await sleep(2000);
       //message.edit("Editado");
       console.log(evento);
-      await rondaLoot(req, jugador, players, channel, 1, language, gameState.slowMode);
+      await rondaLoot(req, jugador, players, channel, 1, language, gameState.slowMode, gameState.teams);
     }
     await sleep(2000);
-    mostrarTeams(channel, req.body.channel.guild_id, players);
+    mostrarTeams(channel, guildId, players, gameState.teams);
     //}
 
     color = randomHexColor();
@@ -318,7 +322,7 @@ export async function messagePlay_2(req, res, client) {
           let check = chequearSonMismoEquipo(players);
           if (check.length == 3) {
             await sleep(3000);
-            displayWinnerTeam(channel, check[0].getTeam(), req.body.channel.guild_id, players);
+            displayWinnerTeam(channel, check[0].getTeam(), guildId, players);
             await sleep(3000);
             console.log(` Los ganadores son ${check[0].getNombre()}, ${check[1].getNombre()} y ${check[2].getNombre()}`);  //despues hacerlo imagen
             embed = generarEmbedTexto(color, tPlay(language, "winners_three", {
@@ -340,7 +344,7 @@ export async function messagePlay_2(req, res, client) {
           let check = chequearSonMismoEquipo(players);
           if (check.length == 2) {
             await sleep(3000);
-            displayWinnerTeam(channel, check[0].getTeam(), req.body.channel.guild_id, players);
+            displayWinnerTeam(channel, check[0].getTeam(), guildId, players);
             await sleep(3000);
             console.log(` Los ganadores son ${check[0].getNombre()} y ${check[1].getNombre()}`);
             embed = generarEmbedTexto(color, tPlay(language, "winners_two", {
@@ -370,22 +374,22 @@ export async function messagePlay_2(req, res, client) {
             //si el jugador no tiene arma, tiene 80% de chances de lootear
             if (probabilidad < 0.80) {
               console.log(`> Loot`);
-              await rondaLoot(req, jugador, players, channel, nroEvento, language, gameState.slowMode);
+              await rondaLoot(req, jugador, players, channel, nroEvento, language, gameState.slowMode, gameState.teams);
             } else {
               console.log(`> Ataque`);
               let copia = copiarJugadores(players);
-              await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, language, gameState.slowMode);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random                      
+              await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, language, gameState.slowMode, gameState.teams);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random                      
             }
           }
           //si el jugador tiene arma, tiene 80% de chances de atacar
           else {
             if (probabilidad < 0.2 - sumarProbabilidad(nroEvento, players.length, 20, gameState.slowMode)) {
               console.log(`> Loot`);
-              await rondaLoot(req, jugador, players, channel, nroEvento, language, gameState.slowMode);
+              await rondaLoot(req, jugador, players, channel, nroEvento, language, gameState.slowMode, gameState.teams);
             } else {
               console.log(`> Ataque`);
               let copia = copiarJugadores(players);
-              await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, language, gameState.slowMode);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random
+              await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, language, gameState.slowMode, gameState.teams);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random
             }
           }
         }
@@ -399,8 +403,8 @@ export async function messagePlay_2(req, res, client) {
       embed = generarEmbedTexto(color, `Quedan ${cantidadConVida} jugadores con vida.`);
       channel.send({embeds:[embed]});
 
-      imprimirTeams();
-      mostrarTeams(channel, req.body.channel.guild_id);*/
+      imprimirTeams(gameState.teams);
+      mostrarTeams(channel, guildId);*/
 
       if (nroRonda >= 4) {        //mas daño hacen las armas cuantas mas rondas hayan pasado
         for (let contador = 0; contador < players.length; contador++) {
@@ -418,7 +422,7 @@ export async function messagePlay_2(req, res, client) {
     if (cantidadConVida == 1) {
       await sleep(3000);
       let ganador = encontrarGanador(players);
-      displayWinnerTeam(channel, ganador.getTeam(), req.body.channel.guild_id, players);
+      displayWinnerTeam(channel, ganador.getTeam(), guildId, players);
       await sleep(3000);
       console.log(` El ganador es ${ganador.getNombre()}`);
       embed = generarEmbedTexto(color, tPlay(language, "winner_one", { name: ganador.getNombre() }));
@@ -461,9 +465,9 @@ export async function messagePlay_2(req, res, client) {
     //vaciar variables
     //players = [];
     resetGuildGameState(guildId);
-    reiniciarContador();
+    reiniciarContador(gameState);
     reiniciarJugadoresFake();
-    limpiarTeams();
+    limpiarTeams(gameState.teams);
     setPartidaActiva(0, guildId);
     clearGuildPlayLanguage(guildId);
 
@@ -535,9 +539,9 @@ export async function messagePlay_2(req, res, client) {
     setPartidaActiva(0, guildId);
     clearGuildPlayLanguage(guildId);
     resetGuildGameState(guildId);
-    reiniciarContador();
+    reiniciarContador(gameState);
     reiniciarJugadoresFake();
-    limpiarTeams();
+    limpiarTeams(gameState.teams);
     channel.send({ embeds: [embed] });
 
   } else {
@@ -672,3 +676,14 @@ export function limpiarPlayersPorGuild(guildId) {
   gameState.players = [];
   console.log(`Limpiando players de guild ${guildId}...`);
 }
+
+
+
+
+
+
+
+
+
+
+
