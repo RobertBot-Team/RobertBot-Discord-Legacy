@@ -16,7 +16,7 @@ eventosAleatorios2[0] = async (jugador, players, maxHP, teams, req, channel, pla
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
    
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
   
     return 1;
 }
@@ -32,7 +32,7 @@ eventosAleatorios2[1] = async (jugador, players, maxHP, teams, req, channel, pla
     jugador.alive = 0;
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
 
     return 1;
 }
@@ -59,7 +59,7 @@ eventosAleatorios2[2] = async (jugador, players, maxHP, teams, req, channel, pla
     funcionCrearImagen(json,"1",channel);
   
      if(jugador.getHP()<=0){
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     }
 
     return 1;
@@ -90,7 +90,7 @@ eventosAleatorios2[3] = async (jugador, players, maxHP, teams, req, channel, pla
     funcionCrearImagen(json,"1",channel);
   
      if(jugador.getHP()<=0){
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     }
   
     return 1;
@@ -121,7 +121,7 @@ eventosAleatorios2[4] = async (jugador, players, maxHP, teams, req, channel, pla
     funcionCrearImagen(json,"1",channel);
   
      if(jugador.getHP()<=0){
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     }
   
     return 1;
@@ -147,7 +147,7 @@ eventosAleatorios2[5] = async (jugador, players, maxHP, teams, req, channel, pla
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
 
 
     return 1;
@@ -178,7 +178,7 @@ eventosAleatorios2[6] = async (jugador, players, maxHP, teams, req, channel, pla
     funcionCrearImagen(json,"1",channel);
   
      if(jugador.getHP()<=0){
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     }
   
     return 1;
@@ -197,7 +197,7 @@ eventosAleatorios2[7] = async (jugador, players, maxHP, teams, req, channel, pla
     jugador.alive = 0;
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
 
     return 1;
 }
@@ -227,7 +227,7 @@ eventosAleatorios2[8] = async (jugador, players, maxHP, teams, req, channel, pla
     funcionCrearImagen(json,"1",channel);
   
      if(jugador.getHP()<=0){
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     }
   
     return 1;
@@ -266,7 +266,7 @@ eventosAleatorios2[9] = async (jugador, players, maxHP, teams, req, channel, pla
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
  
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
 
 
     return 1;
@@ -286,7 +286,7 @@ eventosAleatorios2[10] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
    
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -306,7 +306,7 @@ eventosAleatorios2[11] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
      
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -325,7 +325,7 @@ eventosAleatorios2[12] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
  
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -344,7 +344,7 @@ eventosAleatorios2[13] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -372,7 +372,7 @@ eventosAleatorios2[14] = async (jugador, players, maxHP, teams, req, channel, pl
     funcionCrearImagen(json,"1",channel);
   
      if(jugador.getHP()<=0){
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     }
 
     return 1;
@@ -391,7 +391,7 @@ eventosAleatorios2[15] = async (jugador, players, maxHP, teams, req, channel, pl
     jugador.alive = 0;
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
 
     return 1;
 }
@@ -425,7 +425,7 @@ eventosAleatorios2[16] = async (jugador, players, maxHP, teams, req, channel, pl
     funcionCrearImagen(json,"1",channel);
   
      if(jugador.getHP()<=0){
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     }
   
     return 1;
@@ -465,7 +465,7 @@ eventosAleatorios2[18] = async (jugador, players, maxHP, teams, req, channel, pl
     jugador.alive = 0;
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
 
     return 1;
 }
@@ -482,7 +482,7 @@ eventosAleatorios2[19] = async (jugador, players, maxHP, teams, req, channel, pl
     jugador.alive = 0;
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -501,7 +501,7 @@ eventosAleatorios2[20] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -533,7 +533,7 @@ eventosAleatorios2[22] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -575,7 +575,7 @@ eventosAleatorios2[24] = async (jugador, players, maxHP, teams, req, channel, pl
     funcionCrearImagen(json,"1",channel);
   
      if(jugador.getHP()<=0){
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     }
   
     return 1;
@@ -594,7 +594,7 @@ eventosAleatorios2[25] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -614,7 +614,7 @@ eventosAleatorios2[26] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -634,7 +634,7 @@ eventosAleatorios2[27] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -653,7 +653,7 @@ eventosAleatorios2[28] = async (jugador, players, maxHP, teams, req, channel, pl
     jugador.alive = 0;
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
 
     return 1;
 }
@@ -693,7 +693,7 @@ eventosAleatorios2[30] = async (jugador, players, maxHP, teams, req, channel, pl
     jugador.alive = -1;
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
 
   
     return 1;
@@ -712,7 +712,7 @@ eventosAleatorios2[31] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
   
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
   
 
     return 1;
@@ -732,7 +732,7 @@ eventosAleatorios2[32] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -751,7 +751,7 @@ eventosAleatorios2[33] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -770,7 +770,7 @@ eventosAleatorios2[34] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -810,7 +810,7 @@ eventosAleatorios2[36] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -829,7 +829,7 @@ eventosAleatorios2[37] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -860,7 +860,7 @@ eventosAleatorios2[38] = async (jugador, players, maxHP, teams, req, channel, pl
     funcionCrearImagen(json,"1",channel);
   
      if(jugador.getHP()<=0){
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     }
   
     return 1;
@@ -897,7 +897,7 @@ eventosAleatorios2[40] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
 
     return 1;
@@ -979,7 +979,7 @@ eventosAleatorios2[45] = async (jugador, players, maxHP, teams, req, channel, pl
     funcionCrearImagen(json,"1",channel);
   
      if(jugador.getHP()<=0){
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     }
   
     return 1;
@@ -1009,7 +1009,7 @@ eventosAleatorios2[46] = async (jugador, players, maxHP, teams, req, channel, pl
     funcionCrearImagen(json,"1",channel);
   
      if(jugador.getHP()<=0){
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     }
   
     return 1;
@@ -1034,7 +1034,7 @@ eventosAleatorios2[47] = async (jugador, players, maxHP, teams, req, channel, pl
   funcionCrearImagen(json,"1",channel);
   
 
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
   return 1;
 }
@@ -1052,7 +1052,7 @@ eventosAleatorios2[48] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
 
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
        
     return 1;
@@ -1110,7 +1110,7 @@ eventosAleatorios2[52] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
 
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
        
     return 1;
@@ -1129,7 +1129,7 @@ eventosAleatorios2[53] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
 
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
        
     return 1;
@@ -1160,7 +1160,7 @@ eventosAleatorios2[55] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
 
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
        
     return 1;
@@ -1179,7 +1179,7 @@ eventosAleatorios2[56] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
 
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
        
     return 1;
@@ -1199,7 +1199,7 @@ eventosAleatorios2[57] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
 
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
        
     return 1;
@@ -1219,7 +1219,7 @@ eventosAleatorios2[58] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
 
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
        
     return 1;
@@ -1239,7 +1239,7 @@ eventosAleatorios2[59] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
 
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
        
     return 1;
@@ -1259,7 +1259,7 @@ eventosAleatorios2[60] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
 
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
        
     return 1;
@@ -1279,7 +1279,7 @@ eventosAleatorios2[61] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
 
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
        
     return 1;
@@ -1299,7 +1299,7 @@ eventosAleatorios2[62] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
 
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
        
     return 1;
@@ -1349,7 +1349,7 @@ eventosAleatorios2[64] = async (jugador, players, maxHP, teams, req, channel, pl
   funcionCrearImagen(json,"1",channel);
 
    if(jugador.getHP()<=0){
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
   }
            
   return 1;  
@@ -1389,7 +1389,7 @@ eventosAleatorios2[65] = async (jugador, players, maxHP, teams, req, channel, pl
   funcionCrearImagen(json,"1",channel);
 
    if(jugador.getHP()<=0){
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
   }
   
   return 1;
@@ -1408,7 +1408,7 @@ eventosAleatorios2[66] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
 
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
        
     return 1;
@@ -1427,7 +1427,7 @@ eventosAleatorios2[67] = async (jugador, players, maxHP, teams, req, channel, pl
     console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
 
-    await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+    await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     
        
     return 1;
@@ -1458,7 +1458,7 @@ eventosAleatorios2[68] = async (jugador, players, maxHP, teams, req, channel, pl
     funcionCrearImagen(json,"1",channel);
   
      if(jugador.getHP()<=0){
-      await muerteJugador(req.body.channel.guild_id, channel, playersReal);
+      await muerteJugador(req.body.channel.guild_id, channel, playersReal, teams);
     }
   
     return 1;
