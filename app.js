@@ -121,6 +121,18 @@ app.post("/interactions", async function (req, res) {
    * See https://discord.com/developers/docs/interactions/application-commands#slash-commands
    */
   if (type === InteractionType.APPLICATION_COMMAND) {
+    const appPermissions = req.body.app_permissions;
+    
+    if (!appPermissions || !new PermissionsBitField(BigInt(appPermissions)).has(PermissionsBitField.Flags.SendMessages)) {
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: "❌ No puedo confirmar mis permisos o carezco del permiso de **Mandar Mensajes (Send Messages)** en este canal.",
+          flags: InteractionResponseFlags.EPHEMERAL
+        }
+      });
+    }
+
     const { name } = data;
     const guildId = getGuildIdFromBody(req.body);
     switch(name){
@@ -190,7 +202,7 @@ app.post("/interactions", async function (req, res) {
 
 
 
-import { Client, Events, GatewayIntentBits, version } from "discord.js";
+import { Client, Events, GatewayIntentBits, version, PermissionsBitField } from "discord.js";
 import Canvas from "@napi-rs/canvas";
 
 // Create a new client instance
