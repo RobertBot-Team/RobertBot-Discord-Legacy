@@ -122,15 +122,17 @@ app.post("/interactions", async function (req, res) {
    */
   if (type === InteractionType.APPLICATION_COMMAND) {
     const appPermissions = req.body.app_permissions;
-    
-    if (!appPermissions || !new PermissionsBitField(BigInt(appPermissions)).has(PermissionsBitField.Flags.SendMessages)) {
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          content: "❌ No puedo confirmar mis permisos o carezco del permiso de **Mandar Mensajes (Send Messages)** en este canal.",
-          flags: InteractionResponseFlags.EPHEMERAL
-        }
-      });
+    if (appPermissions) {
+      const bitfield = new PermissionsBitField(BigInt(appPermissions));
+      if (!bitfield.has(PermissionsBitField.Flags.SendMessages)) {
+        return res.send({
+          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          data: {
+            content: "❌ Necesito el permiso de **Mandar Mensajes (Send Messages)** en este canal para poder funcionar.",
+            flags: InteractionResponseFlags.EPHEMERAL
+          }
+        });
+      }
     }
 
     const { name } = data;
