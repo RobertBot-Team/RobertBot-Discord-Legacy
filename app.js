@@ -128,7 +128,7 @@ app.post("/interactions", async function (req, res) {
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: {
-            content: "❌ Para poder funcionar necesito el permiso de **Mandar Mensajes (Send Messages)**, **Leer Historial de Mensajes (Read Message History)** y **Ver Canal (View Channel)** en este canal.",
+            content: "❌ To function properly, I need the following permissions in this channel: **Send Messages**, **Read Message History**, and **View Channel**.",
             flags: InteractionResponseFlags.EPHEMERAL
           }
         });
