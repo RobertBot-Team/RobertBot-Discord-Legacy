@@ -124,11 +124,11 @@ app.post("/interactions", async function (req, res) {
     const appPermissions = req.body.app_permissions;
     if (appPermissions) {
       const bitfield = new PermissionsBitField(BigInt(appPermissions));
-      if (!bitfield.has(PermissionsBitField.Flags.SendMessages) || !bitfield.has(PermissionsBitField.Flags.ReadMessageHistory)) {
+      if (!bitfield.has(PermissionsBitField.Flags.SendMessages) || !bitfield.has(PermissionsBitField.Flags.ReadMessageHistory) || !bitfield.has(PermissionsBitField.Flags.ViewChannel)) {
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: {
-            content: "❌ Necesito el permiso de **Mandar Mensajes (Send Messages)** y **Leer Historial de Mensajes (Read Message History)** en este canal para poder funcionar.",
+            content: "❌ Para poder funcionar necesito el permiso de **Mandar Mensajes (Send Messages)**, **Leer Historial de Mensajes (Read Message History)** y **Ver Canal (View Channel)** en este canal.",
             flags: InteractionResponseFlags.EPHEMERAL
           }
         });
