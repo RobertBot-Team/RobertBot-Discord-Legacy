@@ -121,6 +121,20 @@ app.post("/interactions", async function (req, res) {
    * See https://discord.com/developers/docs/interactions/application-commands#slash-commands
    */
   if (type === InteractionType.APPLICATION_COMMAND) {
+    const appPermissions = req.body.app_permissions;
+    if (appPermissions) {
+      const bitfield = new PermissionsBitField(BigInt(appPermissions));
+      if (!bitfield.has(PermissionsBitField.Flags.SendMessages) || !bitfield.has(PermissionsBitField.Flags.ReadMessageHistory) || !bitfield.has(PermissionsBitField.Flags.ViewChannel)) {
+        return res.send({
+          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          data: {
+            content: "❌ To function properly, I need the following permissions in this channel: **Send Messages**, **Read Message History**, and **View Channel**.",
+            flags: InteractionResponseFlags.EPHEMERAL
+          }
+        });
+      }
+    }
+
     const { name } = data;
     const guildId = getGuildIdFromBody(req.body);
     switch(name){
@@ -190,7 +204,7 @@ app.post("/interactions", async function (req, res) {
 
 
 
-import { Client, Events, GatewayIntentBits, version } from "discord.js";
+import { Client, Events, GatewayIntentBits, version, PermissionsBitField } from "discord.js";
 import Canvas from "@napi-rs/canvas";
 
 // Create a new client instance

@@ -33,10 +33,9 @@ import fs from 'fs';
 import nthline from 'nthline';
 import { returnClient, getGuildPlayLanguage } from './app.js';
 import { buscarPorID } from './hg/utils.js';
+import { getGuildGameState } from './controllers/message_component/play.js';
 
-var contador = 0;
 var maxHP = 1000;
-var teams = [];
 
 //                     (nombre, categoria, daño base, usos, pronombre, pluralidad, english name, english plurality)
 const pistola = new Arma("pistola", "pistola", 190, 3, "f", "", "gun", "");
@@ -407,10 +406,10 @@ export function agregarJugador(res, jugador, players) {
   }
 };
 
-export function funcionEventos() {
-  let arrayEventos = [1, 2, 3, -1];  //simula 3 eventos, termina la partida, y a la 4ta iteración devuelve un -1
-  let resultado = arrayEventos[contador];
-  contador++;
+export function funcionEventos(gameState) {
+  let arrayEventos = [1, 2, 3, -1];
+  let resultado = arrayEventos[gameState.contador];
+  gameState.contador++;
   return resultado;
 }
 
@@ -450,37 +449,35 @@ export function exampleEmbed(channel) {
   channel.send({ embeds: [exampleEmbed] });
 }
 
-export function funcionRetornaJson() {
-  //console.log(`En la funcion del json`);
+export function funcionRetornaJson(gameState) {
   const json = {
-    evento: function () { return `${this.names[0]} ayuda a ${this.names[1]} a atacar a ${this.names[2]}` },
-    names: ["jugador1", "jugador2", "jugador3"],
-    id: ["2311", "456", "456145"],
-    foto: ["47458465", "4189465", "454880"],
-    hp: ["250", "999", "1000"],
+    evento: "Prueba desde JSON", //string principal
+    names: ["john", "willy", "rex"],  //lista de nombres que están en el evento, array
+    id: [1234, 4321, 666],      //ids correspondientes en el orden, array
+    foto: ["link1", "link2", "link3"],    //foto en el orden, array
+    hp: ["90", "10", "40"],               //hp en orden, array
+    danio: ["10", "0", "0"],              //daño que van a hacer en el evento (o healing si es menors a 0), array               //SI NO ES UN EVENTO DE COMBATE; ENTONCES DANIO ES VACIO ["","",""]
+    extra: "ninguno",
     danioRecibido: ["0", "0", "280"],
   };
 
-  if (contador === 0) {
-    contador++;
-    //console.log(contador);
+  if (gameState.contador === 0) {
+    gameState.contador++;
     return json;
   }
   else {
-    //console.log(contador);
     return -1;
   }
-
 }
 
-export function reiniciarContador() {
-  contador = 0;
+export function reiniciarContador(gameState) {
+  gameState.contador = 0;
   console.log("Reiniciando contador...");
 }
 
-export function limpiarTeams() {
-  teams = [];
-  console.log("Limpiando teams...")
+export function limpiarTeams(teams) {
+  teams.length = 0;
+  console.log("Limpiando teams...");
 }
 
 export function reiniciarJugadoresFake() {
@@ -659,11 +656,11 @@ export async function cargarAvatar(foto, id, tieneOtraFoto, guild, players) {
     if (guildMember.user.avatar != null) {
       if (guildMember.avatar != null) {
         jugador = buscarPorID(id, players);
-        jugador.setFoto(guildMember.avatar);
+        if (jugador) jugador.setFoto(guildMember.avatar);
         jugador.tieneOtraFoto = 1;
       } else {
         jugador = buscarPorID(id, players);
-        jugador.setFoto(guildMember.user.avatar);
+        if (jugador) jugador.setFoto(guildMember.user.avatar);
       }
     } else {
       //si tiene discriminador 0, es que ya migro al username nuevo
@@ -674,13 +671,13 @@ export async function cargarAvatar(foto, id, tieneOtraFoto, guild, players) {
         //let avatar = (((user_id)>>22)%6).toString();
 
         jugador = buscarPorID(id, players);
-        jugador.setFoto(avatar);
+        if (jugador) jugador.setFoto(avatar);
         //sino, tiene username viejo con discriminador de 4 digitos
       } else {
         let lastNumber = (guildMember.user.discriminator).slice(-1);
         lastNumber = (parseInt(lastNumber) % 5).toString();
         jugador = buscarPorID(id, players);
-        jugador.setFoto(lastNumber);
+        if (jugador) jugador.setFoto(lastNumber);
       }
     }
     //console.log(jugador.getFoto());
@@ -844,7 +841,7 @@ async function dibujarTeam(canvas, context, team, offsetX, offsetY, guild, playe
 
 }
 
-export async function mostrarTeams(channel, guildId, players) {  //pensar funcion matematica que haga la suma sola, en vez de hacer mas ifs
+export async function mostrarTeams(channel, guildId, players, teams) {  //pensar funcion matematica que haga la suma sola, en vez de hacer mas ifs
   let canvasHeight = 255;
   let filas = ~~((teams.length - 1) / 5) + 1;
   /*if (teams.length > 1 && teams.length < 6 ){
@@ -1658,7 +1655,7 @@ let buscarJugadorOtroTeam = (jugador, jugadores) => {    //el jugador del parame
   return null;
 }
 
-export function buscarTresTeamsSolo() {
+export function buscarTresTeamsSolo(teams) {
   let team;
   let arraySolos = [];
 
@@ -1682,7 +1679,7 @@ export function buscarTresTeamsSolo() {
   return null;
 }
 
-let arreglarIDs = () => {
+let arreglarIDs = (teams) => {
   let team;
   for (let i = 0; i < teams.length; i++) {
     team = teams[i];
@@ -1690,12 +1687,12 @@ let arreglarIDs = () => {
   }
 }
 
-export function eliminarTeam(teamID) {
+export function eliminarTeam(teamID, teams) {
   let index;
   console.log(`eliminando el team ${teamID}`);
   index = teamID - 1;
   teams.splice(index, 1);
-  arreglarIDs();
+  arreglarIDs(teams);
 }
 
 async function dibujarJugadorDeTeam(canvas, context, player, avatarSize, offsetX, offsetY, fontSize, guild, teamOGanador, players) {
@@ -1885,7 +1882,7 @@ export async function displayWinnerTeam(channel, team, guild, players) {
   });
 }
 
-export async function displayTeamByTeam(channel, guild, players) {
+export async function displayTeamByTeam(channel, guild, players, teams) {
   let team;
   for (let i = 0; i < teams.length; i++) {
     team = teams[i];
@@ -2006,7 +2003,7 @@ export function buscarUnMuerto(players) {
   return null;
 }
 
-export function formarEquipo(jugadores) {
+export function formarEquipo(jugadores, teams) {
   let jugador;
   let jugadorA;   //auxiliar
   let jugadorB;   //auxiliar
@@ -2131,7 +2128,7 @@ export function formarEquipo(jugadores) {
 }
 
 
-export function imprimirTeams(teams1 = teams) {
+export function imprimirTeams(teams1) {
   for (let countTeams = 0; countTeams < teams1.length; countTeams++) {
     console.log("\x1b[36m%s\x1b[0m", `TEAM ${teams1[countTeams].getID()}`);
     if (teams1[countTeams].getPlayer1() != null) {
@@ -2165,6 +2162,9 @@ export async function muerteJugador(guildID, channel, players) {
   let embed;
   let color = randomHexColor();
 
+  const gameState = getGuildGameState(guildID);
+  let teams = gameState.teams;
+
   let cantidadConVida = calcularVivos(players);
   let language = getGuildPlayLanguage(guildID);
 
@@ -2182,13 +2182,13 @@ export async function muerteJugador(guildID, channel, players) {
   channel.send({ embeds: [embed] });
 
   await sleep(1000);
-  imprimirTeams();
-  mostrarTeams(channel, guildID, players);
+  imprimirTeams(teams);
+  mostrarTeams(channel, guildID, players, teams);
 }
 
 ////////////
 
-let eventoAleatorio1 = async (jugador, players, req, channel, idioma) => {
+let eventoAleatorio1 = async (jugador, players, req, channel, idioma, teams) => {
   let resultado;
   console.log(" Sucedió un evento aleatorio 1");
   if (idioma === "es") {
@@ -2258,7 +2258,7 @@ let lootGenerico = async (jugador, arma, players, req, channel, idioma) => {
   }
 };
 
-let eventoAleatorio2 = async (jugador, players, req, channel, playersReal, idioma) => {
+let eventoAleatorio2 = async (jugador, players, req, channel, playersReal, idioma, teams) => {
   let resultado;
   console.log(" Sucedió un evento aleatorio 2");
   if (idioma === "es") {
@@ -2395,13 +2395,13 @@ async function ataqueGenericoSinArma(jugador, players, victima, req, channel, pl
 
 
 // ronda de loot
-export async function rondaLoot(req, jugador, players, channel, nroEvento, idioma = "en", modo = false) {
+export async function rondaLoot(req, jugador, players, channel, nroEvento, idioma = "en", modo = false, teams) {
   //let armaVieja = jugador.getArma();
   let probabilidad = Math.random();
   let probabilidadExtra = Math.random();
 
   if (probabilidad < 0.2 - sumarProbabilidad(nroEvento, players.length, 20, modo)) {
-    await eventoAleatorio1(jugador, players, req, channel, idioma);
+    await eventoAleatorio1(jugador, players, req, channel, idioma, teams);
   } else {
     let armaAux = generarArma()
     let arma = new Arma(armaAux.nombre, armaAux.categoria, armaAux.danio, armaAux.usos, armaAux.pronombre, armaAux.plural, armaAux.name, armaAux.pluralEn);
@@ -2424,16 +2424,16 @@ export async function rondaLoot(req, jugador, players, channel, nroEvento, idiom
 };
 
 //ronda de ataque
-export async function rondaAtaque(req, jugador, jugadores, cantidadConVida, channel, playersOriginal, nroEvento, idioma = "en", modo = false) {
+export async function rondaAtaque(req, jugador, jugadores, cantidadConVida, channel, playersOriginal, nroEvento, idioma = "en", modo = false, teams) {
   if (jugador.alive == 1) {
     if (cantidadConVida >= 2) {
       let probabilidad = Math.random();
       let probabilidadAleatorios = Math.random();
       if (probabilidad < 0.2) {
         if (probabilidadAleatorios < 0.5 - sumarProbabilidad(nroEvento, playersOriginal.length, 50, modo)) {
-          await eventoAleatorio1(jugador, playersOriginal, req, channel, idioma);
+          await eventoAleatorio1(jugador, playersOriginal, req, channel, idioma, teams);
         } else {
-          await eventoAleatorio2(jugador, jugadores, req, channel, playersOriginal, idioma);
+          await eventoAleatorio2(jugador, jugadores, req, channel, playersOriginal, idioma, teams);
         }
       } else {
         let victima = buscarJugadorOtroTeam(jugador, jugadores);
@@ -2468,3 +2468,27 @@ export function sumarProbabilidad(eventos, jugadores, porc, modo = false) {
   let num = numMode * (50 * Math.atan((eventos + polinomioNewton(porc) - jugadores) / 10) + porc - 25 * Math.PI);
   return num >= 0 ? num / 100 : 0;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
