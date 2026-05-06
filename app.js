@@ -24,6 +24,7 @@ import {
   PLAY_COMMAND,
   //LYNN_COMMAND,
   STOP_COMMAND,
+  HELP_COMMAND,
   //JOIN_COMMAND,
   HasGlobalCommands,
   HasGuildCommands
@@ -36,6 +37,7 @@ import {challenge} from "./controllers/commands/challenge.js"
 import {test} from "./controllers/commands/test.js"
 import {play, partidaEnCurso} from "./controllers/commands/play.js"
 import {stop} from "./controllers/commands/stop.js"
+import {help} from "./controllers/commands/help.js"
 import {
   messageChallenge_1,
   messageChallenge_2
@@ -166,6 +168,9 @@ app.post("/interactions", async function (req, res) {
       //  break;
       case "stop":
         await stop(req, res, client);        
+      case "help":
+        return await help(req, res);
+        break;
         break;
         
     };
@@ -227,6 +232,7 @@ app.listen(PORT, () => {
   // Register global commands so the bot works in any server where it is invited.
   HasGlobalCommands(process.env.APP_ID, [
     //TEST_COMMAND,
+    HELP_COMMAND,
     PLAY_COMMAND,
     //LYNN_COMMAND,
     STOP_COMMAND,

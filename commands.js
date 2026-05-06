@@ -135,4 +135,10 @@ export const STOP_COMMAND = {
   name: 'stop',
   description: 'Detiene una partida iniciada inmediatamente.',
   type: 1
-}
+};
+
+export const HELP_COMMAND = {
+  name: 'help',
+  description: 'Muestra información y comandos disponibles del bot',
+  type: 1
+};
