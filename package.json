@@ -19,7 +19,9 @@
     "emoji-regex": "^10.6.0",
     "express": "^4.22.1",
     "node-fetch": "^3.3.0",
-    "nthline": "^1.0.2"
+    "nthline": "^1.0.2",
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
