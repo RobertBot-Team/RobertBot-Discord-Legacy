@@ -140,5 +140,23 @@ export const STOP_COMMAND = {
 export const HELP_COMMAND = {
   name: 'help',
   description: 'Muestra información y comandos disponibles del bot',
+  options: [
+    {
+      type: 3,
+      name: 'idioma',
+      description: 'Idioma de la respuesta',
+      required: true,
+      choices: [
+        {
+          name: 'Espanol',
+          value: 'es',
+        },
+        {
+          name: 'English',
+          value: 'en',
+        },
+      ],
+    },
+  ],
   type: 1
 };

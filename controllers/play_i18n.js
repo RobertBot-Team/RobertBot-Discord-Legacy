@@ -30,6 +30,7 @@ const PLAY_TRANSLATIONS = {
     no_winners: " Parece que esta vez no hubo ganadores...",
     stop_by_staff: "{nick} ha detenido la partida de los Juegos del Hambre.",
     stop_no_permission: "No te hagas el chistoso, solo Staff puede detener una partida.",
+    help_message: "🛠️ **Comandos de RobertBot:**\n\n**/play** - Comenzar una partida nueva de los Juegos del Hambre. Te pedirá elegir el idioma de la partida.\n**/stop** - Detiene una partida iniciada inmediatamente.\n**/help** - Muestra este mensaje de ayuda explicando los comandos.",
   },
   en: {
     game_started: "A new Hunger Games battle has started",
@@ -59,6 +60,7 @@ const PLAY_TRANSLATIONS = {
     no_winners: " Looks like there were no winners this time...",
     stop_by_staff: "{nick} stopped the Hunger Games battle.",
     stop_no_permission: "Nice try, only Staff can stop a battle.",
+    help_message: "🛠️ **RobertBot Commands:**\n\n**/play** - Start a new Hunger Games match. It will ask you to select the game language.\n**/stop** - Immediately stops an active match.\n**/help** - Shows this help message explaining the commands.",
   },
 };
 

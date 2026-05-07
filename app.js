@@ -168,9 +168,10 @@ app.post("/interactions", async function (req, res) {
       //  break;
       case "stop":
         await stop(req, res, client);        
-      case "help":
-        return await help(req, res);
         break;
+      case "help":
+        const helpLanguage = getPlayLanguageFromOptions(req.body.data?.options || []);
+        return await help(req, res, helpLanguage);
         break;
         
     };
