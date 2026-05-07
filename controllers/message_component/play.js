@@ -124,7 +124,19 @@ export async function messagePlay_1(req, res, client) {
   }
 
   console.log(newPlayer);
-  let resultado = agregarJugador(res, newPlayer, players);
+
+  //let isAlreadyIn = players.some(j => j.id == newPlayer.id);
+  if (players.length >= 8 /*&& !isAlreadyIn*/) {
+    return res.send({
+      type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+      data: {
+        content: tPlay(language, "game_full"),
+        flags: InteractionResponseFlags.EPHEMERAL
+      }
+    });
+  }
+
+  let resultado = 0//agregarJugador(res, newPlayer, players);
 
   for (let i = 0; i < players.length; i++) {
     let jugadorIterado = players[i];
