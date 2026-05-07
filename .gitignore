@@ -8,3 +8,4 @@ node_modules
 .glitch-assets
 pnpm-debug.log
 shrinkwrap.yaml
+logs/

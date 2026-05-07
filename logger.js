@@ -1,3 +1,4 @@
+/* global process */
 import fs from "fs";
 import path from "path";
 import winston from "winston";
@@ -13,29 +14,53 @@ if (!fs.existsSync(logsDir)) {
     fs.mkdirSync(logsDir);
 }
 
+const consoleFormat = winston.format.printf(
+    ({ level, message, timestamp, ...meta }) => {
+        return `${timestamp} ${level}: ${message} ${Object.keys(meta).length ? JSON.stringify(meta) : ""
+            }`;
+    }
+);
+
 const logger = winston.createLogger({
-    level: "info",
+    level: process.env.LOG_LEVEL || "info",
 
     format: winston.format.combine(
         winston.format.timestamp(),
-        winston.format.json()
+        winston.format.errors({ stack: true })
     ),
 
     transports: [
+        new winston.transports.Console({
+            format: winston.format.combine(
+                winston.format.colorize(),
+                consoleFormat
+            )
+        }),
+
         new DailyRotateFile({
             filename: path.join(logsDir, "app-%DATE%.log"),
             datePattern: "YYYY-MM-DD",
             maxSize: "20m",
-            maxFiles: "14d"
+            maxFiles: "14d",
+
+            format: winston.format.combine(
+                winston.format.timestamp(),
+                winston.format.json()
+            )
         }),
 
-        new winston.transports.File({
-            filename: path.join(logsDir, "error.log"),
-            level: "error"
-        }),
+        new DailyRotateFile({
+            filename: path.join(logsDir, "error-%DATE%.log"),
+            datePattern: "YYYY-MM-DD",
+            level: "error",
+            maxSize: "20m",
+            maxFiles: "30d",
 
-        new winston.transports.Console({
-            format: winston.format.simple()
+            format: winston.format.combine(
+                winston.format.timestamp(),
+                winston.format.errors({ stack: true }),
+                winston.format.json()
+            )
         })
     ]
 });

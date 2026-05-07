@@ -217,11 +217,11 @@ export async function messagePlay_2(req, res, client) {
       ]
     });
 
-    logger.info({
-      game: gameId,
-      guild: guildId,
+    logger.info("Game started", {
+      gameId,
+      guildId,
       players: players.length
-    }, "Game started");
+    });
 
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -332,6 +332,13 @@ export async function messagePlay_2(req, res, client) {
           let check = chequearSonMismoEquipo(players);
           if (check.length == 3) {
             await sleep(3000);
+
+            logger.info("Game finished succesfully", {
+              gameId,
+              guildId,
+              winners: `${check[0].getNombre()}, ${check[1].getNombre()} y ${check[2].getNombre()}`
+            });
+
             displayWinnerTeam(channel, check[0].getTeam(), guildId, players);
             await sleep(3000);
             console.log(` Los ganadores son ${check[0].getNombre()}, ${check[1].getNombre()} y ${check[2].getNombre()}`);  //despues hacerlo imagen
@@ -354,6 +361,13 @@ export async function messagePlay_2(req, res, client) {
           let check = chequearSonMismoEquipo(players);
           if (check.length == 2) {
             await sleep(3000);
+
+            logger.info("Game finished succesfully", {
+              gameId,
+              guildId,
+              winners: `${check[0].getNombre()} y ${check[1].getNombre()}`
+            });
+
             displayWinnerTeam(channel, check[0].getTeam(), guildId, players);
             await sleep(3000);
             console.log(` Los ganadores son ${check[0].getNombre()} y ${check[1].getNombre()}`);
@@ -432,6 +446,13 @@ export async function messagePlay_2(req, res, client) {
     if (cantidadConVida == 1) {
       await sleep(3000);
       let ganador = encontrarGanador(players);
+
+      logger.info("Game finished succesfully", {
+        gameId,
+        guildId,
+        winners: `${ganador.getNombre()}`
+      });
+
       displayWinnerTeam(channel, ganador.getTeam(), guildId, players);
       await sleep(3000);
       console.log(` El ganador es ${ganador.getNombre()}`);
@@ -445,6 +466,13 @@ export async function messagePlay_2(req, res, client) {
 
     if (cantidadConVida < 1) {
       await sleep(3000);
+
+      logger.info("Game finished succesfully", {
+        gameId,
+        guildId,
+        winners: `No winners`
+      });
+
       console.log(` Parece que esta vez no hubo ganadores...`);
       embed = generarEmbedTexto(color, tPlay(language, "no_winners"));
       channel.send({ embeds: [embed] });
