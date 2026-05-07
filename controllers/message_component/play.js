@@ -36,6 +36,8 @@ import {
 import { mostrarKills } from "../../hg/utils.js"
 import { clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, setPartidaActiva } from "../../app.js"
 import { getModeLabel, tPlay } from "../play_i18n.js";
+import logger from "../../logger.js";
+
 const guildGameStates = new Map();
 
 function getGuildIdFromReq(req) {
@@ -164,6 +166,8 @@ export async function messagePlay_1(req, res, client) {
 };
 
 export async function messagePlay_2(req, res, client) {
+  const gameId = crypto.randomUUID();
+
   const guildId = getGuildIdFromReq(req);
   const language = getGuildPlayLanguage(guildId);
   const gameState = getGuildGameState(guildId);
@@ -212,6 +216,12 @@ export async function messagePlay_2(req, res, client) {
         },
       ]
     });
+
+    logger.info({
+      game: gameId,
+      guild: guildId,
+      players: players.length
+    }, "Game started");
 
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
