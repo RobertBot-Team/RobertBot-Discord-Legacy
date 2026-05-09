@@ -472,7 +472,6 @@ export function funcionRetornaJson(gameState) {
 
 export function reiniciarContador(gameState) {
   gameState.contador = 0;
-  console.log("Reiniciando contador...");
 }
 
 export function limpiarTeams(teams) {
