@@ -1079,7 +1079,6 @@ eventoslootEspecificoxCategoria[1] = async (jugador, players, arma, req, channel
   let evento = ` ${jugador.getNombre()} encontró el Martillo de Thor 🔨. Lamentablemente no lo pudo levantar porque no es digno.`;
   //jugador.setArma(arma);
   let json = createObject(evento, [jugador.getNombre()], [jugador.getID()], [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, players)], [jugador.getHP()], [0], []);
-  console.log(json.evento);
   //channel.send(json.evento);
   funcionCrearImagen(json, "1", channel);
   return 1;
