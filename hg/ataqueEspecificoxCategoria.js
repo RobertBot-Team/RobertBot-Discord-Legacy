@@ -560,7 +560,7 @@ eventosAtaqueEspecificoxCategoria[0] = async (jugador, players, victima, req, ch
       let plural = pluralS(arma);
       let quedar = pluralQuedar(arma);
       let evento = ` ${jugador.getNombre()} ataca a ${victima.getNombre()} con su${plural} ${jugador.getArma()["nombre"]}.`;
-      console.log(evento);
+
       let pronombre = pronombreElLaLosLas(jugador.getArma());
 
       let danio = jugador.getArma()["danio"] + danioExtra(1, 300);
@@ -586,17 +586,14 @@ eventosAtaqueEspecificoxCategoria[0] = async (jugador, players, victima, req, ch
 
       if (jugador.getArma()["usos"] <= 0) {
         let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-        console.log(extra1);
         json.extra.push(extra1);
         jugador.setArma(null);
       } //si su arma se queda sin usos, la pierde
 
-      console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
       if (victima.getHP() <= 0) {
         victima.alive = 0;
         jugador.kills++;
         let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-        console.log(extra2);
         json.extra.push(extra2);
       }
       //channel.send(json.evento);
@@ -617,7 +614,7 @@ eventosAtaqueEspecificoxCategoria[0] = async (jugador, players, victima, req, ch
 eventosAtaqueEspecificoxCategoria[1] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronPlural = pluralS(jugador.getArma());
   let evento = ` ${jugador.getNombre()} dispara con su${pronPlural} ${jugador.getArma()["nombre"]} a ${victima.getNombre()}, causándole graves heridas.`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -646,17 +643,14 @@ eventosAtaqueEspecificoxCategoria[1] = async (jugador, players, victima, req, ch
 
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
   //channel.send(json.evento);
@@ -672,7 +666,7 @@ eventosAtaqueEspecificoxCategoria[1] = async (jugador, players, victima, req, ch
 // "pistola"
 eventosAtaqueEspecificoxCategoria[2] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} le dispara a ${victima.getNombre()} en el pie con su ${jugador.getArma()["nombre"]}.`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -698,17 +692,14 @@ eventosAtaqueEspecificoxCategoria[2] = async (jugador, players, victima, req, ch
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -725,7 +716,7 @@ eventosAtaqueEspecificoxCategoria[2] = async (jugador, players, victima, req, ch
 // "taser"
 eventosAtaqueEspecificoxCategoria[3] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} electrocuta a ${victima.getNombre()} con su ${jugador.getArma()["nombre"]}.`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -751,17 +742,14 @@ eventosAtaqueEspecificoxCategoria[3] = async (jugador, players, victima, req, ch
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -778,7 +766,7 @@ eventosAtaqueEspecificoxCategoria[3] = async (jugador, players, victima, req, ch
 // "pistola"
 eventosAtaqueEspecificoxCategoria[4] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} dispara con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()} pero la bala apenas le roza.`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -802,17 +790,14 @@ eventosAtaqueEspecificoxCategoria[4] = async (jugador, players, victima, req, ch
 
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -829,7 +814,7 @@ eventosAtaqueEspecificoxCategoria[4] = async (jugador, players, victima, req, ch
 // "pistola"
 eventosAtaqueEspecificoxCategoria[5] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} dispara con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()} pero ${victima.getNombre()} esquiva la bala al estilo Matrix`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -842,11 +827,9 @@ eventosAtaqueEspecificoxCategoria[5] = async (jugador, players, victima, req, ch
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   //channel.send(json.evento);
   funcionCrearImagen(json, "1x1", channel);
   return 1;
@@ -855,7 +838,7 @@ eventosAtaqueEspecificoxCategoria[5] = async (jugador, players, victima, req, ch
 // "pistola"
 eventosAtaqueEspecificoxCategoria[6] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} intenta matar a ${victima.getNombre()} con su ${jugador.getArma()["nombre"]} pero tiene una puntería lamentable y gasta toda su munición.`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -868,11 +851,9 @@ eventosAtaqueEspecificoxCategoria[6] = async (jugador, players, victima, req, ch
 
   jugador.getArma()["usos"] = 0
   let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-  console.log(extra);
   jugador.setArma(null);
   json.extra.push(extra);
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   //channel.send(json.evento);
   funcionCrearImagen(json, "1x1", channel);
   return 1;
@@ -884,7 +865,7 @@ eventosAtaqueEspecificoxCategoria[7] = async (jugador, players, victima, req, ch
   if (jugador3 == null) { return null; }
 
   let evento = ` ${jugador.getNombre()} dispara a ${jugador3.getNombre()} con su ${jugador.getArma()["nombre"]} pero ${victima.getNombre()} se lanza entremedio para salvar la vida de ${jugador3.getNombre()} heróicamente.`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -903,17 +884,14 @@ eventosAtaqueEspecificoxCategoria[7] = async (jugador, players, victima, req, ch
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
 
   victima.alive = 0;
   jugador.kills++;
   let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-  console.log(extra2);
   json.extra.push(extra2);
 
   //channel.send(json.evento);
@@ -927,7 +905,7 @@ eventosAtaqueEspecificoxCategoria[7] = async (jugador, players, victima, req, ch
 // "pistola"
 eventosAtaqueEspecificoxCategoria[8] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} intenta disparar a ${victima.getNombre()} con su ${jugador.getArma()["nombre"]} pero usa el arma al revés y se dispara a si mismo.`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -953,17 +931,14 @@ eventosAtaqueEspecificoxCategoria[8] = async (jugador, players, victima, req, ch
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   if (jugador.getHP() <= 0) {
     jugador.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -981,7 +956,7 @@ eventosAtaqueEspecificoxCategoria[8] = async (jugador, players, victima, req, ch
 eventosAtaqueEspecificoxCategoria[9] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} prepara y arroja ${pronombre.toLowerCase()} ${jugador.getArma()["nombre"]}. La explosión daña a ${victima.getNombre()}.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -1006,17 +981,14 @@ eventosAtaqueEspecificoxCategoria[9] = async (jugador, players, victima, req, ch
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1036,7 +1008,7 @@ eventosAtaqueEspecificoxCategoria[10] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} detona su${pronPlural} ${jugador.getArma()["nombre"]} y hiere a ${victima.getNombre()}.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -1061,17 +1033,14 @@ eventosAtaqueEspecificoxCategoria[10] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1090,7 +1059,7 @@ eventosAtaqueEspecificoxCategoria[11] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} cocina su huevo, se lo come, y le tira el aceite caliente a ${victima.getNombre()} .`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -1115,17 +1084,14 @@ eventosAtaqueEspecificoxCategoria[11] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1144,7 +1110,7 @@ eventosAtaqueEspecificoxCategoria[12] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} arroja su huevo a ${victima.getNombre()}, y cuando lo golpea sale un pollito`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -1169,17 +1135,14 @@ eventosAtaqueEspecificoxCategoria[12] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1198,7 +1161,7 @@ eventosAtaqueEspecificoxCategoria[13] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} dispara un cohete con su lanzacohetes y manda a madrear a ${victima.getNombre()}.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -1223,17 +1186,14 @@ eventosAtaqueEspecificoxCategoria[13] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1252,7 +1212,7 @@ eventosAtaqueEspecificoxCategoria[14] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} le lanza un cohete a ${victima.getNombre()} y lo hace estallar en 1000 pedazos.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -1266,17 +1226,14 @@ eventosAtaqueEspecificoxCategoria[14] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
 
   victima.alive = 0;
   jugador.kills++;
   let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-  console.log(extra2);
   json.extra.push(extra2);
 
 
@@ -1291,7 +1248,7 @@ eventosAtaqueEspecificoxCategoria[14] = async (jugador, players, victima, req, c
 // "lanzacohetes"
 eventosAtaqueEspecificoxCategoria[15] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} lanza un cohete a ${victima.getNombre()} pero este se desvía y no le da`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -1305,12 +1262,10 @@ eventosAtaqueEspecificoxCategoria[15] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   //channel.send(json.evento);
   funcionCrearImagen(json, "1x1", channel);
   return 1;
@@ -1319,7 +1274,7 @@ eventosAtaqueEspecificoxCategoria[15] = async (jugador, players, victima, req, c
 // "jeringuilla"
 eventosAtaqueEspecificoxCategoria[16] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} le clava la ${jugador.getArma()["nombre"]} a ${victima.getNombre()} y le transmite 5G.`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -1345,17 +1300,14 @@ eventosAtaqueEspecificoxCategoria[16] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1372,7 +1324,7 @@ eventosAtaqueEspecificoxCategoria[16] = async (jugador, players, victima, req, c
 // "jeringuilla"
 eventosAtaqueEspecificoxCategoria[17] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} le clava la ${jugador.getArma()["nombre"]} a ${victima.getNombre()}... O eso intenta, pero se da cuenta que no tiene punta. ${victima.getNombre()} escapa.`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -1386,12 +1338,10 @@ eventosAtaqueEspecificoxCategoria[17] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   //channel.send(json.evento);
   funcionCrearImagen(json, "1x1", channel);
   return 1;
@@ -1400,7 +1350,7 @@ eventosAtaqueEspecificoxCategoria[17] = async (jugador, players, victima, req, c
 // "tridente"
 eventosAtaqueEspecificoxCategoria[18] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} invoca demonios con su Tridente demoníaco y hace que persigan y ataquen a ${victima.getNombre()}`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -1426,17 +1376,14 @@ eventosAtaqueEspecificoxCategoria[18] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1453,7 +1400,7 @@ eventosAtaqueEspecificoxCategoria[18] = async (jugador, players, victima, req, c
 // "tridente"
 eventosAtaqueEspecificoxCategoria[19] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} invoca demonios con su Tridente demoníaco para que ataquen a ${victima.getNombre()}, pero son tan inutiles que terminan atacando a ${jugador.getNombre()}`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -1479,12 +1426,10 @@ eventosAtaqueEspecificoxCategoria[19] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   if (jugador.getHP() <= 0) {
     jugador.alive = 0;
   }
@@ -1502,7 +1447,7 @@ eventosAtaqueEspecificoxCategoria[19] = async (jugador, players, victima, req, c
 //"Espada Maestra"
 eventosAtaqueEspecificoxCategoria[20] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${jugador.getNombre()} lanza un rayo a ${victima.getNombre()} con su Espada Maestra`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -1528,17 +1473,14 @@ eventosAtaqueEspecificoxCategoria[20] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1558,7 +1500,7 @@ eventosAtaqueEspecificoxCategoria[21] = async (jugador, players, victima, req, c
   let pronPluralJugador = pluralS(jugador.getArma());
   let pronPluralVictima = pluralS(victima.getArma());
   let evento = `${jugador.getNombre()} dispara con su${pronPluralJugador} ${jugador.getArma()["nombre"]} a ${victima.getNombre()} pero la bala no sale. ${victima.getNombre()} contraataca con su${pronPluralVictima} ${victima.getArma()["nombre"]}.`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(victima.getArma());
   let quedar = pluralQuedar(victima.getArma());
@@ -1584,17 +1526,14 @@ eventosAtaqueEspecificoxCategoria[21] = async (jugador, players, victima, req, c
   victima.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (victima.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${victima.getArma()["nombre"]} de ${victima.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     victima.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   if (jugador.getHP() <= 0) {
     jugador.alive = 0;
     victima.kills++;
     let extra2 = `Kills de ${victima.getNombre()}: ${victima.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1614,7 +1553,7 @@ eventosAtaqueEspecificoxCategoria[22] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} le pega con su pan duro a ${victima.getNombre()}. Si que lo tiene duro...`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -1639,17 +1578,14 @@ eventosAtaqueEspecificoxCategoria[22] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1669,7 +1605,7 @@ eventosAtaqueEspecificoxCategoria[23] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = `${jugador.getNombre()} suelta su ${jugador.getArma()["nombre"]} y crea un terremoto. ${jugador.getNombre()} estaba demasiado cerca y quedó atrapado en el desastre. ${jugador.getNombre()} cae inconsciente.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -1693,12 +1629,10 @@ eventosAtaqueEspecificoxCategoria[23] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   if (jugador.getHP() <= 0) {
     jugador.alive = 0;
   }
@@ -1721,7 +1655,7 @@ eventosAtaqueEspecificoxCategoria[24] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} prende los fuegos artificiales, y le dice "Feliz Cumple!!" a ${victima.getNombre()}. ${victima.getNombre()} celebra... y luego se prende fuego`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -1746,17 +1680,14 @@ eventosAtaqueEspecificoxCategoria[24] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1777,7 +1708,7 @@ eventosAtaqueEspecificoxCategoria[25] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} le martilla la cabeza a ${victima.getNombre()} (literalmente)`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -1802,17 +1733,14 @@ eventosAtaqueEspecificoxCategoria[25] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1832,7 +1760,7 @@ eventosAtaqueEspecificoxCategoria[26] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} deja su colmena al lado de ${victima.getNombre()} mientras duerme. Al dia siguiente, ${victima.getNombre()} se despierta con la cara tan hinchada que se la toca con las rodillas.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -1857,17 +1785,14 @@ eventosAtaqueEspecificoxCategoria[26] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1887,7 +1812,7 @@ eventosAtaqueEspecificoxCategoria[27] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} patea su colmena para que las abejas ataquen a ${victima.getNombre()}. Las abejas salen y pican a ${jugador.getNombre()} por pendejo.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -1912,12 +1837,10 @@ eventosAtaqueEspecificoxCategoria[27] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   if (jugador.getHP() <= 0) {
     jugador.alive = 0;
   }
@@ -1938,7 +1861,7 @@ eventosAtaqueEspecificoxCategoria[28] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = `${jugador.getNombre()} le arroja su Nokia a la cabeza de ${victima.getNombre()}, haciéndole un agujero`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -1963,17 +1886,14 @@ eventosAtaqueEspecificoxCategoria[28] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -1994,7 +1914,7 @@ eventosAtaqueEspecificoxCategoria[29] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} le arroja su ladrillo a los pies de ${victima.getNombre()}. Eso debe doler`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -2019,17 +1939,14 @@ eventosAtaqueEspecificoxCategoria[29] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2050,7 +1967,7 @@ eventosAtaqueEspecificoxCategoria[30] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = `${jugador.getNombre()} deja caer su Nokia en el pie de ${victima.getNombre()}  `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -2075,17 +1992,14 @@ eventosAtaqueEspecificoxCategoria[30] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2105,7 +2019,7 @@ eventosAtaqueEspecificoxCategoria[31] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} enciende su TNT frente a ${victima.getNombre()} pero ${victima.getNombre()} destruye el bloque antes de que estalle... ¿Ahora qué?`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -2119,7 +2033,6 @@ eventosAtaqueEspecificoxCategoria[31] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
@@ -2135,7 +2048,7 @@ eventosAtaqueEspecificoxCategoria[32] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
 
   let evento = ` ${victima.getNombre()} está por atacar a ${jugador.getNombre()}, pero ${jugador.getNombre()} saca su crucifijo y ${victima.getNombre()} se escapa siseando e insultando en latín. ok?`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -2149,7 +2062,6 @@ eventosAtaqueEspecificoxCategoria[32] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
@@ -2167,7 +2079,7 @@ eventosAtaqueEspecificoxCategoria[33] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = `${jugador.getNombre()} le clava ${pronombre.toLowerCase()} ${jugador.getArma()["nombre"]} en la cabeza a ${victima.getNombre()}`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -2192,17 +2104,14 @@ eventosAtaqueEspecificoxCategoria[33] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2219,7 +2128,7 @@ eventosAtaqueEspecificoxCategoria[33] = async (jugador, players, victima, req, c
 // "crucifijo"
 eventosAtaqueEspecificoxCategoria[34] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} reza con su crucifijo que por favor pueda ganar la partida, y ${victima.getNombre()} que justo se acercaba, se tropieza y cae, lastimándose. ¿Casualidad, o poder divino?`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -2245,17 +2154,14 @@ eventosAtaqueEspecificoxCategoria[34] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2273,7 +2179,7 @@ eventosAtaqueEspecificoxCategoria[34] = async (jugador, players, victima, req, c
 // "plumero"
 eventosAtaqueEspecificoxCategoria[35] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} agita su plumero frente a ${victima.getNombre()} y le causa alergia por el polvo.`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -2299,17 +2205,14 @@ eventosAtaqueEspecificoxCategoria[35] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2329,7 +2232,7 @@ eventosAtaqueEspecificoxCategoria[36] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = `${jugador.getNombre()} abre su gas lacrimógeno porque le daba curiosidad saber a qué olía. Mala idea.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -2353,12 +2256,10 @@ eventosAtaqueEspecificoxCategoria[36] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   if (jugador.getHP() <= 0) {
     jugador.alive = 0;
   }
@@ -2376,7 +2277,7 @@ eventosAtaqueEspecificoxCategoria[36] = async (jugador, players, victima, req, c
 // "gas lacrimogeno"
 eventosAtaqueEspecificoxCategoria[37] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} lanza su gas lacrimógeno a ${victima.getNombre()}. Si antes era medio ciego, ahora lo es del todo`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -2402,17 +2303,14 @@ eventosAtaqueEspecificoxCategoria[37] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2432,7 +2330,7 @@ eventosAtaqueEspecificoxCategoria[38] = async (jugador, players, victima, req, c
   if (jugador3 == null) { return null; }
 
   let evento = `${jugador.getNombre()} dispara una flecha a ${jugador3.getNombre()} pero la flecha se desvía y hiere a ${victima.getNombre()}`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -2460,17 +2358,14 @@ eventosAtaqueEspecificoxCategoria[38] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2490,7 +2385,7 @@ eventosAtaqueEspecificoxCategoria[39] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = `${jugador.getNombre()} se mete en su cañón, se dispara y cae de cabeza en medio de la nada. Hubiera usado las bolas del cañón mejor, no?`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -2514,12 +2409,10 @@ eventosAtaqueEspecificoxCategoria[39] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   if (jugador.getHP() <= 0) {
     jugador.alive = 0;
   }
@@ -2537,7 +2430,7 @@ eventosAtaqueEspecificoxCategoria[39] = async (jugador, players, victima, req, c
 // "canion"
 eventosAtaqueEspecificoxCategoria[40] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} dispara a ${victima.getNombre()} con sus bolas. O sea, con las bolas de su cañón`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -2563,17 +2456,14 @@ eventosAtaqueEspecificoxCategoria[40] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2590,7 +2480,7 @@ eventosAtaqueEspecificoxCategoria[40] = async (jugador, players, victima, req, c
 // "canion"
 eventosAtaqueEspecificoxCategoria[41] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} se mete en su cañón y se dispara dibujando una parábola perfecta y cayendo de cabeza sobre ${victima.getNombre()}.`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -2624,20 +2514,16 @@ eventosAtaqueEspecificoxCategoria[41] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   if (jugador.getHP() <= 0) {
     jugador.alive = 0;
   }
@@ -2659,7 +2545,7 @@ eventosAtaqueEspecificoxCategoria[42] = async (jugador, players, victima, req, c
   let distancia = randomSelector(100, 1000);
 
   let evento = `${jugador.getNombre()} saca a relucir sus dotes de arquería, atinando una flecha a ${victima.getNombre()} desde ${distancia} metros de distancia.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -2684,17 +2570,14 @@ eventosAtaqueEspecificoxCategoria[42] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2713,7 +2596,7 @@ eventosAtaqueEspecificoxCategoria[43] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} hace que le va a ofrecer su ramo de flores a ${victima.getNombre()}, pero luego le empieza a pegar con él.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -2738,17 +2621,14 @@ eventosAtaqueEspecificoxCategoria[43] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2767,7 +2647,7 @@ eventosAtaqueEspecificoxCategoria[44] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} le arroja su ramo de flores a ${victima.getNombre()}. ${victima.getNombre()} lo intenta atrapar creyendo que así podrá casarse, pero se hace daño con las espinas.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -2792,17 +2672,14 @@ eventosAtaqueEspecificoxCategoria[44] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2820,7 +2697,7 @@ eventosAtaqueEspecificoxCategoria[44] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[45] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} subido en su skate dice “A este truco lo llamo El Leñador“, y le lanza el skate a las piernas de ${victima.getNombre()}`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -2845,17 +2722,14 @@ eventosAtaqueEspecificoxCategoria[45] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2873,7 +2747,7 @@ eventosAtaqueEspecificoxCategoria[45] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[46] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} dice, "A este truco lo llamo El eh..." y le parte el skate en la cabeza a ${victima.getNombre()}`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -2898,17 +2772,14 @@ eventosAtaqueEspecificoxCategoria[46] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2927,7 +2798,7 @@ eventosAtaqueEspecificoxCategoria[47] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} comienza a tocar su guitarra tan horriblemente mal que a ${victima.getNombre()} le sangran los oidos. Success?`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -2952,17 +2823,14 @@ eventosAtaqueEspecificoxCategoria[47] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -2980,7 +2848,7 @@ eventosAtaqueEspecificoxCategoria[47] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[48] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le parte su guitarra a ${victima.getNombre()} en la cabeza. Al menos ya no tendremos que escucharlo más tocar`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3005,17 +2873,14 @@ eventosAtaqueEspecificoxCategoria[48] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3033,7 +2898,7 @@ eventosAtaqueEspecificoxCategoria[48] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[49] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} toma su bate de besibol y batea la cara de ${victima.getNombre()}. Es un homerun!!`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3058,17 +2923,14 @@ eventosAtaqueEspecificoxCategoria[49] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3088,7 +2950,7 @@ eventosAtaqueEspecificoxCategoria[50] = async (jugador, players, victima, req, c
   let pronPlural = pluralS(jugador.getArma());
 
   let evento = `${jugador.getNombre()} envenena la bebida de ${victima.getNombre()} con ${pronombre.toLowerCase()} ${jugador.getArma()["nombre"]}, pero se confunde y bebe la bebida envenenada.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3113,12 +2975,10 @@ eventosAtaqueEspecificoxCategoria[50] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   if (jugador.getHP() <= 0) {
     jugador.alive = 0;
   }
@@ -3139,7 +2999,7 @@ eventosAtaqueEspecificoxCategoria[51] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} enciende su${pronPlural} ${jugador.getArma()["nombre"]} y hace volar por los aires a ${victima.getNombre()} `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3154,17 +3014,14 @@ eventosAtaqueEspecificoxCategoria[51] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3182,7 +3039,7 @@ eventosAtaqueEspecificoxCategoria[51] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[52] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} envenena la bebida de ${victima.getNombre()} con ${pronombre.toLowerCase()} ${jugador.getArma()["nombre"]} sin que se de cuenta. ${victima.getNombre()} la bebe inocentemente`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3207,17 +3064,14 @@ eventosAtaqueEspecificoxCategoria[52] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3235,7 +3089,7 @@ eventosAtaqueEspecificoxCategoria[52] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[53] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} envenena la bebida de ${victima.getNombre()} con ${pronombre.toLowerCase()} ${jugador.getArma()["nombre"]} sin que se de cuenta. ${victima.getNombre()} la bebe y sufre dolor de estómago`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3260,17 +3114,14 @@ eventosAtaqueEspecificoxCategoria[53] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3289,7 +3140,7 @@ eventosAtaqueEspecificoxCategoria[54] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} escribe su nombre en la Death Note para saber que es suya. Y luego muere.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3303,17 +3154,14 @@ eventosAtaqueEspecificoxCategoria[54] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
 
   jugador.alive = 0;
   jugador.kills++;
   let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-  console.log(extra2);
   json.extra.push(extra2);
 
   //channel.send(json.evento);
@@ -3332,7 +3180,7 @@ eventosAtaqueEspecificoxCategoria[55] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} escribe el nombre de ${victima.getNombre()} en la Death Note, efectivamente matándolo en el acto.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3347,17 +3195,14 @@ eventosAtaqueEspecificoxCategoria[55] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3377,7 +3222,7 @@ eventosAtaqueEspecificoxCategoria[56] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} escribe el nombre de ${victima.getNombre()} en la Death Note, y lo mata al instante.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3392,17 +3237,14 @@ eventosAtaqueEspecificoxCategoria[56] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3422,7 +3264,7 @@ eventosAtaqueEspecificoxCategoria[57] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} escribe el nombre de ${victima.getNombre()} en la Death Note, pero lo escribe mal, así que no produce ningún resultado.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3435,17 +3277,14 @@ eventosAtaqueEspecificoxCategoria[57] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3465,7 +3304,7 @@ eventosAtaqueEspecificoxCategoria[58] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let metros = randomSelector(100, 999);
   let evento = `${jugador.getNombre()} se acuesta en el suelo y le da tremendo headshot a ${victima.getNombre()} desde ${metros} mts de distancia con su fusil de francotirador.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3481,17 +3320,14 @@ eventosAtaqueEspecificoxCategoria[58] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3508,7 +3344,7 @@ eventosAtaqueEspecificoxCategoria[58] = async (jugador, players, victima, req, c
 // "fusil de francotirador"
 eventosAtaqueEspecificoxCategoria[59] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} intenta darle con su franco a ${victima.getNombre()} pero hay demasiado viento. ${victima.getNombre()} escapa.`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -3521,11 +3357,9 @@ eventosAtaqueEspecificoxCategoria[59] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   //channel.send(json.evento);
   funcionCrearImagen(json, "1x1", channel);
   return 1;
@@ -3535,7 +3369,7 @@ eventosAtaqueEspecificoxCategoria[59] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[60] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} apunta a ${victima.getNombre()} con su fusil de francotirador y le da, pero el disparo no fue fatal.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3560,12 +3394,10 @@ eventosAtaqueEspecificoxCategoria[60] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
 
   //channel.send(json.evento);
   funcionCrearImagen(json, "1x1", channel);
@@ -3579,7 +3411,7 @@ eventosAtaqueEspecificoxCategoria[60] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[61] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} enciende su micrófono y empieza a cantar. A ${victima.getNombre()} le sangran los oídos.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3604,17 +3436,14 @@ eventosAtaqueEspecificoxCategoria[61] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3634,7 +3463,7 @@ eventosAtaqueEspecificoxCategoria[62] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} cortó a ${victima.getNombre()} como un fiambre con su sable de luz. Fium fium`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3649,17 +3478,14 @@ eventosAtaqueEspecificoxCategoria[62] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3678,7 +3504,7 @@ eventosAtaqueEspecificoxCategoria[62] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[63] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le dice a ${victima.getNombre()} "Yo soy tu padre", y le corta un brazo con su sable de luz`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3703,17 +3529,14 @@ eventosAtaqueEspecificoxCategoria[63] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3732,7 +3555,7 @@ eventosAtaqueEspecificoxCategoria[63] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[64] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} mete balas reales a su NERF y le dispara a ${victima.getNombre()} que estaba desprevenido.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3757,17 +3580,14 @@ eventosAtaqueEspecificoxCategoria[64] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3785,7 +3605,7 @@ eventosAtaqueEspecificoxCategoria[64] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[65] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} dispara a ${victima.getNombre()} con su NERF. Es mejor que nada.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3810,17 +3630,14 @@ eventosAtaqueEspecificoxCategoria[65] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3837,7 +3654,7 @@ eventosAtaqueEspecificoxCategoria[65] = async (jugador, players, victima, req, c
 // "pistola pesada"
 eventosAtaqueEspecificoxCategoria[66] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} intenta disparar a ${victima.getNombre()} con su pistola pesada pero no puede. Es muy pesada.`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -3850,11 +3667,9 @@ eventosAtaqueEspecificoxCategoria[66] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   //channel.send(json.evento);
   funcionCrearImagen(json, "1x1", channel);
   return 1;
@@ -3866,7 +3681,7 @@ eventosAtaqueEspecificoxCategoria[67] = async (jugador, players, victima, req, c
   if (victima.hp == maxHP) { return null };
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le cose las heridas a ${victima.getNombre()} con su alfiler. Un segundo, la idea no era atacarse?`;
-  console.log(evento);
+
   let quedar = pluralQuedar(jugador.getArma());
 
   let danio = jugador.getArma()["danio"] + danioExtra(100, 200);
@@ -3890,17 +3705,14 @@ eventosAtaqueEspecificoxCategoria[67] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -3917,7 +3729,7 @@ eventosAtaqueEspecificoxCategoria[67] = async (jugador, players, victima, req, c
 // "pistola de bengalas"
 eventosAtaqueEspecificoxCategoria[68] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} lanza una bengala porque quiere abandonar el juego. Todos la ignoran.`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -3930,11 +3742,9 @@ eventosAtaqueEspecificoxCategoria[68] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   //channel.send(json.evento);
   funcionCrearImagen(json, "1x1", channel);
   return 1;
@@ -3943,7 +3753,7 @@ eventosAtaqueEspecificoxCategoria[68] = async (jugador, players, victima, req, c
 // "pistola de bengalas"
 eventosAtaqueEspecificoxCategoria[69] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} lanza una bengala hacia ${victima.getNombre()} y le quema la ropa. ${victima.getNombre()} corre ahora desnudo.`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -3956,11 +3766,9 @@ eventosAtaqueEspecificoxCategoria[69] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   //channel.send(json.evento);
   funcionCrearImagen(json, "1x1", channel);
   return 1;
@@ -3970,7 +3778,7 @@ eventosAtaqueEspecificoxCategoria[69] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[70] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} lanza una bengala hacia ${victima.getNombre()} y le produce quemaduras de primer grado`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -3995,17 +3803,14 @@ eventosAtaqueEspecificoxCategoria[70] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4022,7 +3827,7 @@ eventosAtaqueEspecificoxCategoria[70] = async (jugador, players, victima, req, c
 // "globo"
 eventosAtaqueEspecificoxCategoria[71] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} hace estallar su globo con confeti. ¿Se supone que eso debía hacer daño?`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -4035,11 +3840,9 @@ eventosAtaqueEspecificoxCategoria[71] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   //channel.send(json.evento);
   funcionCrearImagen(json, "1x1", channel);
   return 1;
@@ -4048,7 +3851,7 @@ eventosAtaqueEspecificoxCategoria[71] = async (jugador, players, victima, req, c
 // "arma blanca > machete"
 eventosAtaqueEspecificoxCategoria[72] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} se fue... ¿al cerro? Dice que va a pelear con el Diablo con su machete.`
-  console.log(evento);
+
 
   let json = createObject(evento, [jugador.getNombre()],
     [jugador.getID()],
@@ -4062,7 +3865,7 @@ eventosAtaqueEspecificoxCategoria[72] = async (jugador, players, victima, req, c
 // "tenedor"
 eventosAtaqueEspecificoxCategoria[73] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} le lanza su tenedor a ${victima.getNombre()} pero ni siquiera está cerca de hacerle algún daño. ¿Quién hizo que este loco se creyera Aquaman?`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -4075,11 +3878,9 @@ eventosAtaqueEspecificoxCategoria[73] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   //channel.send(json.evento);
   funcionCrearImagen(json, "1x1", channel);
   return 1;
@@ -4089,7 +3890,7 @@ eventosAtaqueEspecificoxCategoria[73] = async (jugador, players, victima, req, c
 
 eventosAtaqueEspecificoxCategoria[74] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${jugador.getNombre()} le hace un piercing a ${victima.getNombre()} con su alfiler. ¿Qué?`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -4102,11 +3903,9 @@ eventosAtaqueEspecificoxCategoria[74] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   //channel.send(json.evento);
   funcionCrearImagen(json, "1x1", channel);
   return 1;
@@ -4117,7 +3916,7 @@ eventosAtaqueEspecificoxCategoria[74] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[75] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} pincha a ${victima.getNombre()} con su alfiler. Vaya, ¿no va a hacer mucho daño?`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4142,17 +3941,14 @@ eventosAtaqueEspecificoxCategoria[75] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4172,7 +3968,7 @@ eventosAtaqueEspecificoxCategoria[75] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[76] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} se pone a jugar golf tranquilamente. Nadie esperaba que a 2315 metros de distancia, la bola le iba a pegar justo a ${victima.getNombre()}.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4197,17 +3993,14 @@ eventosAtaqueEspecificoxCategoria[76] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4225,7 +4018,7 @@ eventosAtaqueEspecificoxCategoria[76] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[77] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} estaba por golpear la bola de golf pero ${victima.getNombre()} justo se cruzó por delante y sufrió daño colateral.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4250,17 +4043,14 @@ eventosAtaqueEspecificoxCategoria[77] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4279,7 +4069,7 @@ eventosAtaqueEspecificoxCategoria[77] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[78] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le lanza el Martillo de Thor a ${victima.getNombre()}, pero como no apuntó a la cabeza, ${victima.getNombre()} sigue con vida.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4304,17 +4094,14 @@ eventosAtaqueEspecificoxCategoria[78] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4333,7 +4120,7 @@ eventosAtaqueEspecificoxCategoria[78] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[79] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le lanza un rayo a ${victima.getNombre()}. Según ${jugador.getNombre()}, es Noob…69?`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4358,17 +4145,14 @@ eventosAtaqueEspecificoxCategoria[79] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4387,7 +4171,7 @@ eventosAtaqueEspecificoxCategoria[79] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[80] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} bombardea a los bombazos con su bomba a ${victima.getNombre()}. Lo están pasando bomba`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4412,17 +4196,14 @@ eventosAtaqueEspecificoxCategoria[80] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4441,7 +4222,7 @@ eventosAtaqueEspecificoxCategoria[80] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[81] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} apunta con su varita a ${victima.getNombre()} y comienza recitar palabras random. ${victima.getNombre()} se rie, pero de repente se empieza a sentir mal`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4466,17 +4247,14 @@ eventosAtaqueEspecificoxCategoria[81] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4497,7 +4275,7 @@ eventosAtaqueEspecificoxCategoria[82] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} apunta con su varita a ${victima.getNombre()} y comienza recitar palabras random. ${victima.getNombre()} se le rie en la cara`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4510,17 +4288,14 @@ eventosAtaqueEspecificoxCategoria[82] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4539,7 +4314,7 @@ eventosAtaqueEspecificoxCategoria[82] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[83] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} arroja su Samsung Galaxy Note 7 a ${victima.getNombre()} pero la explosión no le hace mucho daño`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4564,17 +4339,14 @@ eventosAtaqueEspecificoxCategoria[83] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4593,7 +4365,7 @@ eventosAtaqueEspecificoxCategoria[83] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[84] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} abre Genshin en su Samsung Galaxy Note 7 y se lo arroja a ${victima.getNombre()}, a quien le explota muy cerca`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4618,17 +4390,14 @@ eventosAtaqueEspecificoxCategoria[84] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4647,7 +4416,7 @@ eventosAtaqueEspecificoxCategoria[84] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[85] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le dice a ${victima.getNombre()} que acaricie su planta venenosa. La planta le muerde un dedo`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4672,17 +4441,14 @@ eventosAtaqueEspecificoxCategoria[85] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4702,7 +4468,7 @@ eventosAtaqueEspecificoxCategoria[86] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} ata a ${victima.getNombre()} a un arbol con su cuerda`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4715,17 +4481,14 @@ eventosAtaqueEspecificoxCategoria[86] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4745,7 +4508,7 @@ eventosAtaqueEspecificoxCategoria[87] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} ahorca a ${victima.getNombre()} con su cuerda, matándolo en el acto`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4760,17 +4523,14 @@ eventosAtaqueEspecificoxCategoria[87] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4789,7 +4549,7 @@ eventosAtaqueEspecificoxCategoria[87] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[88] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} ahorca a ${victima.getNombre()} con su cuerda, pero no se da cuenta que lo dejó con vida.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4814,17 +4574,14 @@ eventosAtaqueEspecificoxCategoria[88] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4844,7 +4601,7 @@ eventosAtaqueEspecificoxCategoria[89] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} abre la barrera espacial que separa este mundo de otros con su Llave Espada, y empuja a ${victima.getNombre()} dentro. No se supo más de él.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4859,17 +4616,14 @@ eventosAtaqueEspecificoxCategoria[89] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4888,7 +4642,7 @@ eventosAtaqueEspecificoxCategoria[89] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[90] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le muestra a ${victima.getNombre()} el cráneo humano que encontró. ${victima.getNombre()} se asusta y se tropieza, haciéndose daño`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4913,17 +4667,14 @@ eventosAtaqueEspecificoxCategoria[90] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4942,7 +4693,7 @@ eventosAtaqueEspecificoxCategoria[90] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[91] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le clava la punta del lapiz a ${victima.getNombre()} en la mano. Hpta, esa marca no se va a quitar en la vida`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -4967,17 +4718,14 @@ eventosAtaqueEspecificoxCategoria[91] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -4996,7 +4744,7 @@ eventosAtaqueEspecificoxCategoria[91] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[92] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le clava su lapiz a ${victima.getNombre()} en el ojo`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5021,17 +4769,14 @@ eventosAtaqueEspecificoxCategoria[92] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5050,7 +4795,7 @@ eventosAtaqueEspecificoxCategoria[92] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[93] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le escribe una nota con su lapiz a ${victima.getNombre()} que dice "ya no te quiero". ${victima.getNombre()} recibe daño al corazón 💔`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5075,17 +4820,14 @@ eventosAtaqueEspecificoxCategoria[93] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5104,7 +4846,7 @@ eventosAtaqueEspecificoxCategoria[93] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[94] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} se pone la teta de plástico y se la muestra a ${victima.getNombre()}, quien pierde vida por sangrado de nariz `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5129,17 +4871,14 @@ eventosAtaqueEspecificoxCategoria[94] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5158,7 +4897,7 @@ eventosAtaqueEspecificoxCategoria[94] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[95] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} lanza su lanza, lanzandola a ${victima.getNombre()}, quien lanzamentáblemente es alcanzado por la lanza`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5183,17 +4922,14 @@ eventosAtaqueEspecificoxCategoria[95] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5212,7 +4948,7 @@ eventosAtaqueEspecificoxCategoria[95] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[96] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} azota a ${victima.getNombre()} con su látigo. Si bien le hace daño, parece que ${victima.getNombre()} lo disfruta`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5237,17 +4973,14 @@ eventosAtaqueEspecificoxCategoria[96] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5267,7 +5000,7 @@ eventosAtaqueEspecificoxCategoria[97] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} va a azotar a ${victima.getNombre()} con su látigo, y ${victima.getNombre()} dice "oh si, azótame". ${jugador.getNombre()} se arrepiente y se va a meditar sobre su vida`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5279,17 +5012,14 @@ eventosAtaqueEspecificoxCategoria[97] = async (jugador, players, victima, req, c
 
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5308,7 +5038,7 @@ eventosAtaqueEspecificoxCategoria[98] = async (jugador, players, victima, req, c
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} azota a ${victima.getNombre()} con su látigo. ${victima.getNombre()} deja salir un fuerte gemido. ${jugador.getNombre()} se siente satisfecho por hacerle daño. ${victima.getNombre()} oculta su vergüenza; no quiere que ${jugador.getNombre()} se de cuenta que era de placer y no de dolor.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5321,17 +5051,14 @@ eventosAtaqueEspecificoxCategoria[98] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5349,7 +5076,7 @@ eventosAtaqueEspecificoxCategoria[98] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[99] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le rocía gas pimienta a ${victima.getNombre()} en los ojos`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5374,17 +5101,14 @@ eventosAtaqueEspecificoxCategoria[99] = async (jugador, players, victima, req, c
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5403,7 +5127,7 @@ eventosAtaqueEspecificoxCategoria[99] = async (jugador, players, victima, req, c
 eventosAtaqueEspecificoxCategoria[100] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${victima.getNombre()} le insiste a ${jugador.getNombre()} que quiere probar su gas pimienta. Luego de que se lo rocíe en la boca, ${victima.getNombre()} se queda tosiendo unas horas`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5428,17 +5152,14 @@ eventosAtaqueEspecificoxCategoria[100] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5456,7 +5177,7 @@ eventosAtaqueEspecificoxCategoria[100] = async (jugador, players, victima, req, 
 // "serrucho"
 eventosAtaqueEspecificoxCategoria[101] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} utiliza su serrucho para intentar construir... ¿algo? Pero ni sabe usarlo y se corta los dedos. ¿A quién se le ocurrió darselo en primer lugar?`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -5481,12 +5202,10 @@ eventosAtaqueEspecificoxCategoria[101] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   if (jugador.getHP() <= 0) {
     jugador.alive = 0;
   }
@@ -5506,7 +5225,7 @@ eventosAtaqueEspecificoxCategoria[101] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[102] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} demuestra su habilidad de carpintero creando una trampa con su serrucho. Todos creen que no servirá de nada hasta que ${victima.getNombre()} cae en ella y se hace daño. Se ve que sabe manejar tablas.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5531,17 +5250,14 @@ eventosAtaqueEspecificoxCategoria[102] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5559,7 +5275,7 @@ eventosAtaqueEspecificoxCategoria[102] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[103] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} está convencido de que ${victima.getNombre()} es un vampiro, y le clava su estaca de madera en el pecho. Para sorpresa de nadie, ${victima.getNombre()} grita de dolor, finalmente demostrando que... tener una estaca clavada, duele.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5584,17 +5300,14 @@ eventosAtaqueEspecificoxCategoria[103] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5613,7 +5326,7 @@ eventosAtaqueEspecificoxCategoria[103] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[104] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} lanza su búmeran y golpea a ${victima.getNombre()} en la cabeza. Esperemos que no le salga un moretón.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5638,17 +5351,14 @@ eventosAtaqueEspecificoxCategoria[104] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5671,7 +5381,7 @@ eventosAtaqueEspecificoxCategoria[105] = async (jugador, players, victima, req, 
   let pronPluralVictima = pluralS(victima.getArma());
 
   let evento = ` ${jugador.getNombre()} lanza su búmeran hacia ${victima.getNombre()} y le roba su${pronPluralVictima} ${victima.getArma()["nombre"]}. ¿Pero qué...? `;
-  console.log(evento);
+
 
   let json = createObject(evento, [jugador.getNombre(), victima.getNombre()],
     [jugador.getID(), victima.getID()],
@@ -5683,7 +5393,6 @@ eventosAtaqueEspecificoxCategoria[105] = async (jugador, players, victima, req, 
   victima.setArma(null);
 
   let extra1 = ` ${victima.getNombre()} se quedó sin su ${armaAux["nombre"]}.`;
-  console.log(extra1);
   json.extra.push(extra1);
 
   //channel.send(json.evento);
@@ -5697,7 +5406,7 @@ eventosAtaqueEspecificoxCategoria[105] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[106] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} salta antes de golpear a ${victima.getNombre()} con su espada de iron, asi le da un crítico y le quita más vida`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5722,17 +5431,14 @@ eventosAtaqueEspecificoxCategoria[106] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5751,7 +5457,7 @@ eventosAtaqueEspecificoxCategoria[106] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[107] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} y ${victima.getNombre()} juegan una partidita de pool. ${victima.getNombre()} pierde y recibe un tacazo en el estómago.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5776,17 +5482,14 @@ eventosAtaqueEspecificoxCategoria[107] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5804,7 +5507,7 @@ eventosAtaqueEspecificoxCategoria[107] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[108] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} y ${victima.getNombre()} juegan una partidita de pool. ${jugador.getNombre()} se enoja porque va perdiendo y le clava su taco de pool a ${victima.getNombre()} en la mano. Jaja, intenta ganar ahora!`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5829,17 +5532,14 @@ eventosAtaqueEspecificoxCategoria[108] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5858,7 +5558,7 @@ eventosAtaqueEspecificoxCategoria[108] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[109] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} y ${victima.getNombre()} juegan una partidita de pool. ${jugador.getNombre()} apunta mal y en vez de darle a la bola blanca, le da a... otra bola.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5883,17 +5583,14 @@ eventosAtaqueEspecificoxCategoria[109] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5911,7 +5608,7 @@ eventosAtaqueEspecificoxCategoria[109] = async (jugador, players, victima, req, 
 // "taco"
 eventosAtaqueEspecificoxCategoria[110] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} le tira su taco encima a ${victima.getNombre()}. Qué desperdicio..`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -5924,7 +5621,6 @@ eventosAtaqueEspecificoxCategoria[110] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
@@ -5938,7 +5634,7 @@ eventosAtaqueEspecificoxCategoria[110] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[111] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} arroja su taco a los ojos de ${victima.getNombre()}. ¡Qué bien que era extra picante!`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -5963,17 +5659,14 @@ eventosAtaqueEspecificoxCategoria[111] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -5992,7 +5685,7 @@ eventosAtaqueEspecificoxCategoria[111] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[112] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` Los ojos de ${jugador.getNombre()} cambian cuando ataca a ${victima.getNombre()} con su ${jugador.getArma()["nombre"]}.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6017,17 +5710,14 @@ eventosAtaqueEspecificoxCategoria[112] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6046,7 +5736,7 @@ eventosAtaqueEspecificoxCategoria[112] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[113] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} activa el modo asesino y rasga repetidamente la piel de ${victima.getNombre()} con sus estiletes dorados.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6071,17 +5761,14 @@ eventosAtaqueEspecificoxCategoria[113] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6099,7 +5786,7 @@ eventosAtaqueEspecificoxCategoria[113] = async (jugador, players, victima, req, 
 // "escoba"
 eventosAtaqueEspecificoxCategoria[114] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} le barre los pies a ${victima.getNombre()} y le quita la suerte.`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -6112,7 +5799,6 @@ eventosAtaqueEspecificoxCategoria[114] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
@@ -6127,7 +5813,7 @@ eventosAtaqueEspecificoxCategoria[115] = async (jugador, players, victima, req, 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `${jugador.getNombre()} pela la banana, arroja la cáscara en medio del camino, y se esconde a esperar. Nunca pasó nadie por ahí`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6139,7 +5825,6 @@ eventosAtaqueEspecificoxCategoria[115] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
@@ -6155,7 +5840,7 @@ eventosAtaqueEspecificoxCategoria[115] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[116] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} agarra a ${victima.getNombre()} a escobazos, parece madre latina.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6180,17 +5865,14 @@ eventosAtaqueEspecificoxCategoria[116] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6208,7 +5890,7 @@ eventosAtaqueEspecificoxCategoria[116] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[117] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} le arroja su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}. Tampoco perdió mucho.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6233,17 +5915,14 @@ eventosAtaqueEspecificoxCategoria[117] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6262,7 +5941,7 @@ eventosAtaqueEspecificoxCategoria[117] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[118] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} ataca a ${victima.getNombre()} con su ${jugador.getArma()["nombre"]}. Primera vez que no se duerme usándolo.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6287,17 +5966,14 @@ eventosAtaqueEspecificoxCategoria[118] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6316,7 +5992,7 @@ eventosAtaqueEspecificoxCategoria[118] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[119] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} ahorca a ${victima.getNombre()} con el cable de su ${jugador.getArma()["nombre"]}. Resultó útil.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6341,17 +6017,14 @@ eventosAtaqueEspecificoxCategoria[119] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6369,7 +6042,7 @@ eventosAtaqueEspecificoxCategoria[119] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[120] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} rocía a ${victima.getNombre()} con su repelente de tiburones, pero no le hace mucho daño. ¿Para que lo usó si ni siquiera es un tiburón?`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6394,17 +6067,14 @@ eventosAtaqueEspecificoxCategoria[120] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6423,7 +6093,7 @@ eventosAtaqueEspecificoxCategoria[120] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[121] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} pela la banana, arroja la cáscara en medio del camino, y se esconde a esperar. Luego de unos minutos, ${victima.getNombre()} pasó y se tropezó con la cáscara. La operación banana fue todo un éxito.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6448,17 +6118,14 @@ eventosAtaqueEspecificoxCategoria[121] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6477,7 +6144,7 @@ eventosAtaqueEspecificoxCategoria[121] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[122] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} rocía a ${victima.getNombre()} con su repelente de tiburones, y fue muy efectivo. ¿Por qué? ¿Y de dónde rayos sacó ese repelente?`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6502,17 +6169,14 @@ eventosAtaqueEspecificoxCategoria[122] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6532,7 +6196,7 @@ eventosAtaqueEspecificoxCategoria[123] = async (jugador, players, victima, req, 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let pronPlural = pluralS(jugador.getArma());
   let evento = `"Me la pelas?" ${jugador.getNombre()} le pide a ${victima.getNombre()} que le pele su banana. ${victima.getNombre()} decide ayudarlo y se la pela, como agradecimiento ${jugador.getNombre()} le deja comer de su banana`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6545,17 +6209,14 @@ eventosAtaqueEspecificoxCategoria[123] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6574,7 +6235,7 @@ eventosAtaqueEspecificoxCategoria[123] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[124] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} toma su libro de matemáticas y le empieza a explicar límites por definición a ${victima.getNombre()}. ${victima.getNombre()} pierde años de vida.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6599,17 +6260,14 @@ eventosAtaqueEspecificoxCategoria[124] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6627,7 +6285,7 @@ eventosAtaqueEspecificoxCategoria[124] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[125] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} ataca a ${victima.getNombre()} con su regla de metal, pero ${victima.getNombre()} logra evitar el golpe con su brazo. Sin embargo ${victima.getNombre()} se hizo mucho daño.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6652,17 +6310,14 @@ eventosAtaqueEspecificoxCategoria[125] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6681,7 +6336,7 @@ eventosAtaqueEspecificoxCategoria[126] = async (jugador, players, victima, req, 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} golpea con su regla de metal a ${victima.getNombre()} en la cabeza. Le causa traumatismos y se murió al instante. Y decían que no servía para nada.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6696,17 +6351,14 @@ eventosAtaqueEspecificoxCategoria[126] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
 
   victima.alive = 0;
   jugador.kills++;
   let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-  console.log(extra2);
   json.extra.push(extra2);
 
 
@@ -6723,7 +6375,7 @@ eventosAtaqueEspecificoxCategoria[126] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[127] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `"Me la pelas?" ${jugador.getNombre()} le pide a ${victima.getNombre()} que le pele su banana. ${victima.getNombre()} cree que le estaba ofendiendo y comienza a golpearle. Pobre, solo quería que se la pelaran`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6744,12 +6396,10 @@ eventosAtaqueEspecificoxCategoria[127] = async (jugador, players, victima, req, 
     await cargarAvatar(victima.getFoto(), victima.getID(), victima.getTieneOtraFoto(), req.body.channel.guild_id, playersReal)],
     [jugador.getHP(), victima.getHP()], [cuantoquita, 0], []);
 
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6767,7 +6417,7 @@ eventosAtaqueEspecificoxCategoria[127] = async (jugador, players, victima, req, 
 // "regla"
 eventosAtaqueEspecificoxCategoria[128] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} intenta golpear a ${victima.getNombre()} con su regla de metal, pero en el intento le cayó en el pie y se hizo mucho daño solo. Qué pendejo.`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -6793,17 +6443,14 @@ eventosAtaqueEspecificoxCategoria[128] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   if (jugador.getHP() <= 0) {
     jugador.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6821,7 +6468,7 @@ eventosAtaqueEspecificoxCategoria[128] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[129] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} come su manzana, y escupe las semillas de a una a ${victima.getNombre()}. Mas que daño le provoca enojo. `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6846,17 +6493,14 @@ eventosAtaqueEspecificoxCategoria[129] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6876,7 +6520,7 @@ eventosAtaqueEspecificoxCategoria[130] = async (jugador, players, victima, req, 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
 
   let evento = `"Me la pelas?" ${jugador.getNombre()} le pide a ${victima.getNombre()} que le pele su banana. ${victima.getNombre()} lo funa por acoso y todos salen corriendo a perseguirlo. ${jugador.getNombre()} apareció en una bolsa negra a las horas`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6889,7 +6533,6 @@ eventosAtaqueEspecificoxCategoria[130] = async (jugador, players, victima, req, 
     [jugador.getHP(), 0], [0, victima.getHP()], []);
 
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
 
   jugador.alive = 0;
 
@@ -6906,7 +6549,7 @@ eventosAtaqueEspecificoxCategoria[130] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[131] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()}: grita "Aprende la teoría de la gravedad!!", y le arroja su manzana a la cabeza de ${victima.getNombre()} `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -6931,17 +6574,14 @@ eventosAtaqueEspecificoxCategoria[131] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -6959,7 +6599,7 @@ eventosAtaqueEspecificoxCategoria[131] = async (jugador, players, victima, req, 
 //"fazerblaster"
 eventosAtaqueEspecificoxCategoria[132] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()} va a disparar su Fazerblaster contra ${victima.getNombre()}. Pero el Fazerblaster se buguea y no hace nada.`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -6972,7 +6612,6 @@ eventosAtaqueEspecificoxCategoria[132] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
@@ -6986,7 +6625,7 @@ eventosAtaqueEspecificoxCategoria[132] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[133] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} utiliza su Espada cuadruple para crear 4 copias suyas y las copias… ¿golpean a puños a ${victima.getNombre()}? ¿No era mejor que utilizaran la espada? `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7011,17 +6650,14 @@ eventosAtaqueEspecificoxCategoria[133] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7040,7 +6676,7 @@ eventosAtaqueEspecificoxCategoria[133] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[134] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `Después de beberse toda la ${jugador.getArma()["nombre"]}, ${jugador.getNombre()} le parte la botella en la cabeza a ${victima.getNombre()} `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7065,17 +6701,14 @@ eventosAtaqueEspecificoxCategoria[134] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7094,7 +6727,7 @@ eventosAtaqueEspecificoxCategoria[134] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[135] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()}, completamente alcoholizado, arroja su ${jugador.getArma()["nombre"]} a ${victima.getNombre()} `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7119,17 +6752,14 @@ eventosAtaqueEspecificoxCategoria[135] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7147,7 +6777,7 @@ eventosAtaqueEspecificoxCategoria[135] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[136] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} usa su espada cuádruple y pone en cuatro a ${victima.getNombre()}. `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7172,17 +6802,14 @@ eventosAtaqueEspecificoxCategoria[136] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7199,7 +6826,7 @@ eventosAtaqueEspecificoxCategoria[136] = async (jugador, players, victima, req, 
 // "motosierra"
 eventosAtaqueEspecificoxCategoria[137] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` ${jugador.getNombre()}: “Quiero sexo!!!” Por andar haciendo tonterías con la motosierra, ${jugador.getNombre()} se hizo daño a sí mismo.`;
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -7224,12 +6851,10 @@ eventosAtaqueEspecificoxCategoria[137] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
   if (jugador.getHP() <= 0) {
     jugador.alive = 0;
   }
@@ -7248,7 +6873,7 @@ eventosAtaqueEspecificoxCategoria[137] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[138] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} pasa corriendo al lado de ${victima.getNombre()} con su ${jugador.getArma()["nombre"]}. Parece que no le hizo nada, pero de repente se le cae un mechón de cabello.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7262,17 +6887,14 @@ eventosAtaqueEspecificoxCategoria[138] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7291,7 +6913,7 @@ eventosAtaqueEspecificoxCategoria[138] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[139] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()}, le lanza su botella de vodka vacía a ${victima.getNombre()} mientras canta el himno de Rusia :flag_ru: :flag_ru: `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7316,17 +6938,14 @@ eventosAtaqueEspecificoxCategoria[139] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7345,7 +6964,7 @@ eventosAtaqueEspecificoxCategoria[139] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[140] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le hace un tajo a ${victima.getNombre()} con su ${jugador.getArma()["nombre"]}.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7370,17 +6989,14 @@ eventosAtaqueEspecificoxCategoria[140] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7399,7 +7015,7 @@ eventosAtaqueEspecificoxCategoria[140] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[141] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le hace un corte a ${victima.getNombre()} con su ${jugador.getArma()["nombre"]} y ${victima.getNombre()} pierde mucha sangre.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7424,17 +7040,14 @@ eventosAtaqueEspecificoxCategoria[141] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7453,7 +7066,7 @@ eventosAtaqueEspecificoxCategoria[141] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[142] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` ${jugador.getNombre()} usa la oniball para sacar a un oni y hacer que ${victima.getNombre()} reciba daño por cringe. `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7478,17 +7091,14 @@ eventosAtaqueEspecificoxCategoria[142] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7507,7 +7117,7 @@ eventosAtaqueEspecificoxCategoria[142] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[143] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} le clava sus 2 palillos chinos en los ojos a ${victima.getNombre()} `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7532,17 +7142,14 @@ eventosAtaqueEspecificoxCategoria[143] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7561,7 +7168,7 @@ eventosAtaqueEspecificoxCategoria[143] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[144] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} entrenó a su caniche para que ataque a ${victima.getNombre()}. El caniche va y lo muerde para demostrarle lo aprendido.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7586,17 +7193,14 @@ eventosAtaqueEspecificoxCategoria[144] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7615,7 +7219,7 @@ eventosAtaqueEspecificoxCategoria[144] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[145] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `El caniche de ${jugador.getNombre()} le muerde el qlo a ${victima.getNombre()}`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7640,17 +7244,14 @@ eventosAtaqueEspecificoxCategoria[145] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7668,7 +7269,7 @@ eventosAtaqueEspecificoxCategoria[145] = async (jugador, players, victima, req, 
 
 eventosAtaqueEspecificoxCategoria[146] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${jugador.getNombre()} le ordenó a su Pikachu que ataque a ${victima.getNombre()}. Pero Pikachu falló y le quemó a ${victima.getNombre()} su bicicleta`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -7681,7 +7282,6 @@ eventosAtaqueEspecificoxCategoria[146] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
@@ -7695,7 +7295,7 @@ eventosAtaqueEspecificoxCategoria[146] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[147] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `"Placaje eléctrico". Pikachu se rodeó de electricidad y embistió a ${victima.getNombre()} por órdenes de ${jugador.getNombre()}`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7720,17 +7320,14 @@ eventosAtaqueEspecificoxCategoria[147] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7748,7 +7345,7 @@ eventosAtaqueEspecificoxCategoria[147] = async (jugador, players, victima, req, 
 
 eventosAtaqueEspecificoxCategoria[148] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${jugador.getNombre()} usó su espada del tiempo y..., el día se puso soleado`
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -7761,7 +7358,6 @@ eventosAtaqueEspecificoxCategoria[148] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
@@ -7776,7 +7372,7 @@ eventosAtaqueEspecificoxCategoria[149] = async (jugador, players, victima, req, 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
 
   let evento = `${jugador.getNombre()} le enterró un pepino en la garganta a ${victima.getNombre()}, ${victima.getNombre()} murió lentamente en agonía (o placer)`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7792,17 +7388,14 @@ eventosAtaqueEspecificoxCategoria[149] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
 
   victima.alive = 0;
   jugador.kills++;
   let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-  console.log(extra2);
   json.extra.push(extra2);
 
 
@@ -7819,7 +7412,7 @@ eventosAtaqueEspecificoxCategoria[149] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[150] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = `${jugador.getNombre()} agarra su pepino y se lo mete a ${victima.getNombre()} po[CENSURADO]`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7844,17 +7437,14 @@ eventosAtaqueEspecificoxCategoria[150] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7872,7 +7462,7 @@ eventosAtaqueEspecificoxCategoria[150] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[151] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` "Senketsu Senjin!!!" Senketsu saca cuchillas del cuerpo de ${jugador.getNombre()}, quien las usa para atacar a ${victima.getNombre()}. `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7897,17 +7487,14 @@ eventosAtaqueEspecificoxCategoria[151] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -7924,7 +7511,7 @@ eventosAtaqueEspecificoxCategoria[151] = async (jugador, players, victima, req, 
 //"senketsu"
 eventosAtaqueEspecificoxCategoria[152] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = ` "Senketsu Shippū!!" ${jugador.getNombre()} activa las alas de Senketsu y se va volando para evitar el ataque de ${victima.getNombre()} `
-  console.log(evento);
+
 
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let quedar = pluralQuedar(jugador.getArma());
@@ -7937,11 +7524,9 @@ eventosAtaqueEspecificoxCategoria[152] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
   if (jugador.getArma()["usos"] <= 0) {
     let extra = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`
-    console.log(extra);
     jugador.setArma(null);
     json.extra.push(extra);
   } //si su arma se queda sin usos, la pierde
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   //channel.send(json.evento);
   funcionCrearImagen(json, "1x1", channel);
   return 1;
@@ -7951,7 +7536,7 @@ eventosAtaqueEspecificoxCategoria[152] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[153] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` "Senjin Shippū!!" ${jugador.getNombre()} activa la forma híbrida de Senketsu para aumentar las capacidades ofensivas y atacar a ${victima.getNombre()}  `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -7976,17 +7561,14 @@ eventosAtaqueEspecificoxCategoria[153] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -8005,7 +7587,7 @@ eventosAtaqueEspecificoxCategoria[153] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[154] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` "Senketsu Kisaragi!!!" ${jugador.getNombre()} activa la forma definitiva de Senketsu. ${victima.getNombre()} valió `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -8030,17 +7612,14 @@ eventosAtaqueEspecificoxCategoria[154] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -8062,7 +7641,7 @@ eventosAtaqueEspecificoxCategoria[155] = async (jugador, players, victima, req, 
   let pronOaosas = pronombreOAOsAs(jugador.getArma());
 
   let evento = ` ${jugador.getNombre()} toma su${pronPlural} ${jugador.getArma()["nombre"]} y se l${pronOaosas} destroza en la cabeza a ${victima.getNombre()}.`;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -8087,17 +7666,14 @@ eventosAtaqueEspecificoxCategoria[155] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] = 0;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -8116,7 +7692,7 @@ eventosAtaqueEspecificoxCategoria[155] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[156] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronombre = pronombreElLaLosLas(jugador.getArma());
   let evento = ` " ${jugador.getNombre()} se saca la boina con cuchillas y ataca con ella a ${victima.getNombre()} al grito de "POR ORDEN DE LOS PEAKY BLINDERS!!!" `;
-  console.log(evento);
+
 
   let quedar = pluralQuedar(jugador.getArma());
 
@@ -8141,17 +7717,14 @@ eventosAtaqueEspecificoxCategoria[156] = async (jugador, players, victima, req, 
   jugador.getArma()["usos"] -= 1;
   if (jugador.getArma()["usos"] <= 0) {
     let extra1 = `${pronombre} ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se ${quedar} sin usos`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
