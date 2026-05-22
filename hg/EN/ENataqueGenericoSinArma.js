@@ -10,7 +10,6 @@ var ataquesGenericosSinArma = [];
 
 ataquesGenericosSinArma[0] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${jugador.getNombre()} attacked ${victima.getNombre()} with no weapon`;
-  console.log(evento);
   let danio = danioExtra(30, 90);
 
   let cuantoquita;
@@ -30,12 +29,10 @@ ataquesGenericosSinArma[0] = async (jugador, players, victima, req, channel, pla
     [jugador.getHP(), victima.getHP()],
     [0, cuantoquita], []);
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `${jugador.getNombre()}'s kills: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -50,7 +47,6 @@ ataquesGenericosSinArma[0] = async (jugador, players, victima, req, channel, pla
 
 ataquesGenericosSinArma[1] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${jugador.getNombre()} attacked ${victima.getNombre()} with his fists`;
-  console.log(evento);
   let danio = danioExtra(30, 90);
 
   let cuantoquita;
@@ -70,12 +66,10 @@ ataquesGenericosSinArma[1] = async (jugador, players, victima, req, channel, pla
     [jugador.getHP(), victima.getHP()],
     [0, cuantoquita], []);
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `${jugador.getNombre()}'s kills: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -93,7 +87,6 @@ ataquesGenericosSinArma[2] = async (jugador, players, victima, req, channel, pla
   let pronoun = pronounIsAre(victima.getArma());
 
   let evento = `${jugador.getNombre()} kills ${victima.getNombre()} with their own ${victima.getArma()["name"]}`;
-  console.log(evento);
 
   let json = createObject(evento,
     [jugador.getNombre(), victima.getNombre()],
@@ -107,17 +100,14 @@ ataquesGenericosSinArma[2] = async (jugador, players, victima, req, channel, pla
   victima.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (victima.getArma()["usos"] <= 0) {
     let extra1 = `The ${victima.getArma()["name"]} of ${victima.getNombre()} ${pronoun} out of uses`;
-    console.log(extra1);
     json.extra.push(extra1);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
   victima.setHP(0);
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   victima.alive = 0;
   jugador.kills++;
   let extra2 = `${jugador.getNombre()}'s kills: ${jugador.getKills()}.`;
-  console.log(extra2);
   json.extra.push(extra2);
 
   funcionCrearImagen(json, "1x1", channel);
@@ -129,7 +119,6 @@ ataquesGenericosSinArma[2] = async (jugador, players, victima, req, channel, pla
 
 ataquesGenericosSinArma[3] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${jugador.getNombre()} finds ${victima.getNombre()} camping and attacks them from behind`;
-  console.log(evento);
   let danio = danioExtra(80, 150);
 
   let cuantoquita;
@@ -149,12 +138,10 @@ ataquesGenericosSinArma[3] = async (jugador, players, victima, req, channel, pla
     [jugador.getHP(), victima.getHP()],
     [0, cuantoquita], []);
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `${jugador.getNombre()}'s kills: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -169,7 +156,6 @@ ataquesGenericosSinArma[3] = async (jugador, players, victima, req, channel, pla
 
 ataquesGenericosSinArma[4] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${jugador.getNombre()} chases ${victima.getNombre()} but ${victima.getNombre()} is faster`;
-  console.log(evento);
 
   let json = createObject(evento,
     [jugador.getNombre(), victima.getNombre()],
@@ -185,7 +171,6 @@ ataquesGenericosSinArma[4] = async (jugador, players, victima, req, channel, pla
 
 ataquesGenericosSinArma[5] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${jugador.getNombre()} chases ${victima.getNombre()} and catches up to attack them`;
-  console.log(evento);
   let danio = danioExtra(80, 150);
 
   let cuantoquita;
@@ -205,12 +190,10 @@ ataquesGenericosSinArma[5] = async (jugador, players, victima, req, channel, pla
     [jugador.getHP(), victima.getHP()],
     [0, cuantoquita], []);
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `${jugador.getNombre()}'s kills: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -225,7 +208,6 @@ ataquesGenericosSinArma[5] = async (jugador, players, victima, req, channel, pla
 
 ataquesGenericosSinArma[6] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${jugador.getNombre()} falls off a cliff and lands right on top of ${victima.getNombre()}. ${jugador.getNombre()} is fine. ${victima.getNombre()} is not.`;
-  console.log(evento);
   let danio = danioExtra(100, 170);
 
   let cuantoquita;
@@ -245,12 +227,10 @@ ataquesGenericosSinArma[6] = async (jugador, players, victima, req, channel, pla
     [jugador.getHP(), victima.getHP()],
     [0, cuantoquita], []);
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `${jugador.getNombre()}'s kills: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -270,7 +250,6 @@ ataquesGenericosSinArma[7] = async (jugador, players, victima, req, channel, pla
   if (jugador2 == null) { return null; }
 
   let evento = `${jugador2.getNombre()} helps ${jugador.getNombre()} drown ${victima.getNombre()}`;
-  console.log(evento);
 
   let json = createObject(evento,
     [jugador.getNombre(), jugador2.getNombre(), victima.getNombre()],
@@ -282,11 +261,9 @@ ataquesGenericosSinArma[7] = async (jugador, players, victima, req, channel, pla
     [0, 0, victima.getHP()], []);
 
   victima.setHP(0);
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   victima.alive = 0;
   jugador.kills++;
   let extra2 = `${jugador.getNombre()}'s kills: ${jugador.getKills()}.`;
-  console.log(extra2);
   json.extra.push(extra2);
 
   funcionCrearImagen(json, "2x1", channel);
@@ -300,7 +277,6 @@ ataquesGenericosSinArma[7] = async (jugador, players, victima, req, channel, pla
 
 ataquesGenericosSinArma[8] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${victima.getNombre()} insults ${jugador.getNombre()}'s waifu and they have a good fight`;
-  console.log(evento);
 
   let danio = danioExtra(100, 200);
   let danio2 = danioExtra(45, 95);
@@ -330,21 +306,16 @@ ataquesGenericosSinArma[8] = async (jugador, players, victima, req, channel, pla
     [jugador.getHP(), victima.getHP()],
     [cuantoquita2, cuantoquita], []);
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
-  console.log(` HP de ${jugador.getNombre()}: ${jugador.getHP()}`);
-
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `${jugador.getNombre()}'s kills: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
   if (jugador.getHP() <= 0) {
     jugador.alive = 0;
     victima.kills++;
     let extra = `${victima.getNombre()}'s kills: ${victima.getKills()}.`;
-    console.log(extra);
     json.extra.push(extra);
   }
 
@@ -359,7 +330,6 @@ ataquesGenericosSinArma[8] = async (jugador, players, victima, req, channel, pla
 
 ataquesGenericosSinArma[9] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${victima.getNombre()} twists their ankle while escaping from ${jugador.getNombre()}`;
-  console.log(evento);
   let danio = danioExtra(40, 110);
 
   let cuantoquita;
@@ -379,12 +349,10 @@ ataquesGenericosSinArma[9] = async (jugador, players, victima, req, channel, pla
     [jugador.getHP(), victima.getHP()],
     [0, cuantoquita], []);
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `${jugador.getNombre()}'s kills: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
@@ -399,7 +367,6 @@ ataquesGenericosSinArma[9] = async (jugador, players, victima, req, channel, pla
 
 ataquesGenericosSinArma[10] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${jugador.getNombre()} gives ${victima.getNombre()} a good punch with their fists. It's not very effective...`;
-  console.log(evento);
   let danio = danioExtra(1, 7);
 
   let cuantoquita;
@@ -419,12 +386,10 @@ ataquesGenericosSinArma[10] = async (jugador, players, victima, req, channel, pl
     [jugador.getHP(), victima.getHP()],
     [0, cuantoquita], []);
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
     let extra2 = `${jugador.getNombre()}'s kills: ${jugador.getKills()}.`;
-    console.log(extra2);
     json.extra.push(extra2);
   }
 
