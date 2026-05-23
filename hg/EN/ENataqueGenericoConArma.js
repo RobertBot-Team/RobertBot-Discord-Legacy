@@ -60,7 +60,6 @@ ataquesGenericosConArma[0] = async (jugador, players, victima, req, channel, pla
 
 ataquesGenericosConArma[1] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `${jugador.getNombre()} tosses their ${jugador.getArma()["name"]} at ${victima.getNombre()}`;
-  console.log(evento);
   let danio = danioExtra(100, 200);
 
   let cuantoquita;
