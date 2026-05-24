@@ -5,20 +5,20 @@ import {
   InteractionType,
   InteractionResponseType,
   InteractionResponseFlags,
-  MessageComponentTypes,
-  ButtonStyleTypes,
+  // MessageComponentTypes,
+  // ButtonStyleTypes,
 } from "discord-interactions";
 import {
   VerifyDiscordRequest,
-  getRandomEmoji,
-  DiscordRequest,
-  mostrarEvento,
-  funcionRetornaJson,
+  // getRandomEmoji,
+  // DiscordRequest,
+  // mostrarEvento,
+  // funcionRetornaJson,
 } from "./utils.js";
-import {
-  getShuffledOptions,
-  getResult
-} from "./game.js";
+// import {
+// getShuffledOptions,
+// getResult
+// } from "./game.js";
 import {
   // CHALLENGE_COMMAND,
   // TEST_COMMAND,
@@ -28,29 +28,29 @@ import {
   HELP_COMMAND,
   //JOIN_COMMAND,
   HasGlobalCommands,
-  HasGuildCommands
+  // HasGuildCommands
 } from "./commands.js";
-import {
-  Jugador
-} from "./hg/clases.js";
-import { lynn } from "./controllers/commands/lynn.js"
-import { challenge } from "./controllers/commands/challenge.js"
-import { test } from "./controllers/commands/test.js"
+// import {
+//   Jugador
+// } from "./hg/clases.js";
+// import { lynn } from "./controllers/commands/lynn.js"
+// import { challenge } from "./controllers/commands/challenge.js"
+// import { test } from "./controllers/commands/test.js"
 import { play, partidaEnCurso } from "./controllers/commands/play.js"
 import { stop } from "./controllers/commands/stop.js"
 import { help } from "./controllers/commands/help.js"
-import {
-  messageChallenge_1,
-  messageChallenge_2
-} from "./controllers/message_component/challenge.js";
+// import {
+//   messageChallenge_1,
+//   messageChallenge_2
+// } from "./controllers/message_component/challenge.js";
 import { messageLynn } from "./controllers/message_component/lynn.js";
 import {
   messagePlay_1,
   messagePlay_2,
-  messageJoin,
+  // messageJoin,
   messageSlowMode
 } from "./controllers/message_component/play.js";
-import { SlashCommandBuilder } from 'discord.js';
+// import { SlashCommandBuilder } from 'discord.js';
 import { DEFAULT_PLAY_LANGUAGE, getPlayLanguageFromOptions } from "./controllers/play_i18n.js";
 import logger from "./logger.js";
 
@@ -62,7 +62,7 @@ const PORT = process.env.PORT || 80;
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 
 // Store for in-progress games. In production, you'd want to use a DB
-const activeGames = {};
+// const activeGames = {};
 
 const partidaActivaPorGuild = new Map();
 const gameCreatorPorGuild = new Map();
@@ -213,7 +213,7 @@ app.post("/interactions", async function (req, res) {
 
 
 import { Client, Events, GatewayIntentBits, version, PermissionsBitField } from "discord.js";
-import Canvas from "@napi-rs/canvas";
+// import Canvas from "@napi-rs/canvas";
 
 process.on("unhandledRejection", (err) => {
   logger.error({
