@@ -11,6 +11,7 @@
   "author": "Shay DeWael",
   "license": "MIT",
   "dependencies": {
+    "@azure/storage-blob": "^12.31.0",
     "@napi-rs/canvas": "^0.1.40",
     "canvas": "^3.2.3",
     "discord-interactions": "^3.4.0",
