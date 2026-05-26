@@ -2129,30 +2129,30 @@ export function formarEquipo(jugadores, teams) {
 
 export function imprimirTeams(teams1) {
   for (let countTeams = 0; countTeams < teams1.length; countTeams++) {
-    console.log("\x1b[36m%s\x1b[0m", `TEAM ${teams1[countTeams].getID()}`);
+    // console.log("\x1b[36m%s\x1b[0m", `TEAM ${teams1[countTeams].getID()}`);
     if (teams1[countTeams].getPlayer1() != null) {
       if (teams1[countTeams].getPlayer1().getHP() == 0) {
-        console.log("\x1b[31m%s\x1b[0m", `${teams1[countTeams].getPlayer1().getNombre()} - HP: ${teams1[countTeams].getPlayer1().getHP()} - alive  ${teams1[countTeams].getPlayer1().getAlive()}`);
+        // console.log("\x1b[31m%s\x1b[0m", `${teams1[countTeams].getPlayer1().getNombre()} - HP: ${teams1[countTeams].getPlayer1().getHP()} - alive  ${teams1[countTeams].getPlayer1().getAlive()}`);
       } else {
-        console.log("\x1b[36m%s\x1b[0m", `${teams1[countTeams].getPlayer1().getNombre()} - HP: ${teams1[countTeams].getPlayer1().getHP()} - alive  ${teams1[countTeams].getPlayer1().getAlive()}`);
+        // console.log("\x1b[36m%s\x1b[0m", `${teams1[countTeams].getPlayer1().getNombre()} - HP: ${teams1[countTeams].getPlayer1().getHP()} - alive  ${teams1[countTeams].getPlayer1().getAlive()}`);
       }
     }
     if (teams1[countTeams].getPlayer2() != null) {
       if (teams1[countTeams].getPlayer2().getHP() == 0) {
-        console.log("\x1b[31m%s\x1b[0m", `${teams1[countTeams].getPlayer2().getNombre()} - HP: ${teams1[countTeams].getPlayer2().getHP()} - alive  ${teams1[countTeams].getPlayer2().getAlive()}`);
+        // console.log("\x1b[31m%s\x1b[0m", `${teams1[countTeams].getPlayer2().getNombre()} - HP: ${teams1[countTeams].getPlayer2().getHP()} - alive  ${teams1[countTeams].getPlayer2().getAlive()}`);
       } else {
-        console.log("\x1b[36m%s\x1b[0m", `${teams1[countTeams].getPlayer2().getNombre()} - HP: ${teams1[countTeams].getPlayer2().getHP()} - alive  ${teams1[countTeams].getPlayer2().getAlive()}`);
+        // console.log("\x1b[36m%s\x1b[0m", `${teams1[countTeams].getPlayer2().getNombre()} - HP: ${teams1[countTeams].getPlayer2().getHP()} - alive  ${teams1[countTeams].getPlayer2().getAlive()}`);
       }
     }
     if (teams1[countTeams].getPlayer3() != null) {
       if (teams1[countTeams].getPlayer3().getHP() == 0) {
-        console.log("\x1b[31m%s\x1b[0m", `${teams1[countTeams].getPlayer3().getNombre()} - HP: ${teams1[countTeams].getPlayer3().getHP()} - alive  ${teams1[countTeams].getPlayer3().getAlive()}`);
+        // console.log("\x1b[31m%s\x1b[0m", `${teams1[countTeams].getPlayer3().getNombre()} - HP: ${teams1[countTeams].getPlayer3().getHP()} - alive  ${teams1[countTeams].getPlayer3().getAlive()}`);
       }
       else {
-        console.log("\x1b[36m%s\x1b[0m", `${teams1[countTeams].getPlayer3().getNombre()} - HP: ${teams1[countTeams].getPlayer3().getHP()} - alive  ${teams1[countTeams].getPlayer3().getAlive()}`);
+        // console.log("\x1b[36m%s\x1b[0m", `${teams1[countTeams].getPlayer3().getNombre()} - HP: ${teams1[countTeams].getPlayer3().getHP()} - alive  ${teams1[countTeams].getPlayer3().getAlive()}`);
       }
     }
-    console.log(``);
+    // console.log(``);
   }
 }
 
