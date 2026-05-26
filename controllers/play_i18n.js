@@ -1,6 +1,9 @@
 export const DEFAULT_PLAY_LANGUAGE = "es";
 export const SUPPORTED_PLAY_LANGUAGES = ["es", "en"];
 
+const explanationEnglish = "How to play?\nSimply join by clicking the \"Join battle\" button below. When everyone has joined, you can click \"Start\", and the bot will take care of everything, just sit back and watch the chaos unfold. After 10 minutes, the joining button will deactivate and you'll have to start again, so be quick, don't miss out!\nClick \"Slow Mode\" if you want the game to last longer."
+const explicacionEspanol = "¿Cómo jugar?\nSimplemente unete dando click en el boton \"Unirse a la batalla\" de abajo. Cuando todos se hayan unido, pueden darle click a \"Comenzar\", y el bot se encargará de todo, solo sientense a mirar y disfrutar del caos. Después de 10 minutos el botón para unirse se desactiva y debes volver a empezar, ¡sé rápido, no quedes fuera!\nHaz click en \"Modo Lento\" si quieres que la partida dure más"
+
 const PLAY_TRANSLATIONS = {
   es: {
     game_started: "Se ha iniciado una nueva partida de Los Juegos del Hambre",
@@ -10,11 +13,11 @@ const PLAY_TRANSLATIONS = {
     begin_button: "Comenzar",
     slow_mode: "Modo Lento",
     fast_mode: "Modo Rapido",
-    joined_players: "¿Cómo jugar?\nSimplemente unete dando click en el boton \"Unirse a la batalla\" de abajo. Cuando todos se hayan unido, pueden darle click a \"Comenzar\", y el bot se encargará de todo, solo sientense a mirar y disfrutar del caos. Después de 10 minutos el botón para unirse se desactiva y debes volver a empezar, ¡sé rápido, no quedes fuera!\nHaz click en \"Modo Lento\" si quieres que la partida dure más\n\nJugadores unidos",
+    joined_players: `${explicacionEspanol}\n\nJugadores unidos`,
     joined_battle: "⚔ {nick} se unio a la batalla",
     already_joined: "Ya te has unido a esta partida",
     game_full: "La partida ya está llena (Máximo 8 jugadores)",
-    joined_count: "{count} Jugadores unidos\n {playersList}",
+    joined_count: `${explicacionEspanol}\n\n{count} Jugadores unidos\n {playersList}`,
     battle_coming: "Se viene la batalla",
     game_starting: "Comienza la partida",
     need_two_players: "Se necesitan al menos 2 jugadores para comenzar.",
@@ -41,11 +44,11 @@ const PLAY_TRANSLATIONS = {
     begin_button: "Start",
     slow_mode: "Slow Mode",
     fast_mode: "Fast Mode",
-    joined_players: "How to play?\nSimply join by clicking the \"Join battle\" button below. When everyone has joined, you can click \"Start\", and the bot will take care of everything, just sit back and watch the chaos unfold. After 10 minutes, the joining button will deactivate and you'll have to start again, so be quick, don't miss out!\nClick \"Slow Mode\" if you want the game to last longer.\n\nJoined players",
+    joined_players: `${explanationEnglish}\n\nJoined players`,
     joined_battle: "⚔ {nick} joined the battle",
     already_joined: "You have already joined this game",
     game_full: "The game is full (Max 8 players)",
-    joined_count: "{count} players joined\n {playersList}",
+    joined_count: `${explanationEnglish}\n\n{count} players joined\n {playersList}`,
     battle_coming: "The battle is coming",
     game_starting: "The battle starts now",
     need_two_players: "At least 2 players are required to start.",
