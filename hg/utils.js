@@ -121,11 +121,11 @@ export let buscarTeamDe2 = (teams) => {   //retorna null si no hay teams de 2 mi
         team = teams[i];
         idTeam = team.getID();
         if (team.nombresVivos().length == 2) {
-            console.log(`buscarTeamDe2 devuelve ${idTeam}`);
+            //console.log(`buscarTeamDe2 devuelve ${idTeam}`);
             return idTeam;
         }
     }
-    console.log(`buscarTeamDe2 no encontro team de 2`);
+    //console.log(`buscarTeamDe2 no encontro team de 2`);
     return null;
 }
 
@@ -136,47 +136,47 @@ let buscarTeamDe3 = (teams) => {   //retorna null si no hay teams de 3 miembros
         team = teams[i];
         idTeam = team.getID();
         if (team.nombresVivos().length == 3) {
-            console.log(`buscarTeamDe3 devuelve ${idTeam}`);
+            //console.log(`buscarTeamDe3 devuelve ${idTeam}`);
             return idTeam;
         }
     }
-    console.log(`buscarTeamDe3 no encontro team de 3`);
+    //console.log(`buscarTeamDe3 no encontro team de 3`);
     return null;
 }
 
 export let imprimirTeams = (teams) => {
     for (let countTeams = 0; countTeams < teams.length; countTeams++) {
-        console.log("\x1b[36m%s\x1b[0m", `TEAM ${teams[countTeams].getID()}`);
+        //console.log("\x1b[36m%s\x1b[0m", `TEAM ${teams[countTeams].getID()}`);
         if (teams[countTeams].getPlayer1() != null) {
             if (teams[countTeams].getPlayer1().getHP() == 0) {
-                console.log("\x1b[31m%s\x1b[0m", `${teams[countTeams].getPlayer1().getNombre()} - HP: ${teams[countTeams].getPlayer1().getHP()}`);
+                //console.log("\x1b[31m%s\x1b[0m", `${teams[countTeams].getPlayer1().getNombre()} - HP: ${teams[countTeams].getPlayer1().getHP()}`);
             } else {
-                console.log("\x1b[36m%s\x1b[0m", `${teams[countTeams].getPlayer1().getNombre()} - HP: ${teams[countTeams].getPlayer1().getHP()}`);
+                //console.log("\x1b[36m%s\x1b[0m", `${teams[countTeams].getPlayer1().getNombre()} - HP: ${teams[countTeams].getPlayer1().getHP()}`);
             }
         }
         if (teams[countTeams].getPlayer2() != null) {
             if (teams[countTeams].getPlayer2().getHP() == 0) {
-                console.log("\x1b[31m%s\x1b[0m", `${teams[countTeams].getPlayer2().getNombre()} - HP: ${teams[countTeams].getPlayer2().getHP()}`);
+                //console.log("\x1b[31m%s\x1b[0m", `${teams[countTeams].getPlayer2().getNombre()} - HP: ${teams[countTeams].getPlayer2().getHP()}`);
             } else {
-                console.log("\x1b[36m%s\x1b[0m", `${teams[countTeams].getPlayer2().getNombre()} - HP: ${teams[countTeams].getPlayer2().getHP()}`);
+                //console.log("\x1b[36m%s\x1b[0m", `${teams[countTeams].getPlayer2().getNombre()} - HP: ${teams[countTeams].getPlayer2().getHP()}`);
             }
         }
         if (teams[countTeams].getPlayer3() != null) {
             if (teams[countTeams].getPlayer3().getHP() == 0) {
-                console.log("\x1b[31m%s\x1b[0m", `${teams[countTeams].getPlayer3().getNombre()} - HP: ${teams[countTeams].getPlayer3().getHP()}`);
+                //console.log("\x1b[31m%s\x1b[0m", `${teams[countTeams].getPlayer3().getNombre()} - HP: ${teams[countTeams].getPlayer3().getHP()}`);
             }
             else {
-                console.log("\x1b[36m%s\x1b[0m", `${teams[countTeams].getPlayer3().getNombre()} - HP: ${teams[countTeams].getPlayer3().getHP()}`);
+                //console.log("\x1b[36m%s\x1b[0m", `${teams[countTeams].getPlayer3().getNombre()} - HP: ${teams[countTeams].getPlayer3().getHP()}`);
             }
         }
-        console.log(``);
+        //console.log(``);
     }
 }
 
 
 let generarArma = () => {
     var rand = parseInt(Math.random() * armas.length);
-    //console.log(`%c${JSON.stringify(armas[rand])}`,"color:orange");
+    ////console.log(`%c${JSON.stringify(armas[rand])}`,"color:orange");
 
     //return armas[rand];
     return JSON.parse(JSON.stringify(armas[rand]));
@@ -185,19 +185,19 @@ let generarArma = () => {
 
 let danioExtra = (min, max) => {
     let danio = Math.floor(Math.random() * (max - min + 1) + min)
-    console.log("\x1b[90m%s\x1b[0m", `${danio} de danio extra`);
+    //console.log("\x1b[90m%s\x1b[0m", `${danio} de danio extra`);
     return danio;
 }
 
 let porcentajeDeVidaRandom = (min, max) => {
     let vida = Math.floor(Math.random() * (max - min + 1) + min)
-    console.log("\x1b[90m%s\x1b[0m", `${vida} de vida`);
+    //console.log("\x1b[90m%s\x1b[0m", `${vida} de vida`);
     return vida;
 }
 
 let randomSelector = (min, max) => {
     let selected = Math.floor(Math.random() * (max - min + 1) + min)
-    console.log("\x1b[90m%s\x1b[0m", `${selected} selected`);
+    //console.log("\x1b[90m%s\x1b[0m", `${selected} selected`);
     return selected;
 }
 
@@ -241,7 +241,7 @@ let buscarPorID = (id, players) => {
             return players[i];
         }
     }
-    console.log("no lo encontre");
+    //console.log("no lo encontre");
     return null;
 }
 
@@ -443,11 +443,11 @@ let formarEquipo = (jugadores, teams) => {
 
     let n = 1;
     /*    while(n < idEquipo){
-            console.log(`%c EQUIPO ${n} `,"border-radius:8px; border:2px solid white;");
+            //console.log(`%c EQUIPO ${n} `,"border-radius:8px; border:2px solid white;");
             for(let k=0; k<jugadores.length; k++){
                 let jugador = jugadores[k];
                 if(jugador.team.getID() == n){
-                    console.log(`• ${jugador.getNombre()}`);
+                    //console.log(`• ${jugador.getNombre()}`);
                 }
             }
             n++;
@@ -462,7 +462,7 @@ let formarEquipo = (jugadores, teams) => {
                 arrayConTodo.push(` ${jugador.getNombre()}`);
             }
         }
-        console.log(`%c ${arrayConTodo}`, "border-radius:8px; border:2px solid white; padding-top:7px; padding-bottom:7px;padding-right:4px;");
+        //console.log(`%c ${arrayConTodo}`, "border-radius:8px; border:2px solid white; padding-top:7px; padding-bottom:7px;padding-right:4px;");
         arrayConTodo = [];
         n++;
     }
@@ -473,11 +473,11 @@ let formarEquipo = (jugadores, teams) => {
 
 let mostrarResultados = (players) => {
     let jugador;
-    console.log("\x1b[90m%s\x1b[0m", `--------------------`);
+    //console.log("\x1b[90m%s\x1b[0m", `--------------------`);
     for (let i = 0; i < players.length; i++) {
         let jugador = players[i];
         //faltaria ordenar la lista por kills en orden descendente
-        console.log("\x1b[90m%s\x1b[0m", `${jugador.getNombre()} -  Kills: ${jugador.getKills()}`);
+        //console.log("\x1b[90m%s\x1b[0m", `${jugador.getNombre()} -  Kills: ${jugador.getKills()}`);
     }
 }
 
@@ -491,7 +491,7 @@ export function mostrarKills(players) {
         textoFinal = textoFinal.concat(jugadorIterado);
         textoFinal = textoFinal.concat('\n');
     }
-    console.log(`texto final is: ${textoFinal}`);
+    //console.log(`texto final is: ${textoFinal}`);
     return textoFinal;
 }
 
@@ -507,10 +507,10 @@ export function mostrarKills(players) {
 
 let eventoAleatorio1 = (jugador, players) => {
     let resultado;
-    console.log(" Sucedió un evento aleatorio 1");
+    //console.log(" Sucedió un evento aleatorio 1");
     do {
         var rand = parseInt(Math.random() * eventosAleatorios1.length);
-        console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+        //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
         resultado = eventosAleatorios1[rand](jugador, players, maxHP, teams); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
@@ -519,7 +519,7 @@ let eventoAleatorio1 = (jugador, players) => {
 
 let lootEspecificoxCategoria1 = (jugador, arma) => {
     jugador.setArma(arma);
-    console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
+    //console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
 };
 
 let lootEspecificoxCategoria = (jugador, arma, players) => {
@@ -529,11 +529,11 @@ let lootEspecificoxCategoria = (jugador, arma, players) => {
 };
 
 let lootGenerico = (jugador, arma, players) => {
-    //console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
+    ////console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
     let resultado;
     do {
         var rand = parseInt(Math.random() * eventosLootGenerico.length);
-        console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+        //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
         resultado = eventosLootGenerico[rand](jugador, players, arma, maxHP); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
@@ -541,31 +541,31 @@ let lootGenerico = (jugador, arma, players) => {
 
 let eventoAleatorio2 = (jugador, players) => {
     let resultado;
-    console.log(" Sucedió un evento aleatorio 2");
+    //console.log(" Sucedió un evento aleatorio 2");
     do {
         var rand = parseInt(Math.random() * eventosAleatorios2.length);
-        console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+        //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
         resultado = eventosAleatorios2[rand](jugador, players, maxHP, teams); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 };
 
 let ataqueEspecificoxCategoria1 = (jugador, victima) => {
-    console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
+    //console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
     let danio = jugador.getArma()["danio"] + danioExtra(1, 500);
     victima.setHP(Math.max(0, victima.getHP() - danio)); //le quita de vida el danio base de su arma. si queda en negativo pone 0
 
     jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
     if (jugador.getArma()["usos"] <= 0) {
-        console.log(`La ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se quedó sin usos`);
+        //console.log(`La ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se quedó sin usos`);
         jugador.setArma(null);
     } //si su arma se queda sin usos, la pierde
 
-    console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
+    //console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
     if (victima.getHP() <= 0) {
         victima.alive = 0;
         jugador.kills++;
-        console.log("\x1b[90m%s\x1b[0m", `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
+        //console.log("\x1b[90m%s\x1b[0m", `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
     }
 };
 
@@ -578,30 +578,30 @@ let ataqueEspecificoxCategoria = (jugador, players, victima) => {
 
 
 let ataqueGenericoConArma1 = (jugador, victima) => {
-    console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
+    //console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
     let danio = jugador.getArma()["danio"] + danioExtra(1, 500);
     victima.setHP(Math.max(0, victima.getHP() - danio)); //le quita de vida el danio base de su arma. si queda en negativo pone 0
 
     jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
     if (jugador.getArma()["usos"] <= 0) {
-        console.log(`La ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se quedó sin usos`);
+        //console.log(`La ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se quedó sin usos`);
         jugador.setArma(null);
     } //si su arma se queda sin usos, la pierde
 
-    console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
+    //console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
     if (victima.getHP() <= 0) {
         victima.alive = 0;
         jugador.kills++;
-        console.log("\x1b[90m%s\x1b[0m", `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
+        //console.log("\x1b[90m%s\x1b[0m", `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
     }
 };
 
 let ataqueGenericoConArma = (jugador, players, victima, playersReal) => {
     let resultado;
-    console.log(`Ataque generico con arma`);
+    //console.log(`Ataque generico con arma`);
     do {
         var rand = parseInt(Math.random() * ataquesGenericosConArma.length);
-        console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+        //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
         resultado = ataquesGenericosConArma[rand](jugador, players, victima, playersReal); //le paso una copia
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
@@ -609,24 +609,24 @@ let ataqueGenericoConArma = (jugador, players, victima, playersReal) => {
 
 let ataqueGenericoSinArma1 = (jugador, victima) => {
 
-    console.log(` ${jugador.getNombre()} atacó sin arma a ${victima.getNombre()}`);
+    //console.log(` ${jugador.getNombre()} atacó sin arma a ${victima.getNombre()}`);
     let danio = danioExtra(30, 90);
     victima.setHP(Math.max(0, victima.getHP() - danio));
 
-    console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
+    //console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
     if (victima.getHP() <= 0) {
         victima.alive = 0;
         jugador.kills++;
-        console.log("\x1b[90m%s\x1b[0m", `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
+        //console.log("\x1b[90m%s\x1b[0m", `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
     }
 };
 
 let ataqueGenericoSinArma = (jugador, players, victima, playersReal) => {
     let resultado;
-    console.log(`Ataque generico sin arma`);
+    //console.log(`Ataque generico sin arma`);
     do {
         var rand = parseInt(Math.random() * ataquesGenericosSinArma.length);
-        console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+        //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
         resultado = ataquesGenericosSinArma[rand](jugador, players, victima, playersReal); //le paso una copia
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
@@ -648,7 +648,7 @@ let rondaLoot = (jugador, players) => {
         }
 
         /*if(armaVieja != null && armaVieja.danio > arma.danio){
-            console.log("\x1b[33m%s\x1b[0m",` Como el arma anterior hacía más daño, ${jugador.getNombre()} decide no cambiarla.`);
+            //console.log("\x1b[33m%s\x1b[0m",` Como el arma anterior hacía más daño, ${jugador.getNombre()} decide no cambiarla.`);
             jugador.setArma(armaVieja);
         }*/
     }
@@ -693,7 +693,7 @@ let arreglarIDs = (teams) => {
 
 let eliminarTeam = (teamID, teams) => {
     let index;
-    console.log(`eliminando el team ${teamID}`);
+    //console.log(`eliminando el team ${teamID}`);
     index = teamID - 1;
     teams.splice(index, 1);
     arreglarIDs(teams);
@@ -712,7 +712,7 @@ let buscarUnMuerto = (players) => {
 
 let pronombreElLaLosLas = (arma) => {
     let pronombre = "";
-    //console.log(`111111111111`);
+    ////console.log(`111111111111`);
     if (arma["plural"] == "") {
         if (arma["pronombre"] == "m") {
             pronombre = "El";
@@ -734,7 +734,7 @@ let pronombreElLaLosLas = (arma) => {
 
 let pronombreUnUnaUnosUnas = (arma) => {
     let pronombre = "";
-    //console.log(`111111111111`);
+    ////console.log(`111111111111`);
     if (arma["plural"] == "") {
         if (arma["pronombre"] == "m") {
             pronombre = "un";
@@ -756,7 +756,7 @@ let pronombreUnUnaUnosUnas = (arma) => {
 
 let pronombreOAOsAs = (arma) => {
     let pronombre = "";
-    //console.log(`111111111111`);
+    ////console.log(`111111111111`);
     if (arma["plural"] == "") {
         if (arma["pronombre"] == "m") {
             pronombre = "o";

@@ -64,7 +64,7 @@ app.post('/interactions', function (req, res) {
     const componentId = data.custom_id;
 
     if (componentId === 'my_select') {
-      console.log(req.body);
+      // console.log(req.body);
 
       // Get selected option from payload
       const selectedOption = data.values[0];

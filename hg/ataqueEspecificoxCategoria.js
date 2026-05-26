@@ -22,7 +22,7 @@ var maxHP = 1000;
 eventosAtaqueEspecificoxCategoria[0] = async (jugador, players, victima, req, channel, playersReal) => {   //recibe una COPIA, luego buscar la victima original
   let arma = jugador.getArma();
   let categoria = arma["categoria"];
-  console.log(`%c${arma["nombre"]} > ${categoria}`, "color:orange");
+  // console.log(`%c${arma["nombre"]} > ${categoria}`, "color:orange");
   let posicion;
   let seleccionado;
   let arrayPosiciones = [];

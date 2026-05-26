@@ -277,7 +277,7 @@ eventosLootGenerico[19] = async (jugador, players, arma, maxHP, req, channel) =>
     variable = "vacio";
   }
 
-  console.log("\x1b[33m%s\x1b[0m", ` ${jugadorOriginal.getNombre()} - ${variable} // ${jugador.getNombre()} - ${jugador.getArma()["name"]}`);
+  // console.log("\x1b[33m%s\x1b[0m", ` ${jugadorOriginal.getNombre()} - ${variable} // ${jugador.getNombre()} - ${jugador.getArma()["name"]}`);
 
   let json = createObject(evento,
     [jugador.getNombre(), jugadorOriginal.getNombre()],

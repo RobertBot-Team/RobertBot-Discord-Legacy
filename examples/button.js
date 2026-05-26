@@ -56,7 +56,7 @@ app.post('/interactions', function (req, res) {
     const userId = req.body.member.user.id;
 
     if (componentId === 'my_button') {
-      console.log(req.body);
+      // console.log(req.body);
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: { content: `<@${userId} clicked the button` },

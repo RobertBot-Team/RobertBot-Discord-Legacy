@@ -183,7 +183,7 @@ class Team {
     if (this.getPlayer3() != null && this.estaVivo3()) {
       quienes = quienes.concat("3");
     }
-    console.log(quienes);
+    // console.log(quienes);
     return quienes;
   }
 

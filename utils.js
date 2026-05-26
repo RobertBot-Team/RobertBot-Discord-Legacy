@@ -359,7 +359,7 @@ export async function DiscordRequest(endpoint, options) {
   // throw API errors
   if (!res.ok) {
     const data = await res.json();
-    console.log(res.status);
+    //console.log(res.status);
     throw new Error(JSON.stringify(data));
   }
   // return original response
@@ -476,7 +476,7 @@ export function reiniciarContador(gameState) {
 
 export function limpiarTeams(teams) {
   teams.length = 0;
-  console.log("Limpiando teams...");
+  //console.log("Limpiando teams...");
 }
 
 export function reiniciarJugadoresFake() {
@@ -485,7 +485,7 @@ export function reiniciarJugadoresFake() {
     jugador = jugadoresFake[i];
     jugador.yaUnido = 0;
   }
-  console.log('Reiniciando jugadores fake...')
+  //console.log('Reiniciando jugadores fake...')
 }
 
 
@@ -554,20 +554,20 @@ export function leerArchivoDevolverLinea(linea) {
        input : fs.createReadStream(adjetivosFile)
    });
    r.on('line', function (text) {
-   console.log(text);
+   //console.log(text);
    return text;
    });*/
 
   nthline(linea, adjetivosFile)
     .then(line => leido = line)
 
-  console.log(leido);
+  //console.log(leido);
   return leido;
 }
 
 export let generarArma = () => {
   var rand = parseInt(Math.random() * armas.length);
-  //console.log(`%c${JSON.stringify(armas[rand])}`,"color:orange");
+  ////console.log(`%c${JSON.stringify(armas[rand])}`,"color:orange");
 
   //return armas[rand];
   return JSON.parse(JSON.stringify(armas[rand]));
@@ -645,11 +645,11 @@ export async function cargarAvatar(foto, id, tieneOtraFoto, guild, players) {
   let guildMember = null;
 
   //let players = "NO TENEMOS EL ARRAY DE PLAYERS AYUDA";
-  //console.log(`Estoy en cargarAvatar y quizas entro`);
+  ////console.log(`Estoy en cargarAvatar y quizas entro`);
   if (id.length >= 5) {
     guildMember = await cliente.guilds.cache.get(guild).members.fetch(id);
-    //console.log(`el id es: ${id}`);
-    //console.log(guildMember);
+    ////console.log(`el id es: ${id}`);
+    ////console.log(guildMember);
 
     //re-verificar el avatar por si cambió en mitad de la partida
     if (guildMember.user.avatar != null) {
@@ -679,10 +679,10 @@ export async function cargarAvatar(foto, id, tieneOtraFoto, guild, players) {
         if (jugador) jugador.setFoto(lastNumber);
       }
     }
-    //console.log(jugador.getFoto());
+    ////console.log(jugador.getFoto());
   }
 
-  //console.log(guildMember);
+  ////console.log(guildMember);
   let avatar;
   if (id.length < 5) {
     //jugador fakes
@@ -710,7 +710,7 @@ async function dibujarTeam(canvas, context, team, offsetX, offsetY, guild, playe
   let foto;
   let name;
   let avatar;
-  //console.log(team);
+  ////console.log(team);
 
   //fondo azul
   const halloweenColor = '#c34a07';
@@ -887,7 +887,7 @@ export async function mostrarTeams(channel, guildId, players, teams) {  //pensar
 
     for (let j = 0; j < 5; j++) {
       let team = teams[teamNumber];
-      //console.log(team);
+      ////console.log(team);
       if (team !== undefined) {
         await dibujarTeam(canvas, context, team, offsetX, offsetY, guildId, players);
         teamNumber++;
@@ -1022,7 +1022,7 @@ async function generarImagenEventoCero(fondo) {
   //GlobalFonts.registerFromPath('./ARIAL.ttf', 'Typographica');
   //GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/TypoGraphica.otf'), 'Typographica');
   //GlobalFonts.register_from_path('/ARIAL.ttf', 'Typographica');
-  //console.log(GlobalFonts.families)  //fuentes
+  ////console.log(GlobalFonts.families)  //fuentes
 
   // Create a 700x250 pixel canvas and get its context
   // The context will be used to modify the canvas
@@ -1043,7 +1043,7 @@ async function generarImagenEvento(json, tipoEvento) {
   //GlobalFonts.registerFromPath('./ARIAL.ttf', 'Typographica');
   //GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/TypoGraphica.otf'), 'Typographica');
   //GlobalFonts.register_from_path('/ARIAL.ttf', 'Typographica');
-  //console.log(GlobalFonts.families)  //fuentes
+  ////console.log(GlobalFonts.families)  //fuentes
 
   // Create a 700x250 pixel canvas and get its context
   // The context will be used to modify the canvas
@@ -1131,7 +1131,7 @@ async function generarImagenEventoVieja(json, tipoEvento) {
   //GlobalFonts.registerFromPath('./ARIAL.ttf', 'Typographica');
   //GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'https://cdn.glitch.global/4c4df917-cd9b-4528-909a-8c1293d76759/TypoGraphica.otf'), 'Typographica');
   //GlobalFonts.register_from_path('/ARIAL.ttf', 'Typographica');
-  //console.log(GlobalFonts.families)  //fuentes
+  ////console.log(GlobalFonts.families)  //fuentes
 
   // Create a 700x250 pixel canvas and get its context
   // The context will be used to modify the canvas
@@ -1420,7 +1420,7 @@ function printAt(context, text, x, y, lineHeight, fitWidth) {
 
   for (var idx = 1; idx <= text.length; idx++) {
     var str = text.substr(0, idx);
-    console.log(str, context.measureText(str).width, fitWidth);
+    //console.log(str, context.measureText(str).width, fitWidth);
     if (context.measureText(str).width > fitWidth) {
       context.fillText(text.substr(0, idx - 1), x, y);
       printAt(context, text.substr(idx - 1), x, y + lineHeight, lineHeight, fitWidth);
@@ -1466,7 +1466,7 @@ const betterApplyText = (canvas, text, fsize, maxWidth) => {
     context.font = (fontSize -= 1) + `px Noto Sans`;
   } while (context.measureText(text).width > (maxWidth + 25));
 
-  //console.log(context.font);
+  ////console.log(context.font);
   return context.font;
 };
 
@@ -1483,7 +1483,7 @@ const applyText = (canvas, text, fsize, avatarSize) => {
   } while (context.measureText(text).width > canvas.width - avatarSize);
 
   // Return the result to use in the actual canvas
-  //console.log(context.font);
+  ////console.log(context.font);
   return context.font;
 };
 
@@ -1664,7 +1664,7 @@ export function buscarTresTeamsSolo(teams) {
   for (let i = 0; i < copia.length; i++) {
     team = copia[i];
     if (arraySolos.length == 3) {
-      console.log(arraySolos);
+      //console.log(arraySolos);
       return arraySolos;
     }
     if (team.esTeamDe1() && team.estaVivo1()) {
@@ -1672,7 +1672,7 @@ export function buscarTresTeamsSolo(teams) {
     }
   }
   if (arraySolos.length == 3) {
-    console.log(arraySolos);
+    //console.log(arraySolos);
     return arraySolos;
   }
   return null;
@@ -1688,7 +1688,7 @@ let arreglarIDs = (teams) => {
 
 export function eliminarTeam(teamID, teams) {
   let index;
-  console.log(`eliminando el team ${teamID}`);
+  //console.log(`eliminando el team ${teamID}`);
   index = teamID - 1;
   teams.splice(index, 1);
   arreglarIDs(teams);
@@ -1958,19 +1958,19 @@ export function chequearSonMismoEquipo(players) {
 
 let danioExtra = (min, max) => {
   let danio = Math.floor(Math.random() * (max - min + 1) + min)
-  console.log("\x1b[90m%s\x1b[0m", `${danio} de danio extra`);
+  //console.log("\x1b[90m%s\x1b[0m", `${danio} de danio extra`);
   return danio;
 }
 
 let porcentajeDeVidaRandom = (min, max) => {
   let vida = Math.floor(Math.random() * (max - min + 1) + min)
-  console.log("\x1b[90m%s\x1b[0m", `${vida} de vida`);
+  //console.log("\x1b[90m%s\x1b[0m", `${vida} de vida`);
   return vida;
 }
 
 let randomSelector = (min, max) => {
   let selected = Math.floor(Math.random() * (max - min + 1) + min)
-  console.log("\x1b[90m%s\x1b[0m", `${selected} selected`);
+  //console.log("\x1b[90m%s\x1b[0m", `${selected} selected`);
   return selected;
 }
 
@@ -2099,11 +2099,11 @@ export function formarEquipo(jugadores, teams) {
 
   let n = 1;
   /*    while(n < idEquipo){
-          console.log(`%c EQUIPO ${n} `,"border-radius:8px; border:2px solid white;");
+          //console.log(`%c EQUIPO ${n} `,"border-radius:8px; border:2px solid white;");
           for(let k=0; k<jugadores.length; k++){
               let jugador = jugadores[k];
               if(jugador.team.getID() == n){
-                  console.log(`• ${jugador.getNombre()}`);
+                  //console.log(`• ${jugador.getNombre()}`);
               }
           }
           n++;
@@ -2118,7 +2118,7 @@ export function formarEquipo(jugadores, teams) {
         arrayConTodo.push(` ${jugador.getNombre()}`);
       }
     }
-    console.log(`%c ${arrayConTodo}`, "border-radius:8px; border:2px solid white; padding-top:7px; padding-bottom:7px;padding-right:4px;");
+    //console.log(`%c ${arrayConTodo}`, "border-radius:8px; border:2px solid white; padding-top:7px; padding-bottom:7px;padding-right:4px;");
     arrayConTodo = [];
     n++;
   }
@@ -2170,10 +2170,10 @@ export async function muerteJugador(guildID, channel, players) {
   await sleep(3000);
 
   if (language === "es") {
-    console.log(`Quedan ${cantidadConVida} jugadores con vida.`);
+    //console.log(`Quedan ${cantidadConVida} jugadores con vida.`);
     embed = generarEmbedTexto(color, "Queda" + (cantidadConVida != 1 ? "n" : "") + ` ${cantidadConVida} jugador` + (cantidadConVida != 1 ? "es" : "") + " con vida.");
   } else {
-    console.log(`There are ${cantidadConVida} players alive.`);
+    //console.log(`There are ${cantidadConVida} players alive.`);
     embed = generarEmbedTexto(color, `${cantidadConVida} player` + (cantidadConVida != 1 ? "s" : "") + " remaining.");
   }
 
@@ -2189,25 +2189,25 @@ export async function muerteJugador(guildID, channel, players) {
 
 let eventoAleatorio1 = async (jugador, players, req, channel, idioma, teams) => {
   let resultado;
-  console.log(" Sucedió un evento aleatorio 1");
+  //console.log(" Sucedió un evento aleatorio 1");
   if (idioma === "es") {
 
-    console.log("Eventos aleatorios 1 en español");
+    //console.log("Eventos aleatorios 1 en español");
 
     do {
       var rand = parseInt(Math.random() * eventosAleatorios1.length);
-      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
       resultado = await eventosAleatorios1[rand](jugador, players, maxHP, teams, req, channel); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
 
   } else {
 
-    console.log("Eventos aleatorios 1 en ingles");
+    //console.log("Eventos aleatorios 1 en ingles");
 
     do {
       var rand = parseInt(Math.random() * eventosAleatorios1En.length);
-      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
       resultado = await eventosAleatorios1En[rand](jugador, players, maxHP, teams, req, channel); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
@@ -2219,10 +2219,10 @@ let eventoAleatorio1 = async (jugador, players, req, channel, idioma, teams) => 
 let lootEspecificoxCategoria = async (jugador, arma, players, req, channel, idioma) => {
 
   if (idioma === "es") {
-    console.log("Eventos loot especifico por categoria en español");
+    //console.log("Eventos loot especifico por categoria en español");
     await eventoslootEspecificoxCategoria[0](jugador, players, arma, req, channel); //le paso el array original
   } else {
-    console.log("Eventos loot especifico por categoria en ingles");
+    //console.log("Eventos loot especifico por categoria en ingles");
     await eventoslootEspecificoxCategoriaEn[0](jugador, players, arma, req, channel); //le paso el array original
   }
 
@@ -2235,22 +2235,22 @@ let lootArmaEstetica = async (jugador, arma, players, req, channel) => {
 };
 
 let lootGenerico = async (jugador, arma, players, req, channel, idioma) => {
-  //console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
+  ////console.log(` ${jugador.getNombre()} looteó una ${arma["nombre"]}`);
   let resultado;
 
   if (idioma === "es") {
-    console.log("Eventos loot generico en español");
+    //console.log("Eventos loot generico en español");
     do {
       var rand = parseInt(Math.random() * eventosLootGenerico.length);
-      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
       resultado = await eventosLootGenerico[rand](jugador, players, arma, maxHP, req, channel); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
   } else {
-    console.log("Eventos loot generico en ingles");
+    //console.log("Eventos loot generico en ingles");
     do {
       var rand = parseInt(Math.random() * eventosLootGenerico.length);
-      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
       resultado = await eventosLootGenericoEn[rand](jugador, players, arma, maxHP, req, channel); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
@@ -2259,20 +2259,20 @@ let lootGenerico = async (jugador, arma, players, req, channel, idioma) => {
 
 let eventoAleatorio2 = async (jugador, players, req, channel, playersReal, idioma, teams) => {
   let resultado;
-  console.log(" Sucedió un evento aleatorio 2");
+  //console.log(" Sucedió un evento aleatorio 2");
   if (idioma === "es") {
-    console.log("Eventos aleatorios 2 en español");
+    //console.log("Eventos aleatorios 2 en español");
     do {
       var rand = parseInt(Math.random() * eventosAleatorios2.length);
-      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
       resultado = await eventosAleatorios2[rand](jugador, players, maxHP, teams, req, channel, playersReal); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento 
   } else {
-    console.log("Eventos aleatorios 2 en ingles");
+    //console.log("Eventos aleatorios 2 en ingles");
     do {
       var rand = parseInt(Math.random() * eventosAleatorios2.length);
-      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
       resultado = await eventosAleatorios2En[rand](jugador, players, maxHP, teams, req, channel, playersReal); //le paso el array original
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
@@ -2282,31 +2282,31 @@ let eventoAleatorio2 = async (jugador, players, req, channel, playersReal, idiom
 };
 
 let ataqueEspecificoxCategoria1 = (jugador, victima) => {
-  console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
+  //console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
   let danio = jugador.getArma()["danio"] + danioExtra(1, 500);
   victima.setHP(Math.max(0, victima.getHP() - danio)); //le quita de vida el danio base de su arma. si queda en negativo pone 0
 
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso
   if (jugador.getArma()["usos"] <= 0) {
-    console.log(`La ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se quedó sin usos`);
+    //console.log(`La ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se quedó sin usos`);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
+  //console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
-    console.log("\x1b[90m%s\x1b[0m", `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
+    //console.log("\x1b[90m%s\x1b[0m", `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
   }
 };
 
 let ataqueEspecificoxCategoria = async (jugador, copia, victima, req, channel, realPlayers, idioma) => {
 
   if (idioma === "es") {
-    console.log("Eventos ataque especifico por categoria en español");
+    //console.log("Eventos ataque especifico por categoria en español");
     await eventosAtaqueEspecificoxCategoria[0](jugador, copia, victima, req, channel, realPlayers); //le paso una COPIA, luego buscar la victima original
   } else {
-    console.log("Eventos ataque especifico por categoria en ingles");
+    //console.log("Eventos ataque especifico por categoria en ingles");
     await eventosAtaqueEspecificoxCategoriaEn[0](jugador, copia, victima, req, channel, realPlayers); //le paso una COPIA, luego buscar la victima original
   }
 
@@ -2315,40 +2315,40 @@ let ataqueEspecificoxCategoria = async (jugador, copia, victima, req, channel, r
 
 
 let ataqueGenericoConArma1 = (jugador, victima) => {
-  console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
+  //console.log(` ${jugador.getNombre()} atacó con su ${jugador.getArma()["nombre"]} a ${victima.getNombre()}`);
   let danio = jugador.getArma()["danio"] + danioExtra(1, 500);
   victima.setHP(Math.max(0, victima.getHP() - danio)); //le quita de vida el danio base de su arma. si queda en negativo pone 0
 
   jugador.getArma()["usos"] -= 1; //cada vez que usa el arma pierde 1 uso  
   if (jugador.getArma()["usos"] <= 0) {
-    console.log(`La ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se quedó sin usos`);
+    //console.log(`La ${jugador.getArma()["nombre"]} de ${jugador.getNombre()} se quedó sin usos`);
     jugador.setArma(null);
   } //si su arma se queda sin usos, la pierde
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
+  //console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
-    console.log("\x1b[90m%s\x1b[0m", `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
+    //console.log("\x1b[90m%s\x1b[0m", `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
   }
 };
 
 async function ataqueGenericoConArma(jugador, players, victima, req, channel, playersOriginal, idioma) {
   let resultado;
-  console.log(`Ataque generico con arma`);
+  //console.log(`Ataque generico con arma`);
   if (idioma === "es") {
-    console.log("Eventos ataque generico con arma en español");
+    //console.log("Eventos ataque generico con arma en español");
     do {
       var rand = parseInt(Math.random() * ataquesGenericosConArma.length);
-      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
       resultado = await ataquesGenericosConArma[rand](jugador, players, victima, req, channel, playersOriginal); //le paso una copia
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
   } else {
-    console.log("Eventos ataque generico con arma en ingles");
+    //console.log("Eventos ataque generico con arma en ingles");
     do {
       var rand = parseInt(Math.random() * ataquesGenericosConArma.length);
-      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
       resultado = await ataquesGenericosConArmaEn[rand](jugador, players, victima, req, channel, playersOriginal); //le paso una copia
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
@@ -2358,34 +2358,34 @@ async function ataqueGenericoConArma(jugador, players, victima, req, channel, pl
 
 let ataqueGenericoSinArma1 = (jugador, victima) => {
 
-  console.log(` ${jugador.getNombre()} atacó sin arma a ${victima.getNombre()}`);
+  //console.log(` ${jugador.getNombre()} atacó sin arma a ${victima.getNombre()}`);
   let danio = danioExtra(30, 90);
   victima.setHP(Math.max(0, victima.getHP() - danio));
 
-  console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
+  //console.log(` HP de ${victima.getNombre()}: ${victima.getHP()}`);
   if (victima.getHP() <= 0) {
     victima.alive = 0;
     jugador.kills++;
-    console.log("\x1b[90m%s\x1b[0m", `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
+    //console.log("\x1b[90m%s\x1b[0m", `Kills de ${jugador.getNombre()}: ${jugador.getKills()}.`);
   }
 };
 
 async function ataqueGenericoSinArma(jugador, players, victima, req, channel, playersOriginal, idioma) {
   let resultado;
-  console.log(`Ataque generico sin arma`);
+  //console.log(`Ataque generico sin arma`);
   if (idioma === "es") {
-    console.log("Eventos ataque generico sin arma en español");
+    //console.log("Eventos ataque generico sin arma en español");
     do {
       var rand = parseInt(Math.random() * ataquesGenericosSinArma.length);
-      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
       resultado = await ataquesGenericosSinArma[rand](jugador, players, victima, req, channel, playersOriginal); //le paso una copia
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
   } else {
-    console.log("Eventos ataque generico sin arma en ingles");
+    //console.log("Eventos ataque generico sin arma en ingles");
     do {
       var rand = parseInt(Math.random() * ataquesGenericosSinArma.length);
-      console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
+      //console.log("\x1b[33m%s\x1b[0m", ` ${rand}`);
       resultado = await ataquesGenericosSinArmaEn[rand](jugador, players, victima, req, channel, playersOriginal); //le paso una copia
     }
     while (resultado != 1) //si el evento no cumple alguna condicion especial, retorna null y buscamos otro evento
@@ -2416,7 +2416,7 @@ export async function rondaLoot(req, jugador, players, channel, nroEvento, idiom
     }
 
     /*if(armaVieja != null && armaVieja.danio > arma.danio){
-        console.log("\x1b[33m%s\x1b[0m",` Como el arma anterior hacía más daño, ${jugador.getNombre()} decide no cambiarla.`);
+        //console.log("\x1b[33m%s\x1b[0m",` Como el arma anterior hacía más daño, ${jugador.getNombre()} decide no cambiarla.`);
         jugador.setArma(armaVieja);
     }*/
   }
@@ -2467,27 +2467,3 @@ export function sumarProbabilidad(eventos, jugadores, porc, modo = false) {
   let num = numMode * (50 * Math.atan((eventos + polinomioNewton(porc) - jugadores) / 10) + porc - 25 * Math.PI);
   return num >= 0 ? num / 100 : 0;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

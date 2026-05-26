@@ -656,7 +656,7 @@ ataquesGenericosConArma[14] = async (jugador, players, victima, req, channel, pl
     jugador.alive = 0;
     victima.kills++;
     let extra4 = `Kills de ${victima.getNombre()}: ${victima.getKills()}.`;
-    console.log(extra4);
+    // console.log(extra4);
     json.extra.push(extra4);
   }
   //este es el unico evento en el cual, si se da al final de la partida, puede que no haya ningun ganador

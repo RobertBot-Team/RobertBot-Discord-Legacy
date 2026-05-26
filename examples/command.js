@@ -53,7 +53,7 @@ async function createCommand() {
       method: 'POST',
       body: commandBody,
     });
-    console.log(await res.json());
+    // console.log(await res.json());
   } catch (err) {
     console.error('Error installing commands: ', err);
   }

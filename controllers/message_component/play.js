@@ -125,7 +125,7 @@ export async function messagePlay_1(req, res, client) {
     newPlayer = new Jugador(nick, req.body.member.user.id, lastNumber);
   }
 
-  console.log(newPlayer);
+  // console.log(newPlayer);
 
   let isAlreadyIn = players.some(j => j.id == newPlayer.id);
   if (players.length >= 8 && !isAlreadyIn) {
@@ -190,7 +190,7 @@ export async function messagePlay_2(req, res, client) {
   let embed;
   let embed2;
 
-  console.log(`Idioma: ${language}`);
+  // console.log(`Idioma: ${language}`);
 
   const channel = client.channels.cache.get(`${req.body.channel_id}`);
   //console.log(req.body);
@@ -254,7 +254,7 @@ export async function messagePlay_2(req, res, client) {
     //////////////////////////////////
 
     let cantidadConVida = calcularVivos(players);
-    console.log(`Hay ${cantidadConVida} jugadores con vida`);
+    // console.log(`Hay ${cantidadConVida} jugadores con vida`);
     /*channel.send({
           embeds: [ new EmbedBuilder()
           .setColor(color)
@@ -297,7 +297,7 @@ export async function messagePlay_2(req, res, client) {
       //            let message = channel.send(json.evento);
       await sleep(2000);
       //message.edit("Editado");
-      console.log(evento);
+      // console.log(evento);
       await rondaLoot(req, jugador, players, channel, 1, language, gameState.slowMode, gameState.teams);
     }
     await sleep(2000);
@@ -332,7 +332,7 @@ export async function messagePlay_2(req, res, client) {
     await sleep(10000);
     whileGrande:
     while (cantidadConVida > 1) {
-      console.log(`• Ronda ${nroRonda}.`);
+      // console.log(`• Ronda ${nroRonda}.`);
       shuffleJugadores(players);      //por cada ronda, reordeno la lista para que ataquen en orden random
       for (let j = 0; j < players.length; j++) {
 
@@ -353,7 +353,7 @@ export async function messagePlay_2(req, res, client) {
 
             displayWinnerTeam(channel, check[0].getTeam(), guildId, players);
             await sleep(3000);
-            console.log(` Los ganadores son ${check[0].getNombre()}, ${check[1].getNombre()} y ${check[2].getNombre()}`);  //despues hacerlo imagen
+            // console.log(` Los ganadores son ${check[0].getNombre()}, ${check[1].getNombre()} y ${check[2].getNombre()}`);  //despues hacerlo imagen
             embed = generarEmbedTexto(color, tPlay(language, "winners_three", {
               a: check[0].getNombre(),
               b: check[1].getNombre(),
@@ -382,7 +382,7 @@ export async function messagePlay_2(req, res, client) {
 
             displayWinnerTeam(channel, check[0].getTeam(), guildId, players);
             await sleep(3000);
-            console.log(` Los ganadores son ${check[0].getNombre()} y ${check[1].getNombre()}`);
+            // console.log(` Los ganadores son ${check[0].getNombre()} y ${check[1].getNombre()}`);
             embed = generarEmbedTexto(color, tPlay(language, "winners_two", {
               a: check[0].getNombre(),
               b: check[1].getNombre(),
@@ -403,16 +403,16 @@ export async function messagePlay_2(req, res, client) {
         if (jugador.alive == 1) {
           await sleep(9000);  //este se hace siempre    10000
           nroEvento++;
-          console.log(`Turno de ${jugador.getNombre()}`);
+          // console.log(`Turno de ${jugador.getNombre()}`);
           let probabilidad = Math.random();
 
           if (jugador.getArma() == null) {
             //si el jugador no tiene arma, tiene 80% de chances de lootear
             if (probabilidad < 0.80) {
-              console.log(`> Loot`);
+              // console.log(`> Loot`);
               await rondaLoot(req, jugador, players, channel, nroEvento, language, gameState.slowMode, gameState.teams);
             } else {
-              console.log(`> Ataque`);
+              // console.log(`> Ataque`);
               let copia = copiarJugadores(players);
               await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, language, gameState.slowMode, gameState.teams);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random                      
             }
@@ -420,10 +420,10 @@ export async function messagePlay_2(req, res, client) {
           //si el jugador tiene arma, tiene 80% de chances de atacar
           else {
             if (probabilidad < 0.2 - sumarProbabilidad(nroEvento, players.length, 20, gameState.slowMode)) {
-              console.log(`> Loot`);
+              // console.log(`> Loot`);
               await rondaLoot(req, jugador, players, channel, nroEvento, language, gameState.slowMode, gameState.teams);
             } else {
-              console.log(`> Ataque`);
+              // console.log(`> Ataque`);
               let copia = copiarJugadores(players);
               await rondaAtaque(req, jugador, copia, cantidadConVida, channel, players, nroEvento, language, gameState.slowMode, gameState.teams);  //le mando una copia para que los que atacan sigan un orden, pero los que reciben el ataque sean random
             }
@@ -446,9 +446,9 @@ export async function messagePlay_2(req, res, client) {
         for (let contador = 0; contador < players.length; contador++) {
           let playerRonda = players[contador];
           if (playerRonda.getArma() && (playerRonda.getAlive() == 1)) {
-            console.log(`danio antes ${playerRonda.getArma()["danio"]}`);
+            // console.log(`danio antes ${playerRonda.getArma()["danio"]}`);
             playerRonda.getArma().danio += danioSuma + (players.length * 10);
-            console.log(`danio despues ${playerRonda.getArma()["danio"]}`);
+            // console.log(`danio despues ${playerRonda.getArma()["danio"]}`);
           }
         }
         danioSuma += 25;
@@ -467,7 +467,7 @@ export async function messagePlay_2(req, res, client) {
 
       displayWinnerTeam(channel, ganador.getTeam(), guildId, players);
       await sleep(3000);
-      console.log(` El ganador es ${ganador.getNombre()}`);
+      // console.log(` El ganador es ${ganador.getNombre()}`);
       embed = generarEmbedTexto(color, tPlay(language, "winner_one", { name: ganador.getNombre() }));
       channel.send({ embeds: [embed] });
       let finalKills = mostrarKills(players);
@@ -485,14 +485,14 @@ export async function messagePlay_2(req, res, client) {
         winners: `No winners`
       });
 
-      console.log(` Parece que esta vez no hubo ganadores...`);
+      // console.log(` Parece que esta vez no hubo ganadores...`);
       embed = generarEmbedTexto(color, tPlay(language, "no_winners"));
       channel.send({ embeds: [embed] });
       await sleep(3000);
       let finalKills = mostrarKills(players);
-      console.log(`final kills: ${finalKills}`);
+      // console.log(`final kills: ${finalKills}`);
       embed2 = generarEmbedDescripcion(color, finalKills);
-      console.log(`embed2: ${embed2}`)
+      // console.log(`embed2: ${embed2}`)
       channel.send({ embeds: [embed2] });
     }
 
@@ -690,11 +690,11 @@ export async function messageJoin(req, res, client) {
   } else {
     let lastNumber = (req.body.member.user.discriminator).slice(-1);
     lastNumber = (parseInt(lastNumber) % 5).toString();
-    console.log(`>>numero ${lastNumber}`);
+    // console.log(`>>numero ${lastNumber}`);
     newPlayer = new Jugador(nick, req.body.member.user.id, lastNumber);
   }
 
-  console.log(newPlayer);
+  // console.log(newPlayer);
   let resultado = agregarJugador(res, newPlayer, players);
   if (resultado === 1) {
     await res.send({
@@ -726,14 +726,3 @@ export function limpiarPlayersPorGuild(guildId) {
   gameState.players = [];
   console.log(`Limpiando players de guild ${guildId}...`);
 }
-
-
-
-
-
-
-
-
-
-
-

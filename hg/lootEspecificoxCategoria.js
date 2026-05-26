@@ -25,7 +25,7 @@ var eventoslootEspecificoxCategoria = [];
 
 eventoslootEspecificoxCategoria[0] = async (jugador, players, arma, req, channel) => {
   let categoria = arma["categoria"];
-  console.log(`%c${arma["nombre"]} > ${categoria}`, "color:orange");
+  // console.log(`%c${arma["nombre"]} > ${categoria}`, "color:orange");
   let posicion;
   let seleccionado;
   let arrayPosiciones = [];
