@@ -67,6 +67,8 @@ app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 const partidaActivaPorGuild = new Map();
 const gameCreatorPorGuild = new Map();
 const playLanguagePorGuild = new Map();
+const collectedMessagePorGuild = new Map();
+const gameChannelPorGuild = new Map();
 
 function getGuildIdFromBody(body) {
   return body?.guild_id || body?.channel?.guild_id || "global";
@@ -102,6 +104,30 @@ export function getGuildPlayLanguage(guildId = "global") {
 
 export function clearGuildPlayLanguage(guildId = "global") {
   playLanguagePorGuild.delete(guildId);
+}
+
+export function setCollectedMessagePorGuild(message, guildId = "global") {
+  collectedMessagePorGuild.set(guildId, message);
+}
+
+export function getCollectedMessagePorGuild(guildId = "global") {
+  return collectedMessagePorGuild.get(guildId);
+}
+
+export function clearCollectedMessagePorGuild(guildId = "global") {
+  collectedMessagePorGuild.delete(guildId);
+}
+
+export function setGameChannelPorGuild(channel, guildId = "global") {
+  gameChannelPorGuild.set(guildId, channel);
+}
+
+export function getGameChannelPorGuild(guildId = "global") {
+  return gameChannelPorGuild.get(guildId);
+}
+
+export function clearGameChannelPorGuild(guildId = "global") {
+  gameChannelPorGuild.delete(guildId);
 }
 
 /**
