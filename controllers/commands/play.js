@@ -6,14 +6,17 @@ import {
 } from "discord-interactions"
 import {
   randomHexColor,
-  sleep,
   limpiarTeams,
   reiniciarContador,
   reiniciarJugadoresFake
 } from "../../utils.js"
 import { limpiarPlayersPorGuild } from "../message_component/play.js"
 import { EmbedBuilder } from "discord.js";
-import { clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, setGuildPlayLanguage, setPartidaActiva, setGameCreator, clearGameCreator } from "../../app.js"
+import {
+  clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, setGuildPlayLanguage,
+  setPartidaActiva, setGameCreator, clearGameCreator, clearCollectedMessagePorGuild, setCollectedMessagePorGuild,
+  setGameChannelPorGuild, clearGameChannelPorGuild
+} from "../../app.js"
 import { getModeLabel, tPlay } from "../play_i18n.js";
 
 export function play4(req, res, partidaActiva, client) {
@@ -246,6 +249,8 @@ export async function play(req, res, client, selectedLanguage) {
       // console.log(`Collected message: ${message.content}`);
       // console.log(`ID is ${message.id}`);
       idTimeout = message.id;
+      setCollectedMessagePorGuild(idTimeout, guildId);
+      setGameChannelPorGuild(channel, guildId);
       collector.stop();
     });
     collector.on('end', (collected) => {
@@ -255,7 +260,7 @@ export async function play(req, res, client, selectedLanguage) {
 
     setTimeout(async function () {
       await desactivarComando(channel, idTimeout, guildId);
-    }, 600000);  //6 mins
+    }, 600000);  //10 mins
 
     return messagee;
 
@@ -574,6 +579,9 @@ async function desactivarComando(channel, msgid, guildId) {
     setPartidaActiva(0, guildId);
     clearGameCreator(guildId);
     clearGuildPlayLanguage(guildId);
+    clearCollectedMessagePorGuild(guildId);
+    clearGameChannelPorGuild(guildId);
+
     //no se reinicia slowMode ni modoK porque aqui no estan las variables
     //espero que no moleste en el futuro (?)
   }

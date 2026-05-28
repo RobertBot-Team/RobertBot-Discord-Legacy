@@ -1,8 +1,8 @@
 export const DEFAULT_PLAY_LANGUAGE = "es";
 export const SUPPORTED_PLAY_LANGUAGES = ["es", "en"];
 
-const explanationEnglish = "How to play?\nSimply join by clicking the \"Join battle\" button below. When everyone has joined, you can click \"Start\", and the bot will take care of everything, just sit back and watch the chaos unfold. After 10 minutes, the joining button will deactivate and you'll have to start again, so be quick, don't miss out!\nClick \"Slow Mode\" if you want the game to last longer."
-const explicacionEspanol = "¿Cómo jugar?\nSimplemente unete dando click en el boton \"Unirse a la batalla\" de abajo. Cuando todos se hayan unido, pueden darle click a \"Comenzar\", y el bot se encargará de todo, solo sientense a mirar y disfrutar del caos. Después de 10 minutos el botón para unirse se desactiva y debes volver a empezar, ¡sé rápido, no quedes fuera!\nHaz click en \"Modo Lento\" si quieres que la partida dure más"
+const explanationEnglish = "**How to play?**\nSimply join by clicking the \"Join battle\" button below. When everyone has joined, you can click \"Start\", and the bot will take care of everything, just sit back and watch the chaos unfold. After 10 minutes, the joining button will deactivate and you'll have to start again, so be quick, don't miss out!\nClick \"Slow Mode\" if you want the game to last longer."
+const explicacionEspanol = "**¿Cómo jugar?**\nSimplemente unete dando click en el boton \"Unirse a la batalla\" de abajo. Cuando todos se hayan unido, pueden darle click a \"Comenzar\", y el bot se encargará de todo, solo sientense a mirar y disfrutar del caos. Después de 10 minutos el botón para unirse se desactiva y debes volver a empezar, ¡sé rápido, no quedes fuera!\nHaz click en \"Modo Lento\" si quieres que la partida dure más"
 
 const PLAY_TRANSLATIONS = {
   es: {
