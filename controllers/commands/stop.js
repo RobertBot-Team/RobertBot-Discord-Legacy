@@ -64,6 +64,9 @@ async function desactivarComando(channel, msgid, guildId) {
     limpiarTeams();
     reiniciarJugadoresFake();
     setPartidaActiva(0, guildId);
+
+    console.log("partida activa en el stop: ", getPartidaActiva(guildId));
+    
     clearGameCreator(guildId);
     clearGuildPlayLanguage(guildId);
     clearCollectedMessagePorGuild(guildId);
