@@ -4,7 +4,7 @@ import {
   clearGuildPlayLanguage, getGuildPlayLanguage, setPartidaActiva, getGameCreator, clearGameCreator,
   getGameChannelPorGuild, getCollectedMessagePorGuild, getPartidaActiva, clearCollectedMessagePorGuild, clearGameChannelPorGuild
 } from "../../app.js";
-import { resetGuildGameState } from "../message_component/play.js";
+import { getGuildGameState, resetGuildGameState } from "../message_component/play.js";
 import { reiniciarContador, reiniciarJugadoresFake, limpiarTeams } from "../../utils.js";
 import { tPlay } from "../play_i18n.js";
 import { limpiarPlayersPorGuild } from "../message_component/play.js"
@@ -59,9 +59,11 @@ async function desactivarComando(channel, msgid, guildId) {
       ]
     });
 
+    let state = getGuildGameState(guildId);
+
     limpiarPlayersPorGuild(guildId);
-    reiniciarContador();
-    limpiarTeams();
+    reiniciarContador(state);
+    limpiarTeams(state.teams);
     reiniciarJugadoresFake();
     setPartidaActiva(0, guildId);
 
@@ -100,7 +102,7 @@ export async function stop(req, res, client) {
       }
     });
 
-    desactivarComando(getGameChannelPorGuild(guildId), getCollectedMessagePorGuild(guildId), guildId);
+    await desactivarComando(getGameChannelPorGuild(guildId), getCollectedMessagePorGuild(guildId), guildId);
     resetGuildGameState(guildId);
 
   } else {
