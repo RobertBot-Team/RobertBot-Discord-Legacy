@@ -572,18 +572,17 @@ async function desactivarComando(channel, msgid, guildId) {
       ]
     });
 
+    let state = getGuildGameState(guildId);
+
     limpiarPlayersPorGuild(guildId);
-    reiniciarContador();
-    limpiarTeams();
+    reiniciarContador(state);
+    limpiarTeams(state.teams);
     reiniciarJugadoresFake();
-    setPartidaActiva(0, guildId);
+    setPartidaActiva(0, guildId);    
     clearGameCreator(guildId);
     clearGuildPlayLanguage(guildId);
     clearCollectedMessagePorGuild(guildId);
     clearGameChannelPorGuild(guildId);
-
-    //no se reinicia slowMode ni modoK porque aqui no estan las variables
-    //espero que no moleste en el futuro (?)
   }
 }
 
