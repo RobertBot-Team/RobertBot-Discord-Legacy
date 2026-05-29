@@ -194,51 +194,51 @@ export async function play(req, res, client, selectedLanguage) {
 
   setGuildPlayLanguage(language, guildId);
 
-  let messagee = res.send({
-    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-    data: {
-      content: tPlay(language, "game_started"),
+  if (getPartidaActiva(guildId) == 0) {
 
-      // Buttons are inside of action rows
-      components: [
-        {
-          type: MessageComponentTypes.ACTION_ROW,
+      let messagee = res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: tPlay(language, "game_started"),
+
+          // Buttons are inside of action rows
           components: [
             {
-              type: MessageComponentTypes.BUTTON,
-              // Value for your app to identify the button
-              custom_id: "my_button",
-              label: tPlay(language, "join_button"),
-              style: ButtonStyleTypes.PRIMARY
+              type: MessageComponentTypes.ACTION_ROW,
+              components: [
+                {
+                  type: MessageComponentTypes.BUTTON,
+                  // Value for your app to identify the button
+                  custom_id: "my_button",
+                  label: tPlay(language, "join_button"),
+                  style: ButtonStyleTypes.PRIMARY
+                },
+                {
+                  type: MessageComponentTypes.BUTTON,
+                  // Value for your app to identify the button
+                  custom_id: "my_button_begin",
+                  label: tPlay(language, "begin_button"),
+                  style: ButtonStyleTypes.SUCCESS
+                },
+                {
+                  type: MessageComponentTypes.BUTTON,
+                  // Value for your app to identify the button
+                  custom_id: "my_button_slow_mode",
+                  label: getModeLabel(language, false),
+                  style: ButtonStyleTypes.SECONDARY
+                }
+              ],
             },
-            {
-              type: MessageComponentTypes.BUTTON,
-              // Value for your app to identify the button
-              custom_id: "my_button_begin",
-              label: tPlay(language, "begin_button"),
-              style: ButtonStyleTypes.SUCCESS
-            },
-            {
-              type: MessageComponentTypes.BUTTON,
-              // Value for your app to identify the button
-              custom_id: "my_button_slow_mode",
-              label: getModeLabel(language, false),
-              style: ButtonStyleTypes.SECONDARY
-            }
           ],
+
+          embeds: [new EmbedBuilder()
+            .setColor(color)
+            .setDescription(tPlay(language, "joined_players"))
+            .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+          ],
+
         },
-      ],
-
-      embeds: [new EmbedBuilder()
-        .setColor(color)
-        .setDescription(tPlay(language, "joined_players"))
-        .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
-      ],
-
-    },
-  })
-
-  if (getPartidaActiva(guildId) == 0) {
+      })
 
     setPartidaActiva(1, guildId);
     setGameCreator(req.body.member.user.id, guildId);
