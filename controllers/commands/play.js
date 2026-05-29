@@ -189,9 +189,6 @@ export async function play(req, res, client, selectedLanguage) {
   const channel = client.channels.cache.get(`${req.body.channel_id}`);
   const guildId = req.body.guild_id || req.body.channel?.guild_id || channel?.guildId || "global";
   const language = selectedLanguage || getGuildPlayLanguage(guildId);
-
-  console.log(getPartidaActiva(guildId));
-
   let color = randomHexColor();
   let idTimeout;
 
