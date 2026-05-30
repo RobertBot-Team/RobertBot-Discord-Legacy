@@ -10,7 +10,7 @@ import {
   reiniciarContador,
   reiniciarJugadoresFake
 } from "../../utils.js"
-import { limpiarPlayersPorGuild } from "../message_component/play.js"
+import { getGuildGameState, limpiarPlayersPorGuild } from "../message_component/play.js"
 import { EmbedBuilder } from "discord.js";
 import {
   clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, setGuildPlayLanguage,
