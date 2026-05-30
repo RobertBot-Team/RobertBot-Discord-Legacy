@@ -214,8 +214,8 @@ class Team {
 }
 
 class Timer {
-  constructor(timeout) {
-    this.timeout = timeout;
+  constructor() {
+    this.timeout = null;
   };
 
   startTimer(callback, delay) {

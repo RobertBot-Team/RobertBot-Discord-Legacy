@@ -265,7 +265,7 @@ export async function play(req, res, client, selectedLanguage) {
     //   await desactivarComando(channel, idTimeout, guildId);
     // }, 600000);  //10 mins
 
-    const timer = new Timer("timer");
+    const timer = new Timer();
     setTimerPorGuild(timer, guildId);
     timer.startTimer(async function () {
       console.log("Timer desactivado. Esto NO se verá si se detiene antes.");
