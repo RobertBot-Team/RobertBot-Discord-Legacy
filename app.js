@@ -208,7 +208,16 @@ app.post("/interactions", async function (req, res) {
       //   }
       //  break;
       case "stop":
-        await stop(req, res, client);
+        if(getPartidaActiva(guildId) !== 0){
+          await stop(req, res, client);
+        }
+        res.send({
+          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          data: {
+            content: "No hay una partida en curso.",
+            flags: InteractionResponseFlags.EPHEMERAL
+          }
+        });
         break;
       case "help":
         const helpLanguage = getPlayLanguageFromOptions(req.body.data?.options || []);
