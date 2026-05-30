@@ -69,6 +69,7 @@ const gameCreatorPorGuild = new Map();
 const playLanguagePorGuild = new Map();
 const collectedMessagePorGuild = new Map();
 const gameChannelPorGuild = new Map();
+const timerPorGuild = new Map();
 
 function getGuildIdFromBody(body) {
   return body?.guild_id || body?.channel?.guild_id || "global";
@@ -128,6 +129,18 @@ export function getGameChannelPorGuild(guildId = "global") {
 
 export function clearGameChannelPorGuild(guildId = "global") {
   gameChannelPorGuild.delete(guildId);
+}
+
+export function setTimerPorGuild(timer, guildId = "global") {
+  timerPorGuild.set(guildId, timer);
+}
+
+export function getTimerPorGuild(guildId = "global") {
+  return timerPorGuild.get(guildId);
+}
+
+export function clearTimerPorGuild(guildId = "global") {
+  timerPorGuild.delete(guildId);
 }
 
 /**

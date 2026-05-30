@@ -213,9 +213,28 @@ class Team {
 
 }
 
+class Timer {
+  constructor(timeout) {
+    this.timeout = timeout;
+  };
+
+  startTimer(callback, delay) {
+    this.timeout = setTimeout(callback, delay);
+  }
+
+  stopTimer() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = null;
+    }
+  }
+
+};
+
 export {
   Arma,
   Jugador,
   Team,
-  JugadorFake
+  JugadorFake,
+  Timer
 };

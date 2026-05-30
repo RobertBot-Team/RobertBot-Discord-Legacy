@@ -2,7 +2,9 @@ import { InteractionResponseType, InteractionResponseFlags, MessageComponentType
 import { PermissionsBitField } from "discord.js";
 import {
   clearGuildPlayLanguage, getGuildPlayLanguage, setPartidaActiva, getGameCreator, clearGameCreator,
-  getGameChannelPorGuild, getCollectedMessagePorGuild, getPartidaActiva, clearCollectedMessagePorGuild, clearGameChannelPorGuild
+  getGameChannelPorGuild, getCollectedMessagePorGuild, getPartidaActiva, clearCollectedMessagePorGuild, clearGameChannelPorGuild,
+  getTimerPorGuild,
+  clearTimerPorGuild
 } from "../../app.js";
 import { getGuildGameState, resetGuildGameState } from "../message_component/play.js";
 import { reiniciarContador, reiniciarJugadoresFake, limpiarTeams } from "../../utils.js";
@@ -60,12 +62,14 @@ async function desactivarComando(channel, msgid, guildId) {
     });
 
     let state = getGuildGameState(guildId);
-
+    const timer = getTimerPorGuild(guildId);
+    timer.stopTimer();
+    clearTimerPorGuild(guildId);
     limpiarPlayersPorGuild(guildId);
     reiniciarContador(state);
     limpiarTeams(state.teams);
     reiniciarJugadoresFake();
-    setPartidaActiva(0, guildId);    
+    setPartidaActiva(0, guildId);
     clearGameCreator(guildId);
     clearGuildPlayLanguage(guildId);
     clearCollectedMessagePorGuild(guildId);
