@@ -34,7 +34,9 @@ const PLAY_TRANSLATIONS = {
     no_winners: " Parece que esta vez no hubo ganadores...",
     stop_by_staff: "{nick} ha detenido la partida de los Juegos del Hambre.",
     stop_no_permission: "No te hagas el chistoso, solo Staff puede detener una partida.",
-    help_message: `🛠️ **Comandos de RobertBot:**\n\n**/play** - Comenzar una partida nueva de los Juegos del Hambre. Debes seleccionar el idioma de la partida. Es necesario que haya 2 jugadores mínimo para poder iniciar la partida. Hay un máximo de 8 jugadores por partida.\n**/stop** - Detiene la partida en progreso. Solo el jugador que la inició o el owner pueden detenerla.\n**/help** - Muestra este mensaje de ayuda explicando los comandos.`,
+    help_message: `🛠️ **Comandos:**\n\n - **/play** - Comenzar una partida nueva de los Juegos del Hambre. Debes seleccionar el idioma de la partida. Es necesario que haya 2 jugadores mínimo para poder iniciar la partida. Hay un máximo de 8 jugadores por partida.\n - **/stop** - Detiene la partida en progreso. Solo el jugador que la inició o el owner pueden detenerla.\n - **/help** - Muestra este mensaje de ayuda explicando los comandos.`,
+    help_embed_title: "🤖 RobbieBot - Beta",
+    help_embed_description: " 🚀 ¿Disfrutas el juego? Este bot está en beta y se expande gracias a ti.\n 🔗 Invítalo a tu servidor ya mismo y juega con tus amigos.\n 🗨️ Únete al servidor oficial para reportar bugs y ganar roles exclusivos.\n ☕ ¿Te gusta el proyecto? Somos un equipo indie manteniendo los servidores a flote. Si deseas ayudarnos a mantener el servidor o financiar la versión final (y salir en los créditos), puedes invitarnos un café.",
   },
   en: {
     game_started: "A new Hunger Games battle has started",
@@ -65,7 +67,9 @@ const PLAY_TRANSLATIONS = {
     no_winners: " Looks like there were no winners this time...",
     stop_by_staff: "{nick} stopped the Hunger Games battle.",
     stop_no_permission: "Nice try, only Staff can stop a battle.",
-    help_message: `🛠️ **RobertBot Commands:**\n\n**/play** - Start a new Hunger Games match. You must select the game language. In order to start the game, 2 players are needed. 8 players per game max.\n**/stop** - Stops the match in progress. Only the player who started it or the owner can stop it.\n**/help** - Shows this help message explaining the commands.`,
+    help_message: `🛠️ **Commands:**\n\n - **/play** - Start a new Hunger Games match. You must select the game language. In order to start the game, 2 players are needed. 8 players per game max.\n - **/stop** - Stops the match in progress. Only the player who started it or the owner can stop it.\n - **/help** - Shows this help message explaining the commands.`,
+    help_embed_title: "🤖 RobbieBot - Beta",
+    help_embed_description: " 🚀 Enjoying the game? This bot is in Beta now and has a full version on the way.\n 🔗 Invite the bot to your server now and play with your friends.\n 🗨️ Join the official server to report bugs and earn exclusive roles.\n ☕ Like the project? We're an indie team keeping the servers afloat. If you wish to help us maintain the server or fund the final version (and show up in the credits), you can buy us a coffee.",
   },
 };
 
