@@ -35,8 +35,8 @@ const PLAY_TRANSLATIONS = {
     stop_by_staff: "{nick} ha detenido la partida de los Juegos del Hambre.",
     stop_no_permission: "No te hagas el chistoso, solo Staff puede detener una partida.",
     help_message: `🛠️ **Comandos:**\n\n - **/play** - Comenzar una partida nueva de los Juegos del Hambre. Debes seleccionar el idioma de la partida. Es necesario que haya 2 jugadores mínimo para poder iniciar la partida. Hay un máximo de 8 jugadores por partida.\n - **/stop** - Detiene la partida en progreso. Solo el jugador que la inició o el owner pueden detenerla.\n - **/help** - Muestra este mensaje de ayuda explicando los comandos.`,
-    help_embed_title: "🤖 RobbieBot - Beta",
-    help_embed_description: " 🚀 ¿Disfrutas el juego? Este bot está en beta y se expande gracias a ti.\n 🔗 Invítalo a tu servidor ya mismo y juega con tus amigos.\n 🗨️ Únete al servidor oficial para reportar bugs y ganar roles exclusivos.\n ☕ ¿Te gusta el proyecto? Somos un equipo indie manteniendo los servidores a flote. Si deseas ayudarnos a mantener el servidor o financiar la versión final (y salir en los créditos), puedes invitarnos un café.",
+    help_embed_title: "Test",
+    help_embed_description: "Test",
   },
   en: {
     game_started: "A new Hunger Games battle has started",
