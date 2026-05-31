@@ -1,5 +1,6 @@
 import { InteractionResponseType, InteractionResponseFlags } from "discord-interactions";
 import { tPlay } from "../play_i18n.js";
+import { EmbedBuilder } from "discord.js";
 
 export async function help(req, res, language) {
   return res.send({
