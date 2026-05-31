@@ -7,9 +7,11 @@ export async function help(req, res, language) {
     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
     embeds: [
       new EmbedBuilder()
+        .setColor("Blurple")
         .setTitle(tPlay(language, "help_embed_title"))
         .setDescription(tPlay(language, "help_message")),
       new EmbedBuilder()
+        .setColor("Blurple")
         .setDescription(tPlay(language, "help_embed_description"))
     ]
   });
