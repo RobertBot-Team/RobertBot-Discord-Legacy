@@ -30,7 +30,7 @@ const PLAY_TRANSLATIONS = {
     remaining_count: "Queda{pluralN} {count} jugador{pluralEs} con vida.",
     winners_three: " Los ganadores son {a}, {b} y {c}",
     winners_two: " Los ganadores son {a} y {b}",
-    winner_one: " El ganador es {name}",
+    winner_one: " ¡Tenemos un ganador! ¡{name} logró sobrevivir a este caos!",
     no_winners: " Parece que esta vez no hubo ganadores...",
     stop_by_staff: "{nick} ha detenido la partida de los Juegos del Hambre.",
     stop_no_permission: "No te hagas el chistoso, solo Staff puede detener una partida.",
