@@ -189,6 +189,7 @@ export async function messagePlay_2(req, res, client) {
   let color;
   let embed;
   let embed2;
+  let embed3;
 
   // console.log(`Idioma: ${language}`);
 
