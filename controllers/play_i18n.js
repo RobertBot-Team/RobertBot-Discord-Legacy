@@ -4,6 +4,7 @@ export const SUPPORTED_PLAY_LANGUAGES = ["es", "en"];
 const explanationEnglish = "**How to play?**\nSimply join by clicking the \"Join battle\" button below. When everyone has joined, you can click \"Start\", and the bot will take care of everything, just sit back and watch the chaos unfold. After 10 minutes, the joining button will deactivate and you'll have to start again, so be quick, don't miss out!\nClick \"Slow Mode\" if you want the game to last longer."
 const explicacionEspanol = "**¿Cómo jugar?**\nSimplemente unete dando click en el boton \"Unirse a la batalla\" de abajo. Cuando todos se hayan unido, pueden darle click a \"Comenzar\", y el bot se encargará de todo, solo sientense a mirar y disfrutar del caos. Después de 10 minutos el botón para unirse se desactiva y debes volver a empezar, ¡sé rápido, no quedes fuera!\nHaz click en \"Modo Lento\" si quieres que la partida dure más"
 const donacionEspanol = "☕ ¿Te gusta el proyecto? Somos un equipo indie manteniendo los servidores a flote. Si deseas ayudarnos a mantener el servidor o financiar la versión final (y salir en los créditos), puedes invitarnos un café."
+const donationEnglish = "☕ Like the project? We're an indie team keeping the servers afloat. If you wish to help us maintain the server or fund the final version (and show up in the credits), you can buy us a coffee."
 
 const PLAY_TRANSLATIONS = {
   es: {
@@ -30,7 +31,7 @@ const PLAY_TRANSLATIONS = {
     alive_count: "Hay {count} jugadores con vida",
     remaining_count: "Queda{pluralN} {count} jugador{pluralEs} con vida.",
     winners_three: " ¡Tenemos 3 ganadores! ¡{a}, {b} y {c} se llevan el trofeo a casa!",
-    winners_two: " Los ganadores son {a} y {b}",
+    winners_two: " ¡Tenemos 2 ganadores! ¡{a} y {b} se llevan el trofeo a casa!",
     winner_one: " ¡Tenemos un ganador! ¡{name} logró sobrevivir a este caos!",
     no_winners: " Parece que esta vez no hubo ganadores...",
     stop_by_staff: "{nick} ha detenido la partida de los Juegos del Hambre.",
@@ -63,15 +64,16 @@ const PLAY_TRANSLATIONS = {
     no_permission_change_mode: "You do not have permission to change battle mode.",
     alive_count: "There are {count} players alive",
     remaining_count: "{count} player{pluralEs} remaining.",
-    winners_three: " Winners are {a}, {b} and {c}",
-    winners_two: " Winners are {a} and {b}",
-    winner_one: " Winner is {name}",
+    winners_three: " We have 3 winners! {a}, {b} and {c} take the trophy home!",
+    winners_two: " We have 2 winners! {a} and {b} take the trophy home!",
+    winner_one: " We have a winner! {name} managed to survive this chaos!",
     no_winners: " Looks like there were no winners this time...",
     stop_by_staff: "{nick} stopped the Hunger Games battle.",
     stop_no_permission: "Nice try, only Staff can stop a battle.",
     help_message: `🛠️ **Commands:**\n\n - **/play** - Start a new Hunger Games match. You must select the game language. In order to start the game, 2 players are needed. 8 players per game max.\n - **/stop** - Stops the match in progress. Only the player who started it or the owner can stop it.\n - **/help** - Shows this help message explaining the commands.`,
     help_embed_title: "🤖 RobbieBot - Beta",
-    help_embed_description: " 🚀 Enjoying the game? This bot is in Beta now and has a full version on the way.\n 🔗 Invite the bot to your server now and play with your friends.\n 🗨️ Join the official server to report bugs and earn exclusive roles.\n ☕ Like the project? We're an indie team keeping the servers afloat. If you wish to help us maintain the server or fund the final version (and show up in the credits), you can buy us a coffee.",
+    help_embed_description: ` 🚀 Enjoying the game? This bot is in Beta now and has a full version on the way.\n 🔗 Invite the bot to your server now and play with your friends.\n 🗨️ Join the official server to report bugs and earn exclusive roles.\n ${donationEnglish}`,
+    play_final_message: `Wanna bring the whole chaos to your guild and beat up your friends? Then invite the bot [link] and use /play to start playing. It's free and you all are going to have fun for sure!\n ${donationEnglish}`,
   },
 };
 
