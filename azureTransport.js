@@ -35,7 +35,20 @@ export default class AzureTransport extends Transport {
             const blockBlobClient =
                 this.containerClient.getBlockBlobClient(blobName);
 
-            const data = JSON.stringify(info, null, 2);
+            const serialized = JSON.parse(
+                JSON.stringify(info, (key, value) => {
+                    if (value instanceof Error) {
+                        return {
+                            name: value.name,
+                            message: value.message,
+                            stack: value.stack
+                        };
+                    }
+                    return value;
+                })
+            );
+
+            const data = JSON.stringify(serialized, null, 2);
 
             await blockBlobClient.upload(
                 data,
