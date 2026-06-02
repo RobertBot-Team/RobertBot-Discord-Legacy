@@ -1655,6 +1655,8 @@ let buscarJugadorOtroTeam = (jugador, jugadores) => {    //el jugador del parame
 }
 
 export function buscarTresTeamsSolo(teams) {
+  if (!teams) return null;
+
   let team;
   let arraySolos = [];
 

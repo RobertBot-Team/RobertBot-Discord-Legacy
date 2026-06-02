@@ -1498,7 +1498,7 @@ eventosAleatorios1[38] = async (jugador, players, maxHP, teams, req, channel) =>
   let jugador2;
   let jugador3;
 
-  arraySolos = buscarTresTeamsSolo();
+  arraySolos = buscarTresTeamsSolo(teams);
   if (arraySolos === null) { return null; }
 
   pos1 = arraySolos[0] - 1;
@@ -2014,7 +2014,7 @@ eventosAleatorios1[39] =async (jugador, players, maxHP, teams, req, channel)=>{ 
     let jugador2;
     let jugador3;
   
-    arraySolos = buscarTresTeamsSolo();
+    arraySolos = buscarTresTeamsSolo(teams);
     if(arraySolos===null){return null;}
     
     pos1 = arraySolos[0]-1;
@@ -2068,7 +2068,7 @@ eventosAleatorios1[40] =async (jugador, players, maxHP, teams, req, channel)=>{ 
     let jugador2;
     let jugador3;
   
-    arraySolos = buscarTresTeamsSolo();
+    arraySolos = buscarTresTeamsSolo(teams);
     if(arraySolos===null){return null;}
     
     pos1 = arraySolos[0]-1;
@@ -2122,7 +2122,7 @@ eventosAleatorios1[41] =async (jugador, players, maxHP, teams, req, channel)=>{ 
     let jugador2;
     let jugador3;
   
-    arraySolos = buscarTresTeamsSolo();
+    arraySolos = buscarTresTeamsSolo(teams);
     if(arraySolos===null){return null;}
     
     pos1 = arraySolos[0]-1;
