@@ -185,7 +185,6 @@ app.post("/interactions", async function (req, res) {
       //   return test(req, res);  // Send a message into the channel where command was triggered from
       //   break;
       case "play":
-        console.log("partida activa: ", getPartidaActiva(guildId));
         if (getPartidaActiva(guildId) === 0) {
           const selectedLanguage = getPlayLanguageFromOptions(req.body.data?.options || []);
           return await play(req, res, client, selectedLanguage);
