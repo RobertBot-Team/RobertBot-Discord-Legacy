@@ -473,8 +473,8 @@ export async function messagePlay_2(req, res, client) {
       let finalKills = mostrarKills(players);
       embed2 = generarEmbedDescripcion(color, finalKills);
       channel.send({ embeds: [embed,embed2] });
-      embed3 = generarEmbedTexto(color, tPlay(language, "play_final_message"));
-
+      embed3 = generarEmbedDescripcion(color, tPlay(language, "play_final_message"));
+ 
       await sleep(1000);
       channel.send({ embeds: [embed3] });
     }
