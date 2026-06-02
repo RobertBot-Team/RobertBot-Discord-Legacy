@@ -6,7 +6,8 @@ import {
   randomSelector,
   pronombreElLaLosLas,
   pluralQuedar,
-  pronounIsAre
+  pronounIsAre,
+  pronounItThem
 } from "../utils.js"
 import {
   createObject,
