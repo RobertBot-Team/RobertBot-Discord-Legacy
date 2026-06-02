@@ -34,7 +34,7 @@ import {
   EmbedBuilder
 } from "discord.js"
 import { mostrarKills } from "../../hg/utils.js"
-import { clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, setPartidaActiva } from "../../app.js"
+import { clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, getTimerPorGuild, setPartidaActiva } from "../../app.js"
 import { getModeLabel, tPlay } from "../play_i18n.js";
 import logger from "../../logger.js";
 
@@ -243,10 +243,8 @@ export async function messagePlay_2(req, res, client) {
 
     setPartidaActiva(2, guildId);
 
-    /*for(let i=0; i<.., i++){
-      component = ..
-      component.disabled = true;
-    }*/
+    const timer = getTimerPorGuild(guildId);
+    timer.stopTimer();
 
     /////////////////////////////////
 
@@ -472,9 +470,9 @@ export async function messagePlay_2(req, res, client) {
       embed = generarEmbedTexto(color, tPlay(language, "winner_one", { name: ganador.getNombre() }));
       let finalKills = mostrarKills(players);
       embed2 = generarEmbedDescripcion(color, finalKills);
-      channel.send({ embeds: [embed,embed2] });
+      channel.send({ embeds: [embed, embed2] });
       embed3 = generarEmbedDescripcion(color, tPlay(language, "play_final_message"));
- 
+
       await sleep(1000);
       channel.send({ embeds: [embed3] });
     }

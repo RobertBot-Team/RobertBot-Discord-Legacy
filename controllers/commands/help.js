@@ -1,4 +1,4 @@
-import { InteractionResponseType, InteractionResponseFlags } from "discord-interactions";
+import { InteractionResponseType } from "discord-interactions";
 import { tPlay } from "../play_i18n.js";
 import { EmbedBuilder } from "discord.js";
 

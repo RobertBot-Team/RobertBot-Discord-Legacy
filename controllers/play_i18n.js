@@ -53,7 +53,7 @@ const PLAY_TRANSLATIONS = {
     joined_battle: "⚔ {nick} joined the battle",
     already_joined: "You have already joined this game",
     game_full: "The game is full (Max 8 players)",
-    joined_count: `${explanationEnglish}\n\n{count} players joined\n {playersList}.`,
+    joined_count: `${explanationEnglish}\n\n{count} players joined\n {playersList}`,
     battle_coming: "The battle is coming",
     game_starting: "The battle starts now",
     need_two_players: "At least 2 players are required to start.",
