@@ -469,11 +469,13 @@ export async function messagePlay_2(req, res, client) {
       await sleep(3000);
       // console.log(` El ganador es ${ganador.getNombre()}`);
       embed = generarEmbedTexto(color, tPlay(language, "winner_one", { name: ganador.getNombre() }));
-      channel.send({ embeds: [embed] });
       let finalKills = mostrarKills(players);
       embed2 = generarEmbedDescripcion(color, finalKills);
+      channel.send({ embeds: [embed,embed2] });
+      embed3 = generarEmbedTexto(color, tPlay(language, "play_final_message"));
+
       await sleep(1000);
-      channel.send({ embeds: [embed2] });
+      channel.send({ embeds: [embed3] });
     }
 
     if (cantidadConVida < 1) {

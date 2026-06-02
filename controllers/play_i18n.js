@@ -3,6 +3,7 @@ export const SUPPORTED_PLAY_LANGUAGES = ["es", "en"];
 
 const explanationEnglish = "**How to play?**\nSimply join by clicking the \"Join battle\" button below. When everyone has joined, you can click \"Start\", and the bot will take care of everything, just sit back and watch the chaos unfold. After 10 minutes, the joining button will deactivate and you'll have to start again, so be quick, don't miss out!\nClick \"Slow Mode\" if you want the game to last longer."
 const explicacionEspanol = "**¿Cómo jugar?**\nSimplemente unete dando click en el boton \"Unirse a la batalla\" de abajo. Cuando todos se hayan unido, pueden darle click a \"Comenzar\", y el bot se encargará de todo, solo sientense a mirar y disfrutar del caos. Después de 10 minutos el botón para unirse se desactiva y debes volver a empezar, ¡sé rápido, no quedes fuera!\nHaz click en \"Modo Lento\" si quieres que la partida dure más"
+const donacionEspanol = "☕ ¿Te gusta el proyecto? Somos un equipo indie manteniendo los servidores a flote. Si deseas ayudarnos a mantener el servidor o financiar la versión final (y salir en los créditos), puedes invitarnos un café."
 
 const PLAY_TRANSLATIONS = {
   es: {
@@ -28,7 +29,7 @@ const PLAY_TRANSLATIONS = {
     no_permission_change_mode: "No tienes permisos para cambiar el modo de la partida.",
     alive_count: "Hay {count} jugadores con vida",
     remaining_count: "Queda{pluralN} {count} jugador{pluralEs} con vida.",
-    winners_three: " Los ganadores son {a}, {b} y {c}",
+    winners_three: " ¡Tenemos 3 ganadores! ¡{a}, {b} y {c} se llevan el trofeo a casa!",
     winners_two: " Los ganadores son {a} y {b}",
     winner_one: " ¡Tenemos un ganador! ¡{name} logró sobrevivir a este caos!",
     no_winners: " Parece que esta vez no hubo ganadores...",
@@ -36,7 +37,8 @@ const PLAY_TRANSLATIONS = {
     stop_no_permission: "No te hagas el chistoso, solo Staff puede detener una partida.",
     help_message: `🛠️ **Comandos:**\n\n - **/play** - Comenzar una partida nueva de los Juegos del Hambre. Debes seleccionar el idioma de la partida. Es necesario que haya 2 jugadores mínimo para poder iniciar la partida. Hay un máximo de 8 jugadores por partida.\n - **/stop** - Detiene la partida en progreso. Solo el jugador que la inició o el owner pueden detenerla.\n - **/help** - Muestra este mensaje de ayuda explicando los comandos.`,
     help_embed_title: "🤖 RobbieBot - Beta",
-    help_embed_description: " 🚀 ¿Disfrutas el juego? Este bot está en beta y se expande gracias a ti.\n 🔗 Invítalo a tu servidor ya mismo y juega con tus amigos.\n 🗨️ Únete al servidor oficial para reportar bugs y ganar roles exclusivos.\n ☕ ¿Te gusta el proyecto? Somos un equipo indie manteniendo los servidores a flote. Si deseas ayudarnos a mantener el servidor o financiar la versión final (y salir en los créditos), puedes invitarnos un café.",
+    help_embed_description: ` 🚀 ¿Disfrutas el juego? Este bot está en beta y se expande gracias a ti.\n 🔗 Invítalo a tu servidor ya mismo y juega con tus amigos.\n 🗨️ Únete al servidor oficial para reportar bugs y ganar roles exclusivos.\n${donacionEspanol}`,
+    play_final_message: `¿Quieres llevar todo este caos a tu servidor y darle una paliza a tus amigos? Pues invita al bot [link] y pon /play para comenzar a jugar. ¡Es gratis y la diversión está garantizada!\n ${donacionEspanol}`,
   },
   en: {
     game_started: "A new Hunger Games battle has started",
