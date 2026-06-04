@@ -5,16 +5,10 @@ import {
   InteractionType,
   InteractionResponseType,
   InteractionResponseFlags,
+  verifyKeyMiddleware,
   // MessageComponentTypes,
   // ButtonStyleTypes,
 } from "discord-interactions";
-import {
-  VerifyDiscordRequest,
-  // getRandomEmoji,
-  // DiscordRequest,
-  // mostrarEvento,
-  // funcionRetornaJson,
-} from "./utils.js";
 // import {
 // getShuffledOptions,
 // getResult
@@ -59,7 +53,6 @@ const app = express();
 // Get port, or default to 80
 const PORT = process.env.PORT || 80;
 // Parse request body and verifies incoming requests using discord-interactions package
-app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 
 // Store for in-progress games. In production, you'd want to use a DB
 // const activeGames = {};
@@ -148,7 +141,7 @@ export function clearTimerPorGuild(guildId = "global") {
  */
 
 
-app.post("/interactions", async function (req, res) {
+app.post("/interactions", verifyKeyMiddleware(process.env.PUBLIC_KEY), async function (req, res) {
   // Interaction type and data
   const { type, id, data } = req.body;
 
@@ -257,6 +250,8 @@ app.post("/interactions", async function (req, res) {
   }
 
 });
+
+app.use(express.json());
 
 
 
