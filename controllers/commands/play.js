@@ -61,7 +61,7 @@ export function play4(req, res, partidaActiva, client) {
         embeds: [new EmbedBuilder()
           .setColor(color)
           .setDescription(`Jugadores unidos`)
-          .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
         ],
 
       },
@@ -135,7 +135,7 @@ export function play6(req, res, partidaActiva, client) {
       embeds: [new EmbedBuilder()
         .setColor(color)
         .setDescription(`Jugadores unidos`)
-        .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+        .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
       ]
     }
     );
@@ -237,7 +237,7 @@ export async function play(req, res, client, selectedLanguage) {
         embeds: [new EmbedBuilder()
           .setColor(color)
           .setDescription(tPlay(language, "joined_players"))
-          .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
         ],
 
       },
@@ -339,7 +339,7 @@ export async function play7(req, res, partidaActiva, client) {
         embeds: [new EmbedBuilder()
           .setColor(color)
           .setDescription(`Jugadores unidos`)
-          .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
         ],
 
       },
@@ -428,7 +428,7 @@ export function play2(req, res, partidaActiva, client) {
         embeds: [new EmbedBuilder()
           .setColor(color)
           .setDescription(`Jugadores unidos`)
-          .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
         ],
 
       },

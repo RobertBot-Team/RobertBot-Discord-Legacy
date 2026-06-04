@@ -157,7 +157,7 @@ export async function messagePlay_1(req, res, client) {
             playersList: jugadoresUnidos,
           }))
           .setTimestamp()
-          .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
         ],
     });
 
