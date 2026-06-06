@@ -206,7 +206,7 @@ app.post("/interactions", verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
           res.send({
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             data: {
-              content: "No hay una partida en curso.",
+              content: "No game in progress/No hay una partida en curso.",
               flags: InteractionResponseFlags.EPHEMERAL
             }
           });
