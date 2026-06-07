@@ -3,8 +3,8 @@ export const SUPPORTED_PLAY_LANGUAGES = ["es", "en"];
 
 const explanationEnglish = "**How to play?**\nSimply join by clicking the \"Join battle\" button below. When everyone has joined, you can click \"Start\", and the bot will take care of everything, just sit back and watch the chaos unfold. After 10 minutes, the joining button will deactivate and you'll have to start again, so be quick, don't miss out!\nClick \"Slow Mode\" if you want the game to last longer."
 const explicacionEspanol = "**¿Cómo jugar?**\nSimplemente unete dando click en el boton \"Unirse a la batalla\" de abajo. Cuando todos se hayan unido, pueden darle click a \"Comenzar\", y el bot se encargará de todo, solo sientense a mirar y disfrutar del caos. Después de 10 minutos el botón para unirse se desactiva y debes volver a empezar, ¡sé rápido, no quedes fuera!\nHaz click en \"Modo Lento\" si quieres que la partida dure más"
-const donacionEspanol = "☕ ¿Te gusta el proyecto? Somos un equipo indie manteniendo los servidores a flote. Si deseas ayudarnos a mantener el servidor o financiar la versión final (y salir en los créditos), puedes invitarnos un café."
-const donationEnglish = "☕ Like the project? We're an indie team keeping the servers afloat. If you wish to help us maintain the server or fund the final version (and show up in the credits), you can buy us a coffee."
+const donacionEspanol = "☕ ¿Te gusta el proyecto? Somos un equipo indie manteniendo los servidores a flote. Si deseas ayudarnos a mantener el servidor o financiar la versión final (y salir en los créditos), puedes [invitarnos un café](https://ko-fi.com/robbiebot)."
+const donationEnglish = "☕ Like the project? We're an indie team keeping the servers afloat. If you wish to help us maintain the server or fund the final version (and show up in the credits), you can [buy us a coffee](https://ko-fi.com/robbiebot)."
 
 const PLAY_TRANSLATIONS = {
   es: {
