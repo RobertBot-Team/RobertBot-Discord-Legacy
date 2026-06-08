@@ -5,7 +5,7 @@ const explanationEnglish = "**How to play?**\nSimply join by clicking the \"Join
 const explicacionEspanol = "**¿Cómo jugar?**\nSimplemente unete dando click en el boton \"Unirse a la batalla\" de abajo. Cuando todos se hayan unido, pueden darle click a \"Comenzar\", y el bot se encargará de todo, solo sientense a mirar y disfrutar del caos. Después de 10 minutos el botón para unirse se desactiva y debes volver a empezar, ¡sé rápido, no quedes fuera!\nHaz click en \"Modo Lento\" si quieres que la partida dure más"
 const donacionEspanol = "☕ ¿Te gusta el proyecto? Somos un equipo indie manteniendo los servidores a flote. Si deseas ayudarnos a mantener el servidor o financiar la versión final (y salir en los créditos), puedes [invitarnos un café](https://ko-fi.com/robbiebot)."
 const donationEnglish = "☕ Like the project? We're an indie team keeping the servers afloat. If you wish to help us maintain the server or fund the final version (and show up in the credits), you can [buy us a coffee](https://ko-fi.com/robbiebot)."
-const invitacionServer = "https://discord.gg/mEpAhS8X";
+const invitacionServer = "https://discord.gg/XJ6nX4znsj";
 const invitacionBot = "https://discord.com/oauth2/authorize?client_id=1512694300033552454&permissions=2147485696&integration_type=0&scope=bot+applications.commands";
 
 const PLAY_TRANSLATIONS = {
