@@ -1482,6 +1482,7 @@ eventosAleatorios1[37] = async (jugador, players, maxHP, teams, req, channel) =>
 }
 
 eventosAleatorios1[38] = async (jugador, players, maxHP, teams, req, channel) => {
+  return null;
   let arraySolos = [];
   let pos1;
   let pos2;
