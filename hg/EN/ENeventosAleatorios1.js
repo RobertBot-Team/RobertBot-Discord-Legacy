@@ -152,6 +152,7 @@ eventosAleatorios1[9] = async (jugador, players, maxHP, teams, req, channel) => 
 //dejo este comentario porque hay que hacer lo mismo en varios eventos
 
 eventosAleatorios1[10] = async (jugador, players, maxHP, teams, req, channel) => {
+  return null;
   let team = jugador.getTeam();
   let cantEnTeam = 1;
   let newTeamId = teams.length + 1;
