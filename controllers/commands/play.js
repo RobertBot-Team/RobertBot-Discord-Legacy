@@ -11,9 +11,20 @@ import {
   reiniciarContador,
   reiniciarJugadoresFake
 } from "../../utils.js"
-import { limpiarPlayers } from "../message_component/play.js"
+import { getGuildGameState, limpiarPlayersPorGuild } from "../message_component/play.js"
 import { EmbedBuilder } from "discord.js";
-import { getPartidaActiva, setPartidaActiva, setCollectedMessagePorGuild, setGameChannelPorGuild } from "../../app.js"
+import {
+  clearCollectedMessagePorGuild,
+  clearGameChannelPorGuild,
+  clearGameCreator,
+  clearGuildPlayLanguage,
+  clearTimerPorGuild,
+  getPartidaActiva,
+  getTimerPorGuild,
+  setPartidaActiva,
+  setCollectedMessagePorGuild,
+  setGameChannelPorGuild
+} from "../../app.js"
 
 export function play4(req, res, partidaActiva, client){
   let color = randomHexColor();
@@ -175,10 +186,11 @@ const sendMessage = async (res, message) => {
 
 export async function play(req, res, partidaActiva, client){
   const channel = client.channels.cache.get(`${req.body.channel_id}`);
+  const guildId = req.body.guild_id || req.body.channel?.guild_id || "global";
   let color = randomHexColor();
-  if(getPartidaActiva() == 0){
+  if(getPartidaActiva(guildId) == 0){
     
-    setPartidaActiva(1);
+    setPartidaActiva(1, guildId);
 
     res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -222,7 +234,6 @@ export async function play(req, res, partidaActiva, client){
       ],
     });
 
-    const guildId = req.body.guild_id || req.body.channel?.guild_id || "global";
     setGameChannelPorGuild(channel, guildId);
     setCollectedMessagePorGuild(gameMessage.id, guildId);
 
@@ -500,7 +511,8 @@ async function desactivarComando2(req,client,msgid,partidaActiva){
 async function desactivarComando(channel,msgid,partidaActiva){
   //const messageFetched = await channel.messages.fetch(msgid);
   //console.log(messageFetched.components);
-      if(getPartidaActiva() == 1){  //si es 1 está en espera, si es 2 ya comenzó
+  const guildId = channel?.guildId || "global";
+  if(getPartidaActiva(guildId) == 1){  //si es 1 está en espera, si es 2 ya comenzó
             let targetMessageId = msgid;
 
             if(!targetMessageId){
@@ -545,11 +557,19 @@ async function desactivarComando(channel,msgid,partidaActiva){
               console.warn("No se encontró un mensaje válido para desactivar el comando de play.");
             }
 
-            limpiarPlayers();
-            reiniciarContador();
-            limpiarTeams();
+            const state = getGuildGameState(guildId);
+            const timer = getTimerPorGuild(guildId);
+            timer?.stopTimer?.();
+            clearTimerPorGuild(guildId);
+            limpiarPlayersPorGuild(guildId);
+            reiniciarContador(state);
+            limpiarTeams(state.teams);
             reiniciarJugadoresFake();
-            setPartidaActiva(0);
+            setPartidaActiva(0, guildId);
+            clearGameCreator(guildId);
+            clearGuildPlayLanguage(guildId);
+            clearCollectedMessagePorGuild(guildId);
+            clearGameChannelPorGuild(guildId);
             //no se reinicia slowMode ni modoK porque aqui no estan las variables
             //espero que no moleste en el futuro (?)
         }
