@@ -32,38 +32,53 @@ async function desactivarComando(channel, msgid, guildId) {
   if (getPartidaActiva(guildId) == 1) {  //si es 1 está en espera, si es 2 ya comenzó
     const language = getGuildPlayLanguage(guildId);
 
-    channel.messages.edit(msgid, {
-      content: tPlay(language, "wait_timeout"),
+    let targetMessageId = msgid;
 
-      // Buttons are inside of action rows
-      components: [
-        {
-          type: MessageComponentTypes.ACTION_ROW,
+    if (!targetMessageId && channel) {
+      const recentMessages = await channel.messages.fetch({ limit: 10 });
+      const targetMessage = recentMessages.find((message) => message.content === "Se ha iniciado una nueva partida de Los Juegos del Hambre");
+      targetMessageId = targetMessage?.id ?? recentMessages.first()?.id;
+    }
+
+    if (channel && targetMessageId) {
+      try {
+        await channel.messages.edit(targetMessageId, {
+          content: tPlay(language, "wait_timeout"),
+
+          // Buttons are inside of action rows
           components: [
             {
-              type: MessageComponentTypes.BUTTON,
-              // Value for your app to identify the button
-              custom_id: "my_button",
-              label: tPlay(language, "join_button"),
-              style: ButtonStyleTypes.PRIMARY,
-              disabled: true
+              type: MessageComponentTypes.ACTION_ROW,
+              components: [
+                {
+                  type: MessageComponentTypes.BUTTON,
+                  // Value for your app to identify the button
+                  custom_id: "my_button",
+                  label: tPlay(language, "join_button"),
+                  style: ButtonStyleTypes.PRIMARY,
+                  disabled: true
+                },
+                {
+                  type: MessageComponentTypes.BUTTON,
+                  custom_id: "my_button_begin",
+                  label: tPlay(language, "begin_button"),
+                  style: ButtonStyleTypes.SUCCESS,
+                  disabled: true
+                }
+              ],
             },
-            {
-              type: MessageComponentTypes.BUTTON,
-              // Value for your app to identify the button
-              custom_id: "my_button_begin",
-              label: tPlay(language, "begin_button"),
-              style: ButtonStyleTypes.SUCCESS,
-              disabled: true
-            }
-          ],
-        },
-      ]
-    });
+          ]
+        });
+      } catch (error) {
+        console.error("No se pudo desactivar el mensaje de stop:", error);
+      }
+    } else {
+      console.warn("No se encontró un mensaje válido para desactivar el comando stop.");
+    }
 
     let state = getGuildGameState(guildId);
     const timer = getTimerPorGuild(guildId);
-    timer.stopTimer();
+    timer?.stopTimer?.();
     clearTimerPorGuild(guildId);
     limpiarPlayersPorGuild(guildId);
     reiniciarContador(state);

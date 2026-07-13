@@ -180,7 +180,8 @@ app.post("/interactions", verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
       case "play":
         if (getPartidaActiva(guildId) === 0) {
           const selectedLanguage = getPlayLanguageFromOptions(req.body.data?.options || []);
-          return await play(req, res, client, selectedLanguage);
+          const partidaActiva = { activa: getPartidaActiva(guildId) };
+          return await play(req, res, partidaActiva, client, selectedLanguage);
         } else {
           return partidaEnCurso(req, res, client);
         }
