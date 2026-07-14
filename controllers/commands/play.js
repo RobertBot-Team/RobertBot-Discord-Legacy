@@ -23,8 +23,10 @@ import {
   getTimerPorGuild,
   setPartidaActiva,
   setCollectedMessagePorGuild,
-  setGameChannelPorGuild
+  setGameChannelPorGuild,
+  getGuildPlayLanguage
 } from "../../app.js"
+import { tPlay } from "../play_i18n.js";
 
 export function play4(req, res, partidaActiva, client){
   let color = randomHexColor();
@@ -187,51 +189,47 @@ const sendMessage = async (res, message) => {
 export async function play(req, res, partidaActiva, client){
   const channel = client.channels.cache.get(`${req.body.channel_id}`);
   const guildId = req.body.guild_id || req.body.channel?.guild_id || "global";
+  let language = getGuildPlayLanguage(guildId);  //para que se cargue el idioma de la guild en caso de que no esté cargado
   let color = randomHexColor();
   if(getPartidaActiva(guildId) == 0){
     
     setPartidaActiva(1, guildId);
 
-    res.send({
+    let gameMessage = await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
-        content: "Se ha iniciado una nueva partida de Los Juegos del Hambre",
-        flags: InteractionResponseFlags.EPHEMERAL
-      },
-    });
-
-    const gameMessage = await channel.send({
-      content: "Se ha iniciado una nueva partida de Los Juegos del Hambre",
-      components: [
-        {
-          type: MessageComponentTypes.ACTION_ROW,
-          components: [
-            {
-              type: MessageComponentTypes.BUTTON,
-              custom_id: "my_button",
-              label: "Unirse a la batalla",
-              style: ButtonStyleTypes.PRIMARY
-            },
-            {
-              type: MessageComponentTypes.BUTTON,
-              custom_id: "my_button_begin",
-              label: "Comenzar",
-              style: ButtonStyleTypes.SUCCESS
-            },
-            {
-              type: MessageComponentTypes.BUTTON,
-              custom_id: "my_button_slow_mode",
-              label: "Modo Lento",
-              style: ButtonStyleTypes.SECONDARY
-            }
-          ],
-        },
-      ],
-      embeds: [ new EmbedBuilder()
-        .setColor(color)
-        .setDescription(`Jugadores unidos`)
-        .setFooter({ text: 'RobertBot 2023 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png'})
-      ],
+        content: tPlay(language, "game_started"),
+        components: [
+          {
+            type: MessageComponentTypes.ACTION_ROW,
+            components: [
+              {
+                type: MessageComponentTypes.BUTTON,
+                custom_id: "my_button",
+                label: tPlay(language, "join_button"),
+                style: ButtonStyleTypes.PRIMARY
+              },
+              {
+                type: MessageComponentTypes.BUTTON,
+                custom_id: "my_button_begin",
+                label: tPlay(language, "begin_button"),
+                style: ButtonStyleTypes.SUCCESS
+              },
+              {
+                type: MessageComponentTypes.BUTTON,
+                custom_id: "my_button_slow_mode",
+                label: tPlay(language, "slow_mode"),
+                style: ButtonStyleTypes.SECONDARY
+              }
+            ],
+          },
+        ],
+        embeds: [ new EmbedBuilder()
+          .setColor(color)
+          .setDescription(tPlay(language, "joined_players"))
+          .setFooter({ text: 'RobertBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png'})
+        ],
+      }
     });
 
     setGameChannelPorGuild(channel, guildId);
@@ -248,7 +246,7 @@ export async function play(req, res, partidaActiva, client){
     
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {content: `Ya hay una partida en curso`,
+        data: {content: tPlay(language, "already_running"),
               flags: InteractionResponseFlags.EPHEMERAL
               }
       })
