@@ -235,13 +235,13 @@ export async function play(req, res, partidaActiva, client) {
       });
     }
 
-    await res.send({
-      type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: {
-        content: tPlay(language, "game_started"),
-        flags: InteractionResponseFlags.EPHEMERAL
-      }
-    });
+    // await res.send({
+    //   type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+    //   data: {
+    //     content: tPlay(language, "game_started"),
+    //     flags: InteractionResponseFlags.EPHEMERAL
+    //   }
+    // });
 
     if (gameMessage?.id) {
       setGameChannelPorGuild(channel, guildId);

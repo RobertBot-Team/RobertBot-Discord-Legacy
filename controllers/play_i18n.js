@@ -10,7 +10,7 @@ const invitacionBot = "https://discord.com/oauth2/authorize?client_id=1512694300
 
 const PLAY_TRANSLATIONS = {
   es: {
-    game_started: "${explicacionEspanol}\n\nSe ha iniciado una nueva partida de Los Juegos del Hambre",
+    game_started: "{explicacionEspanol}\n\nSe ha iniciado una nueva partida de Los Juegos del Hambre",
     already_running: "Ya hay una partida en curso",
     wait_timeout: "Se ha acabado el tiempo de espera. Por favor inicia una nueva partida.",
     join_button: "Unirse a la batalla",
@@ -44,7 +44,7 @@ const PLAY_TRANSLATIONS = {
     play_final_message: `¿Quieres llevar todo este caos a tu servidor y darle una paliza a tus amigos? Pues [invita al bot](${invitacionBot}) y pon /play para comenzar a jugar. ¡Es gratis y la diversión está garantizada!\n ${donacionEspanol}`,
   },
   en: {
-    game_started: "`${explanationEnglish}\n\nA new Hunger Games battle has started",
+    game_started: "{explanationEnglish}\n\nA new Hunger Games battle has started",
     already_running: "There is already a battle in progress",
     wait_timeout: "Waiting time is over. Please start a new battle.",
     join_button: "Join battle",
