@@ -26,7 +26,7 @@ function hasStopPermission(req, guildId) {
 }
 
 // funcion duplicada de play.js, pero es lo que hay para una beta
-async function desactivarComando(channel, msgid, guildId) {
+async function desactivarComando(channel, msgid, guildId, client) {
   //const messageFetched = await channel.messages.fetch(msgid);
   //console.log(messageFetched.components);
   if (getPartidaActiva(guildId) == 1) {  //si es 1 está en espera, si es 2 ya comenzó
@@ -36,13 +36,23 @@ async function desactivarComando(channel, msgid, guildId) {
 
     if (!targetMessageId && channel) {
       const recentMessages = await channel.messages.fetch({ limit: 10 });
-      const targetMessage = recentMessages.find((message) => message.content === "Se ha iniciado una nueva partida de Los Juegos del Hambre");
+      const targetMessage = recentMessages.find((message) => message.author?.id === client?.user?.id && message.content === "Se ha iniciado una nueva partida de Los Juegos del Hambre");
       targetMessageId = targetMessage?.id ?? recentMessages.first()?.id;
     }
 
     if (channel && targetMessageId) {
       try {
-        await channel.messages.edit(targetMessageId, {
+        const targetMessage = await channel.messages.fetch(targetMessageId).catch(() => null);
+        if (!targetMessage) {
+          throw new Error(`No se pudo recuperar el mensaje ${targetMessageId}`);
+        }
+
+        if (targetMessage.author?.id && client?.user?.id && targetMessage.author.id !== client.user.id) {
+          console.warn(`No se editará el mensaje ${targetMessageId} porque pertenece a ${targetMessage.author.id} y no al bot ${client.user.id}`);
+          return;
+        }
+
+        await targetMessage.edit({
           content: tPlay(language, "wait_timeout"),
 
           // Buttons are inside of action rows
@@ -118,7 +128,7 @@ export async function stop(req, res, client) {
       }
     });
 
-    await desactivarComando(getGameChannelPorGuild(guildId), getCollectedMessagePorGuild(guildId), guildId);
+    await desactivarComando(getGameChannelPorGuild(guildId), getCollectedMessagePorGuild(guildId), guildId, client);
     resetGuildGameState(guildId);
 
   } else {
