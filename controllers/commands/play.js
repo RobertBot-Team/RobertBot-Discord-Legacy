@@ -192,10 +192,10 @@ const sendMessage = async (res, message) => {
 }
 
 
-export async function play(req, res, partidaActiva, client) {
+export async function play(req, res, partidaActiva, client, selectedLanguage) {
   const channel = client.channels.cache.get(`${req.body.channel_id}`);
   const guildId = req.body.guild_id || req.body.channel?.guild_id || "global";
-  let language = getGuildPlayLanguage(guildId);  //para que se cargue el idioma de la guild en caso de que no esté cargado
+  let language = selectedLanguage || getGuildPlayLanguage(guildId);  //para que se cargue el idioma de la guild en caso de que no esté cargado
   let color = randomHexColor();
   if (getPartidaActiva(guildId) == 0) {
 
