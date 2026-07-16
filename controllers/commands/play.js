@@ -24,9 +24,11 @@ import {
   setPartidaActiva,
   setCollectedMessagePorGuild,
   setGameChannelPorGuild,
-  getGuildPlayLanguage
+  getGuildPlayLanguage,
+  setTimerPorGuild
 } from "../../app.js"
 import { tPlay } from "../play_i18n.js";
+import { Timer } from "../../hg/clases.js";
 
 export function play4(req, res, partidaActiva, client) {
   let color = randomHexColor();
@@ -250,9 +252,17 @@ export async function play(req, res, partidaActiva, client) {
       console.warn("No se pudo crear el mensaje de partida en el canal", channel?.id);
     }
 
-    setTimeout(async function () {
-      await desactivarComando(channel, gameMessage?.id, partidaActiva, client);
-    }, 600000);  //6 mins
+    // setTimeout(async function () {
+    //   await desactivarComando(channel, gameMessage?.id, partidaActiva, client);
+    // }, 600000);  //6 mins
+
+    const timer = new Timer();
+    setTimerPorGuild(timer, guildId);
+    timer.startTimer(async function () {
+      console.log("Timer desactivado. Esto NO se verá si se detiene antes.");
+      await desactivarComando(channel, gameMessage.id, guildId, client);
+      clearTimerPorGuild(guildId);
+    }, 600000); // 10 mins
 
     return gameMessage;
 
