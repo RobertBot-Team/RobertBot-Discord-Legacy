@@ -25,7 +25,8 @@ import {
   setCollectedMessagePorGuild,
   setGameChannelPorGuild,
   getGuildPlayLanguage,
-  setTimerPorGuild
+  setTimerPorGuild,
+  setGuildPlayLanguage
 } from "../../app.js"
 import { tPlay } from "../play_i18n.js";
 import { Timer } from "../../hg/clases.js";
@@ -199,6 +200,7 @@ export async function play(req, res, partidaActiva, client) {
   if (getPartidaActiva(guildId) == 0) {
 
     setPartidaActiva(1, guildId);
+    setGuildPlayLanguage(language, guildId);
 
     let gameMessage = null;
     if (channel) {
@@ -247,7 +249,7 @@ export async function play(req, res, partidaActiva, client) {
     //     flags: InteractionResponseFlags.EPHEMERAL
     //   }
     // });
-
+console.log(gameMessage);
     if (gameMessage?.id) {
       setGameChannelPorGuild(channel, guildId);
       setCollectedMessagePorGuild(gameMessage.id, guildId);
