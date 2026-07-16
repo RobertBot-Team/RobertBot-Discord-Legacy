@@ -200,38 +200,41 @@ export async function play(req, res, partidaActiva, client) {
 
     let gameMessage = null;
     if (channel) {
-      gameMessage = await channel.send({
-        content: tPlay(language, "game_started"),
-        components: [
-          {
-            type: MessageComponentTypes.ACTION_ROW,
-            components: [
-              {
-                type: MessageComponentTypes.BUTTON,
-                custom_id: "my_button",
-                label: tPlay(language, "join_button"),
-                style: ButtonStyleTypes.PRIMARY
-              },
-              {
-                type: MessageComponentTypes.BUTTON,
-                custom_id: "my_button_begin",
-                label: tPlay(language, "begin_button"),
-                style: ButtonStyleTypes.SUCCESS
-              },
-              {
-                type: MessageComponentTypes.BUTTON,
-                custom_id: "my_button_slow_mode",
-                label: tPlay(language, "slow_mode"),
-                style: ButtonStyleTypes.SECONDARY
-              }
-            ],
-          },
-        ],
-        embeds: [new EmbedBuilder()
-          .setColor(color)
-          .setDescription(tPlay(language, "joined_players"))
-          .setFooter({ text: 'RobertBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
-        ],
+      gameMessage = await res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: tPlay(language, "game_started"),
+          components: [
+            {
+              type: MessageComponentTypes.ACTION_ROW,
+              components: [
+                {
+                  type: MessageComponentTypes.BUTTON,
+                  custom_id: "my_button",
+                  label: tPlay(language, "join_button"),
+                  style: ButtonStyleTypes.PRIMARY
+                },
+                {
+                  type: MessageComponentTypes.BUTTON,
+                  custom_id: "my_button_begin",
+                  label: tPlay(language, "begin_button"),
+                  style: ButtonStyleTypes.SUCCESS
+                },
+                {
+                  type: MessageComponentTypes.BUTTON,
+                  custom_id: "my_button_slow_mode",
+                  label: tPlay(language, "slow_mode"),
+                  style: ButtonStyleTypes.SECONDARY
+                }
+              ],
+            },
+          ],
+          embeds: [new EmbedBuilder()
+            .setColor(color)
+            .setDescription(tPlay(language, "joined_players"))
+            .setFooter({ text: 'RobertBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+          ],
+        }
       });
     }
 
