@@ -158,12 +158,6 @@ app.post("/interactions", verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
    */
   if (type === InteractionType.APPLICATION_COMMAND) {
     const appPermissions = req.body.app_permissions;
-    console.log({
-    guild_id: req.body.guild_id,
-    app_permissions: req.body.app_permissions,
-    channel_id: req.body.channel_id,
-    type: req.body.type
-});
     if (appPermissions) {
       const bitfield = new PermissionsBitField(BigInt(appPermissions));
       if (!bitfield.has(PermissionsBitField.Flags.SendMessages) || !bitfield.has(PermissionsBitField.Flags.ReadMessageHistory) || !bitfield.has(PermissionsBitField.Flags.ViewChannel)) {
