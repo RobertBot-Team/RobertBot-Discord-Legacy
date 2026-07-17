@@ -29,7 +29,7 @@ function hasStopPermission(req, guildId) {
 async function desactivarComando(channel, msgid, guildId) {
   //const messageFetched = await channel.messages.fetch(msgid);
   //console.log(messageFetched.components);
-  if (getPartidaActiva(guildId) == 1) {  //si es 1 está en espera, si es 2 ya comenzó
+  if (getPartidaActiva(guildId) === 1) {  //si es 1 está en espera, si es 2 ya comenzó
     const language = getGuildPlayLanguage(guildId);
 
     channel.messages.edit(msgid, {
@@ -60,21 +60,21 @@ async function desactivarComando(channel, msgid, guildId) {
         },
       ]
     });
-
-    let state = getGuildGameState(guildId);
-    const timer = getTimerPorGuild(guildId);
-    timer.stopTimer();
-    clearTimerPorGuild(guildId);
-    limpiarPlayersPorGuild(guildId);
-    reiniciarContador(state);
-    limpiarTeams(state.teams);
-    reiniciarJugadoresFake();
-    setPartidaActiva(0, guildId);
-    clearGameCreator(guildId);
-    clearGuildPlayLanguage(guildId);
-    clearCollectedMessagePorGuild(guildId);
-    clearGameChannelPorGuild(guildId);
   }
+
+  let state = getGuildGameState(guildId);
+  const timer = getTimerPorGuild(guildId);
+  timer.stopTimer();
+  clearTimerPorGuild(guildId);
+  limpiarPlayersPorGuild(guildId);
+  reiniciarContador(state);
+  limpiarTeams(state.teams);
+  reiniciarJugadoresFake();
+  setPartidaActiva(0, guildId);
+  clearGameCreator(guildId);
+  clearGuildPlayLanguage(guildId);
+  clearCollectedMessagePorGuild(guildId);
+  clearGameChannelPorGuild(guildId);
 }
 
 export async function stop(req, res, client) {

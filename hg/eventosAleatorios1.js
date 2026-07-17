@@ -591,6 +591,7 @@ eventosAleatorios1[13] = async (jugador, players, maxHP, teams, req, channel) =>
 }
 
 eventosAleatorios1[14] = async (jugador, players, maxHP, teams, req, channel) => {
+  return null;
   let idTeamDe2;
   let team;
   let teamActual;
