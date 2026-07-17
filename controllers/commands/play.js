@@ -195,7 +195,10 @@ export async function play(req, res, client, selectedLanguage) {
 
   const channel =
     client.channels.cache.get(req.body.channel_id) ??
-    await client.channels.fetch(req.body.channel_id).catch(() => null);
+    await client.channels.fetch(req.body.channel_id).catch(err => {
+        console.error("fetch channel:", err);
+        return null;
+    });
 
   if (!channel) {
       console.error("Canal no encontrado: ", req.body.channel_id);
