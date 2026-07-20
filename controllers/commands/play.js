@@ -561,6 +561,7 @@ async function desactivarComando2(req, client, msgid, partidaActiva) {
 }
 
 async function desactivarComando(channel, msgid, guildId) {
+  console.log("Limpiando data desde Timeout...");
   //const messageFetched = await channel.messages.fetch(msgid);
   //console.log(messageFetched.components);
   if (getPartidaActiva(guildId) === 1) {  //si es 1 está en espera, si es 2 ya comenzó

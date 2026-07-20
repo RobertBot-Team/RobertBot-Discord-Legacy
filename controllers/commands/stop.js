@@ -27,6 +27,7 @@ function hasStopPermission(req, guildId) {
 
 // funcion duplicada de play.js, pero es lo que hay para una beta
 async function desactivarComando(channel, msgid, guildId) {
+  console.log("Limpiando data desde comando stop...");
   //const messageFetched = await channel.messages.fetch(msgid);
   //console.log(messageFetched.components);
   if (getPartidaActiva(guildId) === 1) {  //si es 1 está en espera, si es 2 ya comenzó
