@@ -266,6 +266,8 @@ export async function play(req, res, client, selectedLanguage) {
       idTimeout = message.id;
       setCollectedMessagePorGuild(idTimeout, guildId);
       setGameChannelPorGuild(channel, guildId);
+      console.log(`ID de channel guardado: ${channel?.id} / `, getGameChannelPorGuild(guildId));
+      console.log(`full channel object guardado: `, channel);
       collector.stop();
     });
     collector.on('end', (collected) => {

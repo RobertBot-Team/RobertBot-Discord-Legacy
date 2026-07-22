@@ -117,6 +117,8 @@ export function setGameChannelPorGuild(channel, guildId = "global") {
 }
 
 export function getGameChannelPorGuild(guildId = "global") {
+  console.log(`ID de channel obtenido: ${gameChannelPorGuild.get(guildId)?.id}, de guild ${guildId}`);
+  console.log(`full channel object obtenido: `, gameChannelPorGuild.get(guildId));
   return gameChannelPorGuild.get(guildId);
 }
 
