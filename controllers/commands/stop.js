@@ -33,34 +33,38 @@ async function desactivarComando(channel, msgid, guildId) {
   if (getPartidaActiva(guildId) === 1) {  //si es 1 está en espera, si es 2 ya comenzó
     const language = getGuildPlayLanguage(guildId);
 
-    channel.messages.edit(msgid, {
-      content: tPlay(language, "wait_timeout"),
+    try {
+      await channel.messages.edit(msgid, {
+        content: tPlay(language, "wait_timeout"),
 
-      // Buttons are inside of action rows
-      components: [
-        {
-          type: MessageComponentTypes.ACTION_ROW,
-          components: [
-            {
-              type: MessageComponentTypes.BUTTON,
-              // Value for your app to identify the button
-              custom_id: "my_button",
-              label: tPlay(language, "join_button"),
-              style: ButtonStyleTypes.PRIMARY,
-              disabled: true
-            },
-            {
-              type: MessageComponentTypes.BUTTON,
-              // Value for your app to identify the button
-              custom_id: "my_button_begin",
-              label: tPlay(language, "begin_button"),
-              style: ButtonStyleTypes.SUCCESS,
-              disabled: true
-            }
-          ],
-        },
-      ]
-    });
+        // Buttons are inside of action rows
+        components: [
+          {
+            type: MessageComponentTypes.ACTION_ROW,
+            components: [
+              {
+                type: MessageComponentTypes.BUTTON,
+                // Value for your app to identify the button
+                custom_id: "my_button",
+                label: tPlay(language, "join_button"),
+                style: ButtonStyleTypes.PRIMARY,
+                disabled: true
+              },
+              {
+                type: MessageComponentTypes.BUTTON,
+                // Value for your app to identify the button
+                custom_id: "my_button_begin",
+                label: tPlay(language, "begin_button"),
+                style: ButtonStyleTypes.SUCCESS,
+                disabled: true
+              }
+            ],
+          },
+        ]
+      });
+    } catch (error) {
+        console.error('Error al editar el mensaje:', error);
+    }
   }
 
   let state = getGuildGameState(guildId);
