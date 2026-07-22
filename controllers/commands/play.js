@@ -265,7 +265,7 @@ export async function play(req, res, client, selectedLanguage) {
       // console.log(`ID is ${message.id}`);
       idTimeout = message.id;
       setCollectedMessagePorGuild(idTimeout, guildId);
-      setGameChannelPorGuild(channel, guildId);
+      setGameChannelPorGuild(channel.id, guildId);
       collector.stop();
     });
     collector.on('end', (collected) => {
@@ -281,7 +281,7 @@ export async function play(req, res, client, selectedLanguage) {
     setTimerPorGuild(timer, guildId);
     timer.startTimer(async function () {
       console.log("Timer desactivado. Esto NO se verá si se detiene antes.");
-      await desactivarComando(channel, idTimeout, guildId);
+      await desactivarComando(channel.id, idTimeout, guildId, client);
       clearTimerPorGuild(guildId);
     }, 600000); // 10 mins
 
@@ -560,12 +560,19 @@ async function desactivarComando2(req, client, msgid, partidaActiva) {
   partidaActiva.activa = 0;
 }
 
-async function desactivarComando(channel, msgid, guildId) {
+async function desactivarComando(channelId, msgid, guildId, client) {
   console.log("Limpiando data desde Timeout...");
   //const messageFetched = await channel.messages.fetch(msgid);
   //console.log(messageFetched.components);
   if (getPartidaActiva(guildId) === 1) {  //si es 1 está en espera, si es 2 ya comenzó
     const language = getGuildPlayLanguage(guildId);
+
+    const channel = client.channels.cache.get(channelId); 
+
+    if (!channel) {
+        console.log("No se pudo recuperar el canal de la caché");
+        return;
+    }
 
     channel.messages.edit(msgid, {
       content: tPlay(language, "wait_timeout"),

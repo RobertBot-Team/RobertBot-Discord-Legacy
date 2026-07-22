@@ -26,12 +26,18 @@ function hasStopPermission(req, guildId) {
 }
 
 // funcion duplicada de play.js, pero es lo que hay para una beta
-async function desactivarComando(channel, msgid, guildId) {
+async function desactivarComando(channelId, msgid, guildId, client) {
   console.log("Limpiando data desde comando stop...");
   //const messageFetched = await channel.messages.fetch(msgid);
   //console.log(messageFetched.components);
   if (getPartidaActiva(guildId) === 1) {  //si es 1 está en espera, si es 2 ya comenzó
     const language = getGuildPlayLanguage(guildId);
+    const channel = client.channels.cache.get(channelId); 
+
+    if (!channel) {
+        console.log("No se pudo recuperar el canal de la caché");
+        return;
+    }
 
     try {
       await channel.messages.edit(msgid, {
@@ -108,7 +114,7 @@ export async function stop(req, res, client) {
       }
     });
 
-    await desactivarComando(getGameChannelPorGuild(guildId), getCollectedMessagePorGuild(guildId), guildId);
+    await desactivarComando(getGameChannelPorGuild(guildId), getCollectedMessagePorGuild(guildId), guildId, client);
     resetGuildGameState(guildId);
 
   } else {
