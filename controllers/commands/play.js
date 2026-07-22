@@ -17,7 +17,8 @@ import {
   setPartidaActiva, setGameCreator, clearGameCreator, clearCollectedMessagePorGuild, setCollectedMessagePorGuild,
   setGameChannelPorGuild, clearGameChannelPorGuild,
   setTimerPorGuild,
-  clearTimerPorGuild
+  clearTimerPorGuild,
+  getGameChannelPorGuild
 } from "../../app.js"
 import { getModeLabel, tPlay } from "../play_i18n.js";
 import { Timer } from "../../hg/clases.js";
