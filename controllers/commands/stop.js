@@ -26,16 +26,26 @@ function hasStopPermission(req, guildId) {
 }
 
 // funcion duplicada de play.js, pero es lo que hay para una beta
-async function desactivarComando(channelId, msgid, guildId, client) {
+async function desactivarComando(msgid, guildId, client) {
   console.log("Limpiando data desde comando stop...");
   //const messageFetched = await channel.messages.fetch(msgid);
   //console.log(messageFetched.components);
   if (getPartidaActiva(guildId) === 1) {  //si es 1 está en espera, si es 2 ya comenzó
     const language = getGuildPlayLanguage(guildId);
-    const channel = client.channels.cache.get(channelId); 
 
+    const savedChannelId = getGameChannelPorGuild(guildId);
+    console.log(`[DEBUG] Intentando recuperar canal para Guild ${guildId}. ID guardado:`, savedChannelId);
+    if (!savedChannelId) {
+        console.error("❌ ERROR CRÍTICO: savedChannelId es undefined. La variable global se borró.");
+        return;
+    }
+
+    const channel = client.channels.cache.get(savedChannelId) || await client.channels.fetch(savedChannelId).catch(err => {
+        console.error("❌ ERROR: No se pudo hacer fetch del canal a la API de Discord:", err);
+        return null;
+    });
     if (!channel) {
-        console.log("No se pudo recuperar el canal de la caché");
+        console.log("No se pudo recuperar el canal ni de la caché ni de la API.");
         return;
     }
 
@@ -114,7 +124,7 @@ export async function stop(req, res, client) {
       }
     });
 
-    await desactivarComando(getGameChannelPorGuild(guildId), getCollectedMessagePorGuild(guildId), guildId, client);
+    await desactivarComando(getCollectedMessagePorGuild(guildId), guildId, client);
     resetGuildGameState(guildId);
 
   } else {
