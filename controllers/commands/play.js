@@ -258,24 +258,17 @@ export async function play(req, res, client, selectedLanguage) {
     setPartidaActiva(1, guildId);
     setGameCreator(req.body.member.user.id, guildId);
 
-    const filter = (message) => message.author.id == '1067669524192702464' && message.content == tPlay(language, "game_started");
+    const filter = (message) => message.author.id == process.env.APP_ID && message.content == tPlay(language, "game_started");
     const collector = channel.createMessageCollector({ filter, time: 7000 });
     collector.on('collect', (message) => {
-      // console.log(`Collected message: ${message.content}`);
-      // console.log(`ID is ${message.id}`);
       idTimeout = message.id;
       setCollectedMessagePorGuild(idTimeout, guildId);
       setGameChannelPorGuild(channel.id, guildId);
       collector.stop();
     });
     collector.on('end', (collected) => {
-      console.log(`Collected ${collected.size} messages`);
+      // console.log(`Collected ${collected.size} messages`);
     });
-
-
-    // setTimeout(async function () {
-    //   await desactivarComando(channel, idTimeout, guildId);
-    // }, 600000);  //10 mins
 
     const timer = new Timer();
     setTimerPorGuild(timer, guildId);
@@ -286,8 +279,6 @@ export async function play(req, res, client, selectedLanguage) {
     }, 600000); // 10 mins
 
     return messagee;
-
-    //enviar
 
   } else {
 
