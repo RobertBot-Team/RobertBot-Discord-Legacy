@@ -269,7 +269,7 @@ export async function play(req, res, client, selectedLanguage) {
       collector.stop();
     });
     collector.on('end', (collected) => {
-      // console.log(`Collected ${collected.size} messages`);
+      console.log(`Collected ${collected.size} messages`);
     });
 
 
