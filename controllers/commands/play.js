@@ -551,6 +551,19 @@ async function desactivarComando2(req, client, msgid, partidaActiva) {
   partidaActiva.activa = 0;
 }
 
+function limpiarConstantesYMaps(guildId) {
+    let state = getGuildGameState(guildId);
+    limpiarPlayersPorGuild(guildId);
+    reiniciarContador(state);
+    limpiarTeams(state.teams);
+    reiniciarJugadoresFake();
+    setPartidaActiva(0, guildId);
+    clearGameCreator(guildId);
+    clearGuildPlayLanguage(guildId);
+    clearCollectedMessagePorGuild(guildId);
+    clearGameChannelPorGuild(guildId);
+}
+
 async function desactivarComando(channelId, msgid, guildId, client) {
   console.log("Limpiando data desde Timeout...");
   //const messageFetched = await channel.messages.fetch(msgid);
@@ -562,6 +575,7 @@ async function desactivarComando(channelId, msgid, guildId, client) {
 
     if (!channel) {
         console.log("No se pudo recuperar el canal de la caché");
+        limpiarConstantesYMaps(guildId);
         return;
     }
 
@@ -594,17 +608,7 @@ async function desactivarComando(channelId, msgid, guildId, client) {
       ]
     });
 
-    let state = getGuildGameState(guildId);
-
-    limpiarPlayersPorGuild(guildId);
-    reiniciarContador(state);
-    limpiarTeams(state.teams);
-    reiniciarJugadoresFake();
-    setPartidaActiva(0, guildId);
-    clearGameCreator(guildId);
-    clearGuildPlayLanguage(guildId);
-    clearCollectedMessagePorGuild(guildId);
-    clearGameChannelPorGuild(guildId);
+  limpiarConstantesYMaps(guildId);
   }
 }
 
