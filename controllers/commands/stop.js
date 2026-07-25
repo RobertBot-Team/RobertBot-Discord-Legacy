@@ -25,6 +25,22 @@ function hasStopPermission(req, guildId) {
   return (permissionValue & admin) !== 0n || (permissionValue & manageGuild) !== 0n;
 }
 
+function limpiarConstantesYMaps(guildId) {
+  let state = getGuildGameState(guildId);
+  const timer = getTimerPorGuild(guildId);
+  timer.stopTimer();
+  clearTimerPorGuild(guildId);
+  limpiarPlayersPorGuild(guildId);
+  reiniciarContador(state);
+  limpiarTeams(state.teams);
+  reiniciarJugadoresFake();
+  setPartidaActiva(0, guildId);
+  clearGameCreator(guildId);
+  clearGuildPlayLanguage(guildId);
+  clearCollectedMessagePorGuild(guildId);
+  clearGameChannelPorGuild(guildId);
+}
+
 // funcion duplicada de play.js, pero es lo que hay para una beta
 async function desactivarComando(msgid, guildId, client) {
   console.log("Limpiando data desde comando stop...");
@@ -37,15 +53,18 @@ async function desactivarComando(msgid, guildId, client) {
     console.log(`[DEBUG] Intentando recuperar canal para Guild ${guildId}. ID guardado:`, savedChannelId);
     if (!savedChannelId) {
         console.error("❌ ERROR CRÍTICO: savedChannelId es undefined. La variable global se borró.");
+        limpiarConstantesYMaps(guildId)
         return;
     }
 
     const channel = client.channels.cache.get(savedChannelId) || await client.channels.fetch(savedChannelId).catch(err => {
         console.error("❌ ERROR: No se pudo hacer fetch del canal a la API de Discord:", err);
+        limpiarConstantesYMaps(guildId)
         return null;
     });
     if (!channel) {
         console.log("No se pudo recuperar el canal ni de la caché ni de la API.");
+        limpiarConstantesYMaps(guildId)
         return;
     }
 
@@ -83,19 +102,7 @@ async function desactivarComando(msgid, guildId, client) {
     }
   }
 
-  let state = getGuildGameState(guildId);
-  const timer = getTimerPorGuild(guildId);
-  timer.stopTimer();
-  clearTimerPorGuild(guildId);
-  limpiarPlayersPorGuild(guildId);
-  reiniciarContador(state);
-  limpiarTeams(state.teams);
-  reiniciarJugadoresFake();
-  setPartidaActiva(0, guildId);
-  clearGameCreator(guildId);
-  clearGuildPlayLanguage(guildId);
-  clearCollectedMessagePorGuild(guildId);
-  clearGameChannelPorGuild(guildId);
+  limpiarConstantesYMaps(guildId);
 }
 
 export async function stop(req, res, client) {
