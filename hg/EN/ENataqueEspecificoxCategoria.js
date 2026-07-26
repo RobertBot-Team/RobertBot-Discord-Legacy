@@ -6043,15 +6043,13 @@ eventosAtaqueEspecificoxCategoria[129] = async (jugador, players, victima, req, 
 eventosAtaqueEspecificoxCategoria[130] = async (jugador, players, victima, req, channel, playersReal) => {
   let evento = `"Wanna peel it for me?" ${jugador.getNombre()} asks ${victima.getNombre()} to peel their banana. ${victima.getNombre()} calls them out for harassment, and everyone runs off to chase them. Hours later, ${jugador.getNombre()} turns up in a black bag.`;
 
-  jugador.setHP(0); //le quita de vida el danio base de su arma. si queda en negativo pone 0
-
   let json = createObject(evento, [jugador.getNombre(), victima.getNombre()],
     [jugador.getID(), victima.getID()],
     [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, playersReal),
     await cargarAvatar(victima.getFoto(), victima.getID(), victima.getTieneOtraFoto(), req.body.channel.guild_id, playersReal)],
-    [jugador.getHP(), 0], [0, victima.getHP()], []);
+    [0, victima.getHP()], [jugador.getHP(), 0], []);
 
-
+  jugador.setHP(0); //le quita de vida el danio base de su arma. si queda en negativo pone 0
 
   jugador.alive = 0;
 

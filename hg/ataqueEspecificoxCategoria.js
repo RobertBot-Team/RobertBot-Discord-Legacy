@@ -6524,15 +6524,14 @@ eventosAtaqueEspecificoxCategoria[130] = async (jugador, players, victima, req, 
 
   let quedar = pluralQuedar(jugador.getArma());
 
-  jugador.setHP(0); //le quita de vida el danio base de su arma. si queda en negativo pone 0
-
   let json = createObject(evento, [jugador.getNombre(), victima.getNombre()],
     [jugador.getID(), victima.getID()],
     [await cargarAvatar(jugador.getFoto(), jugador.getID(), jugador.getTieneOtraFoto(), req.body.channel.guild_id, playersReal),
     await cargarAvatar(victima.getFoto(), victima.getID(), victima.getTieneOtraFoto(), req.body.channel.guild_id, playersReal)],
-    [jugador.getHP(), 0], [0, victima.getHP()], []);
+    [0, victima.getHP()], [jugador.getHP(), 0], []);
 
 
+  jugador.setHP(0); //le quita de vida el danio base de su arma. si queda en negativo pone 0
 
   jugador.alive = 0;
 
