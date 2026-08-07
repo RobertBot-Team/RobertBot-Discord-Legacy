@@ -7090,9 +7090,9 @@ eventosAtaqueEspecificoxCategoria[154] = async (jugador, players, victima, req, 
 // "rompibles"
 eventosAtaqueEspecificoxCategoria[155] = async (jugador, players, victima, req, channel, playersReal) => {
   let pronoun = pronounIsAre(jugador.getArma());
-  let pronounItThem = pronounItThem(jugador.getArma());
+  let itThem = pronounItThem(jugador.getArma());
 
-  let evento = ` ${jugador.getNombre()} grabs their ${jugador.getArma()["name"]} and smashes ${pronounItThem} on ${victima.getNombre()}'s head.`;
+  let evento = ` ${jugador.getNombre()} grabs their ${jugador.getArma()["name"]} and smashes ${itThem} on ${victima.getNombre()}'s head.`;
 
   let danio = jugador.getArma()["danio"] + danioExtra(1, 100);
 

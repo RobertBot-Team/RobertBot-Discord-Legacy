@@ -644,14 +644,16 @@ export async function cargarAvatar(foto, id, tieneOtraFoto, guild, players) {
   let jugador = null;
   let guildMember = null;
 
-  //let players = "NO TENEMOS EL ARRAY DE PLAYERS AYUDA";
-  ////console.log(`Estoy en cargarAvatar y quizas entro`);
   if (id.length >= 5) {
-    guildMember = await cliente.guilds.cache.get(guild).members.fetch(id);
-    ////console.log(`el id es: ${id}`);
-    ////console.log(guildMember);
+    try {
+      guildMember = await cliente.guilds.cache.get(guild).members.fetch(id);
+    } catch (err) {
+      // Error: user not found in guild
+      console.warn(`Could not fetch member ${id}:`, err);
+      return await loadImage(`https://cdn.discordapp.com/embed/avatars/0.png?size=1024`);
+    }
 
-    //re-verificar el avatar por si cambió en mitad de la partida
+    // re-verificar el avatar por si cambió en mitad de la partida
     if (guildMember.user.avatar != null) {
       if (guildMember.avatar != null) {
         jugador = buscarPorID(id, players);
@@ -667,8 +669,6 @@ export async function cargarAvatar(foto, id, tieneOtraFoto, guild, players) {
         let user_id = BigInt(guildMember.user.id);
         let avatar = ((user_id >> 22n) % 6n).toString();
 
-        //let avatar = (((user_id)>>22)%6).toString();
-
         jugador = buscarPorID(id, players);
         if (jugador) jugador.setFoto(avatar);
         //sino, tiene username viejo con discriminador de 4 digitos
@@ -679,25 +679,37 @@ export async function cargarAvatar(foto, id, tieneOtraFoto, guild, players) {
         if (jugador) jugador.setFoto(lastNumber);
       }
     }
-    ////console.log(jugador.getFoto());
   }
 
-  ////console.log(guildMember);
-  let avatar;
+  let imageUrl;
   if (id.length < 5) {
     //jugador fakes
-    avatar = await loadImage(`${foto}?size=1024`);
+    imageUrl = `${foto}?size=1024`;
   } else {
     if (foto.length == 1) {
-      avatar = await loadImage(`https://cdn.discordapp.com/embed/avatars/${jugador.getFoto()}.png?size=1024`);
+      imageUrl = `https://cdn.discordapp.com/embed/avatars/${jugador.getFoto()}.png?size=1024`;
     } else if (tieneOtraFoto != null) {
-      avatar = await loadImage(`https://cdn.discordapp.com/guilds/${guild}/users/${id}/avatars/${jugador.getFoto()}.png?size=1024`)
+      imageUrl = `https://cdn.discordapp.com/guilds/${guild}/users/${id}/avatars/${jugador.getFoto()}.png?size=1024`;
     } else {
-      avatar = await loadImage(`https://cdn.discordapp.com/avatars/${id}/${jugador.getFoto()}.png?size=1024`);
+      imageUrl = `https://cdn.discordapp.com/avatars/${id}/${jugador.getFoto()}.png?size=1024`;
     }
   }
 
-  return avatar;
+  try {
+    return await loadImage(imageUrl);
+  } catch (err) {
+    console.error(`Failed to load avatar for user ${id}:`, imageUrl, err);
+
+    // Fallback to Discord's generic avatar
+    try {
+      return await loadImage(
+        `https://cdn.discordapp.com/embed/avatars/0.png?size=1024`
+      );
+    } catch (fallbackErr) {
+      console.error('Failed to load fallback avatar:', fallbackErr);
+      throw fallbackErr;
+    }
+  }
 }
 
 export function cantidadArmas() {
