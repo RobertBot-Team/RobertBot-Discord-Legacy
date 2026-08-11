@@ -47,6 +47,7 @@ import {
 // import { SlashCommandBuilder } from 'discord.js';
 import { DEFAULT_PLAY_LANGUAGE, getPlayLanguageFromOptions } from "./controllers/play_i18n.js";
 import logger from "./logger.js";
+import { Api } from '@top-gg/sdk';
 
 // Create an express app
 const app = express();
@@ -287,6 +288,20 @@ client.once(Events.ClientReady, c => {
 client.login(process.env.DISCORD_TOKEN);
 
 logger.info("Bot starting...");
+
+const api = new Api(process.env.TOPGG_TOKEN);
+
+client.on('guildCreate', () => {
+    api.postMetrics({
+        serverCount: client.guilds.cache.size
+    });
+});
+
+client.on('guildDelete', () => {
+    api.postMetrics({
+        serverCount: client.guilds.cache.size
+    });
+});
 
 app.listen(PORT, () => {
   console.log("Listening on port", PORT);
