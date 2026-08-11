@@ -292,13 +292,13 @@ logger.info("Bot starting...");
 const api = new Api(process.env.TOPGG_TOKEN);
 
 client.on('guildCreate', () => {
-    api.postStats({
+    api.postMetrics({
         serverCount: client.guilds.cache.size
     });
 });
 
 client.on('guildDelete', () => {
-    api.postStats({
+    api.postMetrics({
         serverCount: client.guilds.cache.size
     });
 });
