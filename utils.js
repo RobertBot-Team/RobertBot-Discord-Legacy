@@ -1318,7 +1318,7 @@ export async function funcionCrearImagenCero(json, channel, fondo) {
         .addFields(
           { name: ' ', value: `${textosExtra}` })
         .setTimestamp()
-        .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+        .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' })
       ],
       files: [attachment]
     });
@@ -1331,7 +1331,7 @@ export async function funcionCrearImagenCero(json, channel, fondo) {
         .setColor(color)
         .setDescription(`**${json.evento}**\n`)
         .setTimestamp()
-        .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+        .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' })
       ],
       files: [attachment]
     });
@@ -1371,7 +1371,7 @@ export async function funcionCrearImagen(json, tipoEvento, channel) {
         .addFields(
           { name: ' ', value: `${textosExtra}` })
         .setTimestamp()
-        .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+        .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' })
       ],
       files: [attachment]
     });
@@ -1384,7 +1384,7 @@ export async function funcionCrearImagen(json, tipoEvento, channel) {
         .setColor(color)
         .setDescription(`**${json.evento}**\n`)
         .setTimestamp()
-        .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+        .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' })
       ],
       files: [attachment]
     });
@@ -1920,7 +1920,7 @@ export function generarEmbedTexto(color, texto) {
     .setColor(color)
     .setTitle(texto)
     .setTimestamp()
-    .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' });
+    .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' });
 
   return embed;
 }
@@ -1930,7 +1930,7 @@ export function generarEmbedDescripcion(color, texto) {
     .setColor(color)
     .setDescription(`**${texto}**`)
     .setTimestamp()
-    .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' });
+    .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' });
 
   return embed;
 }
@@ -1940,7 +1940,7 @@ export function generarEmbedImagen(color, url) {
     .setColor(color)
     .setImage(url)
     .setTimestamp()
-    .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' });
+    .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' });
 
   return embed;
 }
