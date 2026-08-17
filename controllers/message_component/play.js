@@ -157,7 +157,7 @@ export async function messagePlay_1(req, res, client) {
             playersList: jugadoresUnidos,
           }))
           .setTimestamp()
-          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' })
         ],
     });
 
