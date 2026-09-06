@@ -10,7 +10,7 @@ import {
   reiniciarContador,
   reiniciarJugadoresFake
 } from "../../utils.js"
-import { getGuildGameState, limpiarPlayersPorGuild } from "../message_component/play.js"
+import { getGuildGameState, limpiarPlayersPorGuild, messagePlay_2 } from "../message_component/play.js"
 import { EmbedBuilder } from "discord.js";
 import {
   clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, setGuildPlayLanguage,
@@ -273,7 +273,7 @@ export async function play(req, res, client, selectedLanguage) {
     const timer = new Timer();
     setTimerPorGuild(timer, guildId);
     timer.startTimer(async function () {
-      await timerCallback(channel.id, idTimeout, guildId, client);
+      await timerCallback(req, res, client, channel.id, idTimeout, guildId);
     }, 600000); // 10 mins
 
     return messagee;
@@ -300,9 +300,10 @@ export async function play(req, res, client, selectedLanguage) {
         }, timeout);*/
 }
 
-export async function timerCallback(channelId, msgid, guildId, client) {
-  console.log("Timer desactivado. Esto NO se verá si se detiene antes.");
-  await desactivarComando(channelId, msgid, guildId, client);
+export async function timerCallback(req, res, client, channelId, msgid, guildId) {
+  console.log("Partida iniciada. Timer desactivado Esto NO se verá si se detiene antes.");
+  //await desactivarComando(channelId, msgid, guildId, client);
+  messagePlay_2(req, res, client);
   clearTimerPorGuild(guildId);
 }
 
