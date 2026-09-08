@@ -242,7 +242,7 @@ app.post("/interactions", verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
         messagePlay_1(req, res, client);
         break;
       case "my_button_begin":
-        await messagePlay_2(req, res, client);
+        await messagePlay_2(req, res, client, req.body.message.id);
         break;
       case "my_button_slow_mode":
         await messageSlowMode(req, res, client);

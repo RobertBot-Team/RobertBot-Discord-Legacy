@@ -177,7 +177,7 @@ export async function messagePlay_1(req, res, client) {
   }
 };
 
-export async function messagePlay_2(req, res, client) {
+export async function messagePlay_2(req, res, client, messageID) {
   const gameId = crypto.randomUUID();
 
   const guildId = getGuildIdFromReq(req);
@@ -199,7 +199,7 @@ export async function messagePlay_2(req, res, client) {
 
     let modo = getModeLabel(language, gameState.slowMode);
 
-    channel.messages.edit(req.body.message.id, {
+    channel.messages.edit(messageID, {
       components: [
         {
           type: MessageComponentTypes.ACTION_ROW,

@@ -273,7 +273,7 @@ export async function play(req, res, client, selectedLanguage) {
     const timer = new Timer();
     setTimerPorGuild(timer, guildId);
     timer.startTimer(async function () {
-      await timerCallback(req, res, client, channel.id, idTimeout, guildId);
+      await timerCallback(req, res, client, channel.id, idTimeout, guildId, messagee);
     }, 600000); // 10 mins
 
     return messagee;
@@ -300,10 +300,11 @@ export async function play(req, res, client, selectedLanguage) {
         }, timeout);*/
 }
 
-export async function timerCallback(req, res, client, channelId, msgid, guildId) {
+export async function timerCallback(req, res, client, channelId, msgid, guildId, message) {
   console.log("Partida iniciada. Timer desactivado Esto NO se verá si se detiene antes.");
   //await desactivarComando(channelId, msgid, guildId, client);
-  messagePlay_2(req, res, client);
+  console.log("Message: ", message);
+  messagePlay_2(req, res, client, message.id);
   clearTimerPorGuild(guildId);
 }
 
