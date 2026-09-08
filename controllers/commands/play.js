@@ -571,10 +571,15 @@ async function desactivarComando(channelId, msgid, guildId, client) {
   if (getPartidaActiva(guildId) === 1) {  //si es 1 está en espera, si es 2 ya comenzó
     const language = getGuildPlayLanguage(guildId);
 
-    const channel = client.channels.cache.get(channelId); 
+const channel = client.channels.cache.get(channelId) ?? await client.channels.fetch(channelId).catch(err => {
+        if (err.code !== 10003) {
+            console.error("Error al hacer fetch del canal desde el Timeout:", err);
+        }
+        return null;
+    });
 
     if (!channel) {
-        console.log("No se pudo recuperar el canal de la caché");
+        console.log(`No se pudo recuperar el canal ${channelId}. Probablemente fue eliminado. Limpiando data...`);
         limpiarConstantesYMaps(guildId);
         return;
     }
@@ -606,6 +611,8 @@ async function desactivarComando(channelId, msgid, guildId, client) {
           ],
         },
       ]
+    }).catch(err => {
+      console.warn("No se pudo editar el mensaje del Timeout (quizás fue eliminado):", err.message);
     });
 
   limpiarConstantesYMaps(guildId);
