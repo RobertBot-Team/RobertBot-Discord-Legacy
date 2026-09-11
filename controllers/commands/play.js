@@ -255,6 +255,17 @@ export async function play(req, res, client, selectedLanguage) {
       },
     })
 
+    const message = await fetch(
+        `https://discord.com/api/v10/webhooks/${req.body.application_id}/${req.body.token}/messages/@original`,
+        {
+            headers: {
+                Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+            }
+        }
+    ).then(r => r.json());
+
+    console.log("Message ID:", message.id);
+
     setPartidaActiva(1, guildId);
     setGameCreator(req.body.member.user.id, guildId);
 
@@ -273,7 +284,7 @@ export async function play(req, res, client, selectedLanguage) {
     const timer = new Timer();
     setTimerPorGuild(timer, guildId);
     timer.startTimer(async function () {
-      await timerCallback(req, res, client, channel.id, idTimeout, guildId, messagee);
+      await timerCallback(req, res, client, channel.id, idTimeout, guildId, message);
     }, 600000); // 10 mins
 
     return messagee;
