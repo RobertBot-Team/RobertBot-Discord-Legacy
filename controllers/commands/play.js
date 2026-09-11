@@ -211,7 +211,7 @@ export async function play(req, res, client, selectedLanguage) {
 
   if (getPartidaActiva(guildId) == 0) {
 
-    let messagee = res.send({
+    let messagee = await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
         content: tPlay(language, "game_started"),
