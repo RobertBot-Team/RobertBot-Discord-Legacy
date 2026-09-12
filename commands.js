@@ -106,6 +106,14 @@ export const PLAY_COMMAND = {
       required: false,
       choices: [
         {
+          name: '5 min',
+          value: '300000',
+        },
+        {
+          name: '10 min',
+          value: '600000',
+        },
+        {
           name: '30 min',
           value: '1800000',
         },

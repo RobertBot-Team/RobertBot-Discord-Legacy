@@ -184,6 +184,8 @@ app.post("/interactions", verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
           const selectedLanguage = getPlayLanguageFromOptions(options);
           const autoStartOption = options.find((option) => option?.name === "auto_start");
           const autoStartDelay = {
+            "300000": 300000,
+            "600000": 600000,
             "1800000": 1800000,
             "3600000": 3600000,
             "10800000": 10800000,
