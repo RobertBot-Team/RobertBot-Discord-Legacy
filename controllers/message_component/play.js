@@ -638,7 +638,8 @@ export async function messageSlowMode(req, res, client) {
   const guildId = getGuildIdFromReq(req);
   const language = getGuildPlayLanguage(guildId);
   const gameState = getGuildGameState(guildId);
-  if (userId === req.body.member.user.id) {
+
+  if (req.body.message.interaction.user.id === req.body.member.user.id) {
     gameState.slowMode = !gameState.slowMode;
 
     const channel = client.channels.cache.get(`${req.body.channel_id}`);
