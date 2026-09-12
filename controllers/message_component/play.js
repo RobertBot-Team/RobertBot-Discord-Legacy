@@ -190,11 +190,13 @@ export async function messagePlay_2(req, res, client, messageID) {
   let embed;
   let embed2;
   let embed3;
+  let autoPlay = false;
 
   let userId;
   if(req.body.message){
     userId = req.body.message.interaction.user.id;
   }else{
+    autoPlay = true;
     userId = req.body.member.user.id;
   }
 
@@ -243,9 +245,8 @@ export async function messagePlay_2(req, res, client, messageID) {
       players: players.length
     });
 
-    await res.send({
-      type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: { content: tPlay(language, "battle_coming") },
+    await channel.send({
+      content: tPlay(language, "battle_coming")
     });
 
     setPartidaActiva(2, guildId);
@@ -533,23 +534,36 @@ export async function messagePlay_2(req, res, client, messageID) {
 
 
   } else if (userId === req.body.member.user.id && players.length < 2) {
-    await res.send({
-      type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: {
-        content: tPlay(language, "need_two_players"),
-        flags: InteractionResponseFlags.EPHEMERAL
-      }
-    })
+    if (autoPlay) {
+      await res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: tPlay(language, "need_two_players"),
+          flags: InteractionResponseFlags.EPHEMERAL
+        }
+      })
+    } else {
+      await channel.send({
+        content: tPlay(language, "need_two_players")
+      });
+    }
 
   } else if (userId != req.body.member.user.id && req.body.member.user.id == "435210238711300107") {
     gameState.modoK = 1;
-    await res.send({
-      type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: {
-        content: tPlay(language, "mode_k_enabled"),
-        flags: InteractionResponseFlags.EPHEMERAL
-      }
-    })
+    if(autoPlay) {
+      await res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: tPlay(language, "mode_k_enabled"),
+          flags: InteractionResponseFlags.EPHEMERAL
+        }
+      })
+    } else {
+      await channel.send({
+        content: tPlay(language, "mode_k_enabled")
+      });
+    }
+
   } else if (userId === req.body.member.user.id && players.length >= 1 && gameState.modoK == 1) {
 
 
@@ -586,9 +600,8 @@ export async function messagePlay_2(req, res, client, messageID) {
       ]
     });
 
-    await res.send({
-      type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: { content: tPlay(language, "game_starting") },
+    await channel.send({
+      content: tPlay(language, "game_starting"),
     });
 
     setPartidaActiva(2, guildId);
@@ -603,17 +616,20 @@ export async function messagePlay_2(req, res, client, messageID) {
     channel.send({ embeds: [embed] });
 
   } else {
-    await res.send({
-      type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: {
+    if(autoPlay) {
+      await res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: tPlay(language, "no_permission_start_battle"),
+          flags: InteractionResponseFlags.EPHEMERAL
+        }
+      })
+    } else{
+      await channel.send({
         content: tPlay(language, "no_permission_start_battle"),
-        flags: InteractionResponseFlags.EPHEMERAL
-      }
-    })
-
+      });
+    }
   }
-  //console.log(req.body.message);
-  //console.log(req.body.member);
 };
 
 export async function messageSlowMode(req, res, client) {
