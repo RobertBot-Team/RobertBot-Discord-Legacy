@@ -191,11 +191,17 @@ export async function messagePlay_2(req, res, client, messageID) {
   let embed2;
   let embed3;
 
+  if(req.body.message){
+    let userId = req.body.message.interaction.user.id;
+  }else{
+    let userId = req.body.member.user.id;
+  }
+
   // console.log(`Idioma: ${language}`);
 
   const channel = client.channels.cache.get(`${req.body.channel_id}`);
   //console.log(req.body);
-  if (req.body.message.interaction.user.id === req.body.member.user.id && players.length >= 2 && gameState.modoK == 0) {      //luego >=2
+  if (userId === req.body.member.user.id && players.length >= 2 && gameState.modoK == 0) {      //luego >=2
 
     let modo = getModeLabel(language, gameState.slowMode);
 
@@ -525,7 +531,7 @@ export async function messagePlay_2(req, res, client, messageID) {
     /////////////////////////////////
 
 
-  } else if (req.body.message.interaction.user.id === req.body.member.user.id && players.length < 2) {
+  } else if (userId === req.body.member.user.id && players.length < 2) {
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
@@ -534,7 +540,7 @@ export async function messagePlay_2(req, res, client, messageID) {
       }
     })
 
-  } else if (req.body.message.interaction.user.id != req.body.member.user.id && req.body.member.user.id == "435210238711300107") {
+  } else if (userId != req.body.member.user.id && req.body.member.user.id == "435210238711300107") {
     gameState.modoK = 1;
     await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -543,7 +549,7 @@ export async function messagePlay_2(req, res, client, messageID) {
         flags: InteractionResponseFlags.EPHEMERAL
       }
     })
-  } else if (req.body.message.interaction.user.id === req.body.member.user.id && players.length >= 1 && gameState.modoK == 1) {
+  } else if (userId === req.body.member.user.id && players.length >= 1 && gameState.modoK == 1) {
 
 
     let modo = getModeLabel(language, gameState.slowMode);
@@ -613,7 +619,7 @@ export async function messageSlowMode(req, res, client) {
   const guildId = getGuildIdFromReq(req);
   const language = getGuildPlayLanguage(guildId);
   const gameState = getGuildGameState(guildId);
-  if (req.body.message.interaction.user.id === req.body.member.user.id) {
+  if (userId === req.body.member.user.id) {
     gameState.slowMode = !gameState.slowMode;
 
     const channel = client.channels.cache.get(`${req.body.channel_id}`);
