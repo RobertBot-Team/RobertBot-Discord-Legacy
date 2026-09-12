@@ -191,10 +191,11 @@ export async function messagePlay_2(req, res, client, messageID) {
   let embed2;
   let embed3;
 
+  let userId;
   if(req.body.message){
-    let userId = req.body.message.interaction.user.id;
+    userId = req.body.message.interaction.user.id;
   }else{
-    let userId = req.body.member.user.id;
+    userId = req.body.member.user.id;
   }
 
   // console.log(`Idioma: ${language}`);
