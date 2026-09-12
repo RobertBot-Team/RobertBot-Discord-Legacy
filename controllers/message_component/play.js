@@ -554,7 +554,7 @@ export async function messagePlay_2(req, res, client, messageID) {
 
     let modo = getModeLabel(language, gameState.slowMode);
 
-    channel.messages.edit(req.body.message.id, {
+    channel.messages.edit(messageID, {
       components: [
         {
           type: MessageComponentTypes.ACTION_ROW,
