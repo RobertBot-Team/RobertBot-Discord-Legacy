@@ -314,7 +314,7 @@ export async function play(req, res, client, selectedLanguage) {
 export async function timerCallback(req, res, client, channelId, msgid, guildId, message) {
   console.log("Partida iniciada. Timer desactivado Esto NO se verá si se detiene antes.");
   //await desactivarComando(channelId, msgid, guildId, client);
-  console.log("Message: ", message);
+  //console.log("Message: ", message);
   messagePlay_2(req, res, client, message.id);
   clearTimerPorGuild(guildId);
 }

@@ -252,7 +252,9 @@ export async function messagePlay_2(req, res, client, messageID) {
     setPartidaActiva(2, guildId);
 
     const timer = getTimerPorGuild(guildId);
-    timer.stopTimer();
+    if(timer) {
+      timer.stopTimer();
+    }
 
     /////////////////////////////////
 
