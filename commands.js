@@ -99,6 +99,38 @@ export const PLAY_COMMAND = {
         },
       ],
     },
+    {
+      type: 3,
+      name: 'auto_start',
+      description: 'Tiempo de espera para iniciar la partida',
+      required: false,
+      choices: [
+        {
+          name: '30 min',
+          value: '1800000',
+        },
+        {
+          name: '1 h',
+          value: '3600000',
+        },
+        {
+          name: '3 h',
+          value: '10800000',
+        },
+        {
+          name: '6 h',
+          value: '21600000',
+        },
+        {
+          name: '12 h',
+          value: '43200000',
+        },
+        {
+          name: '24 h',
+          value: '86400000',
+        },
+      ],
+    },
   ],
   type: 1,
 };

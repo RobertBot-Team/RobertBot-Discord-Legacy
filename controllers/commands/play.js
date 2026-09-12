@@ -188,8 +188,7 @@ const sendMessage = async (res, message) => {
 ///
 ///
 ///
-export async function play(req, res, client, selectedLanguage) {
-  const language = selectedLanguage || getGuildPlayLanguage(guildId);
+export async function play(req, res, client, selectedLanguage, autoStartDelay = 600000) {
   let color = randomHexColor();
   let idTimeout;
 
@@ -206,6 +205,7 @@ export async function play(req, res, client, selectedLanguage) {
   }
 
   const guildId = req.body.guild_id || req.body.channel?.guild_id || channel?.guildId || "global";
+  const language = selectedLanguage || getGuildPlayLanguage(guildId);
 
   setGuildPlayLanguage(language, guildId);
 
@@ -285,7 +285,7 @@ export async function play(req, res, client, selectedLanguage) {
     setTimerPorGuild(timer, guildId);
     timer.startTimer(async function () {
       await timerCallback(req, res, client, channel.id, idTimeout, guildId, message);
-    }, 600000); // 10 mins
+    }, autoStartDelay);
 
     return messagee;
 
