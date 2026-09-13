@@ -57,11 +57,14 @@ async function desactivarComando(msgid, guildId, client) {
         return;
     }
 
-    const channel = client.channels.cache.get(savedChannelId) || await client.channels.fetch(savedChannelId).catch(err => {
-        console.error("❌ ERROR: No se pudo hacer fetch del canal a la API de Discord:", err);
-        limpiarConstantesYMaps(guildId)
+    const channel = client.channels.cache.get(savedChannelId) ?? await client.channels.fetch(savedChannelId).catch(err => {
+        if (err.code !== 10003) { // 10003 = Canal borrado
+            console.error("❌ ERROR: No se pudo hacer fetch del canal a la API de Discord:", err);
+        }
+        limpiarConstantesYMaps(guildId);
         return null;
     });
+
     if (!channel) {
         console.log("No se pudo recuperar el canal ni de la caché ni de la API.");
         limpiarConstantesYMaps(guildId)

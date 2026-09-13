@@ -94,14 +94,24 @@ export async function messagePlay_1(req, res, client) {
     //uso el nombre en la guild
     nick = req.body.member.nick;
   }
-  //console.log(req.body);
 
-  const channel = client.channels.cache.get(`${req.body.channel_id}`);
+  const channel = client.channels.cache.get(req.body.channel_id) ?? await client.channels.fetch(req.body.channel_id).catch(err => {
+        console.warn("No se pudo obtener el canal al intentar unir a un jugador:", err.message);
+        return null;
+    });
+
+  if (!channel) {
+      return res.send({
+          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          data: {
+              content: "❌ Hubo un error al intentar unirte a la partida. Es posible que el canal original ya no exista.",
+              flags: InteractionResponseFlags.EPHEMERAL
+          }
+      });
+  }
 
   //channel.send(`Hay ${cantidadArmas()} armas registradas.`);
-  //console.dir(GlobalFonts.families, {'maxArrayLength': null});
-  //console.dir(JSON.stringify(GlobalFonts.families), {'maxArrayLength': null});
-  //console.log(req.body);
+
   if (req.body.member.user.avatar != null) {
     if (req.body.member.avatar != null) {
       newPlayer = new Jugador(nick, req.body.member.user.id, req.body.member.avatar);
@@ -160,6 +170,8 @@ export async function messagePlay_1(req, res, client) {
           .setTimestamp()
           .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' })
         ],
+    }).catch(err => {
+        console.warn("No se pudo editar el mensaje de la partida al agregar jugador: ", err.message);
     });
 
     await res.send({
@@ -201,10 +213,21 @@ export async function messagePlay_2(req, res, client, messageID) {
     userId = req.body.member.user.id;
   }
 
-  // console.log(`Idioma: ${language}`);
+  const channel = client.channels.cache.get(req.body.channel_id) ?? await client.channels.fetch(req.body.channel_id).catch(err => {
+      console.warn("No se pudo obtener el canal para iniciar la partida (messagePlay_2): ", err.message);
+      return null;
+  });
 
-  const channel = client.channels.cache.get(`${req.body.channel_id}`);
-  //console.log(req.body);
+  if (!channel) {
+      return res.send({
+          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          data: {
+              content: "❌ Hubo un error crítico: el canal parece haber sido eliminado. Intenta iniciar el juego nuevamente con /play.",
+              flags: InteractionResponseFlags.EPHEMERAL
+          }
+      });
+  }
+
   if (userId === req.body.member.user.id && players.length >= 2 && gameState.modoK == 0) {      //luego >=2
 
     let modo = getModeLabel(language, gameState.slowMode);
@@ -238,6 +261,8 @@ export async function messagePlay_2(req, res, client, messageID) {
           ],
         },
       ]
+    }).catch(err => {
+        console.warn("No se pudo editar el mensaje de los botones al iniciar la partida: ", err.message);
     });
 
     logger.info("Game started", {
@@ -644,7 +669,20 @@ export async function messageSlowMode(req, res, client) {
   if (req.body.message.interaction.user.id === req.body.member.user.id) {
     gameState.slowMode = !gameState.slowMode;
 
-    const channel = client.channels.cache.get(`${req.body.channel_id}`);
+    const channel = client.channels.cache.get(req.body.channel_id) ?? await client.channels.fetch(req.body.channel_id).catch(err => {
+        console.warn("No se pudo obtener el canal para el Slow Mode: ", err.message);
+        return null;
+    });
+
+    if (!channel) {
+        return res.send({
+            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            data: {
+                content: "❌ No se pudo cambiar el modo. El canal ya no es accesible.",
+                flags: InteractionResponseFlags.EPHEMERAL
+            }
+        });
+    }
 
     let modo = getModeLabel(language, gameState.slowMode);
 
@@ -674,6 +712,9 @@ export async function messageSlowMode(req, res, client) {
           ],
         },
       ]
+    }).catch(err => {
+        // Protegemos el bot por si justo borraron el mensaje al hacer clic en el botón
+        console.warn("No se pudo editar el mensaje del Slow Mode: ", err.message);
     });
 
     await res.send({
