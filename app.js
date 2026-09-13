@@ -317,20 +317,13 @@ client.on('guildDelete', () => {
 });
 
 client.on('messageCreate', async (message) => {
-  console.log("ms received: ", message.content);
     if (message.author.bot) return;
-
-    const [command, ...args] = message.content.trim().split(/\s+/);
-
-    if (command !== 'rb!say') return;
-console.log("proper msg: ", message.content);
-console.log("owners: ", process.env.OWNERS_ID);
+    if (!message.content.startsWith('rb!say')) return;
 
     const owners = process.env.OWNERS_ID.split(',');
     if (!owners.includes(message.author.id)) return;
 
-    const text = args.join(' ');
-
+    const text = message.content.slice('rb!say'.length).trim();
     if (!text) return;
 
     await message.channel.send(text);
