@@ -191,6 +191,7 @@ const sendMessage = async (res, message) => {
 export async function play(req, res, client, selectedLanguage, autoStartDelay = 600000) {
   let color = randomHexColor();
   let idTimeout;
+  const unixTimestamp = Math.floor((Date.now()+autoStartDelay) / 1000);
 
   const channel =
     client.channels.cache.get(req.body.channel_id) ??
@@ -248,7 +249,7 @@ export async function play(req, res, client, selectedLanguage, autoStartDelay = 
 
         embeds: [new EmbedBuilder()
           .setColor(color)
-          .setDescription(tPlay(language, "joined_players"))
+          .setDescription(tPlay(language, "joined_players", { time: unixTimestamp }))
           .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' })
         ],
 
