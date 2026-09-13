@@ -21,8 +21,9 @@ import {
   STOP_COMMAND,
   HELP_COMMAND,
   //JOIN_COMMAND,
+  SAY_COMMAND,
   HasGlobalCommands,
-  // HasGuildCommands
+  HasGuildCommands
 } from "./commands.js";
 // import {
 //   Jugador
@@ -230,6 +231,32 @@ app.post("/interactions", verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
         const helpLanguage = getPlayLanguageFromOptions(req.body.data?.options || []);
         return await help(req, res, helpLanguage);
         break;
+       case "say": {
+            const owners = process.env.OWNERS_ID.split(',');
+            const userId = req.body.member?.user?.id;
+
+            if (!owners.includes(userId)) {
+                return res.send({
+                    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                    data: {
+                        content: "❌ You don't have permission to use this command.",
+                        flags: InteractionResponseFlags.EPHEMERAL
+                    }
+                });
+            }
+
+            const text = req.body.data?.options?.find(
+                option => option.name === "mensaje"
+            )?.value;
+
+            if (!text) return;
+
+            const channel = client.channels.cache.get(req.body.channel_id);
+
+            if (!channel) return;
+
+            await channel.send(text);
+        }
 
     };
   }
@@ -327,8 +354,13 @@ app.listen(PORT, () => {
     //LYNN_COMMAND,
     STOP_COMMAND,
     // CHALLENGE_COMMAND,
-    //JOIN_COMMAND
+    //JOIN_COMMAND,
   ]);
+
+  // Register guild commands for the support server
+  HasGuildCommands(process.env.APP_ID, process.env.SUPPORT_GUILD_ID, [
+  SAY_COMMAND
+]);
 });
 
 export function returnClient() {
