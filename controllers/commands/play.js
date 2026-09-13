@@ -265,8 +265,6 @@ export async function play(req, res, client, selectedLanguage, autoStartDelay = 
         }
     ).then(r => r.json());
 
-    console.log("Message ID:", message.id);
-
     setPartidaActiva(1, guildId);
     setGameCreator(req.body.member.user.id, guildId);
 
