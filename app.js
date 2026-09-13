@@ -285,7 +285,7 @@ process.on("uncaughtException", (err) => {
 });
 
 // Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });  //GatewayIntentBits.MessageContent
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });  //
 
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
@@ -317,6 +317,7 @@ client.on('guildDelete', () => {
 });
 
 client.on('messageCreate', async (message) => {
+  console.log("ms received: ", message.content);
     if (message.author.bot) return;
 
     const [command, ...args] = message.content.trim().split(/\s+/);
@@ -324,7 +325,9 @@ client.on('messageCreate', async (message) => {
     if (command !== 'rb!say') return;
 console.log("proper msg: ", message.content);
 console.log("owners: ", process.env.OWNERS_ID);
-    if (!process.env.OWNERS_ID.includes(message.author.id)) return;
+
+    const owners = process.env.OWNERS_ID.split(',');
+    if (!owners.includes(message.author.id)) return;
 
     const text = args.join(' ');
 
