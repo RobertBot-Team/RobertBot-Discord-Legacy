@@ -316,6 +316,23 @@ client.on('guildDelete', () => {
     });
 });
 
+client.on('messageCreate', async (message) => {
+    if (message.author.bot) return;
+
+    const [command, ...args] = message.content.trim().split(/\s+/);
+
+    if (command !== 'rb!say') return;
+
+    if (!(message.author.id === process.env.OWNER_ID)) return;
+
+    const text = args.join(' ');
+
+    if (!text) return;
+
+    await message.channel.send(text);
+    await message.delete().catch(() => {});
+});
+
 app.listen(PORT, () => {
   console.log("Listening on port", PORT);
 
