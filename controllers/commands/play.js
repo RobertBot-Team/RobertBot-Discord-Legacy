@@ -269,10 +269,10 @@ export async function play(req, res, client, selectedLanguage, autoStartDelay = 
     setPartidaActiva(1, guildId);
     setGameCreator(req.body.member.user.id, guildId);
 
-    const filter = (message) => message.author.id == process.env.APP_ID && message.content == tPlay(language, "game_started");
+    const filter = (msgFilter) => msgFilter.author.id == process.env.APP_ID && msgFilter.content == tPlay(language, "game_started");
     const collector = channel.createMessageCollector({ filter, time: 7000 });
-    collector.on('collect', (message) => {
-      idTimeout = message.id;
+    collector.on('collect', (msgCollected) => {
+      idTimeout = msgCollected.id;
       setCollectedMessagePorGuild(idTimeout, guildId);
       setGameChannelPorGuild(channel.id, guildId);
       collector.stop();
