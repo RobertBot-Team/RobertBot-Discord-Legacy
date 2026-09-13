@@ -10,7 +10,7 @@ import {
   reiniciarContador,
   reiniciarJugadoresFake
 } from "../../utils.js"
-import { getGuildGameState, limpiarPlayersPorGuild } from "../message_component/play.js"
+import { getGuildGameState, limpiarPlayersPorGuild, messagePlay_2 } from "../message_component/play.js"
 import { EmbedBuilder } from "discord.js";
 import {
   clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, setGuildPlayLanguage,
@@ -61,7 +61,7 @@ export function play4(req, res, partidaActiva, client) {
         embeds: [new EmbedBuilder()
           .setColor(color)
           .setDescription(`Jugadores unidos`)
-          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' })
         ],
 
       },
@@ -135,7 +135,7 @@ export function play6(req, res, partidaActiva, client) {
       embeds: [new EmbedBuilder()
         .setColor(color)
         .setDescription(`Jugadores unidos`)
-        .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+        .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' })
       ]
     }
     );
@@ -188,10 +188,10 @@ const sendMessage = async (res, message) => {
 ///
 ///
 ///
-export async function play(req, res, client, selectedLanguage) {
-  const language = selectedLanguage || getGuildPlayLanguage(guildId);
+export async function play(req, res, client, selectedLanguage, autoStartDelay = 600000) {
   let color = randomHexColor();
   let idTimeout;
+  const unixTimestamp = Math.floor((Date.now()+autoStartDelay) / 1000);
 
   const channel =
     client.channels.cache.get(req.body.channel_id) ??
@@ -206,15 +206,16 @@ export async function play(req, res, client, selectedLanguage) {
   }
 
   const guildId = req.body.guild_id || req.body.channel?.guild_id || channel?.guildId || "global";
+  const language = selectedLanguage || getGuildPlayLanguage(guildId);
 
   setGuildPlayLanguage(language, guildId);
 
   if (getPartidaActiva(guildId) == 0) {
 
-    let messagee = res.send({
+    let messagee = await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
-        content: tPlay(language, "game_started"),
+        content: tPlay(language, "game_started", { time: unixTimestamp }),
 
         // Buttons are inside of action rows
         components: [
@@ -249,34 +250,32 @@ export async function play(req, res, client, selectedLanguage) {
         embeds: [new EmbedBuilder()
           .setColor(color)
           .setDescription(tPlay(language, "joined_players"))
-          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' })
         ],
 
       },
     })
 
+    const message = await fetch(
+        `https://discord.com/api/v10/webhooks/${req.body.application_id}/${req.body.token}/messages/@original`,
+        {
+            headers: {
+                Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+            }
+        }
+    ).then(r => r.json());
+
     setPartidaActiva(1, guildId);
     setGameCreator(req.body.member.user.id, guildId);
 
-    const filter = (message) => message.author.id == process.env.APP_ID && message.content == tPlay(language, "game_started");
-    const collector = channel.createMessageCollector({ filter, time: 7000 });
-    collector.on('collect', (message) => {
-      idTimeout = message.id;
-      setCollectedMessagePorGuild(idTimeout, guildId);
-      setGameChannelPorGuild(channel.id, guildId);
-      collector.stop();
-    });
-    collector.on('end', (collected) => {
-      // console.log(`Collected ${collected.size} messages`);
-    });
+    setCollectedMessagePorGuild(message.id, guildId);
+    setGameChannelPorGuild(channel.id, guildId);
 
     const timer = new Timer();
     setTimerPorGuild(timer, guildId);
     timer.startTimer(async function () {
-      console.log("Timer desactivado. Esto NO se verá si se detiene antes.");
-      await desactivarComando(channel.id, idTimeout, guildId, client);
-      clearTimerPorGuild(guildId);
-    }, 600000); // 10 mins
+      await timerCallback(req, res, client, channel.id, idTimeout, guildId, message);
+    }, autoStartDelay);
 
     return messagee;
 
@@ -300,6 +299,14 @@ export async function play(req, res, client, selectedLanguage) {
         console.log(buttonIndex);
           data.components[buttonIndex].disabled = true;
         }, timeout);*/
+}
+
+export async function timerCallback(req, res, client, channelId, msgid, guildId, message) {
+  console.log("Partida iniciada. Timer desactivado Esto NO se verá si se detiene antes.");
+  //await desactivarComando(channelId, msgid, guildId, client);
+  //console.log("Message: ", message);
+  messagePlay_2(req, res, client, message.id);
+  clearTimerPorGuild(guildId);
 }
 
 export async function play7(req, res, partidaActiva, client) {
@@ -342,7 +349,7 @@ export async function play7(req, res, partidaActiva, client) {
         embeds: [new EmbedBuilder()
           .setColor(color)
           .setDescription(`Jugadores unidos`)
-          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' })
         ],
 
       },
@@ -431,7 +438,7 @@ export function play2(req, res, partidaActiva, client) {
         embeds: [new EmbedBuilder()
           .setColor(color)
           .setDescription(`Jugadores unidos`)
-          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://i.imgur.com/eg58vNp.png' })
+          .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' })
         ],
 
       },
@@ -564,7 +571,7 @@ function limpiarConstantesYMaps(guildId) {
     clearGameChannelPorGuild(guildId);
 }
 
-async function desactivarComando(channelId, msgid, guildId, client) {
+export async function desactivarComando(channelId, msgid, guildId, client) {
   console.log("Limpiando data desde Timeout...");
   //const messageFetched = await channel.messages.fetch(msgid);
   //console.log(messageFetched.components);
