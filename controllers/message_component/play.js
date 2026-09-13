@@ -536,7 +536,7 @@ export async function messagePlay_2(req, res, client, messageID) {
 
 
   } else if (userId === req.body.member.user.id && players.length < 2) {
-    if (autoPlay) {
+    if (!autoPlay) {
       await res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
@@ -552,7 +552,7 @@ export async function messagePlay_2(req, res, client, messageID) {
 
   } else if (userId != req.body.member.user.id && req.body.member.user.id == "435210238711300107") {
     gameState.modoK = 1;
-    if(autoPlay) {
+    if(!autoPlay) {
       await res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
@@ -618,7 +618,7 @@ export async function messagePlay_2(req, res, client, messageID) {
     channel.send({ embeds: [embed] });
 
   } else {
-    if(autoPlay) {
+    if(!autoPlay) {
       await res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
