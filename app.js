@@ -180,8 +180,21 @@ app.post("/interactions", verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
       //   break;
       case "play":
         if (getPartidaActiva(guildId) === 0) {
-          const selectedLanguage = getPlayLanguageFromOptions(req.body.data?.options || []);
-          return await play(req, res, client, selectedLanguage);
+          const options = req.body.data?.options || [];
+          const selectedLanguage = getPlayLanguageFromOptions(options);
+          const autoStartOption = options.find((option) => option?.name === "auto_start");
+          const autoStartDelay = {
+            "300000": 300000,
+            "600000": 600000,
+            "1800000": 1800000,
+            "3600000": 3600000,
+            "10800000": 10800000,
+            "21600000": 21600000,
+            "43200000": 43200000,
+            "86400000": 86400000,
+          }[autoStartOption?.value] || 600000;
+
+          return await play(req, res, client, selectedLanguage, autoStartDelay);
         } else {
           return partidaEnCurso(req, res, client);
         }
@@ -242,7 +255,7 @@ app.post("/interactions", verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
         messagePlay_1(req, res, client);
         break;
       case "my_button_begin":
-        await messagePlay_2(req, res, client);
+        await messagePlay_2(req, res, client, req.body.message.id);
         break;
       case "my_button_slow_mode":
         await messageSlowMode(req, res, client);

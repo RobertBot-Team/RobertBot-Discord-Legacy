@@ -10,7 +10,7 @@ import {
   reiniciarContador,
   reiniciarJugadoresFake
 } from "../../utils.js"
-import { getGuildGameState, limpiarPlayersPorGuild } from "../message_component/play.js"
+import { getGuildGameState, limpiarPlayersPorGuild, messagePlay_2 } from "../message_component/play.js"
 import { EmbedBuilder } from "discord.js";
 import {
   clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, setGuildPlayLanguage,
@@ -188,10 +188,10 @@ const sendMessage = async (res, message) => {
 ///
 ///
 ///
-export async function play(req, res, client, selectedLanguage) {
-  const language = selectedLanguage || getGuildPlayLanguage(guildId);
+export async function play(req, res, client, selectedLanguage, autoStartDelay = 600000) {
   let color = randomHexColor();
   let idTimeout;
+  const unixTimestamp = Math.floor((Date.now()+autoStartDelay) / 1000);
 
   const channel =
     client.channels.cache.get(req.body.channel_id) ??
@@ -206,15 +206,16 @@ export async function play(req, res, client, selectedLanguage) {
   }
 
   const guildId = req.body.guild_id || req.body.channel?.guild_id || channel?.guildId || "global";
+  const language = selectedLanguage || getGuildPlayLanguage(guildId);
 
   setGuildPlayLanguage(language, guildId);
 
   if (getPartidaActiva(guildId) == 0) {
 
-    let messagee = res.send({
+    let messagee = await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
-        content: tPlay(language, "game_started"),
+        content: tPlay(language, "game_started", { time: unixTimestamp }),
 
         // Buttons are inside of action rows
         components: [
@@ -255,28 +256,26 @@ export async function play(req, res, client, selectedLanguage) {
       },
     })
 
+    const message = await fetch(
+        `https://discord.com/api/v10/webhooks/${req.body.application_id}/${req.body.token}/messages/@original`,
+        {
+            headers: {
+                Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+            }
+        }
+    ).then(r => r.json());
+
     setPartidaActiva(1, guildId);
     setGameCreator(req.body.member.user.id, guildId);
 
-    const filter = (message) => message.author.id == process.env.APP_ID && message.content == tPlay(language, "game_started");
-    const collector = channel.createMessageCollector({ filter, time: 7000 });
-    collector.on('collect', (message) => {
-      idTimeout = message.id;
-      setCollectedMessagePorGuild(idTimeout, guildId);
-      setGameChannelPorGuild(channel.id, guildId);
-      collector.stop();
-    });
-    collector.on('end', (collected) => {
-      // console.log(`Collected ${collected.size} messages`);
-    });
+    setCollectedMessagePorGuild(message.id, guildId);
+    setGameChannelPorGuild(channel.id, guildId);
 
     const timer = new Timer();
     setTimerPorGuild(timer, guildId);
     timer.startTimer(async function () {
-      console.log("Timer desactivado. Esto NO se verá si se detiene antes.");
-      await desactivarComando(channel.id, idTimeout, guildId, client);
-      clearTimerPorGuild(guildId);
-    }, 600000); // 10 mins
+      await timerCallback(req, res, client, channel.id, idTimeout, guildId, message);
+    }, autoStartDelay);
 
     return messagee;
 
@@ -300,6 +299,14 @@ export async function play(req, res, client, selectedLanguage) {
         console.log(buttonIndex);
           data.components[buttonIndex].disabled = true;
         }, timeout);*/
+}
+
+export async function timerCallback(req, res, client, channelId, msgid, guildId, message) {
+  console.log("Partida iniciada. Timer desactivado Esto NO se verá si se detiene antes.");
+  //await desactivarComando(channelId, msgid, guildId, client);
+  //console.log("Message: ", message);
+  messagePlay_2(req, res, client, message.id);
+  clearTimerPorGuild(guildId);
 }
 
 export async function play7(req, res, partidaActiva, client) {
@@ -564,17 +571,22 @@ function limpiarConstantesYMaps(guildId) {
     clearGameChannelPorGuild(guildId);
 }
 
-async function desactivarComando(channelId, msgid, guildId, client) {
+export async function desactivarComando(channelId, msgid, guildId, client) {
   console.log("Limpiando data desde Timeout...");
   //const messageFetched = await channel.messages.fetch(msgid);
   //console.log(messageFetched.components);
   if (getPartidaActiva(guildId) === 1) {  //si es 1 está en espera, si es 2 ya comenzó
     const language = getGuildPlayLanguage(guildId);
 
-    const channel = client.channels.cache.get(channelId); 
+const channel = client.channels.cache.get(channelId) ?? await client.channels.fetch(channelId).catch(err => {
+        if (err.code !== 10003) {
+            console.error("Error al hacer fetch del canal desde el Timeout:", err);
+        }
+        return null;
+    });
 
     if (!channel) {
-        console.log("No se pudo recuperar el canal de la caché");
+        console.log(`No se pudo recuperar el canal ${channelId}. Probablemente fue eliminado. Limpiando data...`);
         limpiarConstantesYMaps(guildId);
         return;
     }
@@ -606,6 +618,8 @@ async function desactivarComando(channelId, msgid, guildId, client) {
           ],
         },
       ]
+    }).catch(err => {
+      console.warn("No se pudo editar el mensaje del Timeout (quizás fue eliminado):", err.message);
     });
 
   limpiarConstantesYMaps(guildId);

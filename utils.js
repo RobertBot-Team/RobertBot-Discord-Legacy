@@ -645,13 +645,27 @@ export async function cargarAvatar(foto, id, tieneOtraFoto, guild, players) {
   let guildMember = null;
 
   if (id.length >= 5) {
-    try {
-      guildMember = await cliente.guilds.cache.get(guild).members.fetch(id);
-    } catch (err) {
-      // Error: user not found in guild
-      console.warn(`Could not fetch member ${id}:`, err);
+try {
+    // obtener la guild de la caché. Si no está, hacer fetch a la API
+    const guildObj = cliente.guilds.cache.get(guild) ?? await cliente.guilds.fetch(guild).catch(err => {
+      console.warn(`Error al hacer fetch de la guild ${guild}:`, err);
+      return null;
+    });
+
+    // guild no existe o el bot fue expulsado
+    if (!guildObj) {
+      console.warn(`Guild ${guild} no encontrada. Retornando avatar por defecto.`);
       return await loadImage(`https://cdn.discordapp.com/embed/avatars/0.png?size=1024`);
     }
+
+    // con la guild existente, buscamos al miembro.
+    guildMember = await guildObj.members.fetch(id);
+
+  } catch (err) {
+    // Error: user not found in guild (el usuario abandonó el servidor, etc.)
+    console.warn(`Could not fetch member ${id}:`, err);
+    return await loadImage(`https://cdn.discordapp.com/embed/avatars/0.png?size=1024`);
+  }
 
     // re-verificar el avatar por si cambió en mitad de la partida
     if (guildMember.user.avatar != null) {
