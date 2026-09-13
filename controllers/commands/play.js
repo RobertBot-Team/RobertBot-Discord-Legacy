@@ -215,7 +215,7 @@ export async function play(req, res, client, selectedLanguage, autoStartDelay = 
     let messagee = await res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
-        content: tPlay(language, "game_started"),
+        content: tPlay(language, "game_started", { time: unixTimestamp }),
 
         // Buttons are inside of action rows
         components: [
@@ -249,7 +249,7 @@ export async function play(req, res, client, selectedLanguage, autoStartDelay = 
 
         embeds: [new EmbedBuilder()
           .setColor(color)
-          .setDescription(tPlay(language, "joined_players", { time: unixTimestamp }))
+          .setDescription(tPlay(language, "joined_players"))
           .setFooter({ text: 'RobbieBot 2026 — Lynn & Yugito', iconURL: 'https://cdn.top.gg/teams/855310968584753152/3e377abbe4e44f5ef1babbd6f8484e5a387c08cdc4bbb763c6e22a6c0eb1b663.webp' })
         ],
 

@@ -37,6 +37,7 @@ import { mostrarKills } from "../../hg/utils.js"
 import { clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, getTimerPorGuild, setPartidaActiva } from "../../app.js"
 import { getModeLabel, tPlay } from "../play_i18n.js";
 import logger from "../../logger.js";
+import { desactivarComando } from "../commands/play.js"
 
 const guildGameStates = new Map();
 
@@ -536,7 +537,7 @@ export async function messagePlay_2(req, res, client, messageID) {
 
 
   } else if (userId === req.body.member.user.id && players.length < 2) {
-    if (autoPlay) {
+    if (!autoPlay) {
       await res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
@@ -545,6 +546,7 @@ export async function messagePlay_2(req, res, client, messageID) {
         }
       })
     } else {
+      await desactivarComando(channel.id, messageID, guildId, client);
       await channel.send({
         content: tPlay(language, "need_two_players")
       });
@@ -552,7 +554,7 @@ export async function messagePlay_2(req, res, client, messageID) {
 
   } else if (userId != req.body.member.user.id && req.body.member.user.id == "435210238711300107") {
     gameState.modoK = 1;
-    if(autoPlay) {
+    if(!autoPlay) {
       await res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
@@ -618,7 +620,7 @@ export async function messagePlay_2(req, res, client, messageID) {
     channel.send({ embeds: [embed] });
 
   } else {
-    if(autoPlay) {
+    if(!autoPlay) {
       await res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
