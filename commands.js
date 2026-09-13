@@ -200,3 +200,17 @@ export const HELP_COMMAND = {
   ],
   type: 1
 };
+
+export const SAY_COMMAND = {
+  name: 'say',
+  description: 'Envía un mensaje como el bot',
+  options: [
+    {
+      type: 3,
+      name: 'mensaje',
+      description: 'Mensaje que quieres enviar',
+      required: true,
+    },
+  ],
+  type: 1
+};

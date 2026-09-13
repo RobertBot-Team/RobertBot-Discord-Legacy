@@ -21,6 +21,7 @@ import {
   STOP_COMMAND,
   HELP_COMMAND,
   //JOIN_COMMAND,
+  SAY_COMMAND,
   HasGlobalCommands,
   // HasGuildCommands
 } from "./commands.js";
@@ -230,6 +231,32 @@ app.post("/interactions", verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
         const helpLanguage = getPlayLanguageFromOptions(req.body.data?.options || []);
         return await help(req, res, helpLanguage);
         break;
+       case "say": {
+            const owners = process.env.OWNERS_ID.split(',');
+            const userId = req.body.member?.user?.id;
+
+            if (!owners.includes(userId)) {
+                return res.send({
+                    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                    data: {
+                        content: "❌ You don't have permission to use this command.",
+                        flags: InteractionResponseFlags.EPHEMERAL
+                    }
+                });
+            }
+
+            const text = req.body.data?.options?.find(
+                option => option.name === "mensaje"
+            )?.value;
+
+            if (!text) return;
+
+            const channel = client.channels.cache.get(req.body.channel_id);
+
+            if (!channel) return;
+
+            await channel.send(text);
+        }
 
     };
   }
@@ -285,7 +312,7 @@ process.on("uncaughtException", (err) => {
 });
 
 // Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });  //
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });  //GatewayIntentBits.MessageContent
 
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
@@ -316,20 +343,6 @@ client.on('guildDelete', () => {
     });
 });
 
-client.on('messageCreate', async (message) => {
-    if (message.author.bot) return;
-    if (!message.content.startsWith('rb!say')) return;
-
-    const owners = process.env.OWNERS_ID.split(',');
-    if (!owners.includes(message.author.id)) return;
-
-    const text = message.content.slice('rb!say'.length).trim();
-    if (!text) return;
-
-    await message.channel.send(text);
-    await message.delete().catch(() => {});
-});
-
 app.listen(PORT, () => {
   console.log("Listening on port", PORT);
 
@@ -341,8 +354,13 @@ app.listen(PORT, () => {
     //LYNN_COMMAND,
     STOP_COMMAND,
     // CHALLENGE_COMMAND,
-    //JOIN_COMMAND
+    //JOIN_COMMAND,
   ]);
+
+  // Register guild commands for the support server
+  HasGuildCommands(process.env.APP_ID, process.env.SUPPORT_GUILD_ID, [
+  SAY_COMMAND
+]);
 });
 
 export function returnClient() {
