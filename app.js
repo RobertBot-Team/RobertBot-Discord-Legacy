@@ -322,7 +322,8 @@ client.on('messageCreate', async (message) => {
     const [command, ...args] = message.content.trim().split(/\s+/);
 
     if (command !== 'rb!say') return;
-
+console.log("proper msg: ", message.content);
+console.log("owners: ", process.env.OWNERS_ID);
     if (!process.env.OWNERS_ID.includes(message.author.id)) return;
 
     const text = args.join(' ');
