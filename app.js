@@ -323,7 +323,7 @@ client.on('messageCreate', async (message) => {
 
     if (command !== 'rb!say') return;
 
-    if (!(message.author.id === process.env.OWNER_ID)) return;
+    if (!process.env.OWNERS_ID.includes(message.author.id)) return;
 
     const text = args.join(' ');
 
