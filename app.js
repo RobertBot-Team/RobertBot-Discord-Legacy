@@ -114,14 +114,17 @@ export function clearCollectedMessagePorGuild(guildId = "global") {
 }
 
 export function setGameChannelPorGuild(channel, guildId = "global") {
+  console.log(`[DEBUG] Guardando canal para Guild ${guildId}. Canal:`, channel);
   gameChannelPorGuild.set(guildId, channel);
 }
 
 export function getGameChannelPorGuild(guildId = "global") {
+  console.log(`[DEBUG] Recuperando canal para Guild ${guildId}.`);
   return gameChannelPorGuild.get(guildId);
 }
 
 export function clearGameChannelPorGuild(guildId = "global") {
+  console.log(`[DEBUG] Limpiando canal para Guild ${guildId}.`);
   gameChannelPorGuild.delete(guildId);
 }
 
