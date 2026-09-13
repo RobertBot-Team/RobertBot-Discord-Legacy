@@ -23,7 +23,7 @@ import {
   //JOIN_COMMAND,
   SAY_COMMAND,
   HasGlobalCommands,
-  // HasGuildCommands
+  HasGuildCommands
 } from "./commands.js";
 // import {
 //   Jugador
