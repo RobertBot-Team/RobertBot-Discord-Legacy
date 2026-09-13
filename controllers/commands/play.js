@@ -572,7 +572,7 @@ function limpiarConstantesYMaps(guildId) {
     clearGameChannelPorGuild(guildId);
 }
 
-async function desactivarComando(channelId, msgid, guildId, client) {
+export async function desactivarComando(channelId, msgid, guildId, client) {
   console.log("Limpiando data desde Timeout...");
   //const messageFetched = await channel.messages.fetch(msgid);
   //console.log(messageFetched.components);

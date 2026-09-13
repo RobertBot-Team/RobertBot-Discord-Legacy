@@ -37,6 +37,7 @@ import { mostrarKills } from "../../hg/utils.js"
 import { clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, getTimerPorGuild, setPartidaActiva } from "../../app.js"
 import { getModeLabel, tPlay } from "../play_i18n.js";
 import logger from "../../logger.js";
+import { desactivarComando } from "../commands/play.js"
 
 const guildGameStates = new Map();
 
@@ -545,6 +546,7 @@ export async function messagePlay_2(req, res, client, messageID) {
         }
       })
     } else {
+      await desactivarComando(channel.id, messageID, guildId, client);
       await channel.send({
         content: tPlay(language, "need_two_players")
       });
