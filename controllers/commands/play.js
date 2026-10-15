@@ -274,6 +274,7 @@ export async function play(req, res, client, selectedLanguage, autoStartDelay = 
     const timer = new Timer();
     setTimerPorGuild(timer, guildId);
     timer.startTimer(async function () {
+      let message = getCollectedMessagePorGuild(guildId);
       await timerCallback(req, res, client, channel.id, idTimeout, guildId, message);
     }, autoStartDelay);
 
