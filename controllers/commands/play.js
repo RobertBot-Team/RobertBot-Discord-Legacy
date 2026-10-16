@@ -21,6 +21,7 @@ import {
 } from "../../app.js"
 import { getModeLabel, tPlay } from "../play_i18n.js";
 import { Timer } from "../../hg/clases.js";
+import logger from "../../logger.js";
 
 export function play4(req, res, partidaActiva, client) {
   let color = randomHexColor();
@@ -265,6 +266,12 @@ export async function play(req, res, client, selectedLanguage, autoStartDelay = 
         }
     ).then(r => r.json());
 
+    logger.info("Game planned", {
+      guildId,
+      autoStartDelay,
+      unixTimestamp
+    });
+
     setPartidaActiva(1, guildId);
     setGameCreator(req.body.member.user.id, guildId);
 
@@ -291,15 +298,7 @@ export async function play(req, res, client, selectedLanguage, autoStartDelay = 
     })
 
   }
-  //await setTimeout(10000);
 
-  /*  const timeout = 3000;
-    const buttonIndex = data.components.findIndex(component => component.custom_id === 'my_button');
-      setTimeout(() => {
-        // disable the button
-        console.log(buttonIndex);
-          data.components[buttonIndex].disabled = true;
-        }, timeout);*/
 }
 
 export async function timerCallback(req, res, client, channelId, msgid, guildId, message) {
