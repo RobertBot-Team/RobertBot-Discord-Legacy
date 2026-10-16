@@ -13,7 +13,7 @@ import {
 import { getGuildGameState, limpiarPlayersPorGuild, messagePlay_2 } from "../message_component/play.js"
 import { EmbedBuilder } from "discord.js";
 import {
-  clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, setGuildPlayLanguage,
+  clearGuildPlayLanguage, getGuildPlayLanguage, getPartidaActiva, getCollectedMessagePorGuild, setGuildPlayLanguage,
   setPartidaActiva, setGameCreator, clearGameCreator, clearCollectedMessagePorGuild, setCollectedMessagePorGuild,
   setGameChannelPorGuild, clearGameChannelPorGuild,
   setTimerPorGuild,
