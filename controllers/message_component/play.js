@@ -20,7 +20,8 @@ import {
   encontrarGanador,
   displayTeamByTeam,
   displayWinnerTeam,
-  sumarProbabilidad
+  sumarProbabilidad,
+  crearJugadoresFake
 } from "../../utils.js";
 import {
   InteractionResponseType,
@@ -228,7 +229,7 @@ export async function messagePlay_2(req, res, client, messageID) {
       });
   }
 
-  if (userId === req.body.member.user.id && players.length >= 2 && gameState.modoK == 0) {      //luego >=2
+  if (userId === req.body.member.user.id && gameState.modoK == 0) {      //luego >=2
 
     let modo = getModeLabel(language, gameState.slowMode);
 
@@ -304,7 +305,7 @@ export async function messagePlay_2(req, res, client, messageID) {
     //Inicio del juego
 
     //ronda de formar equipos
-    //crearJugadoresFake(players);
+    crearJugadoresFake(players);
 
     let copia1 = copiarJugadores(players)
     formarEquipo(copia1, gameState.teams);

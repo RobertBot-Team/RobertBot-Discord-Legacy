@@ -1582,6 +1582,15 @@ export function crearJugadoresFake(jugadores) {
   //   const tristeza = new Jugador("Tristeza", "123", "https://i.pinimg.com/564x/eb/e1/f1/ebe1f1c9ac245730584c63902b923a7c.jpg");
   //   const coca = new Jugador("coca", "124", "https://i.pinimg.com/564x/c6/d8/d0/c6d8d010684fbae669f673c70c4553c4.jpg");
 
+  const felipe = new Jugador("Felipe 🗿", "600", "https://i.pinimg.com/1200x/8e/e2/57/8ee2575dc32532bb7bfadca654ecc2e9.jpg");
+  const jim = new Jugador("Jim Carrey", "700", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWzeEcaMw9jzgVtpwezIE0fOEa56tZiMwbjlPxjmjPOQ&s=10");
+  const nyaneko = new Jugador("nya neko", "800", "https://i.pinimg.com/736x/52/31/ec/5231ec26b9b892d1bff6c26d436cc2f6.jpg");
+  const cheinbau = new Jugador("Cheinbau6️⃣7️⃣", "900", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROKzWdCdhMUvYLxkrTFAJqztHc85S9bqsdwUp6db4vDQ&s=10");
+
+  jugadores.push(felipe);
+  jugadores.push(jim);
+  jugadores.push(nyaneko);
+  jugadores.push(cheinbau);
 
   //k.setArma(pistola);
   //eltaquito.setArma(pistola);
@@ -1634,11 +1643,11 @@ export function crearJugadoresFake(jugadores) {
   //         shin.setTeam(team);
   //         jugadores.push(shin);    
   //         teams.push(team);
-  jugadores.push(eltaquito);
-  jugadores.push(faalgru);
-  jugadores.push(robert);
-  jugadores.push(dreher);
-  jugadores.push(shin);
+  // jugadores.push(eltaquito);
+  // jugadores.push(faalgru);
+  // jugadores.push(robert);
+  // jugadores.push(dreher);
+  // jugadores.push(shin);
 
   // jugadores.push(frozono2);
   // jugadores.push(njug1);
