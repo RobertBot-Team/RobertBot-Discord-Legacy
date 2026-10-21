@@ -134,7 +134,7 @@ export async function stop(req, res, client) {
       }
     });
 
-    await desactivarComando(getCollectedMessagePorGuild(guildId), guildId, client);
+    await desactivarComando(getCollectedMessagePorGuild(guildId).id, guildId, client);
     resetGuildGameState(guildId);
 
   } else {

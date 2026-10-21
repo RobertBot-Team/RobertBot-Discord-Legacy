@@ -275,7 +275,7 @@ export async function play(req, res, client, selectedLanguage, autoStartDelay = 
     setPartidaActiva(1, guildId);
     setGameCreator(req.body.member.user.id, guildId);
 
-    setCollectedMessagePorGuild(message.id, guildId);
+    setCollectedMessagePorGuild(message, guildId);
     setGameChannelPorGuild(channel.id, guildId);
 
     const timer = new Timer();
